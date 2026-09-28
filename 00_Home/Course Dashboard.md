@@ -31,7 +31,8 @@ updated: 2026-09-28
 | **Analytics Projects** | 2 Projects | Documented | Hotel Reservation + PwC Call Center |
 | **Portfolio Artifact** | 1 Recruiter Case Study | Ready | [[Call Center Analysis Portfolio Case Study]] |
 | **Personal Workbooks** | 10 Module Hubs | Ready | [[11_Demos_and_Workbooks/README\|Student Demos & Workbooks]] |
-| **Benchmark Dataset** | 9,994 Rows (19 Cols) | Verified | [[Sample Superstore Dataset Documentation\|Sample Superstore]] |
+| **Retail Benchmark** | 9,994 Rows (19 Cols) | Verified | [[Sample Superstore Dataset Documentation|Sample Superstore]] |
+| **Hospitality Benchmark** | 36,275 Rows (19 Cols) | Verified | [[Hotel Reservations Dataset Documentation|Hotel Reservations]] |
 
 ---
 
@@ -115,6 +116,7 @@ SORT course_topic ASC
 | [[Data Quality Framework Mind Map]] | Visual Mindmap | 6 Dimensions of Quality Audit Flow | `assets/data-quality-mind-map.png` |
 | [[Data Quality Essentials Guide]] | Visual Guide | Core Quality Principles & Cleaning | `assets/data-quality-essentials-guide.png` |
 | [[Excel Navigation and Setup Video Guide]] | Video Tutorial | Ergonomics & High-Speed Navigation | `assets/getting-started-with-excel-navigation-and-setup.mp4` |
+| [[Hotel Reservations Dataset Documentation]] | Dataset Reference | 36,275 Records, ADR & Kaggle/HF Mirrors | Dedicated Note |
 | [[Ex07_Supplementary_Dynamic_Lookups_and_KPIs]] | Practice Exercise | 5-Level Advanced Drills | [[Ex07_Solutions]] |
 
 ---
