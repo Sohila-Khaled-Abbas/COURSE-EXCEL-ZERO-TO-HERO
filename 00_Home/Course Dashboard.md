@@ -30,7 +30,7 @@ updated: 2026-09-28
 | **Practice Sets** | 7 Exercises + 10 AI Labs | Ready | Levels 1 to 5 with hidden solutions |
 | **Analytics Projects** | 2 Projects | Documented | Hotel Reservation + PwC Call Center |
 | **Portfolio Artifact** | 1 Recruiter Case Study | Ready | [[Call Center Analysis Portfolio Case Study]] |
-| **Personal Workbooks** | 2 Active Demos | In Progress | [[11_Demos_and_Workbooks/README\|Mod 2 (Superstore) + Mod 3 (Formulas & Ref)]] |
+| **Personal Workbooks** | 3 Active Demos | In Progress | [[11_Demos_and_Workbooks/README\|Mod 2 (Superstore) + Mod 3 (Ref & Formatting + Formulas Part 1)]] |
 | **Retail Benchmark** | 9,994 Rows (19 Cols) | Verified | [[Sample Superstore Dataset Documentation|Sample Superstore]] |
 | **Hospitality Benchmark** | 36,275 Rows (19 Cols) | Verified | [[Hotel Reservations Dataset Documentation|Hotel Reservations]] |
 
