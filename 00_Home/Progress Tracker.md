@@ -32,15 +32,15 @@ updated: 2026-09-28
 - [x] 07. Essential Keyboard Shortcuts & Navigation ✅ 2026-09-29
 
 ### Module 3: Excel Formulas & Functions
-- [ ] 08. Relative, Absolute, and Mixed Cell Referencing
-- [ ] 09. Statistical & Aggregation Functions (`SUM`, `AVERAGE`, `COUNT`, `COUNTA`)
-- [ ] 10. Conditional Aggregations (`SUMIFS`, `COUNTIFS`, `AVERAGEIFS`)
-- [ ] 11. Logical Decision Making (`IF`, `AND`, `OR`, `IFS`, `IFERROR`)
-- [ ] 12. Modern Lookups (`XLOOKUP`, `VLOOKUP`, `INDEX & MATCH`)
-- [ ] 13. Text String Cleansing (`TRIM`, `PROPER`, `TEXTJOIN`, `TEXTSPLIT`)
-- [ ] 14. Date & Time Intelligence (`TODAY`, `DATE`, `DATEDIF`, `NETWORKDAYS`)
-- [ ] 15. Dynamic Array Formulas (`FILTER`, `UNIQUE`, `SORT`)
-- [ ] 16. Data Analysis Life Cycle (DALC & CRISP-DM Frameworks)
+- [x] 08. Relative, Absolute, and Mixed Cell Referencing ✅ 2026-09-29
+- [x] 09. Statistical & Aggregation Functions (`SUM`, `AVERAGE`, `COUNT`, `COUNTA`) ✅ 2026-09-29
+- [x] 10. Conditional Aggregations (`SUMIFS`, `COUNTIFS`, `AVERAGEIFS`) ✅ 2026-09-29
+- [x] 11. Logical Decision Making (`IF`, `AND`, `OR`, `IFS`, `IFERROR`) ✅ 2026-09-29
+- [x] 12. Modern Lookups (`XLOOKUP`, `VLOOKUP`, `INDEX & MATCH`) ✅ 2026-09-29
+- [x] 13. Text String Cleansing (`TRIM`, `PROPER`, `TEXTJOIN`, `TEXTSPLIT`) ✅ 2026-09-29
+- [x] 14. Date & Time Intelligence (`TODAY`, `DATE`, `DATEDIF`, `NETWORKDAYS`) ✅ 2026-09-29
+- [x] 15. Dynamic Array Formulas (`FILTER`, `UNIQUE`, `SORT`) ✅ 2026-09-29
+- [x] 16. Data Analysis Life Cycle (DALC & CRISP-DM Frameworks) ✅ 2026-09-29
 
 ### Module 4: Excel Tables (ListObjects)
 - [ ] 17. Range vs Table Architecture
