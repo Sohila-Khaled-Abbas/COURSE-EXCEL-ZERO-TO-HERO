@@ -28,3 +28,11 @@ Hospitality management faces high revenue volatility due to late cancellations a
 1. **Booking Status Breakdown**: Donut chart displaying Confirmed vs Cancelled vs No-Show.
 2. **Channel Contribution**: Bar chart evaluating Online Travel Agencies (OTAs) vs Direct vs Corporate.
 3. **Room Revenue Yield**: Treemap visualizing total revenue by room category.
+
+## 4. Dataset Provenance & Open Mirrors
+- 🌐 **Primary Origin**: [Kaggle: Hotel Reservations Classification Dataset](https://www.kaggle.com/datasets/ahsan81/hotel-reservations-classification-dataset) (by Ahsan)
+- 🤗 **Hugging Face Mirror**: [ahsan81_hotel-reservations-classification-dataset](https://huggingface.co/datasets/jason1966/ahsan81_hotel-reservations-classification-dataset) (by jason1966)
+- 💾 **Local Dataset Source**: `D:\courses\Data Analysis 26-27\Hotel Reservations.csv` (3.09 MB, 36,275 rows)
+- 📖 **Master Data Dictionary**: [[Hotel Reservations Dataset Documentation]]
+- 📁 **Student Practice Workbook**: `11_Demos_and_Workbooks/02_Data_Management/Hotel_Reservations_Demo.xlsx`
+
