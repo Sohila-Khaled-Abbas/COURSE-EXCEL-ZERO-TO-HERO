@@ -15,16 +15,16 @@ prerequisites:
 related_project: "[[Call Center Performance Analysis]]"
 source: https://youtu.be/uv1bxe2gdnU
 created: 2026-09-28
-updated: 2026-09-28
-video_chapter: \"Chapter 3 – Excel Formulas & Functions\"
-video_timestamp: \"1:38:56\"
-video_url: \"https://www.youtube.com/watch?v=uv1bxe2gdnU&t=5936s\"
+updated: 2026-09-29
+video_chapter: "Chapter 3 – Excel Formulas & Functions"
+video_timestamp: "1:38:56"
+video_url: "https://www.youtube.com/watch?v=uv1bxe2gdnU&t=5936s"
 ---
 
 # Lesson 3.7: Modern Dynamic Arrays & Spill Ranges
 
 > [!abstract] Learning Objective
-> Leverage Excel 365's Dynamic Array calculation engine to filter, deduplicate, and sort tabular data in memory without VBA or manual copying.
+> Leverage Excel 365's Dynamic Array calculation engine to filter, deduplicate, sort, and parse tabular data in memory without VBA, manual copying, or legacy Ctrl+Shift+Enter arrays.
 
 > 🎥 **Video Chapter**: [Chapter 3 – Excel Formulas & Functions (1:38:56)](https://www.youtube.com/watch?v=uv1bxe2gdnU&t=5936s)
 
@@ -33,6 +33,8 @@ video_url: \"https://www.youtube.com/watch?v=uv1bxe2gdnU&t=5936s\"
 - `=FILTER(array, include_boolean_array, [if_empty])`: Returns rows matching criteria.
 - `=SORT(array, [sort_index], [sort_order])`: Sorts range dynamically.
 - `=SORTBY(array, by_array1, [order1], ...)`: Sorts based on an external column.
+- `=TEXTSPLIT(text, col_delim, [row_delim])`: Dynamically splits text strings across columns/rows.
+- `=XMATCH(lookup_value, lookup_array)`: Dynamic position finder with exact match by default.
 
 ## Understanding the Spill Range (`#`)
 When a formula returns multiple values, it "spills" into neighboring cells. 
@@ -45,4 +47,6 @@ To reference the entire dynamic spilled output of cell `G2`:
 > Occurs when a non-empty cell blocks the expansion path of a dynamic array. Clearing the blocking cells immediately resolves the error.
 
 ## Related Knowledge
-- Formulas: [[UNIQUE]], [[FILTER]], [[SORT]], [[SORTBY]]
+- **Formulas**: [[UNIQUE]], [[FILTER]], [[SORT]], [[SORTBY]], [[TEXTSPLIT]], [[XMATCH]]
+- **Concepts**: [[VLOOKUP vs XLOOKUP]], [[Why Not Always Formulas]]
+- **Practice**: [[Ex02_Formulas_and_Lookup_Logic]]
