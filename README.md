@@ -177,6 +177,7 @@ COURSE-EXCEL-ZERO-TO-HERO/
 │   ├── Keyboard Shortcuts.md               # High-velocity navigation & selection shortcuts
 │   ├── Glossary.md                         # Analytics & Business Intelligence terminology
 │   ├── Sample Superstore Dataset Documentation.md # 9,994-row benchmark data dictionary & provenance
+│   ├── Hotel Reservations Dataset Documentation.md# 36,275-row hospitality benchmark & Kaggle/HuggingFace mirrors
 │   ├── Gemini Notebook/                    # 12 Curated Supplementary Reference Guides:
 │   │   ├── Analytics Pipeline Comparison.md
 │   │   ├── Call Center KPI Analytics.md
@@ -273,6 +274,7 @@ The knowledge repository maps 1-to-1 to the full **8-hour YouTube masterclass**:
 | 🏗️ **Implementation Log** | Comprehensive engineering log and step-by-step roadmap | [implementation.md](implementation.md) |
 | 📁 **Student Workbooks** | Personal Excel workbooks (.xlsx) and lab implementations | [11_Demos_and_Workbooks](11_Demos_and_Workbooks/README.md) |
 | 📦 **Superstore Dataset** | 9,994-row benchmark data dictionary, statistics, & mirrors | [07_Reference/Superstore](07_Reference/Sample%20Superstore%20Dataset%20Documentation.md) |
+| 🏨 **Hotel Reservations** | 36,275-row benchmark data dictionary, Kaggle & Hugging Face mirrors | [07_Reference/Hotel Reservations](07_Reference/Hotel%20Reservations%20Dataset%20Documentation.md) |
 | 📖 **Function Reference** | Comprehensive Excel & DAX function reference manual | [07_Reference/Function Reference](07_Reference/Function%20Reference.md) |
 | 🗂️ **Flashcard Deck** | Active-recall flashcards for retention and interview prep | [08_Revision/Flashcards](08_Revision/Flashcards.md) |
 
