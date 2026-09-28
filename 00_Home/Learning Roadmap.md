@@ -56,10 +56,10 @@ flowchart TD
 - [x] Execute ETL transformations: unpivoting, merging (joins), and appending (unions) in [[Power Query]]. ✅ 2026-09-29
 
 ## 阶段 4: Analyze (Multi-Dimensional Summarization)
-- [ ] Construct dynamic Pivot Tables with Row, Column, Value, and Filter dimensions ([[Pivot Tables]]).
-- [ ] Utilize advanced Pivot calculations: `% of Grand Total`, `Difference From`, `Running Total` ([[02_Advanced_Calculations_and_Show_Values_As]]).
-- [ ] Group dates by Year/Quarter/Month and numerical values into distribution bins ([[03_Grouping_and_Calculated_Fields]]).
-- [ ] Connect interactive Slicers and Timelines across multiple Pivot Tables via Report Connections ([[Slicers and Timelines]]).
+- [x] Construct dynamic Pivot Tables with Row, Column, Value, and Filter dimensions ([[Pivot Tables]]). ✅ 2026-09-29
+- [x] Utilize advanced Pivot calculations: `% of Grand Total`, `Difference From`, `Running Total` ([[02_Advanced_Calculations_and_Show_Values_As]]). ✅ 2026-09-29
+- [x] Group dates by Year/Quarter/Month and numerical values into distribution bins ([[03_Grouping_and_Calculated_Fields]]). ✅ 2026-09-29
+	- [x] Connect interactive Slicers and Timelines across multiple Pivot Tables via Report Connections ([[Slicers and Timelines]]). ✅ 2026-09-29
 
 ## 阶段 5: Build (End-to-End Analytics Dashboards)
 - [x] Design visual layouts using preattentive attributes and visual hierarchy ([[Dashboard Design Principles]]). ✅ 2026-09-29

@@ -22,14 +22,14 @@ updated: 2026-09-28
 
 ### Module 1: Introduction to Data Analytics & GUI
 - [x] 01. Excel Interface, Ribbon, & Grid Coordinates ✅ 2026-09-28
-- [ ] 02. Data Analyst Roles, Career Roadmaps, & BI Overview
+- [x] 02. Data Analyst Roles, Career Roadmaps, & BI Overview ✅ 2026-09-29
 
 ### Module 2: Data Management & Handling
-- [ ] 03. Data Types & Number Formatting
-- [ ] 04. Single and Multi-Level Sorting & Filtering
-- [ ] 05. Data Validation & Dropdown Integrity
-- [ ] 06. Flash Fill & Text to Columns
-- [ ] 07. Essential Keyboard Shortcuts & Navigation
+- [x] 03. Data Types & Number Formatting ✅ 2026-09-29
+- [x] 04. Single and Multi-Level Sorting & Filtering ✅ 2026-09-29
+- [x] 05. Data Validation & Dropdown Integrity ✅ 2026-09-29
+- [x] 06. Flash Fill & Text to Columns ✅ 2026-09-29
+- [x] 07. Essential Keyboard Shortcuts & Navigation ✅ 2026-09-29
 
 ### Module 3: Excel Formulas & Functions
 - [ ] 08. Relative, Absolute, and Mixed Cell Referencing
