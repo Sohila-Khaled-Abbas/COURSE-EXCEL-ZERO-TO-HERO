@@ -12,11 +12,12 @@
 [![Excel Version](https://img.shields.io/badge/Microsoft%20Excel-Office%20365%20%2F%202021-107c41?logo=microsoftexcel&logoColor=white)](https://www.microsoft.com/en-us/microsoft-365/excel)
 [![Capstone Project](https://img.shields.io/badge/Capstone-PwC%20Call%20Center%20BI-06b6d4)](06_Projects/Call%20Center%20Performance%20Analysis/Project%20Overview.md)
 [![AI for Excel](https://img.shields.io/badge/AI%20Track-Twistly%20%26%20Claude-8b5cf6)](03_Concepts/AI%20for%20Data%20Analysts%20MOC.md)
+[![Benchmark Dataset](https://img.shields.io/badge/Benchmark%20Dataset-Sample%20Superstore-orange)](07_Reference/Sample%20Superstore%20Dataset%20Documentation.md)
 [![CI Validation](https://github.com/Sohila-Khaled-Abbas/COURSE-EXCEL-ZERO-TO-HERO/actions/workflows/lint.yml/badge.svg)](https://github.com/Sohila-Khaled-Abbas/COURSE-EXCEL-ZERO-TO-HERO/actions)
 
 **A production-grade Obsidian Knowledge System, Data Analytics Curriculum, and GitHub Portfolio Repository for mastering modern Microsoft Excel, Power Query, Power Pivot, DAX, AI-Assisted Workflows, and Executive Dashboard Engineering.**
 
-[Explore Dashboard](00_Home/Course%20Dashboard.md) • [Course Curriculum](01_Course/Course%20Curriculum.md) • [Live Mindmap](https://www.mindmeister.com/app/map/3782166881?t=I9gXHbkAlV) • [AI Track](03_Concepts/AI%20for%20Data%20Analysts%20MOC.md) • [Call Center Capstone](06_Projects/Call%20Center%20Performance%20Analysis/Project%20Overview.md) • [Portfolio Case Study](10_Portfolio/Call%20Center%20Analysis%20Portfolio%20Case%20Study.md) • [Implementation Log](implementation.md) • [Contributing](CONTRIBUTING.md) • [Citation](CITATION.cff)
+[Explore Dashboard](00_Home/Course%20Dashboard.md) • [Course Curriculum](01_Course/Course%20Curriculum.md) • [Live Mindmap](https://www.mindmeister.com/app/map/3782166881?t=I9gXHbkAlV) • [AI Track](03_Concepts/AI%20for%20Data%20Analysts%20MOC.md) • [Superstore Dataset](07_Reference/Sample%20Superstore%20Dataset%20Documentation.md) • [Call Center Capstone](06_Projects/Call%20Center%20Performance%20Analysis/Project%20Overview.md) • [Portfolio Case Study](10_Portfolio/Call%20Center%20Analysis%20Portfolio%20Case%20Study.md) • [Implementation Log](implementation.md) • [Contributing](CONTRIBUTING.md) • [Citation](CITATION.cff)
 
 </div>
 
@@ -175,6 +176,7 @@ COURSE-EXCEL-ZERO-TO-HERO/
 │   ├── Function Reference.md               # Master reference matrix with return types
 │   ├── Keyboard Shortcuts.md               # High-velocity navigation & selection shortcuts
 │   ├── Glossary.md                         # Analytics & Business Intelligence terminology
+│   ├── Sample Superstore Dataset Documentation.md # 9,994-row benchmark data dictionary & provenance
 │   ├── Gemini Notebook/                    # 12 Curated Supplementary Reference Guides:
 │   │   ├── Analytics Pipeline Comparison.md
 │   │   ├── Call Center KPI Analytics.md
@@ -208,6 +210,17 @@ COURSE-EXCEL-ZERO-TO-HERO/
 │   └── ...                                 # Untouched source-of-truth materials (gitignored)
 ├── 10_Portfolio/                           # Recruiter & Client-Facing Artifacts
 │   └── Call Center Analysis Portfolio Case Study.md # Executive presentation ready for hiring managers
+├── 11_Demos_and_Workbooks/                 # Student Excel Workbooks (.xlsx) & Personal Demos
+│   ├── 01_Fundamentals/                    # Interface setup, ergonomics, navigation drills
+│   ├── 02_Data_Management/                 # Superstore formatting, custom masks, validation
+│   ├── 03_Formulas_and_Functions/          # Dynamic arrays, XLOOKUP, SUMIFS models
+│   ├── 04_Tables/                          # Excel Table (ListObject) structured calculations
+│   ├── 05_Pivot_Tables/                    # Multi-pivot reports, slicers, Show Values As
+│   ├── 06_Charts_and_Visualizations/       # Dynamic charts, visual hierarchy, KPI cards
+│   ├── 07_Data_Cleaning/                   # 6 Dimensions audit drills, text cleaning
+│   ├── 08_Power_Query/                     # Automated ETL queries, unpivoting, joins
+│   ├── 09_Data_Modeling_and_DAX/           # Star schema models, explicit DAX measures
+│   └── 10_Projects_and_Demos/              # Capstone workbooks, PwC Call Center analysis
 └── Templates/                              # Standardized Reusable Note Templates
     ├── Lesson Note Template.md
     ├── Concept Note Template.md
@@ -251,6 +264,8 @@ The knowledge repository maps 1-to-1 to the full **8-hour YouTube masterclass**:
 | 📞 **PwC Capstone** | End-to-end 5,000-call operational intelligence case study | [06_Projects/Call Center Project Overview](06_Projects/Call%20Center%20Performance%20Analysis/Project%20Overview.md) |
 | 💼 **Portfolio Case Study** | Executive case study formatted for recruiters and hiring managers | [10_Portfolio/Case Study](10_Portfolio/Call%20Center%20Analysis%20Portfolio%20Case%20Study.md) |
 | 🏗️ **Implementation Log** | Comprehensive engineering log and step-by-step roadmap | [implementation.md](implementation.md) |
+| 📁 **Student Workbooks** | Personal Excel workbooks (.xlsx) and lab implementations | [11_Demos_and_Workbooks](11_Demos_and_Workbooks/README.md) |
+| 📦 **Superstore Dataset** | 9,994-row benchmark data dictionary, statistics, & mirrors | [07_Reference/Superstore](07_Reference/Sample%20Superstore%20Dataset%20Documentation.md) |
 | 📖 **Function Reference** | Comprehensive Excel & DAX function reference manual | [07_Reference/Function Reference](07_Reference/Function%20Reference.md) |
 | 🗂️ **Flashcard Deck** | Active-recall flashcards for retention and interview prep | [08_Revision/Flashcards](08_Revision/Flashcards.md) |
 
@@ -285,6 +300,27 @@ The flagship project in this repository is a rigorous, evidence-based operationa
 > Initial inspection reveals 946 null values across `Speed of answer`, `AvgTalkDuration`, and `Satisfaction rating`. A forensic audit confirms that these 946 records correspond **100%** to abandoned calls (`Answered == "N"`). They represent **valid operational missing values** rather than data corruption, preserving the statistical integrity of average wait times.
 
 Explore the complete case study in **[Call Center Analysis Portfolio Case Study](10_Portfolio/Call%20Center%20Analysis%20Portfolio%20Case%20Study.md)** and the AI execution audit in **[AI-Assisted Analysis Workflow](06_Projects/Call%20Center%20Performance%20Analysis/AI-Assisted%20Analysis%20Workflow.md)**.
+
+---
+
+## 📦 Benchmark Dataset: Sample Superstore & Data Management Labs
+
+The foundational data management practices in this repository (**[02_Notes/02_Data_Management](02_Notes/02_Data_Management/01_Data_Types_and_Formatting.md)**) are grounded in the classic **Sample Superstore** dataset — the global pedagogical standard used across Tableau, Excel, and Power BI commercial analytics education.
+
+### Audited Benchmark Figures (Empirically Verified):
+- **Total Inbound Rows**: `9,994` transaction line-items
+- **Data Grain**: 1 row = 1 product line-item within an order
+- **Unique Orders**: `5,009` orders | **Unique Customers**: `793` buyers | **Unique Products**: `1,862` SKUs
+- **Total Gross Sales**: `$2,297,200.86` | **Total Net Profit**: `$286,397.02` (Margin: `12.47%`)
+- **Total Units Sold**: `37,873` units | **Average Discount**: `15.62%`
+
+### Provenance, Official Sources & Open Mirrors
+Sample Superstore is a **fictitious retail enterprise dataset** created by Tableau for business intelligence, ETL, and data visualization training (it is not an Egyptian or open-government dataset).
+- 🏛️ **Official Tableau Hub**: [Tableau Public Sample Data](https://public.tableau.com/app/learn/sample-data) & [Tableau Desktop Superstore Guide](https://help.tableau.com/current/guides/get-started-tutorial/en-gb/get-started-tutorial-connect.htm)
+- 📊 **Kaggle Source Mirrors**: [Kaggle: Naveen Kumar](https://www.kaggle.com/datasets/naveenkumar20bps1137/sample-superstore), [Kaggle: Upal Kundu](https://www.kaggle.com/datasets/upalkundu287/sample-superstore-data), [Kaggle: Anoop](https://www.kaggle.com/datasets/anooper/sample-superstore)
+- 🐙 **Open GitHub Mirrors**: [Ashwini Gist CSV](https://gist.github.com/SharmaAshwini/8bd642f6c46792a9c40c8ccad60391e9), [Phuong Gist CSV](https://gist.github.com/nnbphuong/38db511db14542f3ba9ef16e69d3814c), [Sau101 Tableau Project](https://github.com/Sau101/Tableau-Superstore)
+
+Full 19-column data dictionary, formatting masks, and lab instructions are documented in **[Sample Superstore Dataset Documentation](07_Reference/Sample%20Superstore%20Dataset%20Documentation.md)**.
 
 ---
 

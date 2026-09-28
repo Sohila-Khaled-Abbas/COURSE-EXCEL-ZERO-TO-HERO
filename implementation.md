@@ -139,6 +139,23 @@ flowchart TD
   1. Core text, markdown notes, code, configurations, and templates (pushed in ~6s).
   2. Individual media assets pushed sequentially in manageable chunks under the 300s timeout window.
 
+### Step 8: Sample Superstore Integration & Data Management Grounding
+- **Pedagogical Alignment**: Replaced abstract toy data in Module 2 (**Data Management**) with the industry-standard **Sample Superstore** benchmark dataset (`9,994` transaction rows, `19` columns).
+- **Master Documentation (`07_Reference/Sample Superstore Dataset Documentation.md`)**:
+  - Curated complete provenance links (Tableau Public official sample data, Tableau Help docs, 3 Kaggle copies by Naveen Kumar, Upal Kundu, and Anoop, plus GitHub CSV mirrors).
+  - Empirically audited and verified ground-truth figures: Total Sales `$2,297,200.86`, Net Profit `$286,397.02`, `37,873` units, `5,009` orders, `793` customers.
+  - Complete 19-column data dictionary with explicit Excel format masks and sample records.
+- **Module 2 Lesson Notes Grounding**:
+  - `01_Data_Types_and_Formatting.md`: Superstore date serial numbers, currency masks, negative red profit accounting display.
+  - `02_Sorting_and_Filtering.md`: 3-level sort drill (`Region` ➔ `Category` ➔ `Profit`) and toxic discount filtering (`Discount >= 0.20` & `Profit < 0`).
+  - `03_Data_Validation_and_Integrity.md`: Superstore picklists (`Ship Mode`, `Segment`) and decimal limits (`Discount <= 0.80`).
+  - `04_Data_Transformation_Tools.md`: Flash Fill (`Ctrl + E`) on `Order ID` (`CA-2016-152156`), Text-to-Columns on `Product ID` (`FUR-BO-10001798`), and deduplication trap analysis (793 customers vs 5,009 orders vs 9,994 line items).
+  - `05_Keyboard_Shortcuts_and_Navigation.md`: Navigating 10,000-row sheets via `Ctrl + Arrow`, `Ctrl + Shift + Down`, and `Ctrl + Backspace` viewport snap.
+
+### Step 9: Dedicated Student Demos & Excel Workbooks Repository
+- **Directory Hierarchy (`11_Demos_and_Workbooks/`)**: Created dedicated module-by-module folder structure (`01_Fundamentals/` through `10_Projects_and_Demos/`) for personal user `.xlsx` workbooks.
+- **Workbook Architecture Guide (`11_Demos_and_Workbooks/README.md`)**: Documented naming standards (`Demo_02_Superstore_Data_Management.xlsx`), calculation options, used range verification (`Ctrl + End`), and `.gitignore` integration (ignoring temporary `~$*` lock files while preserving user `.xlsx` workbooks).
+
 ---
 
 ## 📊 Deliverables Inventory
@@ -148,11 +165,12 @@ flowchart TD
 | **Course Curriculum & Dashboards** | 7 notes | Overview, Curriculum, Objectives, Index, Learning Path, Dashboard, MOC | Verified |
 | **Structured Lesson Notes** | 9 notes | Modules 1 through 9 covering 8-hour masterclass timestamps | Verified |
 | **Atomic Concepts & MOCs** | 22 notes | Excel Tables, XLOOKUP, DAX, Quality, M Language, AI MOC, Human vs AI | Verified |
-| **Formula Reference Base** | 25+ notes | Lookup, Math, Logic, Text, Date, Dynamic Arrays, DAX Measures | Verified |
+| **Formula Reference Base** | 27 notes | Lookup, Math, Logic, Text, Date, Dynamic Arrays (SORT, SORTBY, FILTER, UNIQUE), DAX | Verified |
 | **Practice & Solutions** | 19 notes | Ex01–Ex07, 10 AI Drills, Mini Projects, Full Solutions | Verified |
 | **Capstone Project Files** | 11 notes | PwC 5,000-call audit, KPIs, Findings, AI Workflow, Case Study | Verified |
-| **Supplementary Reference Notes** | 12 notes | Gemini Notebook guides, modern lookups, DAX modeling, ETL | Verified |
+| **Supplementary Reference Notes** | 13 notes | Gemini Notebook guides, Superstore Benchmark Doc, modern lookups, DAX | Verified |
 | **AI for Excel Knowledge Base** | 9 notes | Overview, Twistly, Claude, Install, Workflow, Prompts, Verification, Security | Verified |
+| **Student Demos & Workbooks** | 10 dirs + guide | `11_Demos_and_Workbooks/` module folders with `.gitkeep` & guidelines | Active |
 | **Physical Media Assets** | 6 files | 4 PNG mindmaps, 1 PDF blueprint (12.3MB), 1 MP4 walkthrough (34.8MB) | Staged / Pushed |
 | **Obsidian Configuration** | Pre-set | Dataview, Omnisearch, Tasks, Minimal theme, Second Brain CSS | Configured |
 | **GitHub Governance** | 9 files | Workflows, Rulesets, Community standards, Issue templates | Active |
