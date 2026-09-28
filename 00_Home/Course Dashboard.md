@@ -25,12 +25,12 @@ updated: 2026-09-28
 | :--- | :--- | :--- | :--- |
 | **Modules Covered** | 9 Modules | 9 Structured | Grounded in course PPTX & Workbooks |
 | **Lesson Notes** | 30+ Lessons | Completed | Across 9 functional modules |
-| **Concept Knowledge Base** | 22 Atomic Concepts | Completed | Star schema, DAX, Tables, XLOOKUP, AI MOC, etc. |
-| **Formula Reference** | 45 Key Functions | Documented | Structured arguments, examples & edge cases |
+| **Concept Knowledge Base** | 23 Atomic Concepts | Completed | Star schema, DAX, Tables, XLOOKUP, Why Not Always Formulas, etc. |
+| **Formula Reference** | 61 Key Functions | Documented | Structured arguments, examples & edge cases |
 | **Practice Sets** | 7 Exercises + 10 AI Labs | Ready | Levels 1 to 5 with hidden solutions |
 | **Analytics Projects** | 2 Projects | Documented | Hotel Reservation + PwC Call Center |
 | **Portfolio Artifact** | 1 Recruiter Case Study | Ready | [[Call Center Analysis Portfolio Case Study]] |
-| **Personal Workbooks** | 3 Active Demos | In Progress | [[11_Demos_and_Workbooks/README\|Mod 2 (Superstore) + Mod 3 (Ref & Formatting + Formulas Part 1)]] |
+| **Personal Workbooks** | 4 Active Demos | In Progress | [[11_Demos_and_Workbooks/README\|Mod 2 (Superstore) + Mod 3 (3 Demos: Ref + Formulas 1 & 2)]] |
 | **Retail Benchmark** | 9,994 Rows (19 Cols) | Verified | [[Sample Superstore Dataset Documentation|Sample Superstore]] |
 | **Hospitality Benchmark** | 36,275 Rows (19 Cols) | Verified | [[Hotel Reservations Dataset Documentation|Hotel Reservations]] |
 
