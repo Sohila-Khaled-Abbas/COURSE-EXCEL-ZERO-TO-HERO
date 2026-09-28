@@ -33,17 +33,22 @@ video_url: https://www.youtube.com/watch?v=uv1bxe2gdnU&t=5936s
 
 ---
 
-## 1. Core Date & Time Functions
+## 1. The 4-Tier Date Analytics Framework
 
-| Function | Syntax | Technical Mechanics | Key Analytical Use Case |
-| :--- | :--- | :--- | :--- |
-| **`TODAY`** | `=TODAY()` | Volatile integer serial representing current date. | Dynamic age calculation (`=DATEDIF(DOB, TODAY(), "Y")`). |
-| **`NOW`** | `=NOW()` | Volatile decimal serial (integer date + fractional time). | Real-time SLA timestamps, operational clocks. |
-| **`DAY`** | `=DAY(serial_number)` | Returns integer day of the month (`1` to `31`). | Cohort analysis, monthly billing cycles. |
-| **`MONTH`** | `=MONTH(serial_number)` | Returns integer month of the year (`1` to `12`). | Monthly trend aggregation, seasonal indices. |
-| **`YEAR`** | `=YEAR(serial_number)` | Returns 4-digit integer year (`1900` to `9999`). | Annual sales reporting, multi-year slicing. |
-| **`WEEKDAY`** | `=WEEKDAY(serial, [type])` | Returns day of the week index (`1` to `7`). Type `2` sets Monday = `1`, Sunday = `7`. | Staffing models, peak day-of-week volume analysis. |
-| **`WEEKNUM`** | `=WEEKNUM(serial, [type])`| Returns week number of the year (`1` to `54`). | Weekly sprint tracking, retail 4-5-4 calendars. |
+From `Formulas_&_Functions_Part_2.xlsx` (Sheet `Date and Time `), date analytics functions fall into four clear functional categories:
+
+| Category | Function | Syntax | Technical Mechanics | Key Analytical Use Case |
+| :--- | :--- | :--- | :--- | :--- |
+| **1. التاريخ الحالي<br>(Current Serials)** | **`TODAY`** | `=TODAY()` | Volatile integer serial (updates on recalculation). | Dynamic client age (`=DATEDIF(DOB, TODAY(), "Y")`). |
+| **1. التاريخ الحالي<br>(Current Serials)** | **`NOW`** | `=NOW()` | Volatile decimal serial (integer date + fractional time). | Real-time SLA timestamps, operational clocks. |
+| **2. فك التاريخ<br>(Decomposition)** | **`DAY`** | `=DAY(serial_number)` | Returns integer day of the month (`1` to `31`). | Cohort analysis, monthly billing cycles (`=DAY(D8)`). |
+| **2. فك التاريخ<br>(Decomposition)** | **`MONTH`** | `=MONTH(serial_number)` | Returns integer month of the year (`1` to `12`). | Monthly trend aggregation, seasonal indices (`=MONTH(D8)`). |
+| **2. فك التاريخ<br>(Decomposition)** | **`YEAR`** | `=YEAR(serial_number)` | Returns 4-digit integer year (`1900` to `9999`). | Annual sales reporting, multi-year slicing (`=YEAR(D8)`). |
+| **3. حسابات التاريخ<br>(Calculations)** | **`DATEDIF`** | `=DATEDIF(start, end, unit)` | Computes exact elapsed periods (`"Y"`, `"M"`, `"D"`). | Client tenure, contract lifespan. |
+| **3. حسابات التاريخ<br>(Calculations)** | **`NETWORKDAYS`** | `=NETWORKDAYS(start, end, [hol])` | Whole business workdays (excludes Sat/Sun). | Turnaround time for standard Western schedule. |
+| **3. حسابات التاريخ<br>(Calculations)** | **`NETWORKDAYS.INTL`**| `=NETWORKDAYS.INTL(start, end, mask, [hol])` | Whole business workdays with custom weekend masks. | Middle East schedules (`"0000011"` for Fri/Sat). |
+| **4. تحليل زمني<br>(Time Analysis)** | **`WEEKDAY`** | `=WEEKDAY(serial, [type])` | Day-of-week index (`1` to `7`). Answers: **اليوم كام في الأسبوع؟** | Staffing models, peak day volume (`=WEEKDAY(D8)`). |
+| **4. تحليل زمني<br>(Time Analysis)** | **`WEEKNUM`** | `=WEEKNUM(serial, [type])`| Week number of the year (`1` to `54`). Answers: **الأسبوع كام في السنة؟** | Weekly sprint tracking, retail 4-5-4 calendars (`=WEEKNUM(D8)`). |
 
 ---
 
@@ -98,15 +103,24 @@ From `Formulas_&_Functions_Part_2.xlsx` (Sheet `Date and Time `):
 
 ## 4. Practical Implementation Patterns
 
-### Pattern A: Dynamic Client Age
-From `Formulas_&_Functions_Part_2.xlsx`:
+### Pattern A: Tenure Calculation (DATEDIF)
+From `Formulas_&_Functions_Part_2.xlsx` (cell `D17`):
 ```excel
-=DATEDIF(E22, TODAY(), "Y")
+=DATEDIF(H18, H17, "y")
+```
+Calculates completed years between Start Date `2024-03-24` and End Date `2026-12-20` ($\rightarrow 2$ years).
+
+### Pattern B: Business Days with Friday/Saturday Weekend
+From `Formulas_&_Functions_Part_2.xlsx` (cell `D19`):
+```excel
+=NETWORKDAYS.INTL(H18, H17, "0000011")
 ```
 
-### Pattern B: SLA Turnaround in Net Business Days
+### Pattern C: Time Analysis (Periodicity)
+From `Formulas_&_Functions_Part_2.xlsx` (cells `D22` & `D23`):
 ```excel
-=NETWORKDAYS.INTL(Tickets[OpenDate], Tickets[CloseDate], 7, Holidays[Date])
+=WEEKDAY(D8)   // Day index of today (اليوم كام في الأسبوع)
+=WEEKNUM(D8)   // Week index of today (الأسبوع كام في السنة)
 ```
 
 ---
