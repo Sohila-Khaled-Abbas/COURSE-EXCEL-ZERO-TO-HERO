@@ -30,6 +30,7 @@ Drop your completed workbook files directly into their respective module folder:
 | :--- | :--- | :--- | :---: |
 | **02: Data Management** | [`Superstore_Dataset_Demo.xlsx`](02_Data_Management/Superstore_Dataset_Demo.xlsx) | 9,994 records, `Gross Revenue`, `Net Revenue`, `Order Year`, Text to Columns (`Dept`, `Sub-Cat`, `Serial`), `Dim_Customers` deduplication | ✅ Verified |
 | **03: Formulas & Functions** | [`Conditional Formatting & Absolute Relative.xlsx`](03_Formulas_and_Functions/Conditional%20Formatting%20&%20Absolute%20Relative.xlsx) | Formula rationale, dynamic recalculation, relative amount math (`=B5*C5`), coordinate locking (`$`/`F4`), branch-level transaction conditional formatting | ✅ Active |
+| **03: Formulas & Functions** | [`Formulas_&_Functions_Part_1.xlsx`](03_Formulas_and_Functions/Formulas_&_Functions_Part_1.xlsx) | Arithmetic (`SUM`, `PRODUCT`, `QUOTIENT`, `MOD`), statistical (`MIN`, `MAX`, `AVERAGE`), counting logic (`COUNT`, `COUNTA`, `COUNTBLANK`, `COUNTIF`, `COUNTIFS`), text operations (`CONCAT`, `LEFT`/`RIGHT`/`MID`, `LEN`, `TRIM`, `SUBSTITUTE`/`REPLACE`, `FIND`/`SEARCH`, `UPPER`/`LOWER`) | 🔥 Active Study |
 
 ---
 
