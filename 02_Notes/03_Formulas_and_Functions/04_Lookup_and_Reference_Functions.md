@@ -76,7 +76,47 @@ Retrieves client name from row index `2` based on client `Code` in row `3`.
 
 ---
 
-## 3. Practical Integration: Dynamic Age Calculation
+## 3. Practical Workbook Implementations
+
+### Drill A: VLOOKUP Vertical Key Mapping
+From `Formulas_&_Functions_Part_2.xlsx` (Sheet `Vlookup`, cell `L27`):
+```excel
+=VLOOKUP(K27, $B$21:$I$46, 2, FALSE)
+```
+Retrieves `Client Name` from column 2 based on client `Code` in `K27`.
+
+### Drill B: HLOOKUP Transposed Data Mapping
+From `Formulas_&_Functions_Part_2.xlsx` (Sheet `HLookup`):
+- **Code to Name** (cell `B18`): `=HLOOKUP(B17, $A$3:$K$10, 2, FALSE)`
+- **Name to Industry** (cell `B46`): `=HLOOKUP(B45, $A$32:$K$38, 6, FALSE)` (searches top row 32 for client name and pulls row 6).
+
+### Drill C: XLOOKUP Bidirectional Searches & Native Fallbacks
+From `Formulas_&_Functions_Part_2.xlsx` (Sheet `XLookup`):
+- **Left Lookup (Code $\rightarrow$ Name)** (cell `K22`):
+  ```excel
+  =XLOOKUP(J22, $D$3:$D$28, $A$3:$A$28, "مش موجود", 0, 1)
+  ```
+  *(Returns Name from Column A to the left of Code in Column D!)*
+- **Missing Value Handling (Client $\rightarrow$ Industry)** (cell `K54`):
+  ```excel
+  =XLOOKUP(J54, $A$35:$A$60, $G$35:$G$60, "مش موجود", 0, 1)
+  ```
+  *(Gracefully outputs custom message `"مش موجود"` when client `'جمعة'` is not in the system).*
+
+---
+
+## 4. Modern Companion Functions: Indexing & Selection
+
+| Function | Modern Analytical Role | Key Advantage | Note Link |
+| :--- | :--- | :--- | :--- |
+| **`INDEX`** | Retrieves value at `(row_num, col_num)` | High performance, impervious to column inserts | [[INDEX]] |
+| **`MATCH`** | Finds relative position index | Flexible coordination with `INDEX` | [[MATCH]] |
+| **`XMATCH`** | Next-generation position finder | Exact by default (`0`), supports bottom-to-top reverse search (`-1`) | [[XMATCH]] |
+| **`CHOOSE`** | Selects from argument list by 1-based index | Dynamic scenario modeling (Best/Base/Worst case) | [[CHOOSE]] |
+
+---
+
+## 5. Practical Integration: Dynamic Age Calculation
 Across all three lookup sheets in the workbook demo, client records feature dynamic age calculation calculated on the fly from Date of Birth:
 ```excel
 =DATEDIF(E22, TODAY(), "Y")
@@ -85,25 +125,10 @@ This demonstrates how enterprise data systems pair lookup indices (`Code`, `Clie
 
 ---
 
-## 4. Practical Implementation Patterns
-
-### Pattern A: Modern Employee Metadata Retrieval
-```excel
-=XLOOKUP(A2, Employees[EmpID], Employees[Salary], "Not Found")
-```
-
-### Pattern B: Approximate Tier Lookup (Tax or Commission Brackets)
-```excel
-=XLOOKUP(SalesAmount, CommissionTable[MinSales], CommissionTable[Rate], 0, -1)
-```
-*(Match mode `-1` finds exact match or next smaller item).*
-
----
-
 ## Related Knowledge
-- **Formulas**: [[XLOOKUP]], [[VLOOKUP]], [[HLOOKUP]], [[INDEX]], [[MATCH]], [[DATEDIF]], [[TODAY]]
+- **Formulas**: [[XLOOKUP]], [[VLOOKUP]], [[HLOOKUP]], [[INDEX]], [[MATCH]], [[XMATCH]], [[CHOOSE]], [[DATEDIF]], [[TODAY]]
 - **Concepts**: [[VLOOKUP vs XLOOKUP]], [[INDEX and MATCH]], [[Why Not Always Formulas]]
 - 📂 **Personal Workbook Demo**: [`11_Demos_and_Workbooks/03_Formulas_and_Functions/Formulas_&_Functions_Part_2.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20%28Excel%29/11_Demos_and_Workbooks/03_Formulas_and_Functions/Formulas_&_Functions_Part_2.xlsx)
   - Tab **`Vlookup`**: 79-row vertical dataset linking client codes to accounts, industries, and annual income.
-  - Tab **`HLookup`**: Horizontal transpose structure retrieving client names across row indices.
-  - Tab **`XLookup`**: Modern decoupled lookup architecture with `[if_not_found]` parameter handling.
+  - Tab **`HLookup`**: Horizontal transpose structure retrieving client names and industries across row indices.
+  - Tab **`XLookup`**: Modern decoupled lookup architecture with left lookups, native Arabic fallbacks, and index exploration.
