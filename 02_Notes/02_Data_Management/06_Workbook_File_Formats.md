@@ -165,9 +165,9 @@ flowchart TD
 
 ## 🧪 Practice & Application Drills
 
-- [ ] **Level 1 (Recall)**: Name the 4 primary extensions and their 1-word role (`XLSX = Default`, `XLSM = Macro`, `XLSB = Fast`, `CSV = Data Set`).
-- [ ] **Level 2 (Application)**: Take `09_Source_Materials/Module 2/Sample_Superstore_Full.csv`. Open it in Excel, save it as `XLSX` inside `11_Demos_and_Workbooks/02_Data_Management/`, and check the file size change.
-- [ ] **Level 3 (Real-World Stress Test)**: If a corporate financial consolidation model with 500,000 formulas takes 45 seconds to open in `.xlsx`, convert it to `.xlsb` using `F12`. Benchmark the new load time and file size reduction.
+- [x] **Level 1 (Recall)**: Name the 4 primary extensions and their 1-word role (`XLSX = Default`, `XLSM = Macro`, `XLSB = Fast`, `CSV = Data Set`). ✅ 2026-09-28
+- [x] **Level 2 (Application)**: Take `09_Source_Materials/Module 2/Sample_Superstore_Full.csv`. Open it in Excel, save it as `XLSX` inside `11_Demos_and_Workbooks/02_Data_Management/`, and check the file size change. ✅ 2026-09-28
+- [x] **Level 3 (Real-World Stress Test)**: If a corporate financial consolidation model with 500,000 formulas takes 45 seconds to open in `.xlsx`, convert it to `.xlsb` using `F12`. Benchmark the new load time and file size reduction. ✅ 2026-09-28
 
 ---
 
