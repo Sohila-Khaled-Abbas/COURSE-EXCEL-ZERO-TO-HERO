@@ -1,0 +1,34 @@
+# Obsidian workspace & caches (preserve community plugins, themes, and snippets)
+.obsidian/workspace*
+.obsidian/graph*
+.obsidian/indexed*
+.obsidian/cache*
+.obsidian/plugins/*/data.json.bak
+.obsidian/plugins/omnisearch/cache*
+.obsidian/plugins/obsidian-tasks-plugin/cache*
+
+# OS Generated Files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Temporary & Cache files
+*.tmp
+*.temp
+*.bak
+~$*
+
+# Python scratch / cache
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+scratch/
+
+# Large binaries / dumps if applicable (allow source materials)
+# Keep 09_Source_Materials tracked

@@ -1,0 +1,14 @@
+{
+  "cssTheme": "Minimal",
+  "theme": "obsidian",
+  "baseFontSize": 16,
+  "enabledCssSnippets": [
+    "metadata-icon-auto-gen",
+    "second-brain"
+  ],
+  "nativeMenus": false,
+  "monospaceFontFamily": "Source Code Pro",
+  "textFontFamily": "Inter",
+  "interfaceFontFamily": "Inter",
+  "showRibbon": true
+}
