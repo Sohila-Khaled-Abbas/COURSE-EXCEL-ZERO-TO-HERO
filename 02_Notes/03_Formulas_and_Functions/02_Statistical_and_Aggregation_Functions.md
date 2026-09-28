@@ -42,6 +42,16 @@ video_url: https://www.youtube.com/watch?v=uv1bxe2gdnU&t=5936s
 | **`QUOTIENT`** | `=QUOTIENT(numerator, denominator)` | $\lfloor \frac{\text{num}}{\text{den}} \rfloor$ | Integer division (discards the fractional remainder). Packaging batches or full cartons. |
 | **`MOD`** | `=MOD(number, divisor)` | $\text{num} \pmod{\text{div}}$ | Remainder of division. Alternating row shading (`=MOD(ROW(), 2)=0`), time/shift rollover, inventory units left over. |
 | **`POWER`** | `=POWER(number, power)` | $x^y$ | Exponential growth, CAGR calculations, compound interest models. |
+| **`ROUND`** | `=ROUND(number, num_digits)` | Normal rounding ($<5$ down, $\ge 5$ up) | Financial currency formatting, reducing floating precision errors. |
+| **`ROUNDUP`** | `=ROUNDUP(number, num_digits)` | Rounds strictly away from zero | Capacity planning, container count ceiling. |
+| **`ROUNDDOWN`** | `=ROUNDDOWN(number, num_digits)`| Rounds strictly toward zero | Completed integer milestones, conservative floor forecasts. |
+
+### Practical Rounding Drill (from `Formulas_&_Functions_Part_2.xlsx`):
+If cell contains `12.4445`:
+- `=ROUND(12.4445, 2)` $\rightarrow 12.44$
+- `=ROUNDUP(12.4445, 1)` $\rightarrow 12.5$
+- `=ROUNDDOWN(12.4445, 3)` $\rightarrow 12.444$
+- Negative digits round to tens or hundreds: `=ROUND(1254, -2)` $\rightarrow 1300$.
 
 ---
 
@@ -114,9 +124,12 @@ To identify items remaining after packaging into 12-unit cartons:
 ---
 
 ## Related Knowledge
-- **Formulas**: [[SUM]], [[SUMIFS]], [[AVERAGE]], [[AVERAGEIFS]], [[COUNT]], [[COUNTA]], [[COUNTIFS]]
+- **Formulas**: [[SUM]], [[SUMIFS]], [[AVERAGE]], [[AVERAGEIFS]], [[COUNT]], [[COUNTA]], [[COUNTIFS]], [[ROUND]], [[ROUNDUP]], [[ROUNDDOWN]]
 - **Concepts**: [[Relative vs Absolute References]], [[Structured References]]
 - **Practice**: [[Ex02_Formulas_and_Lookup_Logic]]
-- 📂 **Personal Workbook Demo**: [`11_Demos_and_Workbooks/03_Formulas_and_Functions/Formulas_&_Functions_Part_1.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20%28Excel%29/11_Demos_and_Workbooks/03_Formulas_and_Functions/Formulas_&_Functions_Part_1.xlsx)
-  - Tab **`Arithmetic and statistical`**: Hands-on formula practice for `SUM`, `SUM_IF`, `SUM_IFS`, `MIN`, `MAX`, `AVERAGE` (mean), `PRODUCT`, `QUOTIENT`, `MOD`, and `POWER`.
-  - Tab **`Counting `**: Practical comparative drills implementing `COUNT`, `COUNTA`, `COUNTBLANK`, `COUNTIF`, and `COUNTIFS`.
+- 📂 **Personal Workbook Demos**:
+  - [`11_Demos_and_Workbooks/03_Formulas_and_Functions/Formulas_&_Functions_Part_1.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20%28Excel%29/11_Demos_and_Workbooks/03_Formulas_and_Functions/Formulas_&_Functions_Part_1.xlsx)
+    - Tab **`Arithmetic and statistical`**: Hands-on formula practice for `SUM`, `SUM_IF`, `SUM_IFS`, `MIN`, `MAX`, `AVERAGE` (mean), `PRODUCT`, `QUOTIENT`, `MOD`, and `POWER`.
+    - Tab **`Counting `**: Practical comparative drills implementing `COUNT`, `COUNTA`, `COUNTBLANK`, `COUNTIF`, and `COUNTIFS`.
+  - [`11_Demos_and_Workbooks/03_Formulas_and_Functions/Formulas_&_Functions_Part_2.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20%28Excel%29/11_Demos_and_Workbooks/03_Formulas_and_Functions/Formulas_&_Functions_Part_2.xlsx)
+    - Tab **`Rounding and Dynamic Filters `**: Hands-on precision drills with `ROUND`, `ROUNDUP`, and `ROUNDDOWN`.
