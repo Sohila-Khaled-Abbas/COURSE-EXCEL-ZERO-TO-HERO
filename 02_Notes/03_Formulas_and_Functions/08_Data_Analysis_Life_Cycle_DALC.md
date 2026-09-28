@@ -1,14 +1,18 @@
 ---
 type: lesson
 course: Excel Zero to Hero
-module: "Module 3"
-topic: "Data Analysis Life Cycle"
-status: not-started
+module: Module 3
+topic: Data Analysis Life Cycle
+status: completed
 difficulty: intermediate
-tags: [analytics, methodology, dalc, crisp-dm]
+tags:
+  - analytics
+  - methodology
+  - dalc
+  - crisp-dm
 prerequisites: []
 related_project: "[[Call Center Performance Analysis]]"
-source: "https://youtu.be/uv1bxe2gdnU"
+source: https://youtu.be/uv1bxe2gdnU
 created: 2026-09-28
 updated: 2026-09-28
 video_chapter: \"Chapter 3 – Excel Formulas & Functions\"
