@@ -24,6 +24,15 @@ Drop your completed workbook files directly into their respective module folder:
 
 ---
 
+## 📂 Active Student Workbooks Portfolio
+
+| Module | Workbook File | Core Skills & Features Demonstrated | Status |
+| :--- | :--- | :--- | :---: |
+| **02: Data Management** | [`Superstore_Dataset_Demo.xlsx`](02_Data_Management/Superstore_Dataset_Demo.xlsx) | 9,994 records, `Gross Revenue`, `Net Revenue`, `Order Year`, Text to Columns (`Dept`, `Sub-Cat`, `Serial`), `Dim_Customers` deduplication | ✅ Verified |
+| **03: Formulas & Functions** | [`Conditional Formatting & Absolute Relative.xlsx`](03_Formulas_and_Functions/Conditional%20Formatting%20&%20Absolute%20Relative.xlsx) | Formula rationale, dynamic recalculation, relative amount math (`=B5*C5`), coordinate locking (`$`/`F4`), branch-level transaction conditional formatting | ✅ Active |
+
+---
+
 ## 🏷️ Recommended Naming Conventions
 
 To keep your files professional, easily searchable, and recruiter-ready, use clean, standardized filenames:
