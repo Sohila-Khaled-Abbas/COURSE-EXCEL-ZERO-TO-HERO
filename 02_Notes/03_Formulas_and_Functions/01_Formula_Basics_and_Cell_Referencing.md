@@ -59,3 +59,8 @@ classDiagram
 ## Related Knowledge
 - Concepts: [[Relative vs Absolute References]], [[Structured References]]
 - Practice: [[Ex02_Formulas_and_Lookup_Logic]]
+- 📂 **Personal Workbook Demo**: `11_Demos_and_Workbooks/03_Formulas_and_Functions/Conditional Formatting & Absolute Relative.xlsx`
+  - Tab **`Why Formula`**: Dynamic cell referencing vs static hardcoding.
+  - Tab **`Conditional Formatting`**: Transaction record highlighting by branch (`Cairo`, `Suez`, `Tanta`).
+  - Tab **`Relative vs Absolute`**: Side-by-side demonstration of relative amount calculation (`=B5*C5`) and `$`/`F4` coordinate anchors.
+
