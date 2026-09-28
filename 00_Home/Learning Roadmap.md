@@ -37,16 +37,16 @@ flowchart TD
 
 ## 阶段 1: Understand (Concepts & Foundations)
 - [x] Understand the Excel interface, Grid coordinates, and Ribbon structure ([[01_Excel_Interface_and_GUI]]). ✅ 2026-09-28
-- [ ] Differentiate data types (Text, Number, Date, Boolean, Formula) and custom number formatting ([[01_Data_Types_and_Formatting]]).
-- [ ] Master relative, absolute (`$A$1`), and mixed references (`$A1`, `A$1`) ([[Relative vs Absolute References]]).
-- [ ] Understand the power of Excel Tables (`Ctrl + T`) and structured references ([[Excel Tables]]).
+- [x] Differentiate data types (Text, Number, Date, Boolean, Formula) and custom number formatting ([[01_Data_Types_and_Formatting]]). ✅ 2026-09-29
+- [x] Master relative, absolute (`$A$1`), and mixed references (`$A1`, `A$1`) ([[Relative vs Absolute References]]). ✅ 2026-09-29
+- [x] Understand the power of Excel Tables (`Ctrl + T`) and structured references ([[Excel Tables]]). ✅ 2026-09-29
 
 ## 阶段 2: Practice (Drills & Formula Fluency)
-- [ ] Execute aggregation formulas: `SUM`, `AVERAGE`, `COUNT`, `COUNTA` ([[02_Statistical_and_Aggregation_Functions]]).
-- [ ] Build conditional aggregation logic: `SUMIFS`, `COUNTIFS`, `AVERAGEIFS` ([[SUMIFS]]).
-- [ ] Master modern lookup architecture: `XLOOKUP` vs `VLOOKUP` vs `INDEX/MATCH` ([[VLOOKUP vs XLOOKUP]]).
-- [ ] Handle text cleansing formulas: `TRIM`, `PROPER`, `LEN`, `TEXTJOIN`, `TEXTSPLIT` ([[05_Text_Manipulation_Functions]]).
-- [ ] Complete practice drills in [[Ex01_Data_Management_and_Formatting]] and [[Ex02_Formulas_and_Lookup_Logic]].
+- [x] Execute aggregation formulas: `SUM`, `AVERAGE`, `COUNT`, `COUNTA` ([[02_Statistical_and_Aggregation_Functions]]). ✅ 2026-09-29
+- [x] Build conditional aggregation logic: `SUMIFS`, `COUNTIFS`, `AVERAGEIFS` ([[SUMIFS]]). ✅ 2026-09-29
+- [x] Master modern lookup architecture: `XLOOKUP` vs `VLOOKUP` vs `INDEX/MATCH` ([[VLOOKUP vs XLOOKUP]]). ✅ 2026-09-29
+- [x] Handle text cleansing formulas: `TRIM`, `PROPER`, `LEN`, `TEXTJOIN`, `TEXTSPLIT` ([[05_Text_Manipulation_Functions]]). ✅ 2026-09-29
+- [x] Complete practice drills in [[Ex01_Data_Management_and_Formatting]] and [[Ex02_Formulas_and_Lookup_Logic]]. ✅ 2026-09-29
 
 ## 阶段 3: Apply (Data Structuring & Cleaning)
 - [ ] Evaluate datasets against the [[Six Dimensions of Data Quality]].
