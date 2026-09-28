@@ -35,14 +35,32 @@ related_functions: ["[[WEEKDAY]]", "[[YEAR]]", "[[MONTH]]"]
 
 ## Practical Examples
 
-### 1. Weekly Sprint / Pipeline Tracking
+### 1. Current Date Week Number Drill
+From `Formulas_&_Functions_Part_2.xlsx` (Sheet `Date and Time `, cell `D23`):
+```excel
+=WEEKNUM(D8)
+```
+Where `D8` contains `=TODAY()`. Answers the business question: **"الأسبوع كام في السنة؟"** (Which week of the year does this date belong to?).
+
+### 2. Standard Business Week (Monday Start)
 ```excel
 =WEEKNUM(OrderDate, 2)
 ```
-Groups operational transactions into 52 weekly analytical buckets.
+Ensures weeks start on Monday (aligning with international production cycles).
 
-### 2. Retail Weekly Sales Variance
-Comparing Week `N` this year vs Week `N` last year.
+### 3. Retail Weekly Sales Variance
+Comparing Week `N` this year vs Week `N` last year for retail benchmarking.
+
+---
+## Return Type System Reference
+- **System 1 (Traditional)**: The week containing January 1 is Week 1.
+  - `1`: Sunday (Default)
+  - `2`: Monday
+  - `11`: Monday
+  - `12`: Tuesday
+  - `17`: Sunday
+- **System 2 (ISO 8601 Standard)**:
+  - `21`: The first week of the year containing at least four days (Thursday) is Week 1. Eliminates 1-day or 2-day partial week anomalies at year start.
 
 ---
 ## Related Knowledge

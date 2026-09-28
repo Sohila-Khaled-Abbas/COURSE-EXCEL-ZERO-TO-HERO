@@ -35,14 +35,21 @@ related_functions: ["[[WEEKNUM]]", "[[NETWORKDAYS]]", "[[DAY]]"]
 
 ## Practical Examples
 
-### 1. Identify Weekend Days
-Flagging orders placed on Friday or Saturday in Middle East schedules:
+### 1. Current Date Day-of-Week Drill
+From `Formulas_&_Functions_Part_2.xlsx` (Sheet `Date and Time `, cell `D22`):
+```excel
+=WEEKDAY(D8)
+```
+Where `D8` contains `=TODAY()`. Answers the business question: **"اليوم كام في الأسبوع؟"** (Which day of the week is it numerically?).
+
+### 2. Identify Weekend Days in Middle East Schedules
+Flagging orders placed on Friday or Saturday:
 ```excel
 =IF(OR(WEEKDAY(A2, 2)=5, WEEKDAY(A2, 2)=6), "Weekend", "Workday")
 ```
 
-### 2. Operational Volume Distribution
-Aggregating call center volume by day of week index to optimize shift staffing.
+### 3. Operational Volume Distribution
+Aggregating call center volume by day of week index to optimize shift staffing and staffing rosters.
 
 ---
 ## Related Knowledge
