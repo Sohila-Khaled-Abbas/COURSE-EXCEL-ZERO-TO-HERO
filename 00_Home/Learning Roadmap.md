@@ -49,11 +49,11 @@ flowchart TD
 - [x] Complete practice drills in [[Ex01_Data_Management_and_Formatting]] and [[Ex02_Formulas_and_Lookup_Logic]]. ✅ 2026-09-29
 
 ## 阶段 3: Apply (Data Structuring & Cleaning)
-- [ ] Evaluate datasets against the [[Six Dimensions of Data Quality]].
-- [ ] Implement data validation dropdowns, input alerts, and error constraints ([[03_Data_Validation_and_Integrity]]).
-- [ ] Clean text using Flash Fill (`Ctrl + E`) and Text to Columns ([[04_Data_Transformation_Tools]]).
-- [ ] Ingest multi-format external datasets (CSV, JSON, SQL, REST APIs) into Power Query ([[01_Power_Query_Fundamentals_and_ETL]]).
-- [ ] Execute ETL transformations: unpivoting, merging (joins), and appending (unions) in [[Power Query]].
+- [x] Evaluate datasets against the [[Six Dimensions of Data Quality]]. ✅ 2026-09-29
+- [x] Implement data validation dropdowns, input alerts, and error constraints ([[03_Data_Validation_and_Integrity]]). ✅ 2026-09-29
+- [x] Clean text using Flash Fill (`Ctrl + E`) and Text to Columns ([[04_Data_Transformation_Tools]]). ✅ 2026-09-29
+- [x] Ingest multi-format external datasets (CSV, JSON, SQL, REST APIs) into Power Query ([[01_Power_Query_Fundamentals_and_ETL]]). ✅ 2026-09-29
+- [x] Execute ETL transformations: unpivoting, merging (joins), and appending (unions) in [[Power Query]]. ✅ 2026-09-29
 
 ## 阶段 4: Analyze (Multi-Dimensional Summarization)
 - [ ] Construct dynamic Pivot Tables with Row, Column, Value, and Filter dimensions ([[Pivot Tables]]).
