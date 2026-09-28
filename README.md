@@ -221,6 +221,13 @@ COURSE-EXCEL-ZERO-TO-HERO/
 │   ├── 08_Power_Query/                     # Automated ETL queries, unpivoting, joins
 │   ├── 09_Data_Modeling_and_DAX/           # Star schema models, explicit DAX measures
 │   └── 10_Projects_and_Demos/              # Capstone workbooks, PwC Call Center analysis
+├── scripts/                                # Dynamic Auto-Publish & Watcher Automation
+│   ├── watch_autopublish.ps1               # Continuous repository file watcher with debounce
+│   ├── watch_workbooks.ps1                 # Dedicated workbook watcher (.xlsx)
+│   ├── start_autopublisher.bat             # 1-click visible console launcher
+│   ├── start_silent_autopublisher.vbs      # 1-click background invisible launcher
+│   ├── stop_autopublisher.bat              # Clean watcher termination utility
+│   └── sync_workbooks.bat                  # 1-click manual on-demand synchronization
 └── Templates/                              # Standardized Reusable Note Templates
     ├── Lesson Note Template.md
     ├── Concept Note Template.md
