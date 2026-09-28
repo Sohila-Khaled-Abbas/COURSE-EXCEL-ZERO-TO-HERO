@@ -391,6 +391,25 @@ To guarantee production reliability and protect the integrity of the ground-trut
 
 ---
 
+## 🚀 Dynamic Hands-Free GitHub Auto-Publishing
+
+The repository includes a real-time background automation engine that continuously watches for changes to your notes and `.xlsx` workbooks, automatically committing and pushing updates directly to GitHub:
+
+| Tool / Script | Execution Method | Behavior |
+| :--- | :--- | :--- |
+| **`scripts/start_autopublisher.bat`** | Double-Click | Launches a live PowerShell console displaying detected file changes, debounced auto-commits, and upload statuses. |
+| **`scripts/start_silent_autopublisher.vbs`** | Double-Click | Runs the watcher completely invisibly in the background with zero terminal popup windows. |
+| **`scripts/stop_autopublisher.bat`** | Double-Click | Cleanly terminates any active background watcher processes. |
+| **`scripts/sync_workbooks.bat`** | Double-Click | Performs an instant, one-click manual synchronization of all modified workbooks to GitHub. |
+
+### How the File Watcher Works:
+1. Powered by .NET's `System.IO.FileSystemWatcher` via `scripts/watch_autopublish.ps1`.
+2. Employs a **4-second debounce timer** that waits for Microsoft Excel to finish saving and cleanly release file locks.
+3. Automatically ignores temporary lock files (`~$*.xlsx`), cache folders, and git internals.
+4. Generates clean semantic commits (e.g. `feat(auto-sync): update [timestamp]`) and pushes directly to `origin/main`.
+
+---
+
 ## 💻 Obsidian Setup & Second Brain Configuration
 
 This repository is configured as a standalone, fully functional Obsidian vault out of the box.
