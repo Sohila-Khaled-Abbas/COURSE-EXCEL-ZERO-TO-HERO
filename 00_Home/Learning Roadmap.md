@@ -62,19 +62,19 @@ flowchart TD
 - [ ] Connect interactive Slicers and Timelines across multiple Pivot Tables via Report Connections ([[Slicers and Timelines]]).
 
 ## 阶段 5: Build (End-to-End Analytics Dashboards)
-- [ ] Design visual layouts using preattentive attributes and visual hierarchy ([[Dashboard Design Principles]]).
-- [ ] Construct the [[Hotel_Reservation_Dashboard_Mini_Project|Hotel Reservation Management Dashboard]].
-- [ ] Architect the full [[Call Center Performance Analysis|PwC Call Center Performance Analysis Capstone]]:
+- [x] Design visual layouts using preattentive attributes and visual hierarchy ([[Dashboard Design Principles]]). ✅ 2026-09-29
+- [x] Construct the [[Hotel_Reservation_Dashboard_Mini_Project|Hotel Reservation Management Dashboard]]. ✅ 2026-09-29
+- [x] Architect the full [[Call Center Performance Analysis|PwC Call Center Performance Analysis Capstone]]: ✅ 2026-09-29
   - Model 5,000 raw call interactions.
   - Implement dynamic KPI cards: Total Calls, Answer Rate, Resolution Rate, Speed of Answer, CSAT.
   - Integrate interactive Slicers and VBA Reset Macro ([[06_Projects/Call Center Performance Analysis/Project Overview]]).
 
 ## 阶段 6: Review (Retention & Spaced Repetition)
-- [ ] Run through the [[Flashcards]] active recall deck.
-- [ ] Study the [[Common Mistakes]] log to avoid common formula and modeling traps.
-- [ ] Conduct timed formula tests using [[Quick Review]].
+- [x] Run through the [[Flashcards]] active recall deck. ✅ 2026-09-29
+- [x] Study the [[Common Mistakes]] log to avoid common formula and modeling traps. ✅ 2026-09-29
+- [x] Conduct timed formula tests using [[Quick Review]]. ✅ 2026-09-29
 
 ## 阶段 7: Explain (Portfolio & Interview Mastery)
-- [ ] Articulate analytical decisions using the [[Call Center Analysis Portfolio Case Study]].
-- [ ] Practice answering technical questions in [[Interview Questions]].
-- [ ] Publish the GitHub repository with clean documentation and demonstrate technical proficiency.
+- [x] Articulate analytical decisions using the [[Call Center Analysis Portfolio Case Study]]. ✅ 2026-09-29
+- [x] Practice answering technical questions in [[Interview Questions]]. ✅ 2026-09-29
+- [x] Publish the GitHub repository with clean documentation and demonstrate technical proficiency. ✅ 2026-09-29
