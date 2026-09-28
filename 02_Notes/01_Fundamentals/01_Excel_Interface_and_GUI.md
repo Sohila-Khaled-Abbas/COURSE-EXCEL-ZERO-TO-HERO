@@ -61,6 +61,12 @@ Excel is the most ubiquitous business software in the world. Analysts spend hund
 - Concepts: [[Relative vs Absolute References]]
 - Reference: [[Keyboard Shortcuts]], [[Excel Cheat Sheet]]
 
+## Supplementary Visual & Video Resources (Gemini Notebook)
+- 📄 [[Excel Interface Blueprint|Excel Interface Blueprint (PDF Manual)]]
+- 🎥 [[Excel Navigation and Setup Video Guide|Excel Navigation and Setup Video Walkthrough]]
+- 🌐 [Gemini Notebook Source](https://notebook.google.com/notebook/bcdef821-08bc-4186-9221-2c747d5a2b15?authuser=1)
+
+
 ## Self-Test & Interview Questions
 1. *What is the maximum number of rows and columns available in a modern Excel worksheet?* (1,048,576 rows by 16,384 columns).
 2. *How do you instantly toggle the height of the Formula Bar for long formulas?* (`Ctrl + Shift + U`).

@@ -37,3 +37,10 @@ video_url: \"https://www.youtube.com/watch?v=uv1bxe2gdnU&t=18219s\"
 
 ## Related Knowledge
 - Concepts: [[Calculated Columns vs DAX Measures]], [[Data Analysis Expressions (DAX)]]
+
+## Additional Learning Resources
+### Recommended
+- 📐 [[DAX Measures and Data Modeling|Gemini Notebook: DAX Measures and Data Modeling Deep-Dive]]
+### External
+- 🌐 [Gemini Notebook Source](https://notebook.google.com/notebook/bcdef821-08bc-4186-9221-2c747d5a2b15?authuser=1)
+

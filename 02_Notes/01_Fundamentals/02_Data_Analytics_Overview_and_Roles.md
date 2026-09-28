@@ -1,14 +1,17 @@
 ---
 type: lesson
 course: Excel Zero to Hero
-module: "Module 1"
-topic: "Data Analytics Overview & Roles"
-status: not-started
+module: Module 1
+topic: Data Analytics Overview & Roles
+status: completed
 difficulty: beginner
-tags: [analytics, bi, career-roadmap]
+tags:
+  - analytics
+  - bi
+  - career-roadmap
 prerequisites: []
 related_project: "[[Call Center Performance Analysis]]"
-source: "https://youtu.be/uv1bxe2gdnU"
+source: https://youtu.be/uv1bxe2gdnU
 created: 2026-09-28
 updated: 2026-09-28
 video_chapter: \"Chapter 1 – Excel Introduction & GUI\"

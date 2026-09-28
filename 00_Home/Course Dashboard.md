@@ -82,5 +82,35 @@ SORT next_review ASC
 - 🔍 **Data Quality Audit**: [[06_Projects/Call Center Performance Analysis/Data Quality Assessment|Data Quality Assessment (5,000 Rows)]]
 - 📐 **KPI Architecture**: [[06_Projects/Call Center Performance Analysis/KPIs|KPI Definitions & DAX / Excel Formulas]]
 - 💡 **Findings**: [[06_Projects/Call Center Performance Analysis/Findings|Evidence-Based Analytical Findings]]
-- 🚀 **Recommendations**: [[06_Projects/Call Center Performance Analysis/Recommendations|Executive Strategic Recommendations]]
 - 💼 **Recruiter Case Study**: [[Call Center Analysis Portfolio Case Study]]
+
+---
+
+## 📚 4. Supplementary Resources & External Knowledge
+- 🧭 **Resource Index**: [[Gemini Notebook Resource Index|Gemini Notebook Resource Index]]
+- 🗺️ **Learning Path**: [[Supplementary Learning Path|Curated Supplementary Learning Path]]
+- 🎯 **Skill Matrix**: [[Resource to Skill Map|Comprehensive Skill-to-Resource Map]]
+
+### External Resources Catalog (Dataview Query)
+```dataview
+TABLE source_type, course_topic, status
+FROM "07_Reference/Gemini Notebook"
+SORT course_topic ASC
+```
+
+### Static Fallback: Curated Supplementary Reference Notes
+| Resource Note | Type | Topic | Artifact Link |
+| :--- | :--- | :--- | :--- |
+| [[XLOOKUP and Modern Lookups]] | Formula Reference | Lookups & Error Handling | Dedicated Note |
+| [[Dynamic Arrays and Modern Calculation]] | Engine Reference | Spill Arrays & Dynamic Range (`#`) | Dedicated Note |
+| [[Power Query ETL Transformations]] | Tutorial | Automated ETL & Data Cleaning | Dedicated Note |
+| [[DAX Measures and Data Modeling]] | Concept Reference | Star Schema & Explicit DAX Measures | Dedicated Note |
+| [[Call Center KPI Analytics]] | Project Resource | Operational FCR, SLA & CSAT Math | Dedicated Note |
+| [[Executive Dashboard Design Principles]] | Documentation | Visual Hierarchy & Slicer Reset Macro | Dedicated Note |
+| [[Analytics Pipeline Comparison]] | Visual Infographic | Modern Data Stack Tool Comparison | `assets/analytics-pipeline-data-comparison.png` |
+| [[Enterprise Architecture Mindmap]] | Architecture Mindmap | 9-Module Analytics Topology | `assets/enterprise-architecture-mindmap.png` |
+| [[Excel Interface Blueprint]] | Reference PDF | Ribbon, Grid & Backstage Blueprint | `assets/excel-interface-blueprint.pdf` |
+| [[Data Quality Framework Mind Map]] | Visual Mindmap | 6 Dimensions of Quality Audit Flow | `assets/data-quality-mind-map.png` |
+| [[Excel Navigation and Setup Video Guide]] | Video Tutorial | Ergonomics & High-Speed Navigation | `assets/getting-started-with-excel-navigation-and-setup.mp4` |
+| [[Ex07_Supplementary_Dynamic_Lookups_and_KPIs]] | Practice Exercise | 5-Level Advanced Drills | [[Ex07_Solutions]] |
+

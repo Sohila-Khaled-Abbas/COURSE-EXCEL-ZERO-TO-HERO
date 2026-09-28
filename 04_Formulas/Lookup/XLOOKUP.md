@@ -36,3 +36,8 @@ updated: 2026-09-28
 
 ## Business Analytics Use Case
 Enriching transactional call records with agent metadata (department, supervisor, hire date) without fear of column shift errors.
+
+## Additional Resources
+- 📘 [[XLOOKUP and Modern Lookups|Gemini Notebook: XLOOKUP and Modern Lookups Deep-Dive]]
+- 🌐 [Gemini Notebook External Source](https://notebook.google.com/notebook/bcdef821-08bc-4186-9221-2c747d5a2b15?authuser=1)
+

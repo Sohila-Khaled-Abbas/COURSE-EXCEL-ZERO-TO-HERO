@@ -95,3 +95,13 @@ graph TD
 ### 3. Key Projects
 - 🏨 [[Hotel Reservation Analysis]]: 36,000+ booking records, cancellation trends, RevPAR, ADR, channel performance.
 - 📞 [[Call Center Performance Analysis]]: 5,000 PwC customer service calls, CSAT, Speed of Answer, Agent Scorecard.
+
+---
+
+## 🌐 Interactive Online Mindmaps & Architecture Blueprints
+- 🧠 **Interactive Course Mindmap (MindMeister)**: [Open Live MindMeister Course Map](https://www.mindmeister.com/app/map/3782166881?t=I9gXHbkAlV)
+- 🗺️ **Enterprise Architecture Topology**: [[Enterprise Architecture Mindmap|Enterprise Architecture Mindmap (Infographic)]]
+- 🔍 **Data Quality Audit Flow**: [[Data Quality Framework Mind Map|Data Quality Framework Visual Mind Map]]
+- 📄 **Excel GUI Blueprint**: [[Excel Interface Blueprint|Excel Interface Blueprint (PDF Manual)]]
+- 🎥 **Navigation Video**: [[Excel Navigation and Setup Video Guide|Excel Navigation and Setup Video Walkthrough]]
+

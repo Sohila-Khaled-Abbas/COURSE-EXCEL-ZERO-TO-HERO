@@ -39,3 +39,11 @@ flowchart LR
 8. 🚀 [[Recommendations]] — Actionable staffing, process, & technology proposals
 9. 🔄 [[Project Retrospective]] — Engineering lessons & competencies demonstrated
 10. 💼 [[Call Center Analysis Portfolio Case Study]] — Recruiter-ready showcase
+
+---
+
+## Supporting Resources (Gemini Notebook)
+- 📊 [[Call Center KPI Analytics|Call Center KPI Analytics & Operations Benchmarks]]
+- 🎨 [[Executive Dashboard Design Principles|Executive Dashboard Design & Interface Ergonomics]]
+- 🌐 [Gemini Notebook Source Reference](https://notebook.google.com/notebook/bcdef821-08bc-4186-9221-2c747d5a2b15?authuser=1)
+

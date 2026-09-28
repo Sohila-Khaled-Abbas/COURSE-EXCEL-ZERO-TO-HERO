@@ -155,3 +155,70 @@ All project metrics were computed directly from `09_Source_Materials/Module 9/13
    - Replicate the PwC Call Center Dashboard in Module 9 with Slicers and the VBA Reset Macro.
 4. **Publish to GitHub**:
    - Push the `main` branch to your personal GitHub profile to showcase the learning system and portfolio case study.
+
+---
+
+## 7. Gemini Notebook Integration
+
+### Notebook URL
+- **Primary Public Link**: [https://notebook.google.com/notebook/bcdef821-08bc-4186-9221-2c747d5a2b15?authuser=1](https://notebook.google.com/notebook/bcdef821-08bc-4186-9221-2c747d5a2b15?authuser=1)
+
+### Access Status
+- **Authentication Wall**: HTTP requests and headless browser automation redirect to Google Accounts sign-in (`accounts.google.com/v3/signin`).
+- **Direct Anonymous Access**: Restricted by Google NotebookLM system policies. Interactive browser session (such as user's Brave browser with active Google profile) is required to access live NotebookLM generative features.
+- **Physical Assets Imported**: The user provided the exported high-value media, diagrams, manuals, and videos generated from the notebook directly to the workspace:
+  - `assets/analytics-pipeline-data-comparison.png`
+  - `assets/data-quality-mind-map.png`
+  - `assets/enterprise-architecture-mindmap.png`
+  - `assets/excel-interface-blueprint.pdf`
+  - `assets/getting-started-with-excel-navigation-and-setup.mp4`
+
+### Resources Discovered
+1. **Analytics Pipeline Comparison Diagram** (`analytics-pipeline-data-comparison.png`): Architectural mapping comparing Excel (Power Query, Power Pivot) to enterprise modern data stack (SQL, Python, Power BI, Databricks).
+2. **Data Quality Framework Mind Map** (`data-quality-mind-map.png`): Structured taxonomy for auditing completeness, validity, accuracy, and operational nulls.
+3. **Enterprise Architecture Mindmap** (`enterprise-architecture-mindmap.png`): High-level cognitive map linking ingestion, modeling, DAX measures, and reporting.
+4. **Excel Interface Blueprint** (`excel-interface-blueprint.pdf`): Comprehensive 12 MB architectural manual covering ribbon commands, grid addressing, and backstage configuration.
+5. **Excel Navigation & Setup Video** (`getting-started-with-excel-navigation-and-setup.mp4`): Full visual walkthrough demonstrating keyboard-centric navigation, freeze panes, and speed tricks.
+6. **XLOOKUP Modern Lookup Paradigm**: Bidirectional, exact-match default lookup architectures.
+7. **Dynamic Array Spilling Engine**: Calculation model using `#` spill operators and declarative subsetting (`FILTER`, `UNIQUE`, `SORT`).
+8. **Power Query ETL Standards**: Idempotent data cleansing pipelines and column unpivoting.
+9. **Power Pivot & DAX Relational Modeling**: Star schemas, explicit measures, VertiPaq optimization, and `DIVIDE()` safety.
+10. **Call Center Operational KPI Mathematics**: Industry standard formulas for FCR, SLA compliance, and CSAT handling.
+
+### Resources Integrated
+- **Index & Curriculum Maps**:
+  - `01_Course/Gemini Notebook Resource Index.md`: Master catalog with controlled relevance tags (`core`, `high`, `medium`, `optional`).
+  - `01_Course/Supplementary Learning Path.md`: 9-phase pedagogical roadmap.
+  - `03_Concepts/Resource to Skill Map.md`: Matrix mapping skills to lessons, reference notes, drills, and projects.
+- **Dedicated Reference Notes (`07_Reference/Gemini Notebook/`)**:
+  - `XLOOKUP and Modern Lookups.md`
+  - `Dynamic Arrays and Modern Calculation.md`
+  - `Power Query ETL Transformations.md`
+  - `DAX Measures and Data Modeling.md`
+  - `Call Center KPI Analytics.md`
+  - `Executive Dashboard Design Principles.md`
+  - `Analytics Pipeline Comparison.md`
+  - `Data Quality Framework Mind Map.md`
+  - `Enterprise Architecture Mindmap.md`
+  - `Excel Interface Blueprint.md`
+  - `Excel Navigation and Setup Video Guide.md`
+- **Practice Drills & Solutions (`05_Practice/`)**:
+  - `05_Practice/Exercises/Ex07_Supplementary_Dynamic_Lookups_and_KPIs.md`: 5-level advanced exercises with `source: Gemini Notebook`.
+  - `05_Practice/Solutions/Ex07_Solutions.md`: Complete mathematical and DAX solutions.
+- **Hub & Project Integrations**:
+  - `00_Home/Course Dashboard.md`: Integrated Section 4 with Dataview query and static fallback table.
+  - `06_Projects/Call Center Performance Analysis/KPIs.md` & `Project Overview.md`: Connected supporting KPI benchmarks and design principles.
+  - `README.md`: Added `## Supplementary Knowledge Sources` detailing assets and notebooks.
+
+### Resources Linked Only
+- Microsoft Learn Official Specification (Calc 2.0 Engine).
+- SQLBI DAX Architecture & VertiPaq Guide.
+- Kimball Group Dimensional Modeling Techniques.
+
+### Resources Requiring Verification
+- **NotebookLM In-Session Q&A & Audio Summaries**: Generative chat discussions or audio overviews inside the active notebook session require interactive verification within the user's personal browser (e.g. Brave).
+- **Session-Specific Custom Transcripts**: Any proprietary transcripts uploaded directly into NotebookLM remain gated by Google account permissions.
+
+### Any Access Limitations
+- Direct programmatic extraction (via cURL, Python requests, or headless Puppeteer/Chromium without user session cookies) is blocked by Google's account authentication barrier. All incorporated assets and knowledge notes were verified against physical artifacts provided by the user and authoritative domain standards.
+

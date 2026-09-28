@@ -57,3 +57,8 @@ In the course's 5,000-row Call Center dataset:
 ## Related Knowledge
 - Concepts: [[Six Dimensions of Data Quality]], [[Data Cleaning]]
 - Projects: [[06_Projects/Call Center Performance Analysis/Data Quality Assessment]]
+
+## Supplementary Visual Resources (Gemini Notebook)
+- 🗺️ [[Data Quality Framework Mind Map|Data Quality Framework Visual Mind Map]]
+- 🌐 [Gemini Notebook Source](https://notebook.google.com/notebook/bcdef821-08bc-4186-9221-2c747d5a2b15?authuser=1)
+

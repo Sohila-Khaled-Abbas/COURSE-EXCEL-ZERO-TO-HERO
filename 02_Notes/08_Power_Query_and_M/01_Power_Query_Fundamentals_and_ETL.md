@@ -37,3 +37,11 @@ flowchart LR
 
 ## Related Knowledge
 - Concepts: [[Power Query]], [[ETL Process]], [[M Language]]
+
+## Additional Learning Resources
+### Recommended
+- ⚡ [[Power Query ETL Transformations|Gemini Notebook: Power Query ETL Transformations]]
+- 📊 [[Analytics Pipeline Comparison|Analytics Pipeline & Enterprise Stack Comparison]]
+### External
+- 🌐 [Gemini Notebook Source](https://notebook.google.com/notebook/bcdef821-08bc-4186-9221-2c747d5a2b15?authuser=1)
+

@@ -36,3 +36,11 @@ created: 2026-09-28
 | **Joe** | 593 | 484 | 81.62% | 436 | 90.08% | 70.99 s | 3.33 |
 | **Martha** | 638 | 514 | 80.56% | 461 | 89.69% | 69.49 s | 3.47 |
 | **Stewart** | 582 | 477 | 81.96% | 424 | 88.89% | 66.18 s | 3.40 |
+
+---
+
+## Supporting Resources
+- 📊 [[Call Center KPI Analytics|Gemini Notebook: Call Center KPI Analytics Architecture]]
+- 📈 [[Executive Dashboard Design Principles|Executive Dashboard Design & Slicer Blueprint]]
+- 🌐 [Gemini Notebook Source Reference](https://notebook.google.com/notebook/bcdef821-08bc-4186-9221-2c747d5a2b15?authuser=1)
+

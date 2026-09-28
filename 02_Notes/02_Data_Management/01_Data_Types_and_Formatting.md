@@ -1,14 +1,19 @@
 ---
 type: lesson
 course: Excel Zero to Hero
-module: "Module 2"
-topic: "Data Types & Formatting"
-status: not-started
+module: Module 2
+topic: Data Types & Formatting
+status: completed
 difficulty: beginner
-tags: [excel, lesson, data-types, formatting]
-prerequisites: ["[[01_Excel_Interface_and_GUI]]"]
+tags:
+  - excel
+  - lesson
+  - data-types
+  - formatting
+prerequisites:
+  - "[[01_Excel_Interface_and_GUI]]"
 related_project: "[[Call Center Performance Analysis]]"
-source: "https://youtu.be/uv1bxe2gdnU"
+source: https://youtu.be/uv1bxe2gdnU
 created: 2026-09-28
 updated: 2026-09-28
 video_chapter: \"Chapter 2 – Data Management\"
@@ -52,8 +57,8 @@ Formatting changes *appearance*, not *underlying value*. Misunderstanding this d
 > - **Date Serial Confusion**: If a date appears as `45563`, the cell is simply unformatted; change format to Short Date.
 
 ## Practice & Application
-- [ ] Format a revenue column to display values in thousands with a `$` symbol: `$#,##0, "K"`.
-- [ ] Practice resolving numbers stored as text using the text-to-number dropdown or multiplying by 1.
+- [x] Format a revenue column to display values in thousands with a `$` symbol: `$#,##0, "K"`. ✅ 2026-09-28
+- [x] Practice resolving numbers stored as text using the text-to-number dropdown or multiplying by 1. ✅ 2026-09-28
 
 ## Related Knowledge
 - Concepts: [[Six Dimensions of Data Quality]]
