@@ -1,14 +1,19 @@
 ---
 type: lesson
 course: Excel Zero to Hero
-module: "Module 3"
-topic: "Cell Referencing"
-status: not-started
+module: Module 3
+topic: Cell Referencing
+status: completed
 difficulty: beginner
-tags: [excel, lesson, formulas, references]
-prerequisites: ["[[01_Data_Types_and_Formatting]]"]
+tags:
+  - excel
+  - lesson
+  - formulas
+  - references
+prerequisites:
+  - "[[01_Data_Types_and_Formatting]]"
 related_project: "[[Call Center Performance Analysis]]"
-source: "https://youtu.be/uv1bxe2gdnU"
+source: https://youtu.be/uv1bxe2gdnU
 created: 2026-09-28
 updated: 2026-09-28
 video_chapter: \"Chapter 3 – Excel Formulas & Functions\"
