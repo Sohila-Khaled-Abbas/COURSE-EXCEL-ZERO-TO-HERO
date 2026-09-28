@@ -30,5 +30,5 @@ __pycache__/
 .pytest_cache/
 scratch/
 
-# Large binaries / dumps if applicable (allow source materials)
-# Keep 09_Source_Materials tracked
+# Large binary raw source files (Preserved locally, excluded from git to prevent HTTP 408 timeout & PC lag)
+09_Source_Materials/

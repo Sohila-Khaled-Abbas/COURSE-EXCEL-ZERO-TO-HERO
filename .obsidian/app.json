@@ -17,5 +17,8 @@
     "downscalePercent": 100
   },
   "strictLineBreaks": false,
-  "readableLineLength": false
+  "readableLineLength": false,
+  "userIgnoreFilters": [
+    "09_Source_Materials/"
+  ]
 }
