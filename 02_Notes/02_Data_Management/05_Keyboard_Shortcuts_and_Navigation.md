@@ -1,14 +1,18 @@
 ---
 type: lesson
 course: Excel Zero to Hero
-module: "Module 2"
-topic: "Shortcuts & Navigation"
-status: not-started
+module: Module 2
+topic: Shortcuts & Navigation
+status: completed
 difficulty: beginner
-tags: [excel, lesson, shortcuts, productivity]
+tags:
+  - excel
+  - lesson
+  - shortcuts
+  - productivity
 prerequisites: []
 related_project: "[[Call Center Performance Analysis]]"
-source: "https://youtu.be/uv1bxe2gdnU"
+source: https://youtu.be/uv1bxe2gdnU
 created: 2026-09-28
 updated: 2026-09-28
 video_chapter: \"Chapter 2 – Data Management\"

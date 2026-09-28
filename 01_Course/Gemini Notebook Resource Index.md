@@ -35,6 +35,7 @@ This index connects the primary course material ([Excel from Zero to Hero in 8 H
 | [[Enterprise Architecture Mindmap]] | Concept Reference / Visual Asset | End-to-End Analytics Topology | high | [[00_Home/Course Map]], [[01_Course/Learning Objectives]] | reviewed |
 | [[Excel Interface Blueprint]] | Book / PDF | GUI, Ribbon & View Architecture | high | [[01_Excel_Interface_and_GUI]] | reviewed |
 | [[Data Quality Framework Mind Map]] | Concept Reference / Visual Asset | 6 Dimensions of Quality & Auditing | high | [[01_Data_Quality_Dimensions_and_Audit]], [[Data Quality Assessment]] | reviewed |
+| [[Data Quality Essentials Guide]] | Concept Reference / Visual Asset | Core Quality Principles & Cleaning | high | [[01_Data_Quality_Dimensions_and_Audit]], [[Six Dimensions of Data Quality]] | reviewed |
 | [[Excel Navigation and Setup Video Guide]] | Video | Workspace Ergonomics & Navigation | high | [[01_Excel_Interface_and_GUI]] | reviewed |
 | [[Ex07_Supplementary_Dynamic_Lookups_and_KPIs]] | Practice Resource | Formulas, Lookups & DAX | high | [[05_Practice/Exercises/Ex07_Supplementary_Dynamic_Lookups_and_KPIs]] | ready |
 | [MindMeister Course Mindmap](https://www.mindmeister.com/app/map/3782166881?t=I9gXHbkAlV) | Tool / Interactive Map | Curriculum Knowledge Topology | high | [[00_Home/Course Map]], [[Enterprise Architecture Mindmap]] | verified |

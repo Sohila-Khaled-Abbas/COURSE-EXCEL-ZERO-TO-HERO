@@ -11,12 +11,12 @@
 [![Course Duration](https://img.shields.io/badge/Course%20Duration-8%20Hours-blue?logo=youtube&logoColor=red)](https://youtu.be/uv1bxe2gdnU)
 [![Excel Version](https://img.shields.io/badge/Microsoft%20Excel-Office%20365%20%2F%202021-107c41?logo=microsoftexcel&logoColor=white)](https://www.microsoft.com/en-us/microsoft-365/excel)
 [![Capstone Project](https://img.shields.io/badge/Capstone-PwC%20Call%20Center%20BI-06b6d4)](06_Projects/Call%20Center%20Performance%20Analysis/Project%20Overview.md)
-[![Dataview Ready](https://img.shields.io/badge/Dataview-Configured-22c55e)](00_Home/Course%20Dashboard.md)
+[![AI for Excel](https://img.shields.io/badge/AI%20Track-Twistly%20%26%20Claude-8b5cf6)](03_Concepts/AI%20for%20Data%20Analysts%20MOC.md)
 [![CI Validation](https://github.com/Sohila-Khaled-Abbas/COURSE-EXCEL-ZERO-TO-HERO/actions/workflows/lint.yml/badge.svg)](https://github.com/Sohila-Khaled-Abbas/COURSE-EXCEL-ZERO-TO-HERO/actions)
 
-**A production-grade Obsidian Knowledge System, Data Analytics Curriculum, and GitHub Portfolio Repository for mastering modern Microsoft Excel, Power Query, Power Pivot, DAX, and Executive Dashboard Engineering.**
+**A production-grade Obsidian Knowledge System, Data Analytics Curriculum, and GitHub Portfolio Repository for mastering modern Microsoft Excel, Power Query, Power Pivot, DAX, AI-Assisted Workflows, and Executive Dashboard Engineering.**
 
-[Explore Dashboard](00_Home/Course%20Dashboard.md) • [Course Curriculum](01_Course/Course%20Curriculum.md) • [Live Mindmap](https://www.mindmeister.com/app/map/3782166881?t=I9gXHbkAlV) • [Supplementary Path](01_Course/Supplementary%20Learning%20Path.md) • [Call Center Capstone](06_Projects/Call%20Center%20Performance%20Analysis/Project%20Overview.md) • [Portfolio Case Study](10_Portfolio/Call%20Center%20Analysis%20Portfolio%20Case%20Study.md) • [Contributing](CONTRIBUTING.md) • [Citation](CITATION.cff)
+[Explore Dashboard](00_Home/Course%20Dashboard.md) • [Course Curriculum](01_Course/Course%20Curriculum.md) • [Live Mindmap](https://www.mindmeister.com/app/map/3782166881?t=I9gXHbkAlV) • [AI Track](03_Concepts/AI%20for%20Data%20Analysts%20MOC.md) • [Call Center Capstone](06_Projects/Call%20Center%20Performance%20Analysis/Project%20Overview.md) • [Portfolio Case Study](10_Portfolio/Call%20Center%20Analysis%20Portfolio%20Case%20Study.md) • [Implementation Log](implementation.md) • [Contributing](CONTRIBUTING.md) • [Citation](CITATION.cff)
 
 </div>
 
@@ -24,11 +24,11 @@
 
 ## 🧭 Repository Overview & Pedagogical Mission
 
-This repository converts the 8-hour masterclass **[Excel from Zero to Hero in 8 Hours | Complete Course + Call Center Analysis Project](https://youtu.be/uv1bxe2gdnU)** by **Mostafa Hamed** into an interconnected **Obsidian Second Brain** and **GitHub Portfolio Artifact**.
+This repository converts the 8-hour masterclass **[Excel from Zero to Hero in 8 Hours | Complete Course + Call Center Analysis Project](https://youtu.be/uv1bxe2gdnU)** by **Mostafa Hamed** into an interconnected **Obsidian Second Brain**, **GitHub Portfolio Artifact**, and **AI-Augmented Analytical System**.
 
 Rather than serving as a passive archive or transcript dump, this system converts raw learning materials into an active, disciplined learning pipeline:
 ```
-Course ➔ Concepts ➔ Notes ➔ Practice ➔ Exercises ➔ Projects ➔ Revision ➔ Knowledge Graph ➔ Portfolio
+Course ➔ Concepts ➔ Notes ➔ Practice ➔ AI Assistance ➔ Verification ➔ Projects ➔ Revision ➔ Portfolio
 ```
 
 ```mermaid
@@ -38,9 +38,10 @@ flowchart LR
     B --> D[04 Formula Reference]
     C --> E[05 Practice & Challenges]
     D --> E
-    E --> F[06 Analytics Projects]
-    F --> G[10 Portfolio Case Study]
-    F --> H[08 Spaced Revision]
+    E --> F[AI-Assisted Practice]
+    F --> G[06 Analytics Projects]
+    G --> H[10 Portfolio Case Study]
+    G --> I[08 Spaced Revision]
 
     style A fill:#1e293b,stroke:#3b82f6,stroke-width:2px,color:#fff
     style B fill:#1e293b,stroke:#06b6d4,stroke-width:2px,color:#fff
@@ -48,8 +49,9 @@ flowchart LR
     style D fill:#1e293b,stroke:#f59e0b,stroke-width:2px,color:#fff
     style E fill:#1e293b,stroke:#ef4444,stroke-width:2px,color:#fff
     style F fill:#1e293b,stroke:#8b5cf6,stroke-width:2px,color:#fff
-    style G fill:#1e293b,stroke:#ec4899,stroke-width:2px,color:#fff
-    style H fill:#1e293b,stroke:#64748b,stroke-width:2px,color:#fff
+    style G fill:#1e293b,stroke:#06b6d4,stroke-width:2px,color:#fff
+    style H fill:#1e293b,stroke:#ec4899,stroke-width:2px,color:#fff
+    style I fill:#1e293b,stroke:#64748b,stroke-width:2px,color:#fff
 ```
 
 ---
@@ -87,9 +89,11 @@ COURSE-EXCEL-ZERO-TO-HERO/
 ├── assets/                                 # Visual Blueprints, Architectural Diagrams & Media
 │   ├── analytics-pipeline-data-comparison.png # Modern Data Stack & ETL pipeline architecture
 │   ├── data-quality-mind-map.png           # 6-dimension data hygiene & audit framework
+│   ├── data-quality-essentials-guide.png   # Data quality pillars & verification flow
 │   ├── enterprise-architecture-mindmap.png # Enterprise analytics topology & BI integration
 │   ├── excel-interface-blueprint.pdf       # Architectural manual covering ribbon & formula bar
 │   └── getting-started-with-excel-navigation-and-setup.mp4 # Video setup walkthrough
+├── implementation.md                       # Comprehensive engineering log & step-by-step roadmap
 ├── 00_Home/                                # Central Command & Navigation
 │   ├── Home.md                             # Welcome orientation & quick jump portal
 │   ├── Course Dashboard.md                 # Dynamic Dataview queries & metric trackers
@@ -100,7 +104,7 @@ COURSE-EXCEL-ZERO-TO-HERO/
 │   ├── Course Overview.md                  # Metadata, instructor, duration, & prerequisites
 │   ├── Course Curriculum.md                # 9-module syllabus & file cross-reference
 │   ├── Lesson Index.md                     # Comprehensive directory of all lectures
-│   ├── Learning Objectives.md              # Bloom's taxonomy competency matrix
+│   ├── Learning Objectives.md              # Bloom's taxonomy competency matrix + 15 AI objectives
 │   ├── Gemini Notebook Resource Index.md   # Supplementary knowledge resource index
 │   └── Supplementary Learning Path.md      # 9-stage advanced analytical learning pathway
 ├── 02_Notes/                               # Comprehensive Structured Lecture Notes
@@ -113,7 +117,7 @@ COURSE-EXCEL-ZERO-TO-HERO/
 │   ├── 07_Data_Cleaning_and_Importing/     # 6 Dimensions of Data Quality, ERP/CRM, SQL ingestion
 │   ├── 08_Power_Query_and_M/               # Automated ETL pipelines, unpivoting, merging, M language
 │   └── 09_Data_Modeling_and_DAX/           # Star schemas, relationships, calculated columns vs measures
-├── 03_Concepts/                            # 20+ Standalone Atomic Concept Notes
+├── 03_Concepts/                            # 22+ Standalone Atomic Concept Notes & MOCs
 │   ├── Excel Tables.md                     # ListObject mechanics & auto-expansion
 │   ├── Structured References.md            # [@Column] syntax & table referencing
 │   ├── Relative vs Absolute References.md  # Coordinate locking ($) & F4 toggles
@@ -125,7 +129,8 @@ COURSE-EXCEL-ZERO-TO-HERO/
 │   ├── Dimensional Modeling.md             # Kimball methodology for analytical modeling
 │   ├── Data Analysis Expressions (DAX).md  # Context transition & dynamic scalar measures
 │   ├── Resource to Skill Map.md            # Fast mapping from skills to drills and projects
-│   └── ...                                 # Additional atomic concepts with Mermaid diagrams
+│   ├── Human Skill vs AI Assistance.md     # Cognitive division of labor matrix
+│   └── AI for Data Analysts MOC.md         # Master visual Map of Content for AI track
 ├── 04_Formulas/                            # Categorized Excel Formula Knowledge Base
 │   ├── Lookup/                             # XLOOKUP, VLOOKUP, INDEX, MATCH
 │   ├── Aggregation/                        # SUM, AVERAGE, SUMIFS, COUNTIFS, AVERAGEIFS
@@ -138,7 +143,19 @@ COURSE-EXCEL-ZERO-TO-HERO/
 │   ├── Exercises/                          # Ex01 through Ex07 (data management, lookups, ETL, KPIs)
 │   ├── Challenges/                         # Advanced dynamic array & API transformation drills
 │   ├── Mini Projects/                      # Hotel Reservation & HR Workforce Analytics
-│   └── Solutions/                          # Verified step-by-step solutions (including Ex07)
+│   ├── Solutions/                          # Verified step-by-step solutions (including Ex07)
+│   └── AI Assisted Excel/                  # 10 Dedicated AI-Assisted Hands-on Labs:
+│       ├── 01 — Generate a Formula With AI.md
+│       ├── 02 — Debug a Broken Formula.md
+│       ├── 03 — Explain a Complex Formula.md
+│       ├── 04 — Detect Data Quality Issues With AI.md
+│       ├── 05 — Clean Messy Data With AI Assistance.md
+│       ├── 06 — Categorize Data With AI.md
+│       ├── 07 — Ask AI to Propose KPIs.md
+│       ├── 08 — Design a Dashboard With AI Assistance.md
+│       ├── 09 — Validate an AI Generated Solution.md
+│       ├── 10 — Rebuild the AI Solution Manually.md
+│       └── AI Experiment Log.md            # Reusable prompt engineering & test journal
 ├── 06_Projects/                            # Production Analytics Case Studies
 │   ├── Hotel Reservation Analysis/         # 36,000+ bookings, ADR, RevPAR, cancellation drivers
 │   └── Call Center Performance Analysis/   # Complete PwC Capstone Documentation:
@@ -151,24 +168,36 @@ COURSE-EXCEL-ZERO-TO-HERO/
 │       ├── KPIs.md                         # Mathematical formulas, DAX measures & benchmarks
 │       ├── Findings.md                     # Evidence-based observations & agent scorecard
 │       ├── Recommendations.md              # Actionable staffing, process, & self-service strategies
-│       └── Project Retrospective.md        # Engineering retrospective & competencies demonstrated
+│       ├── Project Retrospective.md        # Engineering retrospective & competencies demonstrated
+│       └── AI-Assisted Analysis Workflow.md # Execution classification (AI vs Automated vs Manual)
 ├── 07_Reference/                           # Rapid-Access Reference Assets & Supplementary Guides
 │   ├── Excel Cheat Sheet.md                # High-yield formulas, syntax, & shortcuts
 │   ├── Function Reference.md               # Master reference matrix with return types
 │   ├── Keyboard Shortcuts.md               # High-velocity navigation & selection shortcuts
 │   ├── Glossary.md                         # Analytics & Business Intelligence terminology
-│   └── Gemini Notebook/                    # 11 Curated Supplementary Reference Guides:
-│       ├── Analytics Pipeline Comparison.md
-│       ├── Call Center KPI Analytics.md
-│       ├── DAX Measures and Data Modeling.md
-│       ├── Data Quality Framework Mind Map.md
-│       ├── Dynamic Arrays and Modern Calculation.md
-│       ├── Enterprise Architecture Mindmap.md
-│       ├── Excel Interface Blueprint.md
-│       ├── Excel Navigation and Setup Video Guide.md
-│       ├── Executive Dashboard Design Principles.md
-│       ├── Power Query ETL Transformations.md
-│       └── XLOOKUP and Modern Lookups.md
+│   ├── Gemini Notebook/                    # 12 Curated Supplementary Reference Guides:
+│   │   ├── Analytics Pipeline Comparison.md
+│   │   ├── Call Center KPI Analytics.md
+│   │   ├── DAX Measures and Data Modeling.md
+│   │   ├── Data Quality Framework Mind Map.md
+│   │   ├── Data Quality Essentials Guide.md
+│   │   ├── Dynamic Arrays and Modern Calculation.md
+│   │   ├── Enterprise Architecture Mindmap.md
+│   │   ├── Excel Interface Blueprint.md
+│   │   ├── Excel Navigation and Setup Video Guide.md
+│   │   ├── Executive Dashboard Design Principles.md
+│   │   ├── Power Query ETL Transformations.md
+│   │   └── XLOOKUP and Modern Lookups.md
+│   └── AI for Excel/                       # 9 Verified AI-for-Excel Reference Manuals:
+│       ├── AI for Excel Overview.md        # Foundations, architecture & workflow boundaries
+│       ├── GPT for MS Excel — Twistly.md   # Twistly custom functions (AI.ASK, AI.TABLE, etc.)
+│       ├── Claude for Excel — Anthropic.md # Anthropic sidebar workbook reasoning & citations
+│       ├── AI Excel Installation Guide.md  # Office Add-ins vs COM add-ins & AppSource setup
+│       ├── AI Excel Workflow.md            # 14-step professional analytics process
+│       ├── AI Excel Prompt Library.md      # Production prompt templates (formulas, ETL, UI)
+│       ├── AI Output Verification.md       # 6-stage verification framework & checklist
+│       ├── AI Excel Security and Privacy.md# Security decision gate & PII data sanitization
+│       └── AI Tool Comparison.md           # Objective side-by-side feature comparison
 ├── 08_Revision/                            # Spaced Repetition & Interview Prep
 │   ├── Flashcards.md                       # Active-recall interactive flashcard deck
 │   ├── Interview Questions.md              # Senior Data Analyst behavioral & technical questions
@@ -217,9 +246,11 @@ The knowledge repository maps 1-to-1 to the full **8-hour YouTube masterclass**:
 | 🎛️ **Command Center** | Dataview queries, progress tracking, and active review queue | [00_Home/Course Dashboard](00_Home/Course%20Dashboard.md) |
 | 📋 **Full Curriculum** | 9-module detailed syllabus and lab cross-references | [01_Course/Course Curriculum](01_Course/Course%20Curriculum.md) |
 | 🗺️ **Live Mindmap** | Interactive full-course mindmap on MindMeister | [MindMeister Course Map](https://www.mindmeister.com/app/map/3782166881?t=I9gXHbkAlV) |
+| 🤖 **AI for Data Analysts** | Master MOC for AI tools, prompt library, verification & labs | [03_Concepts/AI for Data Analysts MOC](03_Concepts/AI%20for%20Data%20Analysts%20MOC.md) |
 | 🚀 **Supplementary Path** | 9-phase pedagogical progression & skill matrix | [01_Course/Supplementary Learning Path](01_Course/Supplementary%20Learning%20Path.md) |
 | 📞 **PwC Capstone** | End-to-end 5,000-call operational intelligence case study | [06_Projects/Call Center Project Overview](06_Projects/Call%20Center%20Performance%20Analysis/Project%20Overview.md) |
 | 💼 **Portfolio Case Study** | Executive case study formatted for recruiters and hiring managers | [10_Portfolio/Case Study](10_Portfolio/Call%20Center%20Analysis%20Portfolio%20Case%20Study.md) |
+| 🏗️ **Implementation Log** | Comprehensive engineering log and step-by-step roadmap | [implementation.md](implementation.md) |
 | 📖 **Function Reference** | Comprehensive Excel & DAX function reference manual | [07_Reference/Function Reference](07_Reference/Function%20Reference.md) |
 | 🗂️ **Flashcard Deck** | Active-recall flashcards for retention and interview prep | [08_Revision/Flashcards](08_Revision/Flashcards.md) |
 
@@ -253,7 +284,30 @@ The flagship project in this repository is a rigorous, evidence-based operationa
 > [!tip] Forensic Data Quality Breakthrough
 > Initial inspection reveals 946 null values across `Speed of answer`, `AvgTalkDuration`, and `Satisfaction rating`. A forensic audit confirms that these 946 records correspond **100%** to abandoned calls (`Answered == "N"`). They represent **valid operational missing values** rather than data corruption, preserving the statistical integrity of average wait times.
 
-Explore the complete case study in **[Call Center Analysis Portfolio Case Study](10_Portfolio/Call%20Center%20Analysis%20Portfolio%20Case%20Study.md)**.
+Explore the complete case study in **[Call Center Analysis Portfolio Case Study](10_Portfolio/Call%20Center%20Analysis%20Portfolio%20Case%20Study.md)** and the AI execution audit in **[AI-Assisted Analysis Workflow](06_Projects/Call%20Center%20Performance%20Analysis/AI-Assisted%20Analysis%20Workflow.md)**.
+
+---
+
+## 🤖 AI-Assisted Excel Analytics Track
+
+This repository includes a structured, professional AI-for-Excel curriculum designed to cultivate **AI-augmented analytical competence** rather than AI dependency:
+
+```text
+Excel Fundamentals ➔ Understand Logic ➔ Use AI Assistant ➔ Inspect Output ➔ 
+Test & Validate ➔ Improve Manually ➔ Document Final Logic ➔ Apply to Real Data
+```
+
+### Core Architecture & Components
+- **Verified Tool Coverage**:
+  - **[GPT for MS Excel — Twistly](07_Reference/AI%20for%20Excel/GPT%20for%20MS%20Excel%20%E2%80%94%20Twistly.md)**: Independent AppSource add-in by Twistly featuring custom formula functions (`AI.ASK`, `AI.TABLE`, `AI.FILL`, `AI.CHOICE`, `AI.EXTRACT`, `AI.TRANSLATE`).
+  - **[Claude for Excel — Anthropic](07_Reference/AI%20for%20Excel/Claude%20for%20Excel%20%E2%80%94%20Anthropic.md)**: Contextual multi-tab workbook reasoning, dependency-preserving formula assistance, and cell-level citations.
+- **[Installation Architecture](07_Reference/AI%20for%20Excel/AI%20Excel%20Installation%20Guide.md)**: Deployment workflows for Office.js web add-ins, contrasting them with legacy `.xlam` and COM `.dll` add-ins.
+- **[14-Step Methodology](07_Reference/AI%20for%20Excel/AI%20Excel%20Workflow.md)**: End-to-end framework from business framing to human validation.
+- **[Prompt Engineering Library](07_Reference/AI%20for%20Excel/AI%20Excel%20Prompt%20Library.md)**: Battle-tested templates for formula generation, debugging, data profiling, and executive dashboard wireframing.
+- **[6-Stage Output Verification](07_Reference/AI%20for%20Excel/AI%20Output%20Verification.md)**: Pre-flight checklist utilizing native Excel tools (`F9`, `Evaluate Formula`).
+- **[Security & Privacy](07_Reference/AI%20for%20Excel/AI%20Excel%20Security%20and%20Privacy.md)**: 5-step security decision gate, 8 pre-flight questions, and data sanitization protocols.
+- **[10 Hands-on Practice Labs](05_Practice/AI%20Assisted%20Excel/)**: Progressive drills covering formula generation, debugging, text cleaning, sentiment categorization, KPI formulation, and full manual rebuilds.
+- **[AI Experiment Log](05_Practice/AI%20Assisted%20Excel/AI%20Experiment%20Log.md)**: Reusable scientific prompt tracking journal.
 
 ---
 
@@ -267,6 +321,7 @@ This repository extends the core curriculum with curated supplementary resources
 | :--- | :---: | :---: | :--- |
 | `analytics-pipeline-data-comparison.png` | PNG | 5.5 MB | High-resolution comparison matrix between Excel, SQL, Python, and Modern BI stacks |
 | `data-quality-mind-map.png` | PNG | 2.9 MB | Comprehensive visual diagram of the 6 Dimensions of Data Quality & remediation flows |
+| `data-quality-essentials-guide.png` | PNG | 5.4 MB | Data quality essentials infographic detailing core validation checks and cleaning rules |
 | `enterprise-architecture-mindmap.png` | PNG | 1.4 MB | End-to-end enterprise analytical architecture connecting ERP/CRM sources to executive BI |
 | `excel-interface-blueprint.pdf` | PDF | 12.3 MB | Vector-quality architectural guide detailing ribbon commands, formula bar mechanics, and grid |
 | `getting-started-with-excel-navigation-and-setup.mp4` | MP4 | 34.8 MB | High-efficiency video tutorial demonstrating workspace setup, quick access customization, and navigation |
@@ -275,7 +330,7 @@ This repository extends the core curriculum with curated supplementary resources
 - 📋 **Master Resource Index**: [`01_Course/Gemini Notebook Resource Index.md`](01_Course/Gemini%20Notebook%20Resource%20Index.md) — Comprehensive directory linking external insights to vault notes.
 - 🚀 **Supplementary Learning Path**: [`01_Course/Supplementary Learning Path.md`](01_Course/Supplementary%20Learning%20Path.md) — Structured 9-phase journey bridging basic spreadsheet mechanics to enterprise engineering.
 - 🎯 **Resource-to-Skill Matrix**: [`03_Concepts/Resource to Skill Map.md`](03_Concepts/Resource%20to%20Skill%20Map.md) — Direct mapping connecting technical competencies to lessons, drills, and projects.
-- 📚 **Dedicated Reference Manuals**: 11 notes in [`07_Reference/Gemini Notebook/`](07_Reference/Gemini%20Notebook/) covering modern lookups, dynamic arrays, DAX modeling, Power Query transformations, and dashboard UI best practices.
+- 📚 **Dedicated Reference Manuals**: 12 notes in [`07_Reference/Gemini Notebook/`](07_Reference/Gemini%20Notebook/) covering modern lookups, dynamic arrays, DAX modeling, Power Query transformations, and dashboard UI best practices.
 - 🧪 **Hands-on Mastery Drills**: [`05_Practice/Exercises/Ex07_Supplementary_Dynamic_Lookups_and_KPIs.md`](05_Practice/Exercises/Ex07_Supplementary_Dynamic_Lookups_and_KPIs.md) with full mathematical solutions in [`05_Practice/Solutions/Ex07_Solutions.md`](05_Practice/Solutions/Ex07_Solutions.md).
 
 ---
@@ -330,14 +385,16 @@ flowchart TD
     A[Step 1: Open Course Dashboard] --> B[Step 2: Study Lesson Note in 02_Notes]
     B --> C[Step 3: Dive into Atomic Concepts in 03_Concepts]
     C --> D[Step 4: Execute Drills in 05_Practice]
-    D --> E[Step 5: Apply to PwC Call Center Capstone]
-    E --> F[Step 6: Spaced Recall via Flashcards & Interview Prep]
+    D --> E[Step 5: Apply AI-Assisted Workflows with Verification]
+    E --> F[Step 6: Execute PwC Call Center Capstone]
+    F --> G[Step 7: Spaced Recall via Flashcards & Interview Prep]
 ```
 
 1. **Before Learning**: Open `00_Home/Course Dashboard.md`, inspect module prerequisites and Bloom's taxonomy objectives.
 2. **During Learning**: Follow along in the structured lesson notes (`02_Notes/`), examining step-by-step procedures and watch-outs.
 3. **After Learning**: Test understanding with Level 1-5 practice exercises in `05_Practice/Exercises/` and check answers against `05_Practice/Solutions/`.
-4. **During Revision**: Cycle through active recall flashcards in `08_Revision/Flashcards.md` and review diagnostic fixes in `08_Revision/Common Mistakes.md`.
+4. **During AI Exploration**: Complete the 10 hands-on AI exercises in `05_Practice/AI Assisted Excel/` and log findings in `AI Experiment Log.md`.
+5. **During Revision**: Cycle through active recall flashcards in `08_Revision/Flashcards.md` and review diagnostic fixes in `08_Revision/Common Mistakes.md`.
 
 ---
 
@@ -348,6 +405,7 @@ Every note, formula, metric, and exercise in this repository is strictly grounde
 - **PwC Dataset Verification**: Programmatically verified across 5,000 records using Python, Pandas, and OpenPyXL.
 - **Supplementary Knowledge Source**: Publicly accessible [Gemini Notebook](https://notebook.google.com/notebook/bcdef821-08bc-4186-9221-2c747d5a2b15?authuser=1).
 - **Curriculum Architecture**: Live [MindMeister Mindmap](https://www.mindmeister.com/app/map/3782166881?t=I9gXHbkAlV).
+- **AI Tool Documentation**: Verified against official Microsoft AppSource listings, Anthropic documentation, and Twistly user manuals.
 
 ---
 

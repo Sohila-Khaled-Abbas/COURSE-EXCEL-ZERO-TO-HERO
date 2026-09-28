@@ -1,14 +1,19 @@
 ---
 type: lesson
 course: Excel Zero to Hero
-module: "Module 2"
-topic: "Sorting & Filtering"
-status: not-started
+module: Module 2
+topic: Sorting & Filtering
+status: completed
 difficulty: beginner
-tags: [excel, lesson, sorting, filtering]
-prerequisites: ["[[01_Data_Types_and_Formatting]]"]
+tags:
+  - excel
+  - lesson
+  - sorting
+  - filtering
+prerequisites:
+  - "[[01_Data_Types_and_Formatting]]"
 related_project: "[[Call Center Performance Analysis]]"
-source: "https://youtu.be/uv1bxe2gdnU"
+source: https://youtu.be/uv1bxe2gdnU
 created: 2026-09-28
 updated: 2026-09-28
 video_chapter: \"Chapter 2 – Data Management\"

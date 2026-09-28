@@ -222,3 +222,70 @@ All project metrics were computed directly from `09_Source_Materials/Module 9/13
 ### Any Access Limitations
 - Direct programmatic extraction (via cURL, Python requests, or headless Puppeteer/Chromium without user session cookies) is blocked by Google's account authentication barrier. All incorporated assets and knowledge notes were verified against physical artifacts provided by the user and authoritative domain standards.
 
+---
+
+## 8. AI Excel Integration
+
+### Tools Added
+- **GPT for MS Excel — Twistly**:
+  - Publisher: Twistly ([twistlycells.ai](https://twistlycells.ai))
+  - Distribution: Microsoft AppSource
+  - Primary Functionality: Cell-formula LLM execution (`AI.ASK`, `AI.TABLE`, `AI.FILL`, `AI.FORMAT`, `AI.EXTRACT`, `AI.CHOICE`, `AI.LIST`, `AI.TRANSLATE`).
+  - Architecture: Office.js custom functions calling cloud LLM endpoints; supports Bring-Your-Own-Key (BYOK) OpenAI credentials.
+- **Claude for Excel — Anthropic**:
+  - Publisher: Anthropic PBC ([anthropic.com](https://anthropic.com))
+  - Distribution: Microsoft AppSource
+  - Primary Functionality: Contextual workbook reasoning via task-pane sidebar, multi-tab DOM inspection, formula dependency preservation, error diagnostics (`#REF!`, `#VALUE!`), and cell-level citations.
+  - Architecture: Office.js / WebView2 add-in requiring Claude Pro, Max, Team, or Enterprise subscription.
+
+### Knowledge Added
+- `07_Reference/AI for Excel/AI for Excel Overview.md`: Pedagogical mission, division of labor, and vault ecosystem integration.
+- `07_Reference/AI for Excel/GPT for MS Excel — Twistly.md`: Comprehensive reference manual for all 8 custom functions with syntax, inputs, outputs, common mistakes, and limitations.
+- `07_Reference/AI for Excel/Claude for Excel — Anthropic.md`: In-depth breakdown separating what Claude can assist with from what the human analyst must verify.
+- `07_Reference/AI for Excel/AI Excel Installation Guide.md`: Verified AppSource deployment workflow and architectural analysis distinguishing Office Add-ins, Excel Add-ins (`.xlam`), and COM Add-ins.
+- `07_Reference/AI for Excel/AI Excel Workflow.md`: 14-step professional analytics process from business framing to human validation.
+- `07_Reference/AI for Excel/AI Excel Prompt Library.md`: Categorized prompt templates for formula generation, debugging, data quality assessment, analysis, and dashboard architecture.
+- `07_Reference/AI for Excel/AI Output Verification.md`: 6-stage verification framework, pre-flight checklist, and native Excel forensic auditing tools (`F9`, `Evaluate Formula`).
+- `07_Reference/AI for Excel/AI Excel Security and Privacy.md`: 5-step security decision gate, 8 mandatory pre-flight questions, and enterprise data sanitization techniques.
+- `07_Reference/AI for Excel/AI Tool Comparison.md`: Objective side-by-side feature and architectural capability matrix.
+- `03_Concepts/Human Skill vs AI Assistance.md`: Division of responsibility concept note answering 10 essential questions.
+- `06_Projects/Call Center Performance Analysis/AI-Assisted Analysis Workflow.md`: Complete audit matrix of automated, AI-assisted, manually performed, and manually validated tasks across the 5,000-call PwC dataset.
+
+### Practice Added
+- `05_Practice/AI Assisted Excel/`: 10 progressive hands-on lab exercises:
+  1. `01 — Generate a Formula With AI.md`: Multi-condition `XLOOKUP` with boolean array logic.
+  2. `02 — Debug a Broken Formula.md`: Diagnosing text-vs-number data type mismatches.
+  3. `03 — Explain a Complex Formula.md`: Deconstructing `LET`, `MAP`, and `LAMBDA` formulas.
+  4. `04 — Detect Data Quality Issues With AI.md`: Auditing operational blanks vs corruption.
+  5. `05 — Clean Messy Data With AI Assistance.md`: Text sanitation with `TRIM`, `CLEAN`, `SUBSTITUTE`.
+  6. `06 — Categorize Data With AI.md`: Sentiment classification via `AI.CHOICE` and native formulas.
+  7. `07 — Ask AI to Propose KPIs.md`: Call center metric architecture and denominator defense.
+  8. `08 — Design a Dashboard With AI Assistance.md`: Executive 12-column grid wireframing.
+  9. `09 — Validate an AI Generated Solution.md`: Adversarial stress-testing against blanks and zeros.
+  10. `10 — Rebuild the AI Solution Manually.md`: Proving complete independence from AI tools.
+- `05_Practice/AI Assisted Excel/AI Experiment Log.md`: Reusable scientific logging journal with historical test cases.
+
+### New MOCs
+- `03_Concepts/AI for Data Analysts MOC.md`: Visual knowledge graph connecting all AI reference guides, concepts, prompt templates, exercises, and projects.
+
+### External Sources
+- Microsoft AppSource Add-in Catalog (`appsource.microsoft.com`).
+- Anthropic Official Product Documentation & Claude Help Center (`support.anthropic.com`).
+- Twistly Product Website & User Guides (`twistlycells.ai`).
+- Microsoft Learn Office.js API Documentation (`learn.microsoft.com/office/dev/add-ins`).
+
+### Verification Notes
+- All tool capabilities and limitations were verified against current official AppSource listings.
+- Neither OpenAI nor Microsoft was incorrectly credited for Twistly's third-party add-in.
+- All capstone metrics remain strictly grounded in the verified 5,000 call records (81.08% answer rate, 89.94% resolution rate, 67.52s ASA, 3.40 CSAT).
+
+### Remaining Unknowns
+- Future OpenAI / Anthropic model version releases inside AppSource add-in updates (e.g. Claude 3.7 Sonnet dynamic reasoning parameters inside Excel).
+- Tenant-level Microsoft 365 copilot convergence with third-party store add-ins in enterprise environments.
+
+### Recommended Next Learning Steps
+1. Execute the 10 hands-on practice exercises in `05_Practice/AI Assisted Excel/`.
+2. Record prompt iterations and findings in `AI Experiment Log.md`.
+3. Complete Exercise 10 to certify independent mastery of native Excel dynamic formulas.
+
+

@@ -1,14 +1,20 @@
 ---
 type: lesson
 course: Excel Zero to Hero
-module: "Module 2"
-topic: "Data Transformation Tools"
-status: not-started
+module: Module 2
+topic: Data Transformation Tools
+status: completed
 difficulty: intermediate
-tags: [excel, lesson, flash-fill, text-to-columns, deduplication]
-prerequisites: ["[[01_Data_Types_and_Formatting]]"]
+tags:
+  - excel
+  - lesson
+  - flash-fill
+  - text-to-columns
+  - deduplication
+prerequisites:
+  - "[[01_Data_Types_and_Formatting]]"
 related_project: "[[Call Center Performance Analysis]]"
-source: "https://youtu.be/uv1bxe2gdnU"
+source: https://youtu.be/uv1bxe2gdnU
 created: 2026-09-28
 updated: 2026-09-28
 video_chapter: \"Chapter 2 – Data Management\"

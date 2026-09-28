@@ -111,6 +111,59 @@ SORT course_topic ASC
 | [[Enterprise Architecture Mindmap]] | Architecture Mindmap | 9-Module Analytics Topology | `assets/enterprise-architecture-mindmap.png` |
 | [[Excel Interface Blueprint]] | Reference PDF | Ribbon, Grid & Backstage Blueprint | `assets/excel-interface-blueprint.pdf` |
 | [[Data Quality Framework Mind Map]] | Visual Mindmap | 6 Dimensions of Quality Audit Flow | `assets/data-quality-mind-map.png` |
+| [[Data Quality Essentials Guide]] | Visual Guide | Core Quality Principles & Cleaning | `assets/data-quality-essentials-guide.png` |
 | [[Excel Navigation and Setup Video Guide]] | Video Tutorial | Ergonomics & High-Speed Navigation | `assets/getting-started-with-excel-navigation-and-setup.mp4` |
 | [[Ex07_Supplementary_Dynamic_Lookups_and_KPIs]] | Practice Exercise | 5-Level Advanced Drills | [[Ex07_Solutions]] |
+
+---
+
+## 🤖 5. AI-Assisted Excel Analytics Track
+
+> [!important] Core Principle
+> **Use AI to accelerate Excel work, but never use AI to avoid understanding Excel.**
+>
+> I should be able to:
+> - Explain the formula
+> - Reproduce the logic
+> - Test the result
+> - Identify failure cases
+> - Explain the analytical decision
+>
+> without depending on the AI tool.
+
+### Track Navigation & Core Frameworks
+- 🧭 **Master Map of Content**: [[AI for Data Analysts MOC]]
+- 📚 **Prompt Engineering**: [[AI Excel Prompt Library]]
+- 🛡️ **Quality Assurance**: [[AI Output Verification]]
+- 🔄 **Analytical Lifecycle**: [[AI Excel Workflow]]
+- 📓 **Experimentation Journal**: [[AI Experiment Log]]
+- ⚖️ **Tools Matrix**: [[AI Tool Comparison]]
+- 🔒 **Security & Governance**: [[AI Excel Security and Privacy]]
+
+### Current AI Track Progress:
+`Not Started ➔ Learning ➔ Practicing ➔ [Verified]`
+
+### AI Knowledge Base (Dataview Query)
+```dataview
+TABLE type, status, track
+FROM "07_Reference/AI for Excel"
+SORT file.name ASC
+```
+
+### Static Fallback: AI Reference Guides
+| Reference Guide | Subject | Primary Focus |
+| :--- | :--- | :--- |
+| [[AI for Excel Overview]] | Architecture | Pedagogical mission, tool ecosystem & workflow boundaries |
+| [[GPT for MS Excel — Twistly]] | Tool Reference | Twistly custom formula functions (`AI.ASK`, `AI.TABLE`, `AI.FILL`) |
+| [[Claude for Excel — Anthropic]] | Tool Reference | Anthropic sidebar workbook reasoning, citations & edits |
+| [[AI Excel Installation Guide]] | Setup Guide | Office Add-ins vs COM add-ins, AppSource deployment |
+| [[AI Excel Workflow]] | Methodology | 14-step professional analytics process |
+| [[AI Excel Prompt Library]] | Prompt Library | Structured templates for formulas, debugging, and ETL |
+| [[AI Output Verification]] | Quality Control | 6-stage verification pipeline & audit checklist |
+| [[AI Excel Security and Privacy]] | Governance | Sensitive data decision gate & PII anonymization |
+| [[AI Tool Comparison]] | Comparison Matrix | Objective side-by-side technical evaluation |
+| [[Human Skill vs AI Assistance]] | Skill Concept | Demarcation of AI acceleration vs human accountability |
+| [[AI-Assisted Analysis Workflow]] | Case Study | Real-world execution audit on 5,000 PwC call records |
+| [[01 — Generate a Formula With AI\|10 AI Practice Drills]] | Hands-on Labs | Formula generation, debugging, and full manual rebuilds |
+
 

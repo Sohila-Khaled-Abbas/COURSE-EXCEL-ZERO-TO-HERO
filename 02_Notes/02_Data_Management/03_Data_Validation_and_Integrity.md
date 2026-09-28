@@ -1,14 +1,19 @@
 ---
 type: lesson
 course: Excel Zero to Hero
-module: "Module 2"
-topic: "Data Validation & Integrity"
-status: not-started
+module: Module 2
+topic: Data Validation & Integrity
+status: completed
 difficulty: intermediate
-tags: [excel, lesson, data-validation, governance]
-prerequisites: ["[[01_Data_Types_and_Formatting]]"]
+tags:
+  - excel
+  - lesson
+  - data-validation
+  - governance
+prerequisites:
+  - "[[01_Data_Types_and_Formatting]]"
 related_project: "[[Call Center Performance Analysis]]"
-source: "https://youtu.be/uv1bxe2gdnU"
+source: https://youtu.be/uv1bxe2gdnU
 created: 2026-09-28
 updated: 2026-09-28
 video_chapter: \"Chapter 2 – Data Management\"
@@ -48,7 +53,7 @@ Data cleaning is expensive; preventing bad data at the point of entry is the mos
 5. Under the **Error Alert** tab, set Style to **Stop** and write an informative message.
 
 ## Practice & Application
-- [ ] Build a validation rule that prevents ratings outside the 1 to 5 range with an error prompt.
+- [x] Build a validation rule that prevents ratings outside the 1 to 5 range with an error prompt. ✅ 2026-09-28
 
 ## Related Knowledge
 - Concepts: [[Six Dimensions of Data Quality]], [[Excel Tables]]

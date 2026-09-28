@@ -61,6 +61,13 @@ graph TD
         PORT["[[Call Center Analysis Portfolio Case Study]]"]
     end
 
+    subgraph AIAssisted ["Phase 7: AI-Assisted Workflows"]
+        AIMOC["[[AI for Data Analysts MOC|AI MOC]]"]
+        AITOOLS["[[AI for Excel Overview|AI Tools (Twistly & Claude)]]"]
+        AIWORKFLOW["[[AI Excel Workflow|14-Step AI Workflow]]"]
+        AIPRACTICE["[[05_Practice/AI Assisted Excel/|10 AI Practice Drills]]"]
+    end
+
     Fundamentals --> Logic
     Logic --> Structure
     Structure --> DataEngineering
@@ -68,6 +75,8 @@ graph TD
     Structure --> Projects
     BI --> Projects
     Projects --> PORT
+    Projects --> AIAssisted
+    AIAssisted --> PORT
 ```
 
 ---
@@ -91,10 +100,18 @@ graph TD
 - [[Data Cleaning]] | [[Six Dimensions of Data Quality]] | [[Power Query]] | [[ETL Process]] | [[M Language]]
 - [[Dimensional Modeling]] | [[Star Schema vs Snowflake Schema]] | [[Fact vs Dimension Tables]]
 - [[Data Analysis Expressions (DAX)]] | [[Calculated Columns vs DAX Measures]] | [[Dashboard Design Principles]] | [[Data Analysis Life Cycle]]
+- [[Human Skill vs AI Assistance]] | [[AI for Data Analysts MOC]]
 
 ### 3. Key Projects
 - 🏨 [[Hotel Reservation Analysis]]: 36,000+ booking records, cancellation trends, RevPAR, ADR, channel performance.
 - 📞 [[Call Center Performance Analysis]]: 5,000 PwC customer service calls, CSAT, Speed of Answer, Agent Scorecard.
+- 🤖 [[06_Projects/Call Center Performance Analysis/AI-Assisted Analysis Workflow|Call Center AI Workflow]]: Audit matrix of automated, AI-assisted, and manually verified tasks.
+
+### 4. AI-Assisted Excel Track
+- 🧭 **[[AI for Data Analysts MOC]]**: Master map of content for AI tools, prompts, verification, and practice.
+- 🛠️ **[[AI for Excel Overview]]** | **[[GPT for MS Excel — Twistly]]** | **[[Claude for Excel — Anthropic]]** | **[[AI Tool Comparison]]**
+- 📋 **[[AI Excel Installation Guide]]** | **[[AI Excel Workflow]]** | **[[AI Excel Prompt Library]]** | **[[AI Output Verification]]** | **[[AI Excel Security and Privacy]]**
+- 🧪 **[[05_Practice/AI Assisted Excel/]]**: 10 progressive practice exercises & [[AI Experiment Log]].
 
 ---
 
@@ -102,6 +119,8 @@ graph TD
 - 🧠 **Interactive Course Mindmap (MindMeister)**: [Open Live MindMeister Course Map](https://www.mindmeister.com/app/map/3782166881?t=I9gXHbkAlV)
 - 🗺️ **Enterprise Architecture Topology**: [[Enterprise Architecture Mindmap|Enterprise Architecture Mindmap (Infographic)]]
 - 🔍 **Data Quality Audit Flow**: [[Data Quality Framework Mind Map|Data Quality Framework Visual Mind Map]]
+- 📖 **Data Quality Essentials**: [[Data Quality Essentials Guide|Data Quality Essentials Guide (Infographic)]]
 - 📄 **Excel GUI Blueprint**: [[Excel Interface Blueprint|Excel Interface Blueprint (PDF Manual)]]
 - 🎥 **Navigation Video**: [[Excel Navigation and Setup Video Guide|Excel Navigation and Setup Video Walkthrough]]
+
 
