@@ -1,19 +1,29 @@
 ---
 type: lesson
 course: Excel Zero to Hero
-module: "Module 3"
-topic: "Logical Functions"
-status: in-progress
+module: Module 3
+topic: Logical Functions
+status: completed
 difficulty: intermediate
-tags: [excel, lesson, logical, if, ifs, iferror, ifna, boolean, error-handling]
-prerequisites: ["[[01_Formula_Basics_and_Cell_Referencing]]"]
+tags:
+  - excel
+  - lesson
+  - logical
+  - if
+  - ifs
+  - iferror
+  - ifna
+  - boolean
+  - error-handling
+prerequisites:
+  - "[[01_Formula_Basics_and_Cell_Referencing]]"
 related_project: "[[Call Center Performance Analysis]]"
-source: "https://youtu.be/uv1bxe2gdnU"
+source: https://youtu.be/uv1bxe2gdnU
 created: 2026-09-28
 updated: 2026-09-29
-video_chapter: "Chapter 3 – Excel Formulas & Functions"
-video_timestamp: "1:38:56"
-video_url: "https://www.youtube.com/watch?v=uv1bxe2gdnU&t=5936s"
+video_chapter: Chapter 3 – Excel Formulas & Functions
+video_timestamp: 1:38:56
+video_url: https://www.youtube.com/watch?v=uv1bxe2gdnU&t=5936s
 ---
 
 # Lesson 3.3: Conditional Logic, Boolean Evaluation & Error Handling

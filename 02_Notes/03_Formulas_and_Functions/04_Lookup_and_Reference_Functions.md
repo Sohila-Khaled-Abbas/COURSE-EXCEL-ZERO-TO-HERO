@@ -1,19 +1,27 @@
 ---
 type: lesson
 course: Excel Zero to Hero
-module: "Module 3"
-topic: "Lookup & Reference Functions"
-status: in-progress
+module: Module 3
+topic: Lookup & Reference Functions
+status: completed
 difficulty: intermediate
-tags: [excel, lesson, lookup, xlookup, vlookup, hlookup, index-match]
-prerequisites: ["[[01_Formula_Basics_and_Cell_Referencing]]"]
+tags:
+  - excel
+  - lesson
+  - lookup
+  - xlookup
+  - vlookup
+  - hlookup
+  - index-match
+prerequisites:
+  - "[[01_Formula_Basics_and_Cell_Referencing]]"
 related_project: "[[Call Center Performance Analysis]]"
-source: "https://youtu.be/uv1bxe2gdnU"
+source: https://youtu.be/uv1bxe2gdnU
 created: 2026-09-28
 updated: 2026-09-29
-video_chapter: "Chapter 3 – Excel Formulas & Functions"
-video_timestamp: "1:38:56"
-video_url: "https://www.youtube.com/watch?v=uv1bxe2gdnU&t=5936s"
+video_chapter: Chapter 3 – Excel Formulas & Functions
+video_timestamp: 1:38:56
+video_url: https://www.youtube.com/watch?v=uv1bxe2gdnU&t=5936s
 ---
 
 # Lesson 3.4: Modern Lookup Systems: XLOOKUP vs VLOOKUP vs HLOOKUP vs INDEX & MATCH

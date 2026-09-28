@@ -1,19 +1,27 @@
 ---
 type: lesson
 course: Excel Zero to Hero
-module: "Module 3"
-topic: "Date & Time Intelligence"
-status: in-progress
+module: Module 3
+topic: Date & Time Intelligence
+status: completed
 difficulty: intermediate
-tags: [excel, lesson, dates, time-series, datedif, networkdays, calendar]
-prerequisites: ["[[01_Data_Types_and_Formatting]]"]
+tags:
+  - excel
+  - lesson
+  - dates
+  - time-series
+  - datedif
+  - networkdays
+  - calendar
+prerequisites:
+  - "[[01_Data_Types_and_Formatting]]"
 related_project: "[[Call Center Performance Analysis]]"
-source: "https://youtu.be/uv1bxe2gdnU"
+source: https://youtu.be/uv1bxe2gdnU
 created: 2026-09-28
 updated: 2026-09-29
-video_chapter: "Chapter 3 – Excel Formulas & Functions"
-video_timestamp: "1:38:56"
-video_url: "https://www.youtube.com/watch?v=uv1bxe2gdnU&t=5936s"
+video_chapter: Chapter 3 – Excel Formulas & Functions
+video_timestamp: 1:38:56
+video_url: https://www.youtube.com/watch?v=uv1bxe2gdnU&t=5936s
 ---
 
 # Lesson 3.6: Date Mathematics & Time-Series Calculations
