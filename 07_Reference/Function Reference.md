@@ -15,6 +15,8 @@ updated: 2026-09-28
 | **Lookup** | `HLOOKUP` | Horizontal table search across rows | Any | Intermediate | [[HLOOKUP]] |
 | **Lookup** | `INDEX` | Return value at row/col coordinates | Any | Intermediate | [[INDEX]] |
 | **Lookup** | `MATCH` | Return position index of matching value | Integer | Intermediate | [[MATCH]] |
+| **Lookup** | `XMATCH` | Next-gen position index (exact by default)| Integer | Intermediate | [[XMATCH]] |
+| **Lookup** | `CHOOSE` | Return value by 1-based index position | Any | Intermediate | [[CHOOSE]] |
 | **Aggregation** | `SUM` | Adds numeric values | Number | Beginner | [[SUM]] |
 | **Aggregation** | `SUMIF` | Adds values matching a single condition | Number | Beginner | [[SUMIF]] |
 | **Aggregation** | `SUMIFS` | Adds values matching multiple conditions| Number | Intermediate | [[SUMIFS]] |
