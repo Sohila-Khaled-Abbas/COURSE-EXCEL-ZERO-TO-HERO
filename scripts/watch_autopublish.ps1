@@ -12,9 +12,9 @@ $RepoRoot = (Resolve-Path $RepoPath).Path
 Set-Location $RepoRoot
 
 Write-Host "==========================================================" -ForegroundColor Cyan
-Write-Host " 🚀 Continuous Repository Auto-Publisher Active" -ForegroundColor Green
-Write-Host " 📂 Watching Repository: $RepoRoot" -ForegroundColor Yellow
-Write-Host " ⏱️  Debounce interval: $DebounceSeconds seconds" -ForegroundColor Gray
+Write-Host " [ACTIVE] Continuous Repository Auto-Publisher Running" -ForegroundColor Green
+Write-Host " [PATH]   Watching Repository: $RepoRoot" -ForegroundColor Yellow
+Write-Host " [DEBOUNCE] Interval: $DebounceSeconds seconds" -ForegroundColor Gray
 Write-Host " Press Ctrl+C to terminate auto-publisher." -ForegroundColor DarkGray
 Write-Host "==========================================================" -ForegroundColor Cyan
 
@@ -38,7 +38,7 @@ $action = {
         return
     }
 
-    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] 📝 Change detected: $relPath ($($event.ChangeType))" -ForegroundColor Magenta
+    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [DETECTED] $relPath ($($event.ChangeType))" -ForegroundColor Magenta
     $global:pendingChanges = $true
     $global:lastModifiedFile = $relPath
 }
@@ -52,11 +52,11 @@ try {
     while ($true) {
         Start-Sleep -Seconds 2
         if ($global:pendingChanges) {
-            # Debounce: wait for Excel or Obsidian to finish writing/releasing file locks
+            # Debounce: wait for Excel or editor to release file locks
             Start-Sleep -Seconds $DebounceSeconds
             $global:pendingChanges = $false
 
-            Write-Host "[$(Get-Date -Format 'HH:mm:ss')] 🔄 Staging updates to Git..." -ForegroundColor Cyan
+            Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [SYNC] Staging updates to Git..." -ForegroundColor Cyan
             git add -A -- ":(exclude)09_Source_Materials" ":(exclude)assets/*.mp4" ":(exclude).obsidian/workspace*"
 
             $staged = git diff --cached --name-only
@@ -66,17 +66,17 @@ try {
                 $commitMsg = "feat(auto-sync): update $targetName [$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')]"
 
                 git commit -m $commitMsg
-                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] 📦 Committed: $commitMsg" -ForegroundColor Green
+                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [COMMITTED] $commitMsg" -ForegroundColor Green
 
-                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] ⬆️  Pushing to GitHub (origin main)..." -ForegroundColor Yellow
+                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [PUSHING] Uploading to GitHub (origin main)..." -ForegroundColor Yellow
                 $pushOutput = git push origin main 2>&1
                 if ($LASTEXITCODE -eq 0) {
-                    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] 🎉 Successfully published to GitHub!" -ForegroundColor Green
+                    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [SUCCESS] Published to GitHub!" -ForegroundColor Green
                 } else {
-                    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] ⚠️ Push notice: $pushOutput" -ForegroundColor Red
+                    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [WARNING] Push notice: $pushOutput" -ForegroundColor Red
                 }
             } else {
-                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] ℹ️ No new changes to commit." -ForegroundColor DarkGray
+                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [NO-CHANGE] No changes to commit." -ForegroundColor DarkGray
             }
         }
     }
@@ -88,5 +88,5 @@ finally {
     Unregister-Event -SourceIdentifier $subCreated.Name -ErrorAction SilentlyContinue
     Unregister-Event -SourceIdentifier $subRenamed.Name -ErrorAction SilentlyContinue
     Unregister-Event -SourceIdentifier $subDeleted.Name -ErrorAction SilentlyContinue
-    Write-Host "🛑 Repository auto-publisher stopped." -ForegroundColor Red
+    Write-Host "[STOPPED] Repository auto-publisher stopped." -ForegroundColor Red
 }

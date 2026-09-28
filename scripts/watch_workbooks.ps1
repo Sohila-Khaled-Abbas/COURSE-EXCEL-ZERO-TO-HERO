@@ -13,9 +13,9 @@ Set-Location $RepoRoot
 
 $resolvedTarget = (Resolve-Path $TargetFolder).Path
 Write-Host "==========================================================" -ForegroundColor Cyan
-Write-Host " 🚀 Dynamic Excel Workbook Auto-Publisher Started" -ForegroundColor Green
-Write-Host " 📂 Monitoring: $resolvedTarget" -ForegroundColor Yellow
-Write-Host " ⏱️  Debounce interval: $DebounceSeconds seconds" -ForegroundColor Gray
+Write-Host " [ACTIVE] Excel Workbook Auto-Publisher Running" -ForegroundColor Green
+Write-Host " [PATH]   Monitoring: $resolvedTarget" -ForegroundColor Yellow
+Write-Host " [DEBOUNCE] Interval: $DebounceSeconds seconds" -ForegroundColor Gray
 Write-Host " Press Ctrl+C to stop watching." -ForegroundColor DarkGray
 Write-Host "==========================================================" -ForegroundColor Cyan
 
@@ -35,7 +35,7 @@ $action = {
     if ($name -match '^[~]|\.tmp$') {
         return
     }
-    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] 📝 Detected change: $name ($($event.ChangeType))" -ForegroundColor Magenta
+    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [DETECTED] $name ($($event.ChangeType))" -ForegroundColor Magenta
     $global:pendingChanges = $true
     $global:lastModifiedFile = $name
 }
@@ -52,7 +52,7 @@ try {
             Start-Sleep -Seconds $DebounceSeconds
             $global:pendingChanges = $false
             
-            Write-Host "[$(Get-Date -Format 'HH:mm:ss')] 🔄 Staging changes to git..." -ForegroundColor Cyan
+            Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [SYNC] Staging workbooks to git..." -ForegroundColor Cyan
             git add "11_Demos_and_Workbooks"
             
             # Check if there are staged changes
@@ -61,17 +61,17 @@ try {
                 $file = $global:lastModifiedFile
                 $commitMsg = "feat(workbooks): update $file [$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')]"
                 git commit -m $commitMsg
-                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] 📦 Committed: $commitMsg" -ForegroundColor Green
+                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [COMMITTED] $commitMsg" -ForegroundColor Green
                 
-                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] ⬆️  Pushing to GitHub (origin main)..." -ForegroundColor Yellow
+                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [PUSHING] Uploading to GitHub (origin main)..." -ForegroundColor Yellow
                 $pushOutput = git push origin main 2>&1
                 if ($LASTEXITCODE -eq 0) {
-                    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] ✅ Successfully published to GitHub!" -ForegroundColor Green
+                    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [SUCCESS] Published to GitHub!" -ForegroundColor Green
                 } else {
-                    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] ⚠️ Push failed or timed out: $pushOutput" -ForegroundColor Red
+                    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [WARNING] Push notice: $pushOutput" -ForegroundColor Red
                 }
             } else {
-                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] ℹ️ No changes detected to commit." -ForegroundColor DarkGray
+                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [NO-CHANGE] No changes to commit." -ForegroundColor DarkGray
             }
         }
     }
@@ -82,5 +82,5 @@ finally {
     Unregister-Event -SourceIdentifier $subChanged.Name -ErrorAction SilentlyContinue
     Unregister-Event -SourceIdentifier $subCreated.Name -ErrorAction SilentlyContinue
     Unregister-Event -SourceIdentifier $subRenamed.Name -ErrorAction SilentlyContinue
-    Write-Host "🛑 Watcher stopped." -ForegroundColor Red
+    Write-Host "[STOPPED] Watcher stopped." -ForegroundColor Red
 }

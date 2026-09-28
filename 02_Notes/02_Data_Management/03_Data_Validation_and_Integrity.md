@@ -85,8 +85,8 @@ Using `Sample_ Superstore.csv` fields, we establish data-entry governance to pre
 
 ## Practice & Application
 - [x] Build a validation rule that prevents ratings outside the 1 to 5 range with an error prompt. ✅ 2026-09-28
-- [ ] In `Sample_ Superstore.csv`, apply List Validation to the `Region` column restricting entry strictly to: `Central, East, South, West`.
-- [ ] Build a custom formula validation on `Order ID` ensuring that all entries begin with either `"CA-"` or `"US-"`: `=OR(LEFT(A2,3)="CA-", LEFT(A2,3)="US-")`.
+- [x] In `Sample_ Superstore.csv`, apply List Validation to the `Region` column restricting entry strictly to: `Central, East, South, West`. ✅ 2026-09-28
+- [x] Build a custom formula validation on `Order ID` ensuring that all entries begin with either `"CA-"` or `"US-"`: `=OR(LEFT(A2,3)="CA-", LEFT(A2,3)="US-")`. ✅ 2026-09-28
 
 ## Related Knowledge
 - Dataset: [[Sample Superstore Dataset Documentation]]
