@@ -26,7 +26,7 @@ updated: 2026-09-28
 | **Modules Covered** | 9 Modules | 9 Structured | Grounded in course PPTX & Workbooks |
 | **Lesson Notes** | 30+ Lessons | Completed | Across 9 functional modules |
 | **Concept Knowledge Base** | 22 Atomic Concepts | Completed | Star schema, DAX, Tables, XLOOKUP, AI MOC, etc. |
-| **Formula Reference** | 27 Key Functions | Documented | Structured arguments, examples & edge cases |
+| **Formula Reference** | 45 Key Functions | Documented | Structured arguments, examples & edge cases |
 | **Practice Sets** | 7 Exercises + 10 AI Labs | Ready | Levels 1 to 5 with hidden solutions |
 | **Analytics Projects** | 2 Projects | Documented | Hotel Reservation + PwC Call Center |
 | **Portfolio Artifact** | 1 Recruiter Case Study | Ready | [[Call Center Analysis Portfolio Case Study]] |
