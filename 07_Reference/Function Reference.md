@@ -27,6 +27,7 @@ updated: 2026-09-28
 | **Text** | `TRIM` | Strip extra whitespace | Text | Beginner | [[TRIM]] |
 | **Text** | `PROPER` | Convert to Title Case | Text | Beginner | [[PROPER]] |
 | **Text** | `TEXTJOIN` | Concatenate array with delimiter | Text | Intermediate | [[TEXTJOIN]] |
+| **Text** | `TEXTSPLIT` | Split text into array across columns/rows | Array | Intermediate | [[TEXTSPLIT]] |
 | **Date/Time** | `TODAY` | Current system date | Date | Beginner | [[TODAY]] |
 | **Date/Time** | `DATEDIF` | Difference between dates in days/months/years | Integer | Intermediate | [[DATEDIF]] |
 | **Date/Time** | `NETWORKDAYS`| Working business days (excluding weekends)| Integer | Intermediate | [[NETWORKDAYS]] |
