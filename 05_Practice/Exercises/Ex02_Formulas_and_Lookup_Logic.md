@@ -1,11 +1,16 @@
 ---
 type: exercise
-module: "Module 3"
-topic: "Formulas & Lookups"
+module: Module 3
+topic: Formulas & Lookups
 difficulty: intermediate
-status: not-started
-tags: [excel, practice, formulas, xlookup, sumifs]
-source_dataset: "09_Source_Materials/Module 3/3-Module_3 Test Sheet.xlsx"
+status: mastered
+tags:
+  - excel
+  - practice
+  - formulas
+  - xlookup
+  - sumifs
+source_dataset: 09_Source_Materials/Module 3/3-Module_3 Test Sheet.xlsx
 created: 2026-09-28
 updated: 2026-09-28
 ---
