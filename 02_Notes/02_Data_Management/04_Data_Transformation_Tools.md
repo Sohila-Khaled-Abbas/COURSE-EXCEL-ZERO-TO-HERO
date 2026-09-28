@@ -113,13 +113,16 @@ Flash Fill detects patterns instantaneously without touching formulas:
 
 ---
 
-## Practical Lab Exercise
-- Open `09_Source_Materials/Module 2/Sample_Superstore_Full.csv`.
-- Create a new column `Order Year` and populate it via `Ctrl + E`.
-- Split `Product ID` into 3 columns using Text to Columns.
-- Extract a unique list of all **1,862 distinct products** using Remove Duplicates on `Product ID`.
+## Practical Lab Exercise & Demo Workbook
+- **Demo Workbook**: `11_Demos_and_Workbooks/02_Data_Management/Superstore_Dataset_Demo.xlsx`
+  - **`Order Year`**: Extracted using `=YEAR([@[Order Date]])` and formatted as integer `0`.
+  - **`Gross Revenue`**: Calculated catalog price before discount: `=[@Sales] / (1 - [@Discount])`.
+  - **`Net Revenue`**: Realized revenue after discount: `=[@Sales] * (1 - [@Discount])`.
+  - **`Dept`, `Sub-Cat`, `Serial`**: Decomposed from `Product ID` via Delimited Text to Columns or `=TEXTSPLIT([@[Product ID]], "-")`.
+  - **`Dim_Customers` Tab**: Deduplicated customer dimension table (793 distinct customer entities).
 
 ## Related Knowledge
-- Concepts: [[Data Cleaning]], [[Power Query]]
+- Concepts: [[Data Cleaning]], [[Power Query]], [[Excel File Formats]]
 - Dataset: [[Sample Superstore Dataset Documentation]]
 - Formulas: [[TEXTJOIN]], [[TRIM]], [[TEXTSPLIT]]
+- Student Workbook: `11_Demos_and_Workbooks/02_Data_Management/Superstore_Dataset_Demo.xlsx`
