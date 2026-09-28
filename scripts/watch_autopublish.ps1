@@ -27,14 +27,14 @@ $global:pendingChanges = $false
 $global:lastModifiedFile = ""
 
 # Filter regex for ignored paths/files
-$ignorePattern = '(\.git[\\/]|\.obsidian[\\/](workspace|cache)|09_Source_Materials[\\/]|assets[\\/].*\.mp4|~$|\.tmp$|\.bak$)'
+$ignorePattern = '(^|[\\/])\.git([\\/]|$)|(\.obsidian[\\/](workspace|cache)|09_Source_Materials|assets[\\/].*\.mp4|~$|\.tmp$|\.bak$)'
 
 $action = {
     param($source, $event)
     $fullPath = $event.FullPath
     $relPath = $fullPath.Replace($RepoRoot, "").TrimStart("\/")
 
-    if ($relPath -match $ignorePattern) {
+    if ($relPath -eq ".git" -or $relPath.StartsWith(".git\") -or $relPath.StartsWith(".git/") -or $relPath -match $ignorePattern) {
         return
     }
 
