@@ -1,14 +1,19 @@
 ---
 type: lesson
 course: Excel Zero to Hero
-module: "Module 3"
-topic: "Dynamic Arrays"
-status: not-started
+module: Module 3
+topic: Dynamic Arrays
+status: in-progress
 difficulty: advanced
-tags: [excel, lesson, dynamic-arrays, spill-formulas]
-prerequisites: ["[[01_Formula_Basics_and_Cell_Referencing]]"]
+tags:
+  - excel
+  - lesson
+  - dynamic-arrays
+  - spill-formulas
+prerequisites:
+  - "[[01_Formula_Basics_and_Cell_Referencing]]"
 related_project: "[[Call Center Performance Analysis]]"
-source: "https://youtu.be/uv1bxe2gdnU"
+source: https://youtu.be/uv1bxe2gdnU
 created: 2026-09-28
 updated: 2026-09-28
 video_chapter: \"Chapter 3 – Excel Formulas & Functions\"
