@@ -156,6 +156,13 @@ flowchart TD
 - **Directory Hierarchy (`11_Demos_and_Workbooks/`)**: Created dedicated module-by-module folder structure (`01_Fundamentals/` through `10_Projects_and_Demos/`) for personal user `.xlsx` workbooks.
 - **Workbook Architecture Guide (`11_Demos_and_Workbooks/README.md`)**: Documented naming standards (`Demo_02_Superstore_Data_Management.xlsx`), calculation options, used range verification (`Ctrl + End`), and `.gitignore` integration (ignoring temporary `~$*` lock files while preserving user `.xlsx` workbooks).
 
+### Step 10: Excel File Formats & Extensions Knowledge Layer
+- **Lesson Note (`02_Notes/02_Data_Management/06_Workbook_File_Formats.md`)**:
+  - Authored comprehensive guide covering the 4 core formats: `XLSX` (Default, OpenXML, macro-free), `XLSM` (Macro-enabled, VBA code preservation), `XLSB` (Fast binary, 50% smaller size, 2-4x faster open/save), and `CSV` (Raw flat data set, universal ETL interchange).
+  - Included comparison matrix, `F12` Save As procedure, the macro-stripping trap, accidental CSV save disaster, and interview questions.
+- **Atomic Concept Note (`03_Concepts/Excel File Formats.md`)**:
+  - Answering the 10 essential questions with an architectural Mermaid flowchart contrasting OpenXML, BIFF12 binary, and plain text.
+
 ---
 
 ## 📊 Deliverables Inventory
@@ -163,14 +170,14 @@ flowchart TD
 | Category | File Count | Primary Components | Status |
 | :--- | :---: | :--- | :---: |
 | **Course Curriculum & Dashboards** | 7 notes | Overview, Curriculum, Objectives, Index, Learning Path, Dashboard, MOC | Verified |
-| **Structured Lesson Notes** | 9 notes | Modules 1 through 9 covering 8-hour masterclass timestamps | Verified |
-| **Atomic Concepts & MOCs** | 22 notes | Excel Tables, XLOOKUP, DAX, Quality, M Language, AI MOC, Human vs AI | Verified |
+| **Structured Lesson Notes** | 10 notes | Modules 1 through 9 covering 8-hour masterclass timestamps | Verified |
+| **Atomic Concepts & MOCs** | 23 notes | Excel Tables, XLOOKUP, DAX, File Formats, M Language, AI MOC, Human vs AI | Verified |
 | **Formula Reference Base** | 27 notes | Lookup, Math, Logic, Text, Date, Dynamic Arrays (SORT, SORTBY, FILTER, UNIQUE), DAX | Verified |
 | **Practice & Solutions** | 19 notes | Ex01–Ex07, 10 AI Drills, Mini Projects, Full Solutions | Verified |
 | **Capstone Project Files** | 11 notes | PwC 5,000-call audit, KPIs, Findings, AI Workflow, Case Study | Verified |
 | **Supplementary Reference Notes** | 13 notes | Gemini Notebook guides, Superstore Benchmark Doc, modern lookups, DAX | Verified |
 | **AI for Excel Knowledge Base** | 9 notes | Overview, Twistly, Claude, Install, Workflow, Prompts, Verification, Security | Verified |
-| **Student Demos & Workbooks** | 10 dirs + guide | `11_Demos_and_Workbooks/` module folders with `.gitkeep` & guidelines | Active |
+| **Student Demos & Workbooks** | 10 dirs + guide | `11_Demos_and_Workbooks/` module folders with `.gitkeep` & student `.xlsx` workbooks | Active |
 | **Physical Media Assets** | 6 files | 4 PNG mindmaps, 1 PDF blueprint (12.3MB), 1 MP4 walkthrough (34.8MB) | Staged / Pushed |
 | **Obsidian Configuration** | Pre-set | Dataview, Omnisearch, Tasks, Minimal theme, Second Brain CSS | Configured |
 | **GitHub Governance** | 9 files | Workflows, Rulesets, Community standards, Issue templates | Active |

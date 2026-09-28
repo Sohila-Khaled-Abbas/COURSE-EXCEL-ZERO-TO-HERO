@@ -26,6 +26,7 @@ updated: 2026-09-28
 - [[03_Data_Validation_and_Integrity]]: Lesson 2.3: Data Validation & Input Integrity
 - [[04_Data_Transformation_Tools]]: Lesson 2.4: Flash Fill, Text to Columns & Deduplication
 - [[05_Keyboard_Shortcuts_and_Navigation]]: Lesson 2.5: High-Velocity Keyboard Ergonomics
+- [[06_Workbook_File_Formats]]: Lesson 2.6: Excel File Formats & Extensions (XLSX, XLSM, XLSB, CSV)
 
 ## Chapter 3: Excel Formulas & Functions ([1:38:56](https://www.youtube.com/watch?v=uv1bxe2gdnU&t=5936s) • `56m 59s`)
 - [[01_Formula_Basics_and_Cell_Referencing]]: Lesson 3.1: Formula Architecture & Coordinate Locking

@@ -32,3 +32,4 @@ scratch/
 
 # Large binary raw source files (Preserved locally, excluded from git to prevent HTTP 408 timeout & PC lag)
 09_Source_Materials/
+assets/*.mp4

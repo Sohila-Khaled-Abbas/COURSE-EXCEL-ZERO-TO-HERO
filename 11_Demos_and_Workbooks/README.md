@@ -51,6 +51,28 @@ To keep your files professional, easily searchable, and recruiter-ready, use cle
    - Use Excel Tables (`Ctrl + T`) wherever possible to preserve dynamic formula expansion.
 3. **Avoid File Bloat**:
    - Check `Ctrl + End` on each sheet to confirm the used range matches your actual data boundary. If blank rows balloon the file size, delete empty rows and save.
-4. **Git Tracking**:
+4. **Git Tracking & Dynamic Publishing**:
    - Microsoft Excel `.xlsx` files in this directory are tracked by Git.
    - Temporary Excel lock files starting with `~$` are automatically ignored by `.gitignore`.
+
+---
+
+## 🚀 Dynamic GitHub Auto-Publishing
+
+To automatically push your `.xlsx` workbooks to GitHub every time you save in Excel:
+
+### Option 1: Live Background Auto-Publisher (Hands-Free)
+Double-click:
+📂 **`scripts/watch_workbooks.bat`**  
+*(Or run `powershell -File scripts/watch_workbooks.ps1` in your terminal)*
+
+- The watcher monitors `11_Demos_and_Workbooks/` in real time.
+- When you press `Ctrl + S` in Excel on any `.xlsx` file, the watcher waits 4 seconds (allowing Excel to finish releasing its lock), stages your workbook, commits it with a timestamp, and immediately pushes it to GitHub!
+
+### Option 2: Instant One-Click Manual Sync
+Whenever you want to trigger a manual push after a session:
+Double-click:
+📂 **`scripts/sync_workbooks.bat`**  
+*(Or run `powershell -File scripts/sync_workbooks.ps1` in your terminal)*
+- Immediately stages all modified `.xlsx` files, commits them, and pushes to `origin main`.
+

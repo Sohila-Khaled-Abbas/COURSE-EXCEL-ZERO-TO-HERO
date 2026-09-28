@@ -49,7 +49,7 @@ SORT file.name ASC
 | Chapter | Topic | Video Timestamp | Primary Note | Core Competency |
 | :---: | :--- | :---: | :--- | :--- |
 | **Ch 1** | **Excel Introduction & GUI** | [0:00](https://www.youtube.com/watch?v=uv1bxe2gdnU) | [[01_Excel_Interface_and_GUI]] | Interface, Workbook Architecture |
-| **Ch 2** | **Data Management** | [16:05](https://www.youtube.com/watch?v=uv1bxe2gdnU&t=965s) | [[01_Data_Types_and_Formatting]] | Validation, Formatting, Flash Fill |
+| **Ch 2** | **Data Management** | [16:05](https://www.youtube.com/watch?v=uv1bxe2gdnU&t=965s) | [[01_Data_Types_and_Formatting]] | Validation, Formatting, Flash Fill, File Formats (`XLSX`, `XLSM`, `XLSB`, `CSV`) |
 | **Ch 3** | **Excel Formulas & Functions** | [1:38:56](https://www.youtube.com/watch?v=uv1bxe2gdnU&t=5936s) | [[01_Formula_Basics_and_Cell_Referencing]] | Referencing, Logic, Lookups, Dates |
 | **Ch 4** | **Excel Tables** | [2:35:55](https://www.youtube.com/watch?v=uv1bxe2gdnU&t=9355s) | [[01_Excel_Tables_Architecture]] | Structured References, Auto-expansion |
 | **Ch 5** | **Pivot Tables** | [2:58:28](https://www.youtube.com/watch?v=uv1bxe2gdnU&t=10708s) | [[01_Pivot_Table_Foundations]] | Aggregation, Slicers, Show Values As |

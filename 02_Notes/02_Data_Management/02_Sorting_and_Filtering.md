@@ -73,9 +73,9 @@ In retail analytics, discounts above 20% frequently destroy profitability. Use A
 > - **Hidden Rows Misconception**: Applying an AutoFilter hides rows; it does **not** delete them. Be cautious when copying and pasting: press `Alt + ;` (`Select Visible Cells Only`) before copying if pasting into unaligned worksheets.
 
 ## Practice & Application
-- [ ] In `Sample_ Superstore.csv`, execute a 3-level sort on `Region`, `Sub-Category`, and `Sales` (Largest to Smallest).
-- [ ] Filter `State == "Texas"` and inspect total profit; note why Texas ranks as one of the least profitable states due to aggressive 80% discounting on binders and appliances.
-- [ ] Use `Top 10...` number filter on `Sales` to isolate the top 10 highest-grossing individual orders.
+- [x] In `Sample_ Superstore.csv`, execute a 3-level sort on `Region`, `Sub-Category`, and `Sales` (Largest to Smallest). ✅ 2026-09-28
+- [x] Filter `State == "Texas"` and inspect total profit; note why Texas ranks as one of the least profitable states due to aggressive 80% discounting on binders and appliances. ✅ 2026-09-28
+- [x] Use `Top 10...` number filter on `Sales` to isolate the top 10 highest-grossing individual orders. ✅ 2026-09-28
 
 ## Related Knowledge
 - Dataset: [[Sample Superstore Dataset Documentation]]

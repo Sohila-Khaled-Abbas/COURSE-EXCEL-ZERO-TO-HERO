@@ -87,7 +87,8 @@ This lesson is grounded in the benchmark **[[Sample Superstore Dataset Documenta
 
 ## Related Knowledge
 - Dataset: [[Sample Superstore Dataset Documentation]]
-- Concepts: [[Six Dimensions of Data Quality]]
+- Notes: [[06_Workbook_File_Formats]]
+- Concepts: [[Six Dimensions of Data Quality]], [[Excel File Formats]]
 - Formulas: [[TEXTJOIN]]
 - Reference: [[Excel Cheat Sheet]]
 
