@@ -2,7 +2,9 @@
 
 <div align="center">
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Author: Sohila Khaled](https://img.shields.io/badge/Author-Sohila%20Khaled%20Abbas-0A66C2?logo=linkedin&logoColor=white)](https://linkedin.com/in/sohilakabbas)
+[![Portfolio](https://img.shields.io/badge/Portfolio-Case%20Studies-FF4B4B?logo=googlechrome&logoColor=white)](https://sohilakhaled-portfolio.lovable.app)
 [![Obsidian Vault](https://img.shields.io/badge/Obsidian-Second%20Brain-8b5cf6?logo=obsidian&logoColor=white)](https://obsidian.md)
 [![Course Duration](https://img.shields.io/badge/Course%20Duration-8%20Hours-blue?logo=youtube&logoColor=red)](https://youtu.be/uv1bxe2gdnU)
 [![Excel Version](https://img.shields.io/badge/Microsoft%20Excel-Office%20365%20%2F%202021-107c41?logo=microsoftexcel&logoColor=white)](https://www.microsoft.com/en-us/microsoft-365/excel)
@@ -11,7 +13,7 @@
 
 **A production-grade Obsidian Knowledge System, Data Analytics Curriculum, and GitHub Portfolio Repository for mastering modern Microsoft Excel, Power Query, Power Pivot, DAX, and Executive Dashboard Engineering.**
 
-[Explore Dashboard](00_Home/Course%20Dashboard.md) • [Course Curriculum](01_Course/Course%20Curriculum.md) • [Call Center Capstone](06_Projects/Call%20Center%20Performance%20Analysis/Project%20Overview.md) • [Portfolio Case Study](10_Portfolio/Call%20Center%20Analysis%20Portfolio%20Case%20Study.md)
+[Explore Dashboard](00_Home/Course%20Dashboard.md) • [Course Curriculum](01_Course/Course%20Curriculum.md) • [Call Center Capstone](06_Projects/Call%20Center%20Performance%20Analysis/Project%20Overview.md) • [Portfolio Case Study](10_Portfolio/Call%20Center%20Analysis%20Portfolio%20Case%20Study.md) • [Contributing](CONTRIBUTING.md) • [Citation](CITATION.cff)
 
 </div>
 
@@ -267,5 +269,33 @@ Every note, formula, metric, and exercise in this repository is strictly grounde
 
 ---
 
-## 📄 License
-This repository is open-sourced under the **[MIT License](LICENSE)**. Feel free to use, modify, and build upon this knowledge system for your own learning and portfolio development.
+## 🤝 Community & Contributing
+
+Contributions, feedback, and discussion are welcome! Please review:
+- 📖 **[Contribution Guidelines](CONTRIBUTING.md)**: Standards for adding new concepts, exercises, or formula notes.
+- 📜 **[Code of Conduct](CODE_OF_CONDUCT.md)**: Community standards and expectations.
+- 🛡️ **[Security Policy](SECURITY.md)**: Procedures for responsibly reporting vulnerabilities.
+- 🔖 **[Citation File](CITATION.cff)**: Academic and professional citation metadata.
+
+---
+
+## 👩‍💻 Author & Architecture Lead
+
+<div align="center">
+
+### **Sohila Khaled Abbas**
+*BI Developer • Data Analytics Engineer • Enterprise Analytics Specialist*
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Sohila%20Khaled-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/sohilakabbas)
+[![Portfolio](https://img.shields.io/badge/Portfolio-Case%20Studies-FF4B4B?style=for-the-badge&logo=googlechrome&logoColor=white)](https://sohilakhaled-portfolio.lovable.app)
+[![Email](https://img.shields.io/badge/Email-sohila.k.data%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:sohila.k.data@gmail.com)
+[![GitHub](https://img.shields.io/badge/GitHub-Sohila--Khaled--Abbas-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Sohila-Khaled-Abbas)
+
+</div>
+
+---
+
+## 📄 License & Attribution
+This repository is open-sourced under the **[MIT License](LICENSE)**.  
+Built upon the educational framework and masterclass delivered by **Mostafa Hamed** (@mostavadel). All dataset rights and trademarks belong to their respective holders (PwC Virtual Experience Program).
+

@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this learning vault, curriculum, or PwC call center analysis in your research or education, please cite it as below."
+title: "Excel Zero to Hero: Enterprise Second Brain & PwC Call Center Analytics Architecture"
+authors:
+  - family-names: "Abbas"
+    given-names: "Sohila Khaled"
+    orcid: "https://orcid.org/0009-0000-0000-0000"
+    website: "https://sohilakhaled-portfolio.lovable.app"
+repository-code: "https://github.com/Sohila-Khaled-Abbas/COURSE-EXCEL-ZERO-TO-HERO"
+url: "https://github.com/Sohila-Khaled-Abbas/COURSE-EXCEL-ZERO-TO-HERO"
+abstract: "A production-grade Obsidian Second Brain and GitHub learning repository mapping Mostafa Hamed's 8-Hour Excel Zero to Hero masterclass into an atomic knowledge graph, formula reference manual, progressive practice drills, and an executive PwC Call Center Operational Intelligence capstone."
+keywords:
+  - "excel"
+  - "business-intelligence"
+  - "data-analytics"
+  - "power-query"
+  - "power-pivot"
+  - "dax"
+  - "obsidian"
+  - "call-center-analytics"
+  - "pwc-simulation"
+  - "second-brain"
+date-released: 2026-09-28
+license: "MIT"
+version: "1.0.0"

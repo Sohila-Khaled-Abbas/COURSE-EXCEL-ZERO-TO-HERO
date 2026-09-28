@@ -56,6 +56,7 @@ SORT file.name ASC
 | **Ch 8** | **Power Query & M Language** | [4:20:30](https://www.youtube.com/watch?v=uv1bxe2gdnU&t=15630s) | [[01_Power_Query_Fundamentals_and_ETL]] | ETL Pipelines, Merge/Append, M Code |
 | **Ch 9** | **Data Modeling, Power Pivot & DAX** | [5:03:39](https://www.youtube.com/watch?v=uv1bxe2gdnU&t=18219s) | [[01_Dimensional_Modeling_Principles]] | Star Schema, Relationships, Measures |
 | **Capstone** | **PwC Call Center Performance** | [5:39:46](https://www.youtube.com/watch?v=uv1bxe2gdnU&t=20386s) | [[Project Overview]] | 5,000 Records Executive Dashboard |
+
 ---
 
 ### 2. Spaced Revision Queue

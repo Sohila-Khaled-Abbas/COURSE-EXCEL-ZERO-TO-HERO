@@ -1,0 +1,38 @@
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+categories:
+  - title: '🚀 New Features & Modules'
+    labels:
+      - 'feature'
+      - 'enhancement'
+  - title: '📝 Documentation & Notes'
+    labels:
+      - 'documentation'
+      - 'docs'
+  - title: '🐛 Bug Fixes & Corrections'
+    labels:
+      - 'fix'
+      - 'bug'
+  - title: '⚙️ Vault Maintenance & CI'
+    labels:
+      - 'ci'
+      - 'chore'
+      - 'dependencies'
+change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
+version-resolver:
+  major:
+    labels:
+      - 'major'
+  minor:
+    labels:
+      - 'minor'
+  patch:
+    labels:
+      - 'patch'
+  default: patch
+template: |
+  ## What's Changed
+
+  $CHANGES
+
+  **Full Changelog**: https://github.com/Sohila-Khaled-Abbas/COURSE-EXCEL-ZERO-TO-HERO/commits/$RESOLVED_VERSION
