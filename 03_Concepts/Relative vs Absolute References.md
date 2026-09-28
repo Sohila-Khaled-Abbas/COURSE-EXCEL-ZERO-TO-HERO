@@ -69,3 +69,5 @@ Applying a static corporate tax rate or currency exchange rate in cell `$K$1` ac
 ## 7. Related Concepts
 - [[Structured References]]
 - [[01_Formula_Basics_and_Cell_Referencing]]
+- 📂 **Personal Practice Workbook**: `11_Demos_and_Workbooks/03_Formulas_and_Functions/Conditional Formatting & Absolute Relative.xlsx` (Sheet: *Relative vs Absolute*)
+
