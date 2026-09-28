@@ -25,3 +25,10 @@ updated: 2026-09-28
    - Scatter / Trend: Cancellation likelihood vs Lead Time.
 3. **Slicer Pane**:
    - Synchronized Slicers for `Booking Channel` and `Year`.
+
+## Dataset Mirrors & References
+- 🌐 **Kaggle**: [Hotel Reservations Classification Dataset](https://www.kaggle.com/datasets/ahsan81/hotel-reservations-classification-dataset)
+- 🤗 **Hugging Face**: [ahsan81_hotel-reservations-classification-dataset](https://huggingface.co/datasets/jason1966/ahsan81_hotel-reservations-classification-dataset)
+- 📖 **Documentation**: [[Hotel Reservations Dataset Documentation]]
+- 💾 **Local File**: `D:\courses\Data Analysis 26-27\Hotel Reservations.csv`
+- 📁 **Demo Workbook**: `11_Demos_and_Workbooks/02_Data_Management/Hotel_Reservations_Demo.xlsx`
