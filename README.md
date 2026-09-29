@@ -2,23 +2,47 @@
 
 <div align="center">
 
+<!-- Row 1: Deployment & Continuous Quality Assurance -->
+[![Live Platform](https://img.shields.io/badge/Live%20Platform-GitHub%20Pages-107c41?style=for-the-badge&logo=githubpages&logoColor=white)](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/)
+[![Deploy Pages](https://github.com/Sohila-Khaled-Abbas/COURSE-EXCEL-ZERO-TO-HERO/actions/workflows/deploy.yml/badge.svg)](https://github.com/Sohila-Khaled-Abbas/COURSE-EXCEL-ZERO-TO-HERO/actions/workflows/deploy.yml)
+[![CI Validation](https://github.com/Sohila-Khaled-Abbas/COURSE-EXCEL-ZERO-TO-HERO/actions/workflows/lint.yml/badge.svg)](https://github.com/Sohila-Khaled-Abbas/COURSE-EXCEL-ZERO-TO-HERO/actions/workflows/lint.yml)
+[![Integrity Test](https://img.shields.io/badge/Audit-1%2C083%20Passed%20%7C%200%20Broken%20Links-22c55e?logo=checkmarx&logoColor=white)](site/verify.js)
+[![Static Pages](https://img.shields.io/badge/Static%20Pages-212%20Generated-0ea5e9?logo=html5&logoColor=white)](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/)
+
+<br/>
+
+<!-- Row 2: Curriculum & Second Brain Architecture -->
+[![Obsidian Vault](https://img.shields.io/badge/Obsidian-Second%20Brain-8b5cf6?logo=obsidian&logoColor=white)](https://obsidian.md)
+[![Curriculum](https://img.shields.io/badge/Curriculum-9%20Modules-success?logo=bookstack&logoColor=white)](01_Course/Course%20Curriculum.md)
+[![Lessons](https://img.shields.io/badge/Lessons-38%20Interactive-107c41?logo=readme&logoColor=white)](01_Course/Lesson%20Index.md)
+[![Formula Library](https://img.shields.io/badge/Formula%20Library-65%2B%20Indexed-107c41?logo=microsoftexcel&logoColor=white)](04_Formulas/)
+[![Atomic Concepts](https://img.shields.io/badge/Atomic%20Concepts-25%20Notes-f59e0b?logo=diagramnext&logoColor=white)](03_Concepts/)
+[![Practice Exercises](https://img.shields.io/badge/Practice%20Labs-29%20Drills-ef4444?logo=codepen&logoColor=white)](05_Practice/)
+
+<br/>
+
+<!-- Row 3: Integrated Media, Datasets & Benchmarks -->
+[![YouTube Masterclass](https://img.shields.io/badge/YouTube%20Masterclass-8%20Hours-red?logo=youtube&logoColor=white)](https://youtu.be/uv1bxe2gdnU)
+[![Course Mindmap](https://img.shields.io/badge/MindMeister-Interactive%20Mindmap-00A3FF?logo=mindmeister&logoColor=white)](https://www.mindmeister.com/app/map/3782166881?t=I9gXHbkAlV)
+[![Course Materials](https://img.shields.io/badge/Google%20Drive-Course%20Materials-4285F4?logo=googledrive&logoColor=white)](https://drive.google.com/drive/folders/1FbT96Hyp9KZbmjT2UeP-CVK0gL1JPn0T)
+[![Capstone](https://img.shields.io/badge/Capstone-PwC%20Call%20Center%20(5K)-06b6d4?logo=pwc&logoColor=white)](06_Projects/Call%20Center%20Performance%20Analysis/Project%20Overview.md)
+[![Hotel Benchmark](https://img.shields.io/badge/Benchmark-Hotel%20Reservations%20(36.2K)-blue?logo=kaggle&logoColor=white)](07_Reference/Hotel%20Reservations%20Dataset%20Documentation.md)
+[![Superstore Benchmark](https://img.shields.io/badge/Benchmark-Superstore%20(9.9K)-orange?logo=tableau&logoColor=white)](07_Reference/Sample%20Superstore%20Dataset%20Documentation.md)
+
+<br/>
+
+<!-- Row 4: Standards, Author & Open Source -->
+[![Excel Version](https://img.shields.io/badge/Microsoft%20Excel-Office%20365%20%2F%202021-107c41?logo=microsoftexcel&logoColor=white)](https://www.microsoft.com/en-us/microsoft-365/excel)
+[![AI Track](https://img.shields.io/badge/AI%20Track-Twistly%20%26%20Claude-8b5cf6)](03_Concepts/AI%20for%20Data%20Analysts%20MOC.md)
+[![Privacy First](https://img.shields.io/badge/Privacy-Zero--Backend%20LocalStorage-6366f1?logo=local&logoColor=white)](site/src/app.js)
+[![Branch Protection](https://img.shields.io/badge/Branch-Protected%20Ruleset-22c55e?logo=github&logoColor=white)](https://github.com/Sohila-Khaled-Abbas/COURSE-EXCEL-ZERO-TO-HERO/rules)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Author: Sohila Khaled](https://img.shields.io/badge/Author-Sohila%20Khaled%20Abbas-0A66C2?logo=linkedin&logoColor=white)](https://linkedin.com/in/sohilakabbas)
 [![Portfolio](https://img.shields.io/badge/Portfolio-Case%20Studies-FF4B4B?logo=googlechrome&logoColor=white)](https://sohilakhaled-portfolio.lovable.app)
-[![Obsidian Vault](https://img.shields.io/badge/Obsidian-Second%20Brain-8b5cf6?logo=obsidian&logoColor=white)](https://obsidian.md)
-[![Branch Protection](https://img.shields.io/badge/Branch-Protected-22c55e?logo=github&logoColor=white)](https://github.com/Sohila-Khaled-Abbas/COURSE-EXCEL-ZERO-TO-HERO/rules)
-[![Course Mindmap](https://img.shields.io/badge/MindMeister-Live%20Mindmap-00A3FF?logo=mindmeister&logoColor=white)](https://www.mindmeister.com/app/map/3782166881?t=I9gXHbkAlV)
-[![Course Duration](https://img.shields.io/badge/Course%20Duration-8%20Hours-blue?logo=youtube&logoColor=red)](https://youtu.be/uv1bxe2gdnU)
-[![Excel Version](https://img.shields.io/badge/Microsoft%20Excel-Office%20365%20%2F%202021-107c41?logo=microsoftexcel&logoColor=white)](https://www.microsoft.com/en-us/microsoft-365/excel)
-[![Capstone Project](https://img.shields.io/badge/Capstone-PwC%20Call%20Center%20BI-06b6d4)](06_Projects/Call%20Center%20Performance%20Analysis/Project%20Overview.md)
-[![AI for Excel](https://img.shields.io/badge/AI%20Track-Twistly%20%26%20Claude-8b5cf6)](03_Concepts/AI%20for%20Data%20Analysts%20MOC.md)
-[![Benchmark Dataset](https://img.shields.io/badge/Benchmark%20Dataset-Sample%20Superstore-orange)](07_Reference/Sample%20Superstore%20Dataset%20Documentation.md)
-[![Interactive Learning Platform](https://img.shields.io/badge/Live%20Platform-GitHub%20Pages-107c41?logo=githubpages&logoColor=white)](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/)
-[![CI Validation](https://github.com/Sohila-Khaled-Abbas/COURSE-EXCEL-ZERO-TO-HERO/actions/workflows/lint.yml/badge.svg)](https://github.com/Sohila-Khaled-Abbas/COURSE-EXCEL-ZERO-TO-HERO/actions)
 
 **A production-grade Obsidian Knowledge System, Interactive Learning Web Platform, Data Analytics Curriculum, and GitHub Portfolio Repository for mastering modern Microsoft Excel, Power Query, Power Pivot, DAX, AI-Assisted Workflows, and Executive Dashboard Engineering.**
 
-[🌐 Interactive Web Platform](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/) • [Explore Dashboard](00_Home/Course%20Dashboard.md) • [Course Curriculum](01_Course/Course%20Curriculum.md) • [Live Mindmap](https://www.mindmeister.com/app/map/3782166881?t=I9gXHbkAlV) • [AI Track](03_Concepts/AI%20for%20Data%20Analysts%20MOC.md) • [Superstore Dataset](07_Reference/Sample%20Superstore%20Dataset%20Documentation.md) • [Call Center Capstone](06_Projects/Call%20Center%20Performance%20Analysis/Project%20Overview.md) • [Portfolio Case Study](10_Portfolio/Call%20Center%20Analysis%20Portfolio%20Case%20Study.md) • [Implementation Log](implementation.md) • [Contributing](CONTRIBUTING.md) • [Citation](CITATION.cff)
+[🌐 Interactive Web Platform](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/) • [🚀 Start Here Guide](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/start-here/) • [🧠 Course Mind Map](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/mindmap/) • [📁 Dataset Library](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/datasets/) • [🧰 Resources Hub](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/resources/) • [📝 Obsidian Guide](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/obsidian-guide/) • [Explore Dashboard](00_Home/Course%20Dashboard.md) • [Course Curriculum](01_Course/Course%20Curriculum.md) • [Superstore Dataset](07_Reference/Sample%20Superstore%20Dataset%20Documentation.md) • [Hotel Reservations](07_Reference/Hotel%20Reservations%20Dataset%20Documentation.md) • [Call Center Capstone](06_Projects/Call%20Center%20Performance%20Analysis/Project%20Overview.md) • [Portfolio Case Study](10_Portfolio/Call%20Center%20Analysis%20Portfolio%20Case%20Study.md) • [Implementation Log](implementation.md)
 
 </div>
 
