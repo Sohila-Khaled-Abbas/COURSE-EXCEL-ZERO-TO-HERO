@@ -76,25 +76,38 @@ mindmap
 
 ## 1. Branch 1: What is the Difference Between Tables and Ranges?
 
-In `11_Demos_and_Workbooks/04_Tables/Module_4_Demo.xlsx`, the opening sheet **`table VS range `** poses the foundational analytical question at cell `B2`:
+In `11_Demos_and_Workbooks/04_Tables/Module_4_Demo.xlsx`, the opening sheet **`Table_VS_Range `** poses the foundational analytical question at cell `B2`:
 
 > **"What is the difference between them?"**
 
-To demonstrate this empirically, the workbook displays a side-by-side comparison:
-- **Unstructured Range (`C6:E12`)**: Three columns (`Mostafa`, `Omar`, `Safaa`) containing static numeric rows (`12`, `23`, `434`).
-- **Official Excel Table (`Table2`, `G6:J12`)**: Four structured columns (`Salah `, `Nariman `, `Smmar `, `Malak`) styled with `TableStyleLight9` containing rows (`44`, `54`, `45`, `454`).
+To demonstrate this empirically, the workbook displays a side-by-side comparison with live formulas and total calculations:
+- **Left Grid (`C6:E12`)**: Three columns (`Mostafa`, `Omar`, `Safaa`). Column E (`Safaa`) uses standard relative cell coordinate formulas:
+  ```excel
+  =D7*C7
+  ```
+- **Right Grid (`Table2`, `G6:J13`)**: An official Excel Table styled with `TableStyleLight9` with headers `Salah `, `Nariman `, `Smmar `, `Malak`:
+  - **Calculated Column (`Malak`)**: Uses explicit structured reference notation:
+    ```excel
+    =Table2[[#This Row],[Smmar ]]*Table2[[#This Row],[Nariman ]]
+    ```
+    Evaluating to `2,430` down all rows automatically.
+  - **Live Total Row (Row 13)**: Demonstrates filter-aware aggregations:
+    - Cell `G13`: Label `"Total"`
+    - Cell `H13` (`Nariman `): `=SUBTOTAL(101,Table2[[Nariman ]])` $\rightarrow$ Average (`54`)
+    - Cell `I13` (`Smmar `): `=SUBTOTAL(101,Table2[[Smmar ]])` $\rightarrow$ Average (`45`)
+    - Cell `J13` (`Malak`): `=SUBTOTAL(109,Table2[Malak])` $\rightarrow$ Sum (`14,580`)
 
 ### Detailed Architectural Comparison Matrix
 
-| Dimension | Standard Range (`C6:E12`) | Excel Table / `ListObject` (`Table2`, `G6:J12`) | Analytical Impact |
+| Dimension | Standard Range (`C6:E12`) | Excel Table / `ListObject` (`Table2`, `G6:J13`) | Analytical Impact |
 | :--- | :--- | :--- | :--- |
 | **Object Model** | Loose matrix of individual coordinate cells | Unified `ListObject` container with schema metadata | Treats rows as atomic records and columns as fields |
-| **Referencing** | Static coordinates (`C7:E12`, `$A$2:$J$101`) | Dynamic structured names (`SalesTable[UnitPrice]`) | Formulas are readable and resilient to column moves |
-| **Formatting** | Manual fill, borders, and font colors | **Automatic Formatting**: banded rows, branded styles | Preserves visual hierarchy across thousands of rows |
+| **Referencing** | Static coordinates (`=D7*C7`) | Explicit structured names (`Table2[[#This Row],[Smmar ]]*Table2[[#This Row],[Nariman ]]`) | Formulas are readable and resilient to column moves |
+| **Formatting** | Manual fill, borders, and font colors | **Automatic Formatting**: banded rows, branded styles (`TableStyleLight9`) | Preserves visual hierarchy across thousands of rows |
 | **Formula Propagation** | Manual drag down with fill handle (`Ctrl + D`) | **Calculated Column**: auto-fills entire column instantly | Prevents broken models caused by incomplete drag-downs |
-| **Dynamic Range** | Static boundary; new rows below are ignored | **Auto-Expanding**: table grows automatically with new rows | Eliminates formula range maintenance when appending data |
+| **Dynamic Range** | Static boundary; row 13 requires manual borders | **Auto-Expanding**: table grows automatically with new rows | Eliminates formula range maintenance when appending data |
 | **Filtering & Sorting** | Basic AutoFilter dropdown arrows | Enhanced AutoFilter + **Interactive Slicers** | Enables dashboard-style point-and-click filtering |
-| **Total Row** | Manual `SUM` formulas risking range drift | One-click toggle (`Ctrl + Shift + T`) with `SUBTOTAL` | `SUBTOTAL(109, ...)` dynamically excludes filtered rows |
+| **Total Row** | Manual `SUM` formulas risking range drift | Built-in Total Row with `=SUBTOTAL(101, ...)` and `=SUBTOTAL(109, ...)` | Dynamic calculations exclude rows hidden by filters |
 | **Integration** | Requires manual "Change Data Source" | Seamless native link to **Pivot Tables** & **Power Query** | Simple refresh (`Alt + F5`) ingests new records |
 
 ---
@@ -162,17 +175,23 @@ The mindmap highlights five core operational benefits:
 
 ## 4. Hands-on Conversion Targets in `Module_4_Demo.xlsx`
 
-The companion workbook `Module_4_Demo.xlsx` provides realistic conversion drills:
+The companion workbook `Module_4_Demo.xlsx` provides realistic conversion drills across 5 distinct operational tabs:
 
-1. **`Sales_Data` (`A1:J101`)**:
+1. **`Table_VS_Range `**:
+   - Compares Range `C6:E12` against `Table2` (`G6:J13`).
+   - Implements live Total Row in row 13 with `=SUBTOTAL(101, ...)` for averages and `=SUBTOTAL(109, ...)` for sums.
+2. **`Sales_Data` (`A1:L101` $\rightarrow$ `SalesTable`)**:
    - 101 retail transactions across Egyptian governorates (Cairo, Giza, Alexandria, Asyut, Luxor, Sohag, Gharbia).
-   - Convert range to table: select cell `A1` $\rightarrow$ press `Ctrl + T` $\rightarrow$ rename table to `SalesTable`.
-2. **`Employee_Records` (`A1:I31`)**:
-   - 30 employee records across 6 departments with salary and performance metrics.
-   - Convert range to table: press `Ctrl + L` $\rightarrow$ rename table to `EmployeeTable`.
-3. **`Product_Inventory` (`A1:F52`)**:
+   - Expanded into a 12-column structured table featuring three production calculated columns:
+     - `OrderYear`: `=YEAR(SalesTable[[#This Row],[Date]])`
+     - `TotalPrice`: `=SalesTable[[#This Row],[Quantity]] * SalesTable[[#This Row],[UnitPrice]]`
+     - `EmailDomain`: `=RIGHT(SalesTable[[#This Row],[Email]], LEN(...) - FIND("@", ...))`
+3. **`Employee_Records` (`A1:I31` $\rightarrow$ `EmployeeTable`)**:
+   - 30 employee records across 6 corporate departments with salary and performance ratings.
+4. **`Dept_Heads` (`A1:G2` $\rightarrow$ `Table8`)**:
+   - Horizontal department head matrix mapping leadership roles.
+5. **`Product_Inventory` (`A1:F52` $\rightarrow$ `InventoryTable`)**:
    - 51 hardware product SKUs with stock levels, unit costs, and selling prices.
-   - Convert range to table: `Insert > Table` $\rightarrow$ rename table to `InventoryTable`.
 
 ---
 
@@ -210,7 +229,8 @@ The companion workbook `Module_4_Demo.xlsx` provides realistic conversion drills
 - **Practice**: [[Ex03_Excel_Tables_and_Structured_References]]
 - 📂 **Personal Workbook Demo**:
   - [`11_Demos_and_Workbooks/04_Tables/Module_4_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20%28Excel%29/11_Demos_and_Workbooks/04_Tables/Module_4_Demo.xlsx)
-    - Tab **`table VS range `**: Live drill comparing Range `C6:E12` against `Table2` (`G6:J12`).
-    - Tab **`Sales_Data`**: 101 retail transactions for `SalesTable` conversion.
-    - Tab **`Employee_Records`**: 30 HR records for `EmployeeTable` conversion.
-    - Tab **`Product_Inventory`**: 51 hardware SKUs for `InventoryTable` conversion.
+    - Tab **`Table_VS_Range `**: Live drill comparing Range `C6:E12` against `Table2` (`G6:J13`) with calculated column `Malak` and Total Row row 13 (`SUBTOTAL(101, ...)` and `SUBTOTAL(109, ...)`).
+    - Tab **`Sales_Data`**: Official `SalesTable` (101 rows $\times$ 12 columns) with calculated columns `OrderYear`, `TotalPrice`, and `EmailDomain`.
+    - Tab **`Employee_Records`**: Official `EmployeeTable` (30 HR records across 6 departments).
+    - Tab **`Dept_Heads`**: Official `Table8` mapping 6 department heads for relational lookups.
+    - Tab **`Product_Inventory`**: Official `InventoryTable` (51 hardware SKUs).

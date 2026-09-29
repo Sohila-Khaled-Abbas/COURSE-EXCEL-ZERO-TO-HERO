@@ -107,28 +107,52 @@ What happens when you write a structured reference outside of a table and drag i
 
 ---
 
+---
+
 ## 4. Real-World Formula Engineering in `Module_4_Demo.xlsx`
 
-The companion workbook provides three distinct operational environments to practice structured formulas:
+The companion workbook provides live implementations of structured references demonstrating both shorthand (`[@...]`) and fully qualified (`TableName[[#This Row], [...]]`) notation:
 
 ### A. Sales Transactions (`Sales_Data` $\rightarrow$ `SalesTable`)
 
-1. **Calculated Column: `TotalPrice`**
-   ```excel
-   =[@Quantity] * [@UnitPrice]
-   ```
-   *Result*: Evaluates 101 sales records instantly across Cairo, Giza, Alexandria, Asyut, Luxor, Sohag, and Gharbia.
+In `Module_4_Demo.xlsx`, the 101 sales orders have been converted to an official 12-column table `SalesTable` featuring three live calculated columns:
 
-2. **Calculated Column: `OrderYear`**
-   ```excel
-   =YEAR([@Date])
-   ```
+1. **Calculated Column: `OrderYear` (Column C)**:
+   - *Workbook Formula*:
+     ```excel
+     =YEAR(SalesTable[[#This Row],[Date]])
+     ```
+   - *Equivalent Shorthand*: `=YEAR([@Date])`
+   - *Evaluation*: Extracts `2024` down all 101 rows.
 
-3. **Calculated Column: `EmailDomain`**
-   ```excel
-   =RIGHT([@Email], LEN([@Email]) - FIND("@", [@Email]))
-   ```
-   Parses `"egypt.com"` cleanly across all customer records.
+2. **Calculated Column: `TotalPrice` (Column H)**:
+   - *Workbook Formula*:
+     ```excel
+     =SalesTable[[#This Row],[Quantity]] * SalesTable[[#This Row],[UnitPrice]]
+     ```
+   - *Equivalent Shorthand*: `=[@Quantity] * [@UnitPrice]`
+   - *Evaluation*: Evaluates line revenues (e.g., `9,791.34` EGP, `2,443.93` EGP).
+
+3. **Calculated Column: `EmailDomain` (Column K)**:
+   - *Workbook Formula*:
+     ```excel
+     =RIGHT(SalesTable[[#This Row],[Email]], LEN(SalesTable[[#This Row],[Email]]) - FIND("@", SalesTable[[#This Row],[Email]]))
+     ```
+   - *Equivalent Shorthand*: `=RIGHT([@Email], LEN([@Email]) - FIND("@", [@Email]))`
+   - *Evaluation*: Dynamically parses domain `"egypt.com"` across all 101 customer profiles.
+
+---
+
+### B. Table vs Range Multiplication (`Table_VS_Range ` $\rightarrow$ `Table2`)
+
+In the opening demonstration tab `Table_VS_Range `:
+- **Calculated Column: `Malak` (Column J)**:
+  ```excel
+  =Table2[[#This Row],[Smmar ]]*Table2[[#This Row],[Nariman ]]
+  ```
+  Evaluates $45 \times 54 = 2,430$ down rows 7 to 12.
+- **Contrast with Range**:
+  In column E (`Safaa`) of the unstructured grid, the formula relies on static coordinates: `=D7*C7`.
 
 ---
 

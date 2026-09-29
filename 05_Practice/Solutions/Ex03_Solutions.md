@@ -25,17 +25,22 @@ updated: 2026-09-30
 ## Level 1 Solution: Recall & Conversion (Range vs. Table)
 
 ### 1. The Range vs Table Behavior Drill
-- **Action**: In sheet `table VS range `, typing `100` into `C13` leaves the cell isolated without borders or formula awareness.
-- **Action**: In `G13`, typing `100` automatically triggers Excel's `ListObject` expansion engine:
-  - The table boundary automatically expands from `G6:J12` to `G6:J13`.
-  - The alternating `TableStyleLight9` banding format immediately styles row 13.
-  - Any column formulas automatically populate down to row 13.
+- **Action**: In sheet `Table_VS_Range `, the workbook contrasts range `C6:E12` against `Table2` (`G6:J13`).
+- **Calculated Formula**: In `Table2`, column `Malak` uses the explicit formula:
+  ```excel
+  =Table2[[#This Row],[Smmar ]]*Table2[[#This Row],[Nariman ]]
+  ```
+- **Live Total Row (Row 13)**: Demonstrates filter-aware subtotals:
+  - `H13`: `=SUBTOTAL(101,Table2[[Nariman ]])` $\rightarrow$ `54`
+  - `I13`: `=SUBTOTAL(101,Table2[[Smmar ]])` $\rightarrow$ `45`
+  - `J13`: `=SUBTOTAL(109,Table2[Malak])` $\rightarrow$ `14,580`
 
-### 2. Data Cleaning & Table Creation (`Sales_Data`)
-- **Pre-conversion Cleaning**: Row 102 contains detached text `  Mohamed El-Sayed  ` without an OrderID. Right-click row header 102 $\rightarrow$ select **Delete** to ensure the table boundary encompasses strictly `A1:J101`.
-- **Keyboard Shortcut**: Click anywhere in `A1:J101` and press **`Ctrl + T`** (or **`Ctrl + L`**).
-- **Confirm Dialog**: Ensure *"My table has headers"* is checked. Click **OK**.
-- **Renaming**: Go to **Table Design > Table Name** (far left) $\rightarrow$ rename to **`SalesTable`**.
+### 2. Table Creation & Calculated Columns (`Sales_Data`)
+- **Structure**: The 101 records are converted to **`SalesTable`** (`A1:L101`, 12 columns).
+- **Production Formulas**:
+  - `OrderYear`: `=YEAR(SalesTable[[#This Row],[Date]])`
+  - `TotalPrice`: `=SalesTable[[#This Row],[Quantity]] * SalesTable[[#This Row],[UnitPrice]]`
+  - `EmailDomain`: `=RIGHT(SalesTable[[#This Row],[Email]], LEN(SalesTable[[#This Row],[Email]]) - FIND("@", SalesTable[[#This Row],[Email]]))`
 
 ---
 

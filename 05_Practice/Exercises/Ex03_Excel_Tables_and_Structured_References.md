@@ -26,7 +26,7 @@ updated: 2026-09-30
 
 ## 📂 Source Lab Workbook
 - **Primary File**: [`11_Demos_and_Workbooks/04_Tables/Module_4_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20%28Excel%29/11_Demos_and_Workbooks/04_Tables/Module_4_Demo.xlsx)
-- **Worksheet Tabs**: `table VS range `, `Sales_Data`, `Employee_Records`, `Dept_Heads`, `Sheet1`, `Product_Inventory`.
+- **Worksheet Tabs**: `Table_VS_Range `, `Sales_Data`, `Employee_Records`, `Dept_Heads`, `Product_Inventory`.
 
 ---
 
@@ -34,15 +34,13 @@ updated: 2026-09-30
 
 ### Level 1: Recall & Conversion (Range vs. Table)
 1. **The Range vs Table Drill**:
-   - Open sheet **`table VS range `**.
-   - In cell `C13` (below the unstructured range `C6:E12`), type `100`.
-   - In cell `G13` (below `Table2` `G6:J12`), type `100`.
-   - **Verification**: Observe how `Table2` auto-expands its banded styling and boundary handle to incorporate row 13, while `C13` remains isolated.
-2. **Sales Data Hygiene & Conversion**:
+   - Open sheet **`Table_VS_Range `**.
+   - Compare unstructured range `C6:E12` against `Table2` (`G6:J13`).
+   - Examine calculated column `Malak` using `=Table2[[#This Row],[Smmar ]]*Table2[[#This Row],[Nariman ]]`.
+   - Inspect the live Total Row in row 13 with `=SUBTOTAL(101, ...)` and `=SUBTOTAL(109, ...)`.
+2. **Sales Data Conversion**:
    - Open sheet **`Sales_Data`**.
-   - Scroll to row 102. Notice cell `H102` contains orphan dirty text (`'  Mohamed El-Sayed  '`) without an OrderID. Delete row 102.
-   - Click inside `A1:J101`. Press **`Ctrl + T`** (or **`Ctrl + L`**). Ensure *"My table has headers"* is checked.
-   - Rename the table to **`SalesTable`** in **Table Design > Table Name**.
+   - The sheet contains 101 clean records (`A1:L101`) converted to **`SalesTable`** across 12 structured fields including `OrderYear`, `TotalPrice`, and `EmailDomain`.
 
 > [!tip]- Click to Expand Level 1 Hint & Solution
 > - **Shortcut**: Pressing `Ctrl + T` opens the Create Table dialog immediately.
