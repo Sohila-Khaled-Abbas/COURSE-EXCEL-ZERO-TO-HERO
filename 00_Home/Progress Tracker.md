@@ -47,16 +47,16 @@ updated: 2026-09-28
 - [x] 18. Structured Referencing Syntax (`[@Column]`, `Table[Column]`) ✅ 2026-09-30
 - [x] 19. Auto-Expansion, Total Row, & Slicers ✅ 2026-09-30
 
-### Module 5: Charts & Visualization
-- [ ] 20. Preattentive Attributes & Chart Selection Matrix
-- [ ] 21. Eliminating Chart Junk & Dynamic Titles
-- [ ] 22. Dashboard Layout Grid & Visual Hierarchy
+### Module 5: Pivot Tables & Multi-Dimensional Aggregation
+- [x] 20. Pivot Table Architecture (Rows, Columns, Values, Filters) ✅ 2026-09-30
+- [x] 21. Show Values As (`% of Total`, `Running Total`, `Difference From`) ✅ 2026-09-30
+- [x] 22. Date & Number Grouping, Calculated Fields, & List Formulas ✅ 2026-09-30
+- [x] 23. Slicers, Timelines, Report Connections & Report Filter Pages ✅ 2026-09-30
 
-### Module 6: Pivot Tables
-- [ ] 23. Pivot Table Architecture (Rows, Columns, Values, Filters)
-- [ ] 24. Show Values As (`% of Total`, `Running Total`, `Difference`)
-- [ ] 25. Date & Number Grouping, Calculated Fields
-- [ ] 26. Slicers, Timelines, & Report Connections
+### Module 6: Data Analysis Charts & Visual Hierarchy
+- [ ] 24. Preattentive Attributes & Chart Selection Matrix
+- [ ] 25. Eliminating Chart Junk & Dynamic Titles
+- [ ] 26. Dashboard Layout Grid & Visual Hierarchy
 
 ### Module 7: Data Quality, Cleaning & Enterprise Systems
 - [ ] 27. Six Dimensions of Data Quality
