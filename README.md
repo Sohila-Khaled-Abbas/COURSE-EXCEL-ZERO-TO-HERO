@@ -323,21 +323,23 @@ The knowledge repository maps 1-to-1 to the full **8-hour YouTube masterclass**:
 
 ## ⚡ Quick Navigation Links
 
-| Hub | Description | Direct Link |
-| :--- | :--- | :--- |
-| 🎛️ **Command Center** | Dataview queries, progress tracking, and active review queue | [00_Home/Course Dashboard](00_Home/Course%20Dashboard.md) |
-| 📋 **Full Curriculum** | 9-module detailed syllabus and lab cross-references | [01_Course/Course Curriculum](01_Course/Course%20Curriculum.md) |
-| 🗺️ **Live Mindmap** | Interactive full-course mindmap on MindMeister | [MindMeister Course Map](https://www.mindmeister.com/app/map/3782166881?t=I9gXHbkAlV) |
-| 🤖 **AI for Data Analysts** | Master MOC for AI tools, prompt library, verification & labs | [03_Concepts/AI for Data Analysts MOC](03_Concepts/AI%20for%20Data%20Analysts%20MOC.md) |
-| 🚀 **Supplementary Path** | 9-phase pedagogical progression & skill matrix | [01_Course/Supplementary Learning Path](01_Course/Supplementary%20Learning%20Path.md) |
-| 📞 **PwC Capstone** | End-to-end 5,000-call operational intelligence case study | [06_Projects/Call Center Project Overview](06_Projects/Call%20Center%20Performance%20Analysis/Project%20Overview.md) |
-| 💼 **Portfolio Case Study** | Executive case study formatted for recruiters and hiring managers | [10_Portfolio/Case Study](10_Portfolio/Call%20Center%20Analysis%20Portfolio%20Case%20Study.md) |
-| 🏗️ **Implementation Log** | Comprehensive engineering log and step-by-step roadmap | [implementation.md](implementation.md) |
-| 📁 **Student Workbooks** | Personal Excel workbooks (.xlsx) and lab implementations | [11_Demos_and_Workbooks](11_Demos_and_Workbooks/README.md) |
-| 📦 **Superstore Dataset** | 9,994-row benchmark data dictionary, statistics, & mirrors | [07_Reference/Superstore](07_Reference/Sample%20Superstore%20Dataset%20Documentation.md) |
-| 🏨 **Hotel Reservations** | 36,275-row benchmark data dictionary, Kaggle & Hugging Face mirrors | [07_Reference/Hotel Reservations](07_Reference/Hotel%20Reservations%20Dataset%20Documentation.md) |
-| 📖 **Function Reference** | Comprehensive Excel & DAX function reference manual | [07_Reference/Function Reference](07_Reference/Function%20Reference.md) |
-| 🗂️ **Flashcard Deck** | Active-recall flashcards for retention and interview prep | [08_Revision/Flashcards](08_Revision/Flashcards.md) |
+| Hub | Description | Web Platform | Vault Note |
+| :--- | :--- | :---: | :---: |
+| 🚀 **Start Here** | 8-step learning loop, audience, prerequisites, & study strategy | [Web Guide](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/start-here/) | [00_Home/Home](00_Home/Home.md) |
+| 🎛️ **Command Center** | Interactive progress gauge, module progress, & resume CTA | [Web Dashboard](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/) | [00_Home/Course Dashboard](00_Home/Course%20Dashboard.md) |
+| 📋 **Full Curriculum** | 9-module syllabus, lecture notes, & exercises | [Web Curriculum](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/curriculum/) | [01_Course/Course Curriculum](01_Course/Course%20Curriculum.md) |
+| 🧠 **Course Mind Map** | Live MindMeister embed & high-res architectural diagrams | [Web Mind Map](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/mindmap/) | [00_Home/Course Map](00_Home/Course%20Map.md) |
+| 📁 **Dataset Library** | Superstore, Hotel Reservations, & Call Center catalog | [Web Datasets](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/datasets/) | [07_Reference/Datasets](07_Reference/Sample%20Superstore%20Dataset%20Documentation.md) |
+| 🎯 **Practice Center** | 29 hands-on labs, guided exercises, & solution walkthroughs | [Web Practice](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/practice/) | [05_Practice/Exercises](05_Practice/Exercises/Ex01_Data_Management_and_Formatting.md) |
+| ⚡ **Formula Library** | 65+ indexed formulas across 7 categories with copy buttons | [Web Formulas](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/formulas/) | [04_Formulas](04_Formulas/Lookup/XLOOKUP.md) |
+| 🗂️ **Active Recall Cram** | 3D flip flashcards, keyboard controls, & spaced repetition | [Web Flashcards](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/revision/) | [08_Revision/Flashcards](08_Revision/Flashcards.md) |
+| 🌐 **Resources Hub** | Unified access to Video, MindMeister, Drive, GitHub & Guides | [Web Resources](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/resources/) | [01_Course/Gemini Notebook](01_Course/Gemini%20Notebook%20Resource%20Index.md) |
+| 📝 **Obsidian Guide** | Vault authoring guidelines, frontmatter standards, & CI/CD | [Web Guide](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/obsidian-guide/) | [.agents/rules](.agents/rules/learning-vault-rules.md) |
+| 🤖 **AI for Data Analysts** | Master MOC for AI tools, prompt library, verification & labs | [Web Reference](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/reference/) | [03_Concepts/AI MOC](03_Concepts/AI%20for%20Data%20Analysts%20MOC.md) |
+| 📞 **PwC Capstone** | End-to-end 5,000-call operational intelligence case study | [Web Project](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/projects/) | [06_Projects/Call Center](06_Projects/Call%20Center%20Performance%20Analysis/Project%20Overview.md) |
+| 💼 **Portfolio Case Study** | Executive case study formatted for recruiters and hiring managers | [Web Portfolio](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/portfolio/) | [10_Portfolio/Case Study](10_Portfolio/Call%20Center%20Analysis%20Portfolio%20Case%20Study.md) |
+| 📁 **Student Workbooks** | Personal Excel workbooks (.xlsx) and lab implementations | [Web Catalog](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/datasets/) | [11_Demos_and_Workbooks](11_Demos_and_Workbooks/README.md) |
+| 🏗️ **Implementation Log** | Comprehensive engineering log and step-by-step roadmap | — | [implementation.md](implementation.md) |
 
 ---
 
