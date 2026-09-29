@@ -112,8 +112,8 @@ flowchart LR
     end
 
     RawData --> PivotEngine
-    PivotEngine -->|Drag & Drop| AngleA
-    PivotEngine -->|Pivot Axes| AngleB
+    PivotEngine -->|"Drag & Drop"| AngleA
+    PivotEngine -->|"Pivot Axes"| AngleB
 ```
 
 ---
@@ -126,16 +126,16 @@ Before creating a Pivot Table, always verify the **Data Cleaning & Structure Che
 
 ```mermaid
 flowchart TD
-    Raw[Raw Spreadsheet Data] --> C1{1. Are there blank rows or columns?}
-    C1 -- Yes --> Fix1[Delete blank rows/cols to avoid broken blocks]
-    C1 -- No --> C2{2. Are headers clear and on Row 1?}
-    C2 -- No --> Fix2[Ensure single-row unique descriptive headers]
-    C2 -- Yes --> C3{3. Does each column have strictly 1 data type?}
-    C3 -- No --> Fix3[Coerce mixed text/numbers into uniform types]
-    C3 -- Yes --> C4{4. Are there any merged cells?}
-    C4 -- Yes --> Fix4[Unmerge all cells and fill down parent values]
-    C4 -- No --> Table[Convert to Official Excel Table: Ctrl + T]
-    Table --> PT[Create Pivot Table: Alt + N + V]
+    Raw["Raw Spreadsheet Data"] --> C1{"1. Are there blank rows or columns?"}
+    C1 -- Yes --> Fix1["Delete blank rows/cols to avoid broken blocks"]
+    C1 -- No --> C2{"2. Are headers clear and on Row 1?"}
+    C2 -- No --> Fix2["Ensure single-row unique descriptive headers"]
+    C2 -- Yes --> C3{"3. Does each column have strictly 1 data type?"}
+    C3 -- No --> Fix3["Coerce mixed text/numbers into uniform types"]
+    C3 -- Yes --> C4{"4. Are there any merged cells?"}
+    C4 -- Yes --> Fix4["Unmerge all cells and fill down parent values"]
+    C4 -- No --> Table["Convert to Official Excel Table: Ctrl + T"]
+    Table --> PT["Create Pivot Table: Alt + N + V"]
 ```
 
 ### The 4 Data Preparation Rules
@@ -190,21 +190,21 @@ When you click inside any Pivot Table, two contextual tabs appear on the Excel R
 
 ```mermaid
 flowchart TD
-    PT[Active Pivot Table Cell] --> Tabs[Contextual Ribbon Tabs]
-    Tabs --> Analyze[PivotTable Analyze Tab]
-    Tabs --> Design[Design Tab]
+    PT["Active Pivot Table Cell"] --> Tabs["Contextual Ribbon Tabs"]
+    Tabs --> Analyze["PivotTable Analyze Tab"]
+    Tabs --> Design["Design Tab"]
 
-    Analyze --> A1[PivotTable Name & Options]
-    Analyze --> A2[Active Field & Field Settings]
-    Analyze --> A3[Insert Slicer & Insert Timeline]
-    Analyze --> A4[Refresh & Change Data Source]
-    Analyze --> A5[Fields, Items & Sets: Calculated Fields]
+    Analyze --> A1["PivotTable Name & Options"]
+    Analyze --> A2["Active Field & Field Settings"]
+    Analyze --> A3["Insert Slicer & Insert Timeline"]
+    Analyze --> A4["Refresh & Change Data Source"]
+    Analyze --> A5["Fields, Items & Sets: Calculated Fields"]
 
-    Design --> D1[Subtotals: Bottom vs Top vs Do Not Show]
-    Design --> D2[Grand Totals: On/Off for Rows & Columns]
-    Design --> D3[Report Layout: Compact vs Outline vs Tabular]
-    Design --> D4[Blank Rows: Insert/Remove Blank Line]
-    Design --> D5[PivotTable Style Gallery: Light, Medium, Dark]
+    Design --> D1["Subtotals: Bottom vs Top vs Do Not Show"]
+    Design --> D2["Grand Totals: On/Off for Rows & Columns"]
+    Design --> D3["Report Layout: Compact vs Outline vs Tabular"]
+    Design --> D4["Blank Rows: Insert/Remove Blank Line"]
+    Design --> D5["PivotTable Style Gallery: Light, Medium, Dark"]
 ```
 
 ### The 4 Pivot Table Drop Zones (Quadrants)
