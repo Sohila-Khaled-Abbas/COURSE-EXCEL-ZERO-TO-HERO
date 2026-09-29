@@ -43,9 +43,9 @@ updated: 2026-09-28
 - [x] 16. Data Analysis Life Cycle (DALC & CRISP-DM Frameworks) ✅ 2026-09-29
 
 ### Module 4: Excel Tables (ListObjects)
-- [ ] 17. Range vs Table Architecture
-- [ ] 18. Structured Referencing Syntax (`[@Column]`, `Table[Column]`)
-- [ ] 19. Auto-Expansion, Total Row, & Slicers
+- [x] 17. Range vs Table Architecture ✅ 2026-09-30
+- [x] 18. Structured Referencing Syntax (`[@Column]`, `Table[Column]`) ✅ 2026-09-30
+- [x] 19. Auto-Expansion, Total Row, & Slicers ✅ 2026-09-30
 
 ### Module 5: Charts & Visualization
 - [ ] 20. Preattentive Attributes & Chart Selection Matrix

@@ -100,12 +100,14 @@ flowchart TD
 
 ### Chapter 4: Excel Tables
 - 🎥 **Video Timestamp**: [2:35:55](https://www.youtube.com/watch?v=uv1bxe2gdnU&t=9355s) | **Duration**: `22m 33s`
-- 🎯 **Core Competencies**: Range vs Table (`Ctrl + T`), Structured Referencing (`[@Column]`, `Table[[#Data]]`), Auto-expansion, Total Row, Slicer integration, Dynamic Named Ranges
-- 📁 **Associated Lab Files**: `Module 4 Data_Set.xlsx`, `Module 4 Tables.pptx`
+- 🎯 **Core Competencies**: Range vs Table (`Ctrl + T` / `Ctrl + L`), 4-Tables Mindmap, Structured Referencing (`[@Column]`, `Table[[#Data]]`), Auto-expansion, Total Row (`SUBTOTAL 109`), Slicer Interactivity, Pivot Table Integration (`Sheet1`), Power Query Ingestion, "It's Just a Dashboard!" Micro-Dashboard Architecture
+- 📁 **Associated Lab Files**: [`Module_4_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20%28Excel%29/11_Demos_and_Workbooks/04_Tables/Module_4_Demo.xlsx) (6 operational sheets), `Module 4 Data_Set.xlsx`, `Module 4 Tables.pptx`, `assets/module_4_tables_mindmap.png`
 - 📝 **Dedicated Vault Notes**:
-  - [[01_Excel_Tables_Architecture]]: Lesson 4.1: ListObject Architecture & Dynamic Expansion
-  - [[02_Structured_References]]: Lesson 4.2: Structured Reference Syntax ([@Column])
-  - [[03_Table_Features_and_Best_Practices]]: Lesson 4.3: Table Best Practices, Slicers & Calculated Columns
+  - [[01_Excel_Tables_Architecture]]: Lesson 4.1: Range vs Table Architecture & Creation (Mindmap Grounding)
+  - [[02_Structured_References]]: Lesson 4.2: Structured References & Formula Engineering
+  - [[03_Table_Features_and_Best_Practices]]: Lesson 4.3: Table Tools, Features & "It's Just a Dashboard!"
+  - [[Ex03_Excel_Tables_and_Structured_References]]: Practice Exercise (5 Mastery Levels) & [[Ex03_Solutions]]
+  - [[Module 4 Dataset Documentation]]: Full 6-sheet schema & data dictionary
 
 ### Chapter 5: Pivot Tables
 - 🎥 **Video Timestamp**: [2:58:28](https://www.youtube.com/watch?v=uv1bxe2gdnU&t=10708s) | **Duration**: `28m 30s`

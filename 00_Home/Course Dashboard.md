@@ -30,9 +30,10 @@ updated: 2026-09-28
 | **Practice Sets** | 7 Exercises + 10 AI Labs | Ready | Levels 1 to 5 with hidden solutions |
 | **Analytics Projects** | 2 Projects | Documented | Hotel Reservation + PwC Call Center |
 | **Portfolio Artifact** | 1 Recruiter Case Study | Ready | [[Call Center Analysis Portfolio Case Study]] |
-| **Personal Workbooks** | 4 Active Demos | In Progress | [[11_Demos_and_Workbooks/README\|Mod 2 (Superstore) + Mod 3 (3 Demos: Ref + Formulas 1 & 2)]] |
+| **Personal Workbooks** | 5 Active Demos | In Progress | [[11_Demos_and_Workbooks/README\|Mod 2 (Superstore) + Mod 3 (3 Demos: Ref + Formulas 1 & 2) + Mod 4 (Tables Demo)]] |
 | **Retail Benchmark** | 9,994 Rows (19 Cols) | Verified | [[Sample Superstore Dataset Documentation|Sample Superstore]] |
 | **Hospitality Benchmark** | 36,275 Rows (19 Cols) | Verified | [[Hotel Reservations Dataset Documentation|Hotel Reservations]] |
+| **Tables Operational Benchmark** | 101 Sales, 30 Staff, 51 SKUs | Verified | [[Module 4 Dataset Documentation|Module 4 Tables & Operational Models]] |
 
 ---
 
@@ -52,7 +53,7 @@ SORT file.name ASC
 | **Ch 1** | **Excel Introduction & GUI** | [0:00](https://www.youtube.com/watch?v=uv1bxe2gdnU) | [[01_Excel_Interface_and_GUI]] | Interface, Workbook Architecture |
 | **Ch 2** | **Data Management** | [16:05](https://www.youtube.com/watch?v=uv1bxe2gdnU&t=965s) | [[01_Data_Types_and_Formatting]] | Validation, Formatting, Flash Fill, File Formats (`XLSX`, `XLSM`, `XLSB`, `CSV`) |
 | **Ch 3** | **Excel Formulas & Functions** | [1:38:56](https://www.youtube.com/watch?v=uv1bxe2gdnU&t=5936s) | [[01_Formula_Basics_and_Cell_Referencing]] | Referencing, Logic, Lookups, Dates |
-| **Ch 4** | **Excel Tables** | [2:35:55](https://www.youtube.com/watch?v=uv1bxe2gdnU&t=9355s) | [[01_Excel_Tables_Architecture]] | Structured References, Auto-expansion |
+| **Ch 4** | **Excel Tables** | [2:35:55](https://www.youtube.com/watch?v=uv1bxe2gdnU&t=9355s) | [[01_Excel_Tables_Architecture]] | ListObjects, Mindmap, Structured References, Dynamic Slicers, "It's Just a Dashboard!" |
 | **Ch 5** | **Pivot Tables** | [2:58:28](https://www.youtube.com/watch?v=uv1bxe2gdnU&t=10708s) | [[01_Pivot_Table_Foundations]] | Aggregation, Slicers, Show Values As |
 | **Ch 6** | **Data Analysis Charts** | [3:26:58](https://www.youtube.com/watch?v=uv1bxe2gdnU&t=12418s&pp=0gcJCWMAwfN6Pr3D) | [[01_Visual_Analytics_and_Chart_Selection]] | Visual Hierarchy, Chart Selection |
 | **Ch 7** | **Importing & Data Cleaning** | [3:54:03](https://www.youtube.com/watch?v=uv1bxe2gdnU&t=14043s) | [[01_Data_Quality_Dimensions_and_Audit]] | 6 Dimensions of Quality, ERP/CRM |

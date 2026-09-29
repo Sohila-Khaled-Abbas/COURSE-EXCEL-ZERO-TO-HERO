@@ -56,6 +56,12 @@ try {
             Start-Sleep -Seconds $DebounceSeconds
             $global:pendingChanges = $false
 
+            # Rebuild site docs if site generator exists
+            if (Test-Path "$RepoRoot\site\build.js") {
+                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [BUILD] Synchronizing documentation site & search index..." -ForegroundColor Cyan
+                node "$RepoRoot\site\build.js" 2>&1 | Out-Null
+            }
+
             Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [SYNC] Staging updates to Git..." -ForegroundColor Cyan
             git add -A -- ":(exclude)09_Source_Materials" ":(exclude)assets/*.mp4" ":(exclude).obsidian/workspace*" ":(exclude)*/node_modules/*" ":(exclude)*/dist/*" ":(exclude)*.cache*"
 

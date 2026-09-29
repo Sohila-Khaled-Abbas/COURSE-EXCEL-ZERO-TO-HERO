@@ -24,6 +24,7 @@ updated: 2026-09-28
 | **Aggregation** | `AVERAGEIFS`| Average of values matching conditions | Number | Intermediate | [[AVERAGEIFS]] |
 | **Aggregation** | `MIN` | Minimum numeric value | Number | Beginner | [[MIN]] |
 | **Aggregation** | `MAX` | Maximum numeric value | Number | Beginner | [[MAX]] |
+| **Aggregation** | `SUBTOTAL` | Filter-aware subtotal in lists & tables (`109`, `101`) | Number | Intermediate | [[SUBTOTAL]] |
 | **Arithmetic** | `PRODUCT` | Multiplies all numeric arguments | Number | Beginner | [[PRODUCT]] |
 | **Arithmetic** | `QUOTIENT` | Returns integer portion of a division | Integer | Beginner | [[QUOTIENT]] |
 | **Arithmetic** | `MOD` | Remainder of division (modulo) | Number | Beginner | [[MOD]] |

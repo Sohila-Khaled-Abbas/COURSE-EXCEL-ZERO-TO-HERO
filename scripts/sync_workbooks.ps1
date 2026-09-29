@@ -14,13 +14,19 @@ Write-Host "==========================================================" -Foregro
 Write-Host " 📦 One-Click Workbook GitHub Synchronizer" -ForegroundColor Green
 Write-Host "==========================================================" -ForegroundColor Cyan
 
-# Stage workbooks folder
-git add "11_Demos_and_Workbooks"
+# Rebuild site docs if generator exists
+if (Test-Path "$RepoRoot\site\build.js") {
+    Write-Host "🔨 Rebuilding documentation site & search index..." -ForegroundColor Cyan
+    node "$RepoRoot\site\build.js" 2>&1 | Out-Null
+}
+
+# Stage workbooks folder and documentation
+git add -A -- ":(exclude)09_Source_Materials" ":(exclude)assets/*.mp4" ":(exclude).obsidian/workspace*" ":(exclude)*/node_modules/*" ":(exclude)*/dist/*" ":(exclude)*.cache*"
 
 # Check diff
-$staged = git diff --cached --name-only "11_Demos_and_Workbooks"
+$staged = git diff --cached --name-only
 if ($staged) {
-    Write-Host "📝 Staged the following workbooks:" -ForegroundColor Yellow
+    Write-Host "📝 Staged the following updates:" -ForegroundColor Yellow
     $staged | ForEach-Object { Write-Host "   - $_" -ForegroundColor White }
     
     $commitMsg = "feat(workbooks): manual sync [$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')]"
