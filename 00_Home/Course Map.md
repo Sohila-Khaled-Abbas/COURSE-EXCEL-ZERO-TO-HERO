@@ -88,8 +88,8 @@ graph TD
 - **[[01_Data_Types_and_Formatting|Module 2: Data Management, Types, & Shortcuts]]**
 - **[[01_Formula_Basics_and_Cell_Referencing|Module 3: Formulas, Functions, & Referencing]]**
 - **[[01_Excel_Tables_Architecture|Module 4: Excel Tables & Structured References]]**
-- **[[01_Visual_Analytics_and_Chart_Selection|Module 5: Charts & Visualization Best Practices]]**
-- **[[01_Pivot_Table_Foundations|Module 6: Pivot Tables & Slicer Interactivity]]**
+- **[[01_Pivot_Table_Foundations|Module 5: Pivot Tables & Multi-Dimensional Aggregation]]**
+- **[[01_Visual_Analytics_and_Chart_Selection|Module 6: Data Analysis Charts & Visual Hierarchy]]**
 - **[[01_Data_Quality_Dimensions_and_Audit|Module 7: Data Quality, Cleaning & Enterprise Sources]]**
 - **[[01_Power_Query_Fundamentals_and_ETL|Module 8: Power Query, Data Pipelines & M Language]]**
 - **[[01_Dimensional_Modeling_Principles|Module 9: Data Modeling, Power Pivot & DAX]]**
