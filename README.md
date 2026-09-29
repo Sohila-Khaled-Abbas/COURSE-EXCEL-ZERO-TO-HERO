@@ -131,6 +131,7 @@ COURSE-EXCEL-ZERO-TO-HERO/
 │   ├── rules/learning-vault-rules.md       # Knowledge governance & frontmatter constraints
 │   └── skills/                             # Custom agent skills (lesson, concept, exercise, dashboard)
 ├── .github/                                # Continuous Integration, Workflows & Governance
+│   ├── workflows/deploy.yml                # Automated GitHub Pages static build & deployment
 │   ├── workflows/lint.yml                  # Markdown link integrity & schema verification
 │   ├── ISSUE_TEMPLATE/                     # Standardized issue templates
 │   ├── PULL_REQUEST_TEMPLATE.md            # Pull request checklist
@@ -146,6 +147,14 @@ COURSE-EXCEL-ZERO-TO-HERO/
 │   ├── enterprise-architecture-mindmap.png # Enterprise analytics topology & BI integration
 │   ├── excel-interface-blueprint.pdf       # Architectural manual covering ribbon & formula bar
 │   └── getting-started-with-excel-navigation-and-setup.mp4 # Video setup walkthrough
+├── site/                                   # Interactive Learning Web Platform (SSG Engine)
+│   ├── build.js                            # Static Site Generator (Vault Markdown to 212 HTML pages)
+│   ├── verify.js                           # Test & link integrity audit suite (1,083+ checks)
+│   ├── package.json                        # Node.js dependencies & build scripts
+│   ├── README.md                           # Web platform architecture & developer guide
+│   └── src/                                # Frontend application source code
+│       ├── app.js                          # Client-side reactivity, search, flashcards & planner
+│       └── styles.css                      # Spreadsheet-inspired analytics design system
 ├── implementation.md                       # Comprehensive engineering log & step-by-step roadmap
 ├── 00_Home/                                # Central Command & Navigation
 │   ├── Home.md                             # Welcome orientation & quick jump portal
