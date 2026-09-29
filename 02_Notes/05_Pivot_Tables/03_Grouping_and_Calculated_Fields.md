@@ -36,12 +36,12 @@ Raw datasets frequently contain granular date-timestamps or continuous currency 
 ```mermaid
 flowchart TD
     subgraph DateGrouping ["A. Date Grouping Engine"]
-        RawDate["216 Discrete Dates<br/>(e.g. 2019-07-15)"] -->|Right-Click > Group| DateDialog["Group Dialog<br/>[X] Years  [X] Quarters  [X] Months"]
+        RawDate["216 Discrete Dates<br/>(e.g. 2019-07-15)"] -->|"Right-Click > Group"| DateDialog["Group Dialog<br/>[X] Years  [X] Quarters  [X] Months"]
         DateDialog --> Hier["Multi-Tier Hierarchy<br/>2019 > Q3 > July"]
     end
 
     subgraph NumericGrouping ["B. Numeric Binning Engine"]
-        RawNum["Continuous Amounts<br/>($617 to $9,062)"] -->|Right-Click > Group| NumDialog["Group Dialog<br/>Start: 0, End: 10,000, By: 2,500"]
+        RawNum["Continuous Amounts<br/>($617 to $9,062)"] -->|"Right-Click > Group"| NumDialog["Group Dialog<br/>Start: 0, End: 10,000, By: 2,500"]
         NumDialog --> Bins["Categorical Distribution Buckets<br/>0–2,500 | 2,500–5,000 | 5,000–7,500 | 7,500–10,000"]
     end
 ```
