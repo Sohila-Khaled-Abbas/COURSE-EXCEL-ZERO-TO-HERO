@@ -87,6 +87,23 @@ Instead of writing complex `IFS()` formulas to classify customer orders by size,
 └────────────────────┴─────────────────┴────────────────────┘
 ```
 
+> [!CAUTION] Troubleshooting: Why is "Group..." Greyed Out or Throwing "Cannot group that selection"?
+> If you right-click on `Amount` in your Pivot Table and **Group...** is greyed out or displays an error, check these 4 common root causes:
+> 
+> 1. **The Data Model Trap (Most Common)**:
+>    - When creating the Pivot Table (*Insert > PivotTable*), if you checked the box **"Add this data to the Data Model"**, Excel builds an OLAP Pivot Table powered by Power Pivot.
+>    - **Microsoft Excel strictly disables native Numeric Binning and ad-hoc Grouping in Data Model / OLAP Pivot Tables**.
+>    - **Fix**: Re-create the Pivot Table from `Table2` and make sure **"Add this data to the Data Model" is UNCHECKED** (Standard Pivot Table).
+> 2. **Right-Clicking the Wrong Column**:
+>    - You must right-click a cell in the **Row Labels** column (`Amount`, e.g., cell `F4` containing `107`).
+>    - If you right-click in the **Values** column (`Count of Order ID`, Column G), Excel will only offer value calculation options (*Summarize Values By*, *Show Values As*), not grouping.
+> 3. **Multiple Cells Selected**:
+>    - Click on **ONE single cell** in the `Amount` rows before right-clicking.
+>    - If you highlight multiple cells (e.g., `F4:F10`), Excel assumes you want to manually group distinct items together (like grouping text names) rather than binning a continuous numeric range, which prevents the numeric dialog (`Starting at`, `Ending at`, `By`) from opening.
+> 4. **Blanks or Text Characters in the Column**:
+>    - If the source data contains even a single blank cell, text label, or space in the numeric column, Excel considers the entire column non-numeric and blocks numeric grouping. Ensure your source table is clean.
+
+
 ---
 
 ## 2. Calculated Fields & Calculated Items
