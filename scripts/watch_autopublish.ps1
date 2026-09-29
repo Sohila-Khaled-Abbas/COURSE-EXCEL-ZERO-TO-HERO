@@ -27,7 +27,7 @@ $global:pendingChanges = $false
 $global:lastModifiedFile = ""
 
 # Filter regex for ignored paths/files
-$ignorePattern = '(^|[\\/])\.git([\\/]|$)|(\.obsidian[\\/](workspace|cache)|09_Source_Materials|assets[\\/].*\.mp4|~$|\.tmp$|\.bak$)'
+$ignorePattern = '(^|[\\/])\.git([\\/]|$)|(node_modules|site[\\/](node_modules|dist|\.astro|\.cache)|dist|\.cache|\.obsidian[\\/](workspace|cache)|09_Source_Materials|assets[\\/].*\.mp4|~$|\.tmp$|\.bak$)'
 
 $action = {
     param($source, $event)
@@ -57,7 +57,7 @@ try {
             $global:pendingChanges = $false
 
             Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [SYNC] Staging updates to Git..." -ForegroundColor Cyan
-            git add -A -- ":(exclude)09_Source_Materials" ":(exclude)assets/*.mp4" ":(exclude).obsidian/workspace*"
+            git add -A -- ":(exclude)09_Source_Materials" ":(exclude)assets/*.mp4" ":(exclude).obsidian/workspace*" ":(exclude)*/node_modules/*" ":(exclude)*/dist/*" ":(exclude)*.cache*"
 
             $staged = git diff --cached --name-only
             if ($staged) {
