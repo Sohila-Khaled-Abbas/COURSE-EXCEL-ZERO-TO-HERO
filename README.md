@@ -396,6 +396,37 @@ Full 19-column data dictionary, formatting masks, and lab instructions are docum
 
 ---
 
+## 🏨 Benchmark Dataset: Hotel Reservations (Hospitality Analytics Benchmark)
+
+Complementing retail data, the repository grounds hospitality operations, cancellation modeling, and customer lead-time analytics in the **Hotel Reservations Classification Dataset** (**[07_Reference/Hotel Reservations Dataset Documentation](07_Reference/Hotel%20Reservations%20Dataset%20Documentation.md)**).
+
+```mermaid
+pie title Booking Fulfillment vs Cancellation (36,275 Reservations)
+    "Fulfilled Stays (24,390)" : 67.24
+    "Canceled Bookings (11,885)" : 32.76
+```
+
+### Audited Benchmark Figures (Empirically Verified):
+- **Total Inbound Bookings**: `36,275` guest reservation records
+- **Data Grain**: **1 row = 1 distinct hotel reservation booking**
+- **Unique Booking IDs**: `36,275` (zero duplicate keys in `Booking_ID`)
+- **Overall Cancellation Rate**: **`32.76%`** (`11,885` cancellations vs `24,390` fulfilled stays)
+- **Average Daily Rate (ADR)**: **`$103.42`** (Range: `$0.00` to `$540.00`)
+- **Complimentary Rooms**: `391` records under market segment *Complementary* with `$0.00` ADR
+- **Average Booking Lead Time**: `85.2 days` (Min: `0 days`, Max: `443 days`)
+- **Temporal Horizon**: 
+  - `2017`: `6,514` stays (18.0%)
+  - `2018`: `29,761` stays (82.0%)
+
+### Provenance, Official Sources & Open Mirrors
+- 📊 **Kaggle Primary Source**: [Kaggle: Hotel Reservations Dataset](https://www.kaggle.com/datasets/ahsan81/hotel-reservations-classification-dataset) (Ahsan, CC0 Public Domain)
+- 🤗 **Hugging Face Open Mirror**: [Hugging Face: jason1966/ahsan81_hotel-reservations-classification-dataset](https://huggingface.co/datasets/jason1966/ahsan81_hotel-reservations-classification-dataset) (Parquet / CSV / JSON)
+- 📁 **Course Student Demo Workbook**: [`11_Demos_and_Workbooks/02_Data_Management/Hotel_Reservations_Demo.xlsx`](11_Demos_and_Workbooks/02_Data_Management/Hotel_Reservations_Demo.xlsx)
+
+Full 19-column schema, cancellation driver breakdowns, validation lists, and custom formatting masks are documented in **[Hotel Reservations Dataset Documentation](07_Reference/Hotel%20Reservations%20Dataset%20Documentation.md)** and the online **[Dataset Library](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/datasets/)**.
+
+---
+
 ## 🤖 AI-Assisted Excel Analytics Track
 
 This repository includes a structured, professional AI-for-Excel curriculum designed to cultivate **AI-augmented analytical competence** rather than AI dependency:
