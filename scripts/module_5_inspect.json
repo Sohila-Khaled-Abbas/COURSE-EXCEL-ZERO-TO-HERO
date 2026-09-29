@@ -1,0 +1,376 @@
+{
+  "sheets": [
+    "What is pivot table",
+    "Sample Data",
+    "Sheet5",
+    "Retail_part_1 ",
+    "Retail_part_2"
+  ],
+  "details": {
+    "What is pivot table": {
+      "max_row": 21,
+      "max_column": 22,
+      "tables": [],
+      "first_5_rows": [
+        [
+          "",
+          "",
+          "What is pivot table?",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "A Pivot Table: is a tool in Excel used to quickly summarize and analyze large datasets. ",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "It\u2019s called \u201cpivot\u201d because you can rotate data around axes \u2014 turning rows into columns and vice versa \u2014 to view the data from different perspectives without changing the original.",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    "Sample Data": {
+      "max_row": 218,
+      "max_column": 10,
+      "tables": [
+        "Table2"
+      ],
+      "first_5_rows": [
+        [
+          "Piviot Table Practice Exercises ",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "Order ID",
+          "Date",
+          "Product",
+          "Category",
+          "Country",
+          "Region",
+          "Month",
+          "Year",
+          "Quarter",
+          "Amount"
+        ],
+        [
+          "1",
+          "2019-07-15 00:00:00",
+          "Carrots",
+          "Vegetables",
+          "US",
+          "South",
+          "July",
+          "2019",
+          "Q3",
+          "4270"
+        ],
+        [
+          "2",
+          "2019-07-19 00:00:00",
+          "Broccoli",
+          "Vegetables",
+          "UK",
+          "East",
+          "July",
+          "2019",
+          "Q3",
+          "8239"
+        ],
+        [
+          "3",
+          "2019-07-26 00:00:00",
+          "Banana",
+          "Fruit",
+          "US",
+          "East",
+          "July",
+          "2019",
+          "Q3",
+          "617"
+        ],
+        [
+          "4",
+          "2019-08-11 00:00:00",
+          "Banana",
+          "Fruit",
+          "Canada",
+          "North",
+          "August",
+          "2019",
+          "Q3",
+          "8384"
+        ],
+        [
+          "5",
+          "2019-08-15 00:00:00",
+          "Beans",
+          "Vegetables",
+          "Germany",
+          "West",
+          "August",
+          "2019",
+          "Q3",
+          "2626"
+        ],
+        [
+          "6",
+          "2019-08-22 00:00:00",
+          "Orange",
+          "Fruit",
+          "US",
+          "South",
+          "August",
+          "2019",
+          "Q3",
+          "3610"
+        ],
+        [
+          "7",
+          "2019-08-24 00:00:00",
+          "Broccoli",
+          "Vegetables",
+          "Australia",
+          "South",
+          "August",
+          "2019",
+          "Q3",
+          "9062"
+        ],
+        [
+          "8",
+          "2019-09-15 00:00:00",
+          "Banana",
+          "Fruit",
+          "New Zealand",
+          "East",
+          "September",
+          "2019",
+          "Q3",
+          "6906"
+        ]
+      ]
+    },
+    "Sheet5": {
+      "max_row": 4,
+      "max_column": 1,
+      "tables": [],
+      "first_5_rows": [
+        [
+          "Count of OrderID"
+        ],
+        [
+          "40001"
+        ]
+      ]
+    },
+    "Retail_part_1 ": {
+      "max_row": 40003,
+      "max_column": 5,
+      "tables": [],
+      "first_5_rows": [
+        [
+          "OrderID",
+          "OrderDate",
+          "CustomerName",
+          "Category",
+          "SubCategory"
+        ],
+        [
+          "1",
+          "2023-05-07 00:00:00",
+          "Youssef Ibrahim",
+          "Electronics",
+          "Mobiles"
+        ],
+        [
+          "2",
+          "2022-11-19 00:00:00",
+          "Hany Zaki",
+          "Furniture",
+          "Chairs"
+        ],
+        [
+          "3",
+          "2024-07-13 00:00:00",
+          "Nour Ali",
+          "Electronics",
+          "Mobiles"
+        ],
+        [
+          "4",
+          "2024-06-17 00:00:00",
+          "Fatma Galal",
+          "Clothing",
+          "Women"
+        ],
+        [
+          "5",
+          "2025-08-24 00:00:00",
+          "Omar Sami",
+          "Electronics",
+          "Mobiles"
+        ],
+        [
+          "6",
+          "2023-10-31 00:00:00",
+          "Tamer Mostafa",
+          "Food",
+          "Dairy"
+        ],
+        [
+          "7",
+          "2022-12-14 00:00:00",
+          "Tamer Fouad",
+          "Clothing",
+          "Kids"
+        ],
+        [
+          "8",
+          "2025-02-20 00:00:00",
+          "Hany El-Sayed",
+          "Clothing",
+          "Women"
+        ],
+        [
+          "9",
+          "2025-05-17 00:00:00",
+          "Omar Ali",
+          "Food",
+          "Dairy"
+        ],
+        [
+          "10",
+          "2023-05-23 00:00:00",
+          "Huda Fouad",
+          "Food",
+          "Dairy"
+        ]
+      ]
+    },
+    "Retail_part_2": {
+      "max_row": 40001,
+      "max_column": 5,
+      "tables": [],
+      "first_5_rows": [
+        [
+          "OrderID",
+          "Region",
+          "SalesAmount",
+          "Quantity",
+          "Profit"
+        ],
+        [
+          "1",
+          "Luxor",
+          "12228.58",
+          "1",
+          "1280.95"
+        ],
+        [
+          "2",
+          "Tanta",
+          "15673.54",
+          "3",
+          "1120.78"
+        ],
+        [
+          "3",
+          "Ismailia",
+          "2941.3",
+          "5",
+          "421.31"
+        ],
+        [
+          "4",
+          "Tanta",
+          "19299.68",
+          "5",
+          "3714.95"
+        ],
+        [
+          "5",
+          "Cairo",
+          "15035.39",
+          "3",
+          "4440.22"
+        ],
+        [
+          "6",
+          "Giza",
+          "6681.04",
+          "9",
+          "1960.71"
+        ],
+        [
+          "7",
+          "Ismailia",
+          "13429.72",
+          "5",
+          "1194.37"
+        ],
+        [
+          "8",
+          "Giza",
+          "11326.29",
+          "3",
+          "1200.98"
+        ],
+        [
+          "9",
+          "Tanta",
+          "11558.26",
+          "8",
+          "852.9"
+        ],
+        [
+          "10",
+          "Mansoura",
+          "3349.32",
+          "2",
+          "651.54"
+        ]
+      ]
+    }
+  }
+}

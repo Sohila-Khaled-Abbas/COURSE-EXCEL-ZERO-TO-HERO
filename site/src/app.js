@@ -27,6 +27,9 @@
     document.documentElement.setAttribute('data-theme', next);
     localStorage.setItem(THEME_KEY, next);
     updateThemeToggleIcons(next);
+    if (typeof initMermaidDiagrams === 'function') {
+      initMermaidDiagrams();
+    }
   }
 
   function updateThemeToggleIcons(theme) {
@@ -816,7 +819,227 @@
   }
 
   // -------------------------------------------------------------------------
-  // 14. INITIALIZATION
+  // 14. MERMAID DIAGRAM RENDERING & INTERACTIVE ENGINE
+  // -------------------------------------------------------------------------
+  let activeModalMermaidSource = '';
+
+  function escapeHtmlLocal(str) {
+    if (!str) return '';
+    return str.replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function initMermaidDiagrams() {
+    if (typeof mermaid === 'undefined') {
+      console.warn('[MERMAID] Library not loaded. Diagrams will remain as source.');
+      return;
+    }
+
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+    const isDark = currentTheme === 'dark';
+
+    try {
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: isDark ? 'dark' : 'default',
+        securityLevel: 'loose',
+        fontFamily: 'Inter, system-ui, -apple-system, sans-serif',
+        themeVariables: isDark ? {
+          darkMode: true,
+          background: '#0f172a',
+          primaryColor: '#107c41',
+          primaryTextColor: '#f8fafc',
+          primaryBorderColor: '#16a34a',
+          lineColor: '#94a3b8',
+          secondaryColor: '#1e293b',
+          tertiaryColor: '#0f172a',
+          mainBkg: '#1e293b',
+          nodeBorder: '#334155',
+          clusterBkg: '#1e293b',
+          clusterBorder: '#475569',
+          titleColor: '#f8fafc',
+          edgeLabelBackground: '#0f172a'
+        } : {
+          darkMode: false,
+          background: '#ffffff',
+          primaryColor: '#107c41',
+          primaryTextColor: '#0f172a',
+          primaryBorderColor: '#16a34a',
+          lineColor: '#64748b',
+          secondaryColor: '#f1f5f9',
+          tertiaryColor: '#e2e8f0',
+          mainBkg: '#f8fafc',
+          nodeBorder: '#cbd5e1',
+          clusterBkg: '#f8fafc',
+          clusterBorder: '#cbd5e1',
+          titleColor: '#0f172a',
+          edgeLabelBackground: '#ffffff'
+        }
+      });
+    } catch (e) {
+      console.error('[MERMAID INIT ERROR]', e);
+    }
+
+    const containers = document.querySelectorAll('.mermaid-block-container');
+    if (!containers.length) return;
+
+    containers.forEach((container, idx) => {
+      const viewport = container.querySelector('.mermaid-viewport');
+      if (!viewport) return;
+
+      const rawEncoded = container.getAttribute('data-diagram-raw');
+      let rawCode = '';
+      if (rawEncoded) {
+        try {
+          rawCode = decodeURIComponent(rawEncoded);
+        } catch (e) {
+          rawCode = '';
+        }
+      }
+
+      if (!rawCode) {
+        const rawEl = container.querySelector('.mermaid');
+        rawCode = rawEl ? rawEl.textContent.trim() : '';
+      }
+
+      if (!rawCode) return;
+
+      const renderId = `mermaid_svg_${idx}_${Date.now()}`;
+
+      try {
+        mermaid.render(renderId, rawCode).then(({ svg }) => {
+          viewport.innerHTML = svg;
+          const svgEl = viewport.querySelector('svg');
+          if (svgEl) {
+            svgEl.style.maxWidth = '100%';
+            svgEl.style.height = 'auto';
+            svgEl.setAttribute('role', 'img');
+            svgEl.setAttribute('aria-label', 'Course concept diagram');
+          }
+        }).catch(err => {
+          console.warn('[MERMAID RENDER FAIL]', err);
+          viewport.innerHTML = `
+            <div class="mermaid-error-fallback">
+              <div class="mermaid-error-header">
+                <span>⚠️ Visual Diagram Rendering Fallback</span>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0.5rem 0;">Mermaid syntax could not be rendered dynamically. You can inspect the structural definition below:</p>
+              <pre class="mermaid-source-pre"><code>${escapeHtmlLocal(rawCode)}</code></pre>
+            </div>
+          `;
+        });
+      } catch (err) {
+        console.warn('[MERMAID RENDER RUNTIME FAIL]', err);
+        viewport.innerHTML = `
+          <div class="mermaid-error-fallback">
+            <div class="mermaid-error-header">
+              <span>⚠️ Visual Diagram Rendering Fallback</span>
+            </div>
+            <pre class="mermaid-source-pre"><code>${escapeHtmlLocal(rawCode)}</code></pre>
+          </div>
+        `;
+      }
+
+      // Wire Copy button
+      const copyBtn = container.querySelector('.mermaid-copy-btn');
+      if (copyBtn && !copyBtn.dataset.wired) {
+        copyBtn.dataset.wired = 'true';
+        copyBtn.addEventListener('click', () => {
+          navigator.clipboard.writeText(rawCode).then(() => {
+            const originalHTML = copyBtn.innerHTML;
+            copyBtn.innerHTML = `
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Copied!</span>
+            `;
+            setTimeout(() => {
+              copyBtn.innerHTML = originalHTML;
+            }, 2000);
+          }).catch(err => console.error('Failed to copy diagram code:', err));
+        });
+      }
+
+      // Wire Zoom / Fullscreen Modal button
+      const zoomBtn = container.querySelector('.mermaid-zoom-btn');
+      if (zoomBtn && !zoomBtn.dataset.wired) {
+        zoomBtn.dataset.wired = 'true';
+        zoomBtn.addEventListener('click', () => {
+          openMermaidModal(viewport, rawCode);
+        });
+      }
+    });
+
+    initMermaidModalGlobal();
+  }
+
+  function openMermaidModal(viewport, rawCode) {
+    const modal = document.getElementById('mermaid-modal');
+    const content = document.getElementById('mermaid-modal-content');
+    if (!modal || !content) return;
+
+    activeModalMermaidSource = rawCode;
+    content.innerHTML = viewport.innerHTML;
+
+    const modalSvg = content.querySelector('svg');
+    if (modalSvg) {
+      modalSvg.style.maxWidth = 'none';
+      modalSvg.style.width = '100%';
+      modalSvg.style.height = 'auto';
+    }
+
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMermaidModal() {
+    const modal = document.getElementById('mermaid-modal');
+    if (modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  }
+
+  let mermaidModalWired = false;
+  function initMermaidModalGlobal() {
+    if (mermaidModalWired) return;
+    mermaidModalWired = true;
+
+    const modal = document.getElementById('mermaid-modal');
+    const closeBtn = document.getElementById('mermaid-modal-close-btn');
+    const copyBtn = document.getElementById('mermaid-modal-copy-btn');
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeMermaidModal);
+    }
+
+    if (modal) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeMermaidModal();
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMermaidModal();
+    });
+
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        if (!activeModalMermaidSource) return;
+        navigator.clipboard.writeText(activeModalMermaidSource).then(() => {
+          const originalHTML = copyBtn.innerHTML;
+          copyBtn.innerHTML = `<span>Copied!</span>`;
+          setTimeout(() => {
+            copyBtn.innerHTML = originalHTML;
+          }, 2000);
+        });
+      });
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // 15. INITIALIZATION
   // -------------------------------------------------------------------------
   document.addEventListener('DOMContentLoaded', () => {
     initTheme();
@@ -839,6 +1062,7 @@
     initStudyPlanner();
     initDatasetFilters();
     initMindmapToggles();
+    initMermaidDiagrams();
   });
 
 })();

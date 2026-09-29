@@ -297,8 +297,55 @@ function transformObsidian(rawText, currentRecord = null) {
   // Parse Markdown to HTML
   let html = marked.parse(text);
 
-  // Wrap code blocks with copy buttons
+  // Wrap code blocks with copy buttons (or render Mermaid diagrams)
   html = html.replace(/<pre><code class="language-([a-zA-Z0-9_\-]+)">([\s\S]*?)<\/code><\/pre>/g, (m, lang, code) => {
+    if (lang.toLowerCase() === 'mermaid') {
+      const rawCode = code
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'")
+        .replace(/&apos;/g, "'")
+        .trim();
+
+      const encodedRaw = encodeURIComponent(rawCode);
+
+      return `
+        <div class="mermaid-block-container" data-diagram-raw="${encodedRaw}">
+          <div class="mermaid-diagram-toolbar">
+            <div class="mermaid-toolbar-left">
+              <span class="mermaid-diagram-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                DIAGRAM
+              </span>
+            </div>
+            <div class="mermaid-diagram-actions">
+              <button class="mermaid-action-btn mermaid-zoom-btn" title="Toggle Fullscreen / Zoom" aria-label="Toggle Fullscreen">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg>
+                <span>Zoom</span>
+              </button>
+              <button class="mermaid-action-btn mermaid-copy-btn" title="Copy Mermaid Syntax" aria-label="Copy Mermaid Syntax">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                <span>Copy</span>
+              </button>
+            </div>
+          </div>
+          <div class="mermaid-viewport">
+            <div class="mermaid-loading-indicator">Rendering architecture diagram...</div>
+            <div class="mermaid" style="display:none;">${rawCode}</div>
+          </div>
+          <details class="mermaid-source-details">
+            <summary class="mermaid-source-summary">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              View Mermaid Syntax
+            </summary>
+            <pre class="mermaid-source-pre"><code>${code}</code></pre>
+          </details>
+        </div>
+      `;
+    }
+
     return `
       <div class="code-block-container">
         <div class="code-block-header">
@@ -537,12 +584,38 @@ function renderPageLayout({ title, pageId, type, content, activeNav, breadcrumbs
     </div>
   </div>
 
+  <!-- Diagram Zoom / Fullscreen Modal -->
+  <div id="mermaid-modal" class="mermaid-modal-backdrop" role="dialog" aria-modal="true" aria-label="Diagram Zoom View" style="display: none;">
+    <div class="mermaid-modal-box">
+      <div class="mermaid-modal-header">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span class="mermaid-diagram-badge">DIAGRAM VIEW</span>
+          <span class="mermaid-modal-title">Architecture & Process Flow</span>
+        </div>
+        <div class="mermaid-modal-actions">
+          <button id="mermaid-modal-copy-btn" class="mermaid-action-btn" title="Copy Mermaid Syntax">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Copy Syntax</span>
+          </button>
+          <button id="mermaid-modal-close-btn" class="icon-btn" aria-label="Close Diagram View">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="mermaid-modal-viewport" id="mermaid-modal-content"></div>
+      <div class="mermaid-modal-footer">
+        <span>Use mouse wheel or touchpad to scroll and inspect complex branches. Press <kbd class="kbd-shortcut">Esc</kbd> to close.</span>
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer class="site-footer">
     <p><strong>Excel Zero to Hero</strong> — Interactive Analytics Learning Platform</p>
     <p style="margin-top: 0.35rem; font-size: 0.8rem;">Sourced from the comprehensive Microsoft Excel & Data Analytics Curriculum Vault • Built for GitHub Pages</p>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
   <script src="${BASE_URL}assets/app.js"></script>
 </body>
 </html>`;
