@@ -672,7 +672,151 @@
   }
 
   // -------------------------------------------------------------------------
-  // 10. INITIALIZATION
+  // 10. VIDEO CHAPTERS & YOUTUBE PLAYER INTERACTION
+  // -------------------------------------------------------------------------
+  function initVideoChapters() {
+    const iframe = document.getElementById('main-course-iframe');
+    const chapterButtons = document.querySelectorAll('.chapter-btn[data-start-seconds]');
+
+    chapterButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const seconds = btn.getAttribute('data-start-seconds');
+        if (iframe && seconds !== null) {
+          chapterButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          iframe.src = `https://www.youtube-nocookie.com/embed/uv1bxe2gdnU?start=${seconds}&autoplay=1`;
+          const playerBox = document.getElementById('course-video-player');
+          if (playerBox) {
+            playerBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }
+      });
+    });
+
+    // Check URL parameters for ?t= or #chapter
+    const urlParams = new URLSearchParams(window.location.search);
+    const startSec = urlParams.get('t');
+    if (startSec && iframe) {
+      iframe.src = `https://www.youtube-nocookie.com/embed/uv1bxe2gdnU?start=${startSec}&autoplay=1`;
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // 11. STUDY PLANNER & MODULE BREAKDOWN ANALYTICS
+  // -------------------------------------------------------------------------
+  const PACE_KEY = 'excel_study_pace';
+
+  function initStudyPlanner() {
+    const paceButtons = document.querySelectorAll('.pace-option-btn');
+    const savedPace = localStorage.getItem(PACE_KEY) || 'steady';
+
+    paceButtons.forEach(btn => {
+      const pace = btn.getAttribute('data-pace');
+      btn.classList.toggle('active', pace === savedPace);
+
+      btn.addEventListener('click', () => {
+        paceButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        localStorage.setItem(PACE_KEY, pace);
+        updatePlannerStats(pace);
+      });
+    });
+
+    updatePlannerStats(savedPace);
+  }
+
+  function updatePlannerStats(pace) {
+    const state = getProgress();
+    const remaining = Math.max(0, TOTAL_LESSONS - state.completedLessons.length);
+    const paceMap = { casual: 2, steady: 4, intensive: 7 };
+    const perWeek = paceMap[pace] || 4;
+
+    const weeksNeeded = Math.ceil(remaining / perWeek);
+    const etaDate = new Date();
+    etaDate.setDate(etaDate.getDate() + weeksNeeded * 7);
+
+    const etaTextEl = document.getElementById('planner-eta-text');
+    if (etaTextEl) {
+      if (remaining === 0) {
+        etaTextEl.innerHTML = '🎉 <strong>Curriculum Completed!</strong> You have finished all 38 lessons.';
+      } else {
+        const options = { month: 'short', day: 'numeric', year: 'numeric' };
+        etaTextEl.innerHTML = `Target Finish: <strong>${etaDate.toLocaleDateString(undefined, options)}</strong> (~${weeksNeeded} weeks at ${perWeek} lessons/wk)`;
+      }
+    }
+
+    // Update module-by-module progress bars
+    document.querySelectorAll('.module-progress-row[data-module-num]').forEach(row => {
+      const modNum = row.getAttribute('data-module-num');
+      const lessonIdsAttr = row.getAttribute('data-lesson-ids');
+      if (lessonIdsAttr) {
+        const lessonIds = lessonIdsAttr.split(',').map(s => s.trim()).filter(Boolean);
+        const doneCount = lessonIds.filter(id => state.completedLessons.includes(id)).length;
+        const pct = lessonIds.length > 0 ? Math.round((doneCount / lessonIds.length) * 100) : 0;
+
+        const fill = row.querySelector('.module-progress-bar-fill');
+        if (fill) fill.style.width = `${pct}%`;
+
+        const stat = row.querySelector('.module-row-stat');
+        if (stat) stat.textContent = `${doneCount}/${lessonIds.length} (${pct}%)`;
+      }
+    });
+  }
+
+  // -------------------------------------------------------------------------
+  // 12. DATASET FILTERS
+  // -------------------------------------------------------------------------
+  function initDatasetFilters() {
+    const filterButtons = document.querySelectorAll('.dataset-filter-btn');
+    const datasetCards = document.querySelectorAll('.dataset-card[data-domain]');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('btn-primary'));
+        filterButtons.forEach(b => b.classList.add('btn-secondary'));
+        btn.classList.remove('btn-secondary');
+        btn.classList.add('btn-primary');
+
+        const domain = btn.getAttribute('data-domain');
+        datasetCards.forEach(card => {
+          if (domain === 'all' || card.getAttribute('data-domain') === domain) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  // -------------------------------------------------------------------------
+  // 13. MIND MAP VIEW TOGGLE
+  // -------------------------------------------------------------------------
+  function initMindmapToggles() {
+    const toggleBtn = document.getElementById('toggle-mindmap-view-btn');
+    const iframeWrap = document.getElementById('mindmap-iframe-container');
+    const diagramWrap = document.getElementById('mindmap-diagram-container');
+
+    if (toggleBtn && iframeWrap && diagramWrap) {
+      toggleBtn.addEventListener('click', () => {
+        const isIframeVisible = iframeWrap.style.display !== 'none';
+        if (isIframeVisible) {
+          iframeWrap.style.display = 'none';
+          diagramWrap.style.display = 'block';
+          toggleBtn.textContent = 'Switch to Interactive MindMeister Embed';
+        } else {
+          iframeWrap.style.display = 'block';
+          diagramWrap.style.display = 'none';
+          toggleBtn.textContent = 'Switch to High-Res Local Architecture Diagram';
+        }
+      });
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // 14. INITIALIZATION
   // -------------------------------------------------------------------------
   document.addEventListener('DOMContentLoaded', () => {
     initTheme();
@@ -691,6 +835,10 @@
     initMobileMenu();
     initResetProgress();
     initPageActions();
+    initVideoChapters();
+    initStudyPlanner();
+    initDatasetFilters();
+    initMindmapToggles();
   });
 
 })();

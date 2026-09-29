@@ -38,6 +38,7 @@ jobs:
         run: |
           cd site
           npm run build
+          npm test
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5

@@ -8,17 +8,26 @@
 
 The platform follows a **zero-duplication static site architecture (SSG)**:
 - **Source of Truth**: The original markdown files across the Obsidian vault (`00_Home/`, `01_Course/`, `02_Notes/`, `03_Concepts/`, `04_Formulas/`, `05_Practice/`, `06_Projects/`, `07_Reference/`, `08_Revision/`, `10_Portfolio/`) remain the single source of truth. No markdown content is duplicated.
-- **SSG Engine (`site/build.js`)**: A custom, high-speed Node.js static site generator that parses YAML frontmatter using `js-yaml` and renders GitHub Flavored Markdown using `marked`.
+- **SSG Engine (`site/build.js`)**: A custom, high-speed Node.js static site generator that compiles 212 static HTML pages, parses YAML frontmatter using `js-yaml`, and renders GitHub Flavored Markdown using `marked`.
 - **Obsidian Preprocessor**:
-  - Automatically resolves all Obsidian wikilinks (`[[Note]]` and `[[Note|Label]]`) to directory-based clean URLs (`/lessons/01_excel_interface_and_gui/`, `/formulas/xlookup/`, etc.).
+  - Automatically resolves all Obsidian wikilinks (`[[Note]]` and `[[Note|Label]]`) to directory-based clean URLs (`/lessons/01_excel_interface_and_gui/`, `/formulas/xlookup/`, `/datasets/`, etc.).
   - Converts Obsidian callouts (`> [!tip]`, `> [!warning]`, `> [!abstract]`, `> [!question]-`, etc.) into semantic styled HTML alert containers with SVG icons and collapsible details.
   - Automatically wraps code and formula blocks with language badges and one-click copy-to-clipboard buttons.
+- **Platform Features & Pages**:
+  - **Start Here Orientation (`/start-here/`)**: Complete onboarding guide featuring the 8-step learning loop (*Watch → Understand → Explore → Practice → Validate → Apply → Revise → Build a Portfolio*), target audience, prerequisites, and AI verification policy.
+  - **Embedded Masterclass Video**: Responsive 16:9 YouTube player (`uv1bxe2gdnU`) with 9 module-level seekable chapter buttons.
+  - **Interactive Mind Map (`/mindmap/`)**: MindMeister embed (`3782166881`) with view toggles and local high-resolution diagram fallbacks.
+  - **Dataset Library (`/datasets/`)**: Filterable catalog of benchmark datasets (Sample Superstore [9,994 rows], Hotel Reservations [36,275 rows], PwC Call Center [5,000 records], chapter practice workbooks) with verified public download mirrors (Kaggle, Hugging Face, Google Drive).
+  - **Unified Resources Hub (`/resources/`)**: Central directory categorized into Videos, Mind Maps, Google Drive Workbooks, GitHub Source, Datasets, and Obsidian Publishing.
+  - **Obsidian Publishing Guide (`/obsidian-guide/`)**: Technical guide on frontmatter standards, wikilinks, callouts, and GitHub Actions CI/CD synchronization.
+  - **Smart Lesson Relationships**: Contextual widgets connecting each lesson directly to related atomic concepts, formula references, practice exercises, datasets, and seekable video timestamps.
+  - **Lightweight Study Planner**: Browser-stored pace selector (Casual, Steady, Intensive) calculating dynamic completion dates and tracking module-by-module completion bars.
 - **Client App Engine (`site/src/app.js`)**:
-  - **Zero-Backend LocalStorage Persistence**: Stores completed lessons, mastered exercises, bookmarked resources, theme preferences, and 3D flashcard mastery securely in the learner's browser.
+  - **Zero-Backend LocalStorage Persistence**: Stores completed lessons, mastered exercises, bookmarked resources, study planner pace, theme preferences, and 3D flashcard mastery securely in the learner's browser.
   - **Dynamic Course Gauge**: Real-time progress percentage calculated from actual completed lessons out of 38 total.
-  - **Interactive 3D Flashcards**: 3D flip card animation with keyboard controls (`Space` to flip, `Arrow` keys for next/prev), shuffle, and self-assessment ("Know it" vs "Review again").
+  - **Interactive 3D Flashcards**: Active recall deck with 3D flip animations, keyboard controls (`Space` to flip, `Arrow` keys for next/prev), shuffle, and self-assessment tracking ("Know it" vs "Review again").
   - **Interactive Self-Check Quizzes**: Knowledge check cards with instant visual feedback and educational explanations.
-  - **Global Search Modal (`Ctrl+K` / `Cmd+K`)**: Lightning-fast, client-side fuzzy search across all 207 pages using the pre-compiled `search-index.json`.
+  - **Global Search Modal (`Ctrl+K` / `Cmd+K`)**: Lightning-fast, client-side fuzzy search across all 212 pages using the pre-compiled `search-index.json`.
 - **Design System (`site/src/styles.css`)**:
   - Spreadsheet-inspired analytics aesthetic featuring Excel emerald green (`#107c41`), subtle slate tones, glassmorphism, responsive navigation drawer, and persistent light/dark mode.
 

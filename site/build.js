@@ -207,6 +207,18 @@ function scanVault() {
   linkIndex.set('hotel reservation analysis', `${BASE_URL}projects/hotel-reservation-analysis/`);
   linkIndex.set('course dashboard', BASE_URL);
   linkIndex.set('curriculum roadmap', `${BASE_URL}curriculum/`);
+  linkIndex.set('start here', `${BASE_URL}start-here/`);
+  linkIndex.set('course orientation', `${BASE_URL}start-here/`);
+  linkIndex.set('course mind map', `${BASE_URL}mindmap/`);
+  linkIndex.set('mind map', `${BASE_URL}mindmap/`);
+  linkIndex.set('mindmap', `${BASE_URL}mindmap/`);
+  linkIndex.set('dataset library', `${BASE_URL}datasets/`);
+  linkIndex.set('datasets', `${BASE_URL}datasets/`);
+  linkIndex.set('learning resources', `${BASE_URL}resources/`);
+  linkIndex.set('resources hub', `${BASE_URL}resources/`);
+  linkIndex.set('resources', `${BASE_URL}resources/`);
+  linkIndex.set('obsidian publishing guide', `${BASE_URL}obsidian-guide/`);
+  linkIndex.set('obsidian guide', `${BASE_URL}obsidian-guide/`);
   linkIndex.set('flashcards', `${BASE_URL}revision/#flashcards`);
   linkIndex.set('interview questions', `${BASE_URL}revision/#interview`);
   linkIndex.set('common mistakes', `${BASE_URL}revision/#mistakes`);
@@ -381,12 +393,19 @@ function renderPageLayout({ title, pageId, type, content, activeNav, breadcrumbs
     <!-- Navigation Sidebar -->
     <aside class="app-sidebar">
       <div class="sidebar-section">
-        <div class="sidebar-title">Learning Core</div>
+        <div class="sidebar-title">Getting Started & Core</div>
         <ul class="sidebar-nav-list">
           <li>
             <a href="${BASE_URL}" class="sidebar-nav-link ${activeNav === 'dashboard' ? 'active' : ''}">
               <span class="sidebar-nav-icon">📊</span>
               <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="${BASE_URL}start-here/" class="sidebar-nav-link ${activeNav === 'start-here' ? 'active' : ''}">
+              <span class="sidebar-nav-icon">🚀</span>
+              <span>Start Here</span>
+              <span class="sidebar-badge">Guide</span>
             </a>
           </li>
           <li>
@@ -397,10 +416,30 @@ function renderPageLayout({ title, pageId, type, content, activeNav, breadcrumbs
             </a>
           </li>
           <li>
+            <a href="${BASE_URL}mindmap/" class="sidebar-nav-link ${activeNav === 'mindmap' ? 'active' : ''}">
+              <span class="sidebar-nav-icon">🧠</span>
+              <span>Course Mind Map</span>
+              <span class="sidebar-badge">Visual</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Hands-On & Practice</div>
+        <ul class="sidebar-nav-list">
+          <li>
             <a href="${BASE_URL}practice/" class="sidebar-nav-link ${activeNav === 'practice' ? 'active' : ''}">
               <span class="sidebar-nav-icon">🎯</span>
               <span>Practice Center</span>
               <span class="sidebar-badge">Labs</span>
+            </a>
+          </li>
+          <li>
+            <a href="${BASE_URL}datasets/" class="sidebar-nav-link ${activeNav === 'datasets' ? 'active' : ''}">
+              <span class="sidebar-nav-icon">📁</span>
+              <span>Dataset Library</span>
+              <span class="sidebar-badge">36K+</span>
             </a>
           </li>
           <li>
@@ -410,11 +449,18 @@ function renderPageLayout({ title, pageId, type, content, activeNav, breadcrumbs
               <span class="sidebar-badge">Active</span>
             </a>
           </li>
+          <li>
+            <a href="${BASE_URL}projects/" class="sidebar-nav-link ${activeNav === 'projects' ? 'active' : ''}">
+              <span class="sidebar-nav-icon">💼</span>
+              <span>Projects & Case Studies</span>
+              <span class="sidebar-badge">PwC</span>
+            </a>
+          </li>
         </ul>
       </div>
 
       <div class="sidebar-section">
-        <div class="sidebar-title">Analytics & References</div>
+        <div class="sidebar-title">Knowledge & Vault</div>
         <ul class="sidebar-nav-list">
           <li>
             <a href="${BASE_URL}formulas/" class="sidebar-nav-link ${activeNav === 'formulas' ? 'active' : ''}">
@@ -431,10 +477,17 @@ function renderPageLayout({ title, pageId, type, content, activeNav, breadcrumbs
             </a>
           </li>
           <li>
-            <a href="${BASE_URL}projects/" class="sidebar-nav-link ${activeNav === 'projects' ? 'active' : ''}">
-              <span class="sidebar-nav-icon">💼</span>
-              <span>Projects & Case Studies</span>
-              <span class="sidebar-badge">PwC</span>
+            <a href="${BASE_URL}resources/" class="sidebar-nav-link ${activeNav === 'resources' ? 'active' : ''}">
+              <span class="sidebar-nav-icon">🌐</span>
+              <span>Learning Resources</span>
+              <span class="sidebar-badge">Hub</span>
+            </a>
+          </li>
+          <li>
+            <a href="${BASE_URL}obsidian-guide/" class="sidebar-nav-link ${activeNav === 'obsidian-guide' ? 'active' : ''}">
+              <span class="sidebar-nav-icon">📝</span>
+              <span>Obsidian Guide</span>
+              <span class="sidebar-badge">Vault</span>
             </a>
           </li>
           <li>
@@ -504,19 +557,59 @@ function buildDashboard() {
   console.log('[BUILD] Building Learning Dashboard...');
   const firstLesson = database.lessons[0] || { url: `${BASE_URL}curriculum/`, title: 'Start Curriculum' };
 
+  const modulesData = [
+    { num: 1, title: 'Excel Fundamentals & Analytics Roles', desc: 'Interface navigation, cell mechanics, and data analyst workflow' },
+    { num: 2, title: 'Data Management & Formatting', desc: 'Types, custom formatting, validation lists, deduplication, and shortcuts' },
+    { num: 3, title: 'Formulas & Functions Mastery', desc: 'Cell references, conditional logic, XLOOKUP, dates, and dynamic arrays' },
+    { num: 4, title: 'Excel Tables Architecture', desc: 'Structured references, calculated columns, and table governance' },
+    { num: 5, title: 'Pivot Tables & Aggregation', desc: 'Multi-dimensional summaries, calculated fields, slicers, and timelines' },
+    { num: 6, title: 'Data Analysis Charts & Dashboards', desc: 'Visual analytics, cognitive load design, and executive layout' },
+    { num: 7, title: 'Data Cleaning & Governance', desc: 'DAMA 6 quality dimensions, null auditing, and ERP ingestion' },
+    { num: 8, title: 'Power Query & M Language ETL', desc: 'Automated data pipelines, unpivoting, merges, and API ingestion' },
+    { num: 9, title: 'Data Modeling & DAX Intelligence', desc: 'Star schema, CALCULATE context transition, and business measures' },
+  ];
+
+  const videoChapters = [
+    { mod: 1, time: '0:00', sec: 0, title: 'M1: Fundamentals' },
+    { mod: 2, time: '16:05', sec: 965, title: 'M2: Data Management' },
+    { mod: 3, time: '1:38:56', sec: 5936, title: 'M3: Formulas' },
+    { mod: 4, time: '2:35:55', sec: 9355, title: 'M4: Tables' },
+    { mod: 5, time: '2:58:28', sec: 10708, title: 'M5: PivotTables' },
+    { mod: 6, time: '3:26:58', sec: 12418, title: 'M6: Charts & Dashboards' },
+    { mod: 7, time: '3:54:03', sec: 14043, title: 'M7: Data Cleaning' },
+    { mod: 8, time: '4:20:30', sec: 15630, title: 'M8: Power Query' },
+    { mod: 9, time: '5:03:39', sec: 18219, title: 'M9: DAX Modeling' },
+  ];
+
   const html = `
     <!-- Hero Card -->
     <div class="dashboard-hero-card">
       <div class="hero-content">
-        <h1>Welcome to Excel Zero to Hero</h1>
-        <p>A structured, interactive journey from core spreadsheet foundations to professional data analytics, Power Query ETL, and DAX dimensional modeling.</p>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.5rem;">
+          <span class="meta-pill" style="color: var(--brand-primary); border-color: var(--brand-primary); background: rgba(16, 124, 65, 0.1);">Interactive Learning Hub</span>
+          <span class="meta-pill">9 Modules • 38 Lessons</span>
+          <span class="meta-pill">Obsidian Synchronized</span>
+        </div>
+        <h1>Excel Zero to Hero — Master Spreadsheet Analytics</h1>
+        <p>A rigorous, interactive learning path taking you from foundational grid mechanics to enterprise data cleaning, Power Query ETL pipelines, and DAX dimensional modeling.</p>
+        
+        <div style="display: flex; align-items: center; gap: 0.75rem; margin: 1rem 0; font-size: 0.85rem; color: var(--text-secondary); flex-wrap: wrap;">
+          <span><strong>Designed for:</strong> Aspiring Data Analysts • Finance & BI Professionals • Excel Power Users</span>
+        </div>
+
         <div class="hero-cta-group">
           <a id="continue-learning-btn" href="${firstLesson.url}" class="btn btn-primary first-lesson-link">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             <span id="continue-learning-desc">Continue Learning</span>
           </a>
-          <a href="${BASE_URL}curriculum/" class="btn btn-secondary">
-            Explore 9-Module Roadmap
+          <a href="#course-video-player" class="btn btn-secondary">
+            🎬 Watch Full Masterclass
+          </a>
+          <a href="${BASE_URL}mindmap/" class="btn btn-secondary">
+            🧠 Explore Course Mind Map
+          </a>
+          <a href="${BASE_URL}start-here/" class="btn btn-secondary" style="border-color: var(--brand-primary); color: var(--brand-primary);">
+            🚀 Start Here Guide
           </a>
         </div>
       </div>
@@ -565,8 +658,132 @@ function buildDashboard() {
       </div>
     </div>
 
-    <!-- Learning Journey Overview -->
-    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-top: 2rem;">
+    <!-- Embedded YouTube Course Video Section -->
+    <div id="course-video-player" class="course-video-section" style="margin-top: 2.5rem; background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-lg); padding: 1.5rem;">
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+        <div>
+          <span class="meta-pill" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.4); background: rgba(239, 68, 68, 0.1);">🎥 Complete Video Masterclass</span>
+          <h2 style="font-size: 1.35rem; margin-top: 0.35rem;">Excel Zero to Hero — Complete Course (5+ Hours)</h2>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">Comprehensive lecture series. Click any module below to immediately jump to its exact timestamp in the player.</p>
+        </div>
+        <a href="https://youtu.be/uv1bxe2gdnU?si=3x0z6LYU5uSkwShe" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+          Watch on YouTube ↗
+        </a>
+      </div>
+
+      <!-- Responsive 16:9 Video Container -->
+      <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: var(--radius-md); background: #000; box-shadow: var(--shadow-md);">
+        <iframe id="main-course-iframe" src="https://www.youtube-nocookie.com/embed/uv1bxe2gdnU" title="Excel from Zero to Hero — Complete Course" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"></iframe>
+      </div>
+
+      <!-- Interactive Chapter Selector -->
+      <div style="margin-top: 1.25rem;">
+        <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 0.5rem;">
+          Jump to Module Video Chapter:
+        </div>
+        <div class="video-chapters-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.5rem;">
+          ${videoChapters.map((ch, idx) => `
+            <button class="chapter-btn ${idx === 0 ? 'active' : ''}" data-start-seconds="${ch.sec}">
+              <span class="chapter-time">${ch.time}</span>
+              <span class="chapter-title">${ch.title}</span>
+            </button>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Access Hub Cards -->
+    <div style="margin-top: 2.5rem;">
+      <div class="section-heading-row">
+        <h2>⚡ Integrated Learning Ecosystem</h2>
+        <span class="meta-pill">One Hub</span>
+      </div>
+      <div class="metrics-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+        <a href="${BASE_URL}start-here/" class="metric-card" style="text-decoration: none; padding: 1.25rem; flex-direction: column; align-items: flex-start; gap: 0.5rem;">
+          <span style="font-size: 1.5rem;">🚀</span>
+          <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary);">Start Here Orientation</h3>
+          <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">8-step active learning loop, prerequisites, and study framework.</p>
+        </a>
+
+        <a href="${BASE_URL}mindmap/" class="metric-card" style="text-decoration: none; padding: 1.25rem; flex-direction: column; align-items: flex-start; gap: 0.5rem;">
+          <span style="font-size: 1.5rem;">🧠</span>
+          <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary);">Course Mind Map</h3>
+          <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Interactive MindMeister visual architecture and local diagrams.</p>
+        </a>
+
+        <a href="https://drive.google.com/drive/folders/1FbT96Hyp9KZbmjT2UeP-CVK0gL1JPn0T" target="_blank" rel="noopener noreferrer" class="metric-card" style="text-decoration: none; padding: 1.25rem; flex-direction: column; align-items: flex-start; gap: 0.5rem;">
+          <span style="font-size: 1.5rem;">📁</span>
+          <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary);">Google Drive Materials ↗</h3>
+          <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Slide decks, raw workbooks, templates, and solutions folder.</p>
+        </a>
+
+        <a href="${BASE_URL}datasets/" class="metric-card" style="text-decoration: none; padding: 1.25rem; flex-direction: column; align-items: flex-start; gap: 0.5rem;">
+          <span style="font-size: 1.5rem;">📊</span>
+          <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary);">Dataset Library</h3>
+          <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Superstore, Hotel (36K), and PwC Call Center benchmark data.</p>
+        </a>
+
+        <a href="${BASE_URL}resources/" class="metric-card" style="text-decoration: none; padding: 1.25rem; flex-direction: column; align-items: flex-start; gap: 0.5rem;">
+          <span style="font-size: 1.5rem;">🌐</span>
+          <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary);">Resources Directory</h3>
+          <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Unified index of videos, code repos, shortcuts, and cheat sheets.</p>
+        </a>
+
+        <a href="${BASE_URL}obsidian-guide/" class="metric-card" style="text-decoration: none; padding: 1.25rem; flex-direction: column; align-items: flex-start; gap: 0.5rem;">
+          <span style="font-size: 1.5rem;">📝</span>
+          <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary);">Obsidian Publishing Guide</h3>
+          <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">How markdown notes synchronize from vault to web via GitHub.</p>
+        </a>
+      </div>
+    </div>
+
+    <!-- Personalized Study Planner & Progress Analytics -->
+    <div class="study-planner-section" style="margin-top: 2.5rem; background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-lg); padding: 1.5rem;">
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+        <div>
+          <span class="meta-pill" style="color: var(--brand-primary); border-color: var(--brand-primary);">Personalized Planner</span>
+          <h2 style="font-size: 1.35rem; margin-top: 0.35rem;">Study Pace & Completion Target</h2>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">Calculate your estimated completion date based on your stored browser progress.</p>
+        </div>
+        
+        <!-- Pace Options -->
+        <div class="pace-selector-group" style="display: flex; gap: 0.5rem;">
+          <button class="btn btn-secondary btn-sm pace-option-btn" data-pace="casual">Casual (2/wk)</button>
+          <button class="btn btn-secondary btn-sm pace-option-btn active" data-pace="steady">Steady (4/wk)</button>
+          <button class="btn btn-secondary btn-sm pace-option-btn" data-pace="intensive">Intensive (7/wk)</button>
+        </div>
+      </div>
+
+      <div id="planner-eta-text" class="planner-eta-box" style="padding: 0.75rem 1rem; background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); font-size: 0.92rem; color: var(--text-primary); margin-bottom: 1.25rem;">
+        Target Finish: <strong>Calculating...</strong>
+      </div>
+
+      <!-- Module Progress Breakdown Rows -->
+      <div class="module-progress-breakdown-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 0.75rem;">
+        ${modulesData.map(m => {
+          const modLessons = database.lessons.filter(l => {
+            const modStr = (l.module || '').toLowerCase();
+            return modStr.includes(`module ${m.num}`) || l.filePath.includes(`0${m.num}_`);
+          });
+          const ids = modLessons.map(l => l.id).join(',');
+
+          return `
+            <div class="module-progress-row" data-module-num="${m.num}" data-lesson-ids="${ids}" style="background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); padding: 0.65rem 0.85rem; border-radius: var(--radius-md);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <span style="font-size: 0.82rem; font-weight: 700; color: var(--text-primary);">M${m.num}: ${m.title.split('&')[0].trim()}</span>
+                <span class="module-row-stat" style="font-size: 0.78rem; font-weight: 600; color: var(--brand-primary);">0/${modLessons.length} (0%)</span>
+              </div>
+              <div class="module-progress-bar-track" style="height: 6px; background: var(--bg-surface); border-radius: 3px; overflow: hidden; border: 1px solid var(--border-subtle);">
+                <div class="module-progress-bar-fill" style="width: 0%; height: 100%; background: var(--brand-primary); transition: width 0.3s ease;"></div>
+              </div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    </div>
+
+    <!-- Learning Journey Overview & Bookmarks -->
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-top: 2.5rem;">
       <div>
         <div class="section-heading-row">
           <h2>Core Curriculum Path</h2>
@@ -574,40 +791,37 @@ function buildDashboard() {
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 0.85rem;">
-          ${[
-            { num: '1', title: 'Excel Fundamentals & Analytics Roles', lessons: '2 Lessons', desc: 'Interface navigation, cell mechanics, and data analyst workflow' },
-            { num: '2', title: 'Data Management & Formatting', lessons: '6 Lessons', desc: 'Types, custom formatting, validation lists, deduplication, and shortcuts' },
-            { num: '3', title: 'Formulas & Functions Mastery', lessons: '8 Lessons', desc: 'Cell references, conditional logic, XLOOKUP, dates, and dynamic arrays' },
-            { num: '4', title: 'Excel Tables Architecture', lessons: '3 Lessons', desc: 'Structured references, calculated columns, and table governance' },
-            { num: '5', title: 'Pivot Tables & Aggregation', lessons: '4 Lessons', desc: 'Multi-dimensional summaries, calculated fields, slicers, and timelines' },
-            { num: '6', title: 'Data Analysis Charts & Dashboards', lessons: '3 Lessons', desc: 'Visual analytics, cognitive load design, and executive layout' },
-            { num: '7', title: 'Data Cleaning & Governance', lessons: '4 Lessons', desc: 'DAMA 6 quality dimensions, null auditing, and ERP ingestion' },
-            { num: '8', title: 'Power Query & M Language ETL', lessons: '4 Lessons', desc: 'Automated data pipelines, unpivoting, merges, and API ingestion' },
-            { num: '9', title: 'Data Modeling & DAX Intelligence', lessons: '4 Lessons', desc: 'Star schema, CALCULATE context transition, and business measures' },
-          ].map(m => `
-            <div class="module-card" style="margin-bottom: 0;">
-              <div class="module-header" onclick="location.href='${BASE_URL}curriculum/#module-${m.num}'">
-                <div class="module-header-main">
-                  <div class="module-num-badge">M${m.num}</div>
-                  <div class="module-header-titles">
-                    <h3>${m.title}</h3>
-                    <p>${m.desc}</p>
+          ${modulesData.map(m => {
+            const modLessons = database.lessons.filter(l => {
+              const modStr = (l.module || '').toLowerCase();
+              return modStr.includes(`module ${m.num}`) || l.filePath.includes(`0${m.num}_`);
+            });
+
+            return `
+              <div class="module-card" style="margin-bottom: 0;">
+                <div class="module-header" onclick="location.href='${BASE_URL}curriculum/#module-${m.num}'">
+                  <div class="module-header-main">
+                    <div class="module-num-badge">M${m.num}</div>
+                    <div class="module-header-titles">
+                      <h3>${m.title}</h3>
+                      <p>${m.desc}</p>
+                    </div>
+                  </div>
+                  <div class="module-header-stats">
+                    <span class="meta-pill">${modLessons.length} Lessons</span>
+                    <span style="font-size: 0.85rem; color: var(--brand-primary); font-weight: 600;">Explore →</span>
                   </div>
                 </div>
-                <div class="module-header-stats">
-                  <span class="meta-pill">${m.lessons}</span>
-                  <span style="font-size: 0.85rem; color: var(--brand-primary); font-weight: 600;">Explore →</span>
-                </div>
               </div>
-            </div>
-          `).join('')}
+            `;
+          }).join('')}
         </div>
       </div>
 
       <!-- Quick Action & Saved Items Sidebar -->
       <div>
         <div class="section-heading-row">
-          <h2>Saved Resources</h2>
+          <h2>Saved Bookmarks</h2>
         </div>
         <div id="dashboard-bookmarks-list" style="margin-bottom: 2rem;">
           <!-- Populated dynamically by app.js -->
@@ -728,6 +942,18 @@ function buildCurriculum() {
   fs.writeFileSync(path.join(outDir, 'index.html'), fullHtml, 'utf8');
 }
 
+function timestampToSeconds(ts) {
+  if (!ts) return 0;
+  const clean = ts.toString().replace(/[^\d:]/g, '');
+  const parts = clean.split(':').map(Number);
+  if (parts.length === 3) {
+    return parts[0] * 3600 + parts[1] * 60 + parts[2];
+  } else if (parts.length === 2) {
+    return parts[0] * 60 + parts[1];
+  }
+  return 0;
+}
+
 // C. Build Individual Lesson Pages (lessons/[slug]/index.html)
 function buildLessons() {
   console.log(`[BUILD] Building ${database.lessons.length} Lesson Pages...`);
@@ -741,14 +967,60 @@ function buildLessons() {
 
     const renderedBody = transformObsidian(lesson.body, lesson);
 
+    // Derive module number
+    const modMatch = (lesson.module || '').match(/module\s*(\d)/i) || lesson.filePath.match(/0(\d)_/);
+    const modNum = modMatch ? parseInt(modMatch[1], 10) : 1;
+
+    // Find relevant practice lab
+    let relatedLab = database.practice.find(p => p.slug === `ex0${modNum}` || p.slug.startsWith(`ex0${modNum}`));
+    if (!relatedLab && modNum >= 8) {
+      relatedLab = database.projects[0] || database.practice[0];
+    }
+
+    // Find recommended dataset
+    let datasetInfo = { name: 'Sample Superstore (9,994 rows)', url: `${BASE_URL}datasets/#superstore` };
+    if (modNum === 2 || modNum === 5) {
+      datasetInfo = { name: 'Hotel Reservations (36,275 bookings)', url: `${BASE_URL}datasets/#hotel` };
+    } else if (modNum >= 8) {
+      datasetInfo = { name: 'PwC Call Center Performance (5,000 records)', url: `${BASE_URL}datasets/#call-center` };
+    }
+
+    // Related formulas
+    const modFormulas = database.formulas.filter(f => {
+      const cat = (f.data.category || '').toLowerCase();
+      if (modNum === 3) return ['lookup', 'logical', 'aggregation', 'dynamic_array', 'date_and_time'].includes(cat);
+      if (modNum === 5) return ['aggregation'].includes(cat);
+      if (modNum === 9) return cat === 'dax';
+      return false;
+    }).slice(0, 4);
+
     const videoBadge = lesson.data.video_chapter ? `
       <div class="meta-item">
         <span>🎥</span>
-        <span>${lesson.data.video_chapter.replace(/\\"/g, '"')} (${lesson.data.video_timestamp ? lesson.data.video_timestamp.replace(/\\"/g, '') : 'Video'})</span>
+        <a href="${BASE_URL}#course-video-player" style="color: inherit; text-decoration: underline;" title="Seek to video timestamp">
+          ${lesson.data.video_chapter.replace(/\\"/g, '"')} (${lesson.data.video_timestamp ? lesson.data.video_timestamp.replace(/\\"/g, '') : 'Video'})
+        </a>
       </div>
     ` : '';
 
     const html = `
+      <!-- Obsidian Source Synchronizer Bar -->
+      <div class="obsidian-source-bar" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); padding: 0.5rem 0.85rem; border-radius: var(--radius-md); margin-bottom: 1.25rem; font-size: 0.85rem;">
+        <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary);">
+          <span>📁</span>
+          <code>${lesson.relPath}</code>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <a href="https://github.com/Sohila-Khaled-Abbas/COURSE-EXCEL-ZERO-TO-HERO/blob/main/${lesson.relPath}" target="_blank" rel="noopener noreferrer" class="obsidian-source-link" style="color: var(--brand-primary); font-weight: 600; text-decoration: none;">
+            View Note on GitHub ↗
+          </a>
+          <span style="color: var(--border-default);">|</span>
+          <a href="obsidian://open?vault=COURSE-EXCEL-ZERO-TO-HERO&file=${encodeURIComponent(lesson.relPath)}" class="obsidian-source-link" style="color: var(--text-muted); text-decoration: none;" title="Open in local Obsidian app">
+            Open in Obsidian
+          </a>
+        </div>
+      </div>
+
       <div class="page-header-box">
         <span class="page-category-badge">${lesson.module || 'Core Curriculum'}</span>
         <h1 class="page-title">${lesson.title}</h1>
@@ -783,8 +1055,47 @@ function buildLessons() {
         ${renderedBody}
       </article>
 
+      <!-- Smart Connected Knowledge & Practice Widget -->
+      <section class="smart-relationships-box" style="margin-top: 3rem; background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-lg); padding: 1.5rem;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin: 0; display: flex; align-items: center; gap: 0.5rem;">
+            <span>🔗</span>
+            <span>Connected Knowledge & Hands-On Practice</span>
+          </h3>
+          <span class="meta-pill" style="color: var(--brand-primary); border-color: var(--brand-primary);">8-Step Learning Loop</span>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+          ${relatedLab ? `
+            <div style="background: var(--bg-surface-elevated); padding: 0.85rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+              <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--brand-primary); margin-bottom: 0.35rem;">🎯 Practice Lab</div>
+              <a href="${relatedLab.url}" style="font-size: 0.92rem; font-weight: 600; color: var(--text-primary); text-decoration: none;">${relatedLab.title}</a>
+            </div>
+          ` : ''}
+
+          <div style="background: var(--bg-surface-elevated); padding: 0.85rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+            <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: #2563eb; margin-bottom: 0.35rem;">📊 Recommended Dataset</div>
+            <a href="${datasetInfo.url}" style="font-size: 0.92rem; font-weight: 600; color: var(--text-primary); text-decoration: none;">${datasetInfo.name}</a>
+          </div>
+
+          ${modFormulas.length > 0 ? `
+            <div style="background: var(--bg-surface-elevated); padding: 0.85rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+              <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--brand-purple); margin-bottom: 0.35rem;">⚡ Key Functions</div>
+              <div style="display: flex; gap: 0.35rem; flex-wrap: wrap;">
+                ${modFormulas.map(f => `<a href="${f.url}" class="meta-pill" style="font-size: 0.78rem;">=${f.title.replace(/ Function/i, '')}</a>`).join('')}
+              </div>
+            </div>
+          ` : ''}
+
+          <div style="background: var(--bg-surface-elevated); padding: 0.85rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+            <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: #d97706; margin-bottom: 0.35rem;">🧠 Visual Architecture</div>
+            <a href="${BASE_URL}mindmap/" style="font-size: 0.92rem; font-weight: 600; color: var(--text-primary); text-decoration: none;">Explore Module ${modNum} in Mind Map →</a>
+          </div>
+        </div>
+      </section>
+
       <!-- Bottom Pagination (Previous / Next Lesson) -->
-      <nav class="page-pagination-footer">
+      <nav class="page-pagination-footer" style="margin-top: 2rem;">
         ${prevLesson ? `
           <a href="${prevLesson.url}" class="pagination-card">
             <span class="pagination-label">← Previous Lesson</span>
@@ -1634,7 +1945,771 @@ function buildReference() {
   });
 }
 
-// J. Build 404 Page (404.html)
+// J. Build Course Orientation & Start Here (start-here/index.html)
+function buildStartHere() {
+  console.log('[BUILD] Building Start Here Orientation Page...');
+  const outDir = path.join(DIST_DIR, 'start-here');
+  ensureDir(outDir);
+
+  const firstLesson = database.lessons[0] || { url: `${BASE_URL}curriculum/`, title: 'Lesson 1.1' };
+
+  const html = `
+    <div class="page-header-box">
+      <span class="page-category-badge">Course Orientation & Study Guide</span>
+      <h1 class="page-title">Start Here: Master Spreadsheet Analytics</h1>
+      <p class="page-subtitle">Welcome to Excel Zero to Hero! This orientation outlines how our 9-module curriculum is organized, how to leverage our multi-modal learning resources, and how to follow our proven 8-step active learning loop.</p>
+    </div>
+
+    <!-- Target Audience & Prerequisites Grid -->
+    <div class="metrics-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-bottom: 2.5rem;">
+      <div class="metric-card" style="flex-direction: column; align-items: flex-start; padding: 1.5rem; gap: 0.75rem;">
+        <div style="font-size: 1.75rem;">🌱</div>
+        <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary);">Who This Course Is For</h3>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5;">
+          Designed for beginners entering data fields, business professionals wanting to eliminate manual spreadsheet chaos, and analysts preparing for technical Excel/BI interviews.
+        </p>
+      </div>
+
+      <div class="metric-card" style="flex-direction: column; align-items: flex-start; padding: 1.5rem; gap: 0.75rem;">
+        <div style="font-size: 1.75rem;">⚙️</div>
+        <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary);">Prerequisites</h3>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5;">
+          Zero programming or advanced mathematics required. You only need basic computer literacy and Microsoft Excel (Excel 365, Excel 2021, or Excel 2019 desktop app recommended).
+        </p>
+      </div>
+
+      <div class="metric-card" style="flex-direction: column; align-items: flex-start; padding: 1.5rem; gap: 0.75rem;">
+        <div style="font-size: 1.75rem;">🎯</div>
+        <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary);">Expected Outcomes</h3>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5;">
+          Progress from basic cell references to mastering 65+ formulas, dynamic arrays, ListObject table design, automated Power Query ETL pipelines, Star Schema modeling, and DAX measures.
+        </p>
+      </div>
+    </div>
+
+    <!-- The 8-Step Active Learning Loop -->
+    <div style="margin-bottom: 3.5rem;">
+      <div class="section-heading-row">
+        <h2>🔄 The 8-Step Active Learning Loop</h2>
+        <span class="meta-pill" style="color: var(--brand-primary); border-color: var(--brand-primary);">Pedagogical Method</span>
+      </div>
+      <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.6;">
+        Passive watching yields low retention. Our platform is built around a structured 8-step cycle proven to build muscle memory and analytical autonomy:
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem;">
+        ${[
+          { step: '1', title: 'Watch', icon: '🎥', desc: 'Stream the video lecture segment to observe live click paths, UI ergonomics, and immediate visual feedback.' },
+          { step: '2', title: 'Understand', icon: '📖', desc: 'Read the comprehensive lesson note to grasp formal syntax, argument mechanics, and architectural principles.' },
+          { step: '3', title: 'Explore', icon: '🧠', desc: 'Consult atomic concept cards and the visual Mind Map to connect the topic with broader business intelligence models.' },
+          { step: '4', title: 'Practice', icon: '⌨️', desc: 'Open the associated hands-on Excel workbook in our Practice Center and solve progressive Level 1 to Level 4 challenges.' },
+          { step: '5', title: 'Validate', icon: '💡', desc: 'Expand the collapsible verified solution walkthroughs to compare your formulas against industry best practices.' },
+          { step: '6', title: 'Apply', icon: '📊', desc: 'Conduct exploratory analysis on production-scale benchmark datasets (Superstore, Hotel Reservations, PwC Call Center).' },
+          { step: '7', title: 'Revise', icon: '🗂️', desc: 'Solidify recall using 3D flip flashcards, the 15-minute technical cram sheet, and senior interview diagnostic questions.' },
+          { step: '8', title: 'Build Portfolio', icon: '🏆', desc: 'Synthesize your skills in end-to-end case studies that communicate measurable business impact to recruiters.' },
+        ].map(s => `
+          <div style="background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: 1.25rem;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+              <span style="font-size: 1.5rem;">${s.icon}</span>
+              <span class="meta-pill" style="font-weight: 800;">Step ${s.step}</span>
+            </div>
+            <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.35rem;">${s.title}</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.45; margin: 0;">${s.desc}</p>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+    <!-- The Multi-Modal Ecosystem Grid -->
+    <div style="margin-bottom: 3.5rem;">
+      <div class="section-heading-row">
+        <h2>🌐 How Our Learning Resources Work Together</h2>
+      </div>
+
+      <div style="overflow-x: auto; background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-lg); padding: 1rem;">
+        <table class="data-table" style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+          <thead>
+            <tr style="border-bottom: 2px solid var(--border-default); text-align: left;">
+              <th style="padding: 0.75rem 1rem;">Resource</th>
+              <th style="padding: 0.75rem 1rem;">Primary Medium</th>
+              <th style="padding: 0.75rem 1rem;">Core Purpose</th>
+              <th style="padding: 0.75rem 1rem;">When To Use</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--border-subtle);">
+              <td style="padding: 0.75rem 1rem;"><strong>YouTube Masterclass</strong></td>
+              <td style="padding: 0.75rem 1rem;"><span class="meta-pill">Video Player</span></td>
+              <td style="padding: 0.75rem 1rem;">5+ hours of visual instruction and live walkthroughs</td>
+              <td style="padding: 0.75rem 1rem;">First-time exposure and visual orientation</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-subtle);">
+              <td style="padding: 0.75rem 1rem;"><strong>MindMeister Mind Map</strong></td>
+              <td style="padding: 0.75rem 1rem;"><span class="meta-pill">Interactive Map</span></td>
+              <td style="padding: 0.75rem 1rem;">Cognitive hierarchy and multi-module skill connections</td>
+              <td style="padding: 0.75rem 1rem;">Reviewing how concepts relate across modules</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-subtle);">
+              <td style="padding: 0.75rem 1rem;"><strong>Obsidian Knowledge Vault</strong></td>
+              <td style="padding: 0.75rem 1rem;"><span class="meta-pill">Markdown Vault</span></td>
+              <td style="padding: 0.75rem 1rem;">Permanent notes, formula syntax rules, and concept cards</td>
+              <td style="padding: 0.75rem 1rem;">Deep technical reference and authoring updates</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-subtle);">
+              <td style="padding: 0.75rem 1rem;"><strong>Google Drive Materials</strong></td>
+              <td style="padding: 0.75rem 1rem;"><span class="meta-pill">Workbooks & Slides</span></td>
+              <td style="padding: 0.75rem 1rem;">Raw Excel files, demonstration templates, and slide decks</td>
+              <td style="padding: 0.75rem 1rem;">Tactile keyboard practice and following along</td>
+            </tr>
+            <tr>
+              <td style="padding: 0.75rem 1rem;"><strong>Web Learning Platform</strong></td>
+              <td style="padding: 0.75rem 1rem;"><span class="meta-pill">Static Web Hub</span></td>
+              <td style="padding: 0.75rem 1rem;">Search, study planner, progress tracking, and flashcards</td>
+              <td style="padding: 0.75rem 1rem;">Daily learning dashboard, quizzes, and revision</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Responsible AI Guidance -->
+    <div style="background: var(--bg-surface); border: 1px solid var(--border-default); border-left: 5px solid var(--brand-purple); border-radius: var(--radius-lg); padding: 1.75rem; margin-bottom: 3.5rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+        <span style="font-size: 1.5rem;">🤖</span>
+        <h3 style="font-size: 1.25rem; margin: 0; font-weight: 800;">Responsible AI Usage & Verification Policy</h3>
+      </div>
+      <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">
+        Modern data analysts use generative AI (Copilot, ChatGPT, Gemini) to accelerate productivity. However, AI cannot replace spreadsheet intuition. In enterprise environments, entering an unverified formula can corrupt financial statements or customer billing.
+      </p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+        <div style="background: var(--bg-surface-elevated); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+          <strong style="color: var(--brand-primary); display: block; margin-bottom: 0.35rem;">✓ Recommended AI Uses</strong>
+          <ul style="font-size: 0.85rem; color: var(--text-muted); padding-left: 1.25rem; margin: 0; line-height: 1.5;">
+            <li>Explaining cryptic errors (#VALUE!, #CALC!, circular refs)</li>
+            <li>Generating synthetic dummy data for testing formulas</li>
+            <li>Suggesting alternative formulas (e.g. INDEX/MATCH vs XLOOKUP)</li>
+            <li>Brainstorming regex or Power Query M expressions</li>
+          </ul>
+        </div>
+        <div style="background: var(--bg-surface-elevated); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+          <strong style="color: #ef4444; display: block; margin-bottom: 0.35rem;">✗ Prohibited / Risky Habits</strong>
+          <ul style="font-size: 0.85rem; color: var(--text-muted); padding-left: 1.25rem; margin: 0; line-height: 1.5;">
+            <li>Pasting complex formulas without auditing argument boundaries</li>
+            <li>Assuming AI knows your data types or date formats correctly</li>
+            <li>Allowing AI to alter raw source data without a transformation log</li>
+            <li>Relying on AI for basic calculations before mastering fundamentals</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ready to Start CTA -->
+    <div style="text-align: center; padding: 2.5rem 1rem; background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-lg);">
+      <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem;">Ready to Begin Your Analytics Journey?</h2>
+      <p style="color: var(--text-muted); max-width: 550px; margin: 0 auto 1.5rem; line-height: 1.5;">
+        Start with Module 1 to master the spreadsheet interface and understand how professional data analysts structure their workflow.
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="${firstLesson.url}" class="btn btn-primary">
+          Start Lesson 1.1 →
+        </a>
+        <a href="${BASE_URL}curriculum/" class="btn btn-secondary">
+          Explore 9-Module Roadmap
+        </a>
+        <a href="${BASE_URL}mindmap/" class="btn btn-secondary">
+          View Visual Mind Map
+        </a>
+      </div>
+    </div>
+  `;
+
+  fs.writeFileSync(
+    path.join(outDir, 'index.html'),
+    renderPageLayout({
+      title: 'Start Here: Course Orientation',
+      pageId: 'start-here',
+      type: 'guide',
+      content: html,
+      activeNav: 'start-here',
+      breadcrumbs: [{ label: 'Start Here' }]
+    }),
+    'utf8'
+  );
+}
+
+// K. Build Course Mind Map (mindmap/index.html)
+function buildMindMap() {
+  console.log('[BUILD] Building Course Mind Map Page...');
+  const outDir = path.join(DIST_DIR, 'mindmap');
+  ensureDir(outDir);
+
+  const html = `
+    <div class="page-header-box">
+      <span class="page-category-badge">Visual Learning & Mental Models</span>
+      <h1 class="page-title">Interactive Course Mind Map</h1>
+      <p class="page-subtitle">A visual, hierarchical architecture of the entire 9-module curriculum. Trace how core cell mechanics connect with formulas, tables, pivot tables, data cleaning, Power Query ETL, and DAX dimensional modeling.</p>
+    </div>
+
+    <!-- Action Bar & View Controls -->
+    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.5rem; padding: 0.85rem 1.25rem; background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-md);">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <a href="https://www.mindmeister.com/app/map/3782166881?t=I9gXHbkAlV" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+          Open in MindMeister (Interactive 3D App) ↗
+        </a>
+        <button id="toggle-mindmap-view-btn" class="btn btn-secondary btn-sm">
+          Switch to High-Res Local Architecture Diagram
+        </button>
+      </div>
+      <div style="font-size: 0.82rem; color: var(--text-muted);">
+        Map ID: 3782166881 • 9 Modules • 38 Lessons Mapped
+      </div>
+    </div>
+
+    <!-- Primary Interactive Embed Container -->
+    <div id="mindmap-iframe-container" class="mindmap-embed-wrapper" style="position: relative; width: 100%; height: 680px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-default); background: var(--bg-surface); box-shadow: var(--shadow-md);">
+      <iframe src="https://www.mindmeister.com/maps/public_map_shell/3782166881?t=I9gXHbkAlV" title="Excel Zero to Hero Interactive Course Mind Map" width="100%" height="100%" frameborder="0" scrolling="no" style="overflow: hidden; border: none;" allowfullscreen></iframe>
+      <div class="mindmap-embed-fallback-bar" style="padding: 0.65rem 1rem; background: var(--bg-surface-elevated); border-top: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between; font-size: 0.82rem; color: var(--text-muted);">
+        <span>💡 Note: If third-party iframe cookies are blocked in your browser, click "Open in MindMeister" above or toggle the diagram view.</span>
+        <a href="https://www.mindmeister.com/app/map/3782166881?t=I9gXHbkAlV" target="_blank" rel="noopener noreferrer" style="color: var(--brand-primary); font-weight: 600;">Direct Link ↗</a>
+      </div>
+    </div>
+
+    <!-- Local High-Res Diagram Container (Toggleable) -->
+    <div id="mindmap-diagram-container" style="display: none; margin-top: 1rem;">
+      <div style="background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 2rem;">
+        <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 0.5rem;">Enterprise Analytics Architecture Mind Map</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">High-resolution conceptual hierarchy showing the progression from data ingestion to BI modeling.</p>
+        <img src="${BASE_URL}assets/images/enterprise-architecture-mindmap.png" alt="Enterprise Architecture Mind Map" loading="lazy" style="width: 100%; height: auto; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);" />
+      </div>
+
+      <div style="background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-lg); padding: 1.5rem;">
+        <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 0.5rem;">Data Quality & Cleaning Framework Mind Map</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">The DAMA 6 Dimensions of Data Quality and enterprise audit rules.</p>
+        <img src="${BASE_URL}assets/images/data-quality-mind-map.png" alt="Data Quality Mind Map" loading="lazy" style="width: 100%; height: auto; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);" />
+      </div>
+    </div>
+
+    <!-- Mind Map Conceptual Structure Guide -->
+    <div style="margin-top: 3.5rem;">
+      <div class="section-heading-row">
+        <h2>🗺️ The 3-Tier Curriculum Architecture</h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-lg); padding: 1.5rem;">
+          <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">🧱</div>
+          <span class="meta-pill" style="color: var(--brand-primary); margin-bottom: 0.5rem;">Tier 1: Foundation</span>
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;">Data Capture, Hygiene & UI</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+            <strong>Modules 1, 2 & 7:</strong> Grid coordinates, primitive data types, custom number formatting, list validation, deduplication, and the DAMA 6 Dimensions of Data Quality. Ensures data is structured before analysis begins.
+          </p>
+        </div>
+
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-lg); padding: 1.5rem;">
+          <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">⚡</div>
+          <span class="meta-pill" style="color: #2563eb; margin-bottom: 0.5rem;">Tier 2: Calculation</span>
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;">Analytical Computation & Summaries</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+            <strong>Modules 3, 4, 5 & 6:</strong> Relative vs Absolute references, dynamic array calculations, XLOOKUP, Excel Tables (<code>ListObject</code>), multi-dimensional PivotTables, and executive KPI dashboard visualization.
+          </p>
+        </div>
+
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-lg); padding: 1.5rem;">
+          <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">🚀</div>
+          <span class="meta-pill" style="color: var(--brand-purple); margin-bottom: 0.5rem;">Tier 3: Enterprise BI</span>
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;">Automated ETL & Scaled Modeling</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+            <strong>Modules 8, 9 & Capstone:</strong> Power Query M pipelines, column unpivoting, fuzzy merging, Star Schema relationship modeling, CALCULATE context transitions, and executive portfolio presentation.
+          </p>
+        </div>
+      </div>
+    </div>
+  `;
+
+  fs.writeFileSync(
+    path.join(outDir, 'index.html'),
+    renderPageLayout({
+      title: 'Course Mind Map',
+      pageId: 'mindmap',
+      type: 'mindmap',
+      content: html,
+      activeNav: 'mindmap',
+      breadcrumbs: [{ label: 'Course Mind Map' }]
+    }),
+    'utf8'
+  );
+}
+
+// L. Build Dataset Library (datasets/index.html)
+function buildDatasets() {
+  console.log('[BUILD] Building Dataset Library Page...');
+  const outDir = path.join(DIST_DIR, 'datasets');
+  ensureDir(outDir);
+
+  const html = `
+    <div class="page-header-box">
+      <span class="page-category-badge">Hands-On Practice Data</span>
+      <h1 class="page-title">Enterprise Dataset Library & Labs</h1>
+      <p class="page-subtitle">Production-scale, verified datasets used throughout our curriculum, practice exercises, and capstone projects. Each dataset includes documented schemas, verified row counts, business scenarios, and direct access links.</p>
+    </div>
+
+    <!-- Domain Filter Bar -->
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem;">
+      <button class="btn btn-primary btn-sm dataset-filter-btn" data-domain="all">All Datasets (4 Collections)</button>
+      <button class="btn btn-secondary btn-sm dataset-filter-btn" data-domain="retail">Retail & E-Commerce</button>
+      <button class="btn btn-secondary btn-sm dataset-filter-btn" data-domain="hospitality">Hospitality Operations</button>
+      <button class="btn btn-secondary btn-sm dataset-filter-btn" data-domain="telecom">Telecom & Customer BI</button>
+      <button class="btn btn-secondary btn-sm dataset-filter-btn" data-domain="workbooks">Curriculum Workbooks</button>
+    </div>
+
+    <!-- Dataset Cards Grid -->
+    <div class="metrics-grid" style="grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
+      
+      <!-- Dataset 1: Sample Superstore -->
+      <div id="superstore" class="metric-card dataset-card" data-domain="retail" style="flex-direction: column; align-items: flex-start; padding: 1.75rem; gap: 1rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+          <span class="meta-pill" style="color: #107c41; border-color: rgba(16, 124, 65, 0.4); background: rgba(16, 124, 65, 0.1);">Retail Benchmark</span>
+          <span class="meta-pill">9,994 Rows • 19 Cols</span>
+        </div>
+        <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--text-primary); margin: 0;">Sample Superstore Sales</h2>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; margin: 0;">
+          A multi-regional US commercial retail transaction dataset spanning 2014 to 2017. Total revenue $2,297,200 with $286,397 profit across 4 geographic regions and 3 customer segments (Consumer, Corporate, Home Office).
+        </p>
+        <div style="display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.82rem; color: var(--text-muted); width: 100%; border-top: 1px solid var(--border-subtle); padding-top: 0.75rem;">
+          <div><strong>Data Grain:</strong> Single line-item purchase within an order</div>
+          <div><strong>Skills Practiced:</strong> XLOOKUP, SUMIFS, ListObject Tables, Slicers, Pareto Distribution</div>
+          <div><strong>Related Modules:</strong> Module 2, Module 3, Module 4, Module 5, Module 6</div>
+        </div>
+        <div style="display: flex; gap: 0.5rem; width: 100%; margin-top: auto; flex-wrap: wrap;">
+          <a href="${BASE_URL}reference/sample-superstore-dataset-documentation/" class="btn btn-secondary btn-sm" style="flex: 1;">View Data Dictionary</a>
+          <a href="${BASE_URL}practice/ex03_excel_tables_and_structured_references/" class="btn btn-primary btn-sm" style="flex: 1;">Practice Lab (Ex03) →</a>
+        </div>
+      </div>
+
+      <!-- Dataset 2: Hotel Reservations -->
+      <div id="hotel" class="metric-card dataset-card" data-domain="hospitality" style="flex-direction: column; align-items: flex-start; padding: 1.75rem; gap: 1rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+          <span class="meta-pill" style="color: #d97706; border-color: rgba(217, 119, 6, 0.4); background: rgba(217, 119, 6, 0.1);">Hospitality Operations</span>
+          <span class="meta-pill">36,275 Rows • 19 Cols</span>
+        </div>
+        <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--text-primary); margin: 0;">Hotel Reservations Classification</h2>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; margin: 0;">
+          A rich hospitality dataset documenting guest booking patterns, meal plans, room types, lead time (0 to 443 days), average price per room (€103.42), and cancellation status (32.76% overall cancellation rate).
+        </p>
+        <div style="display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.82rem; color: var(--text-muted); width: 100%; border-top: 1px solid var(--border-subtle); padding-top: 0.75rem;">
+          <div><strong>Data Grain:</strong> Single guest reservation booking</div>
+          <div><strong>Skills Practiced:</strong> Data validation, missing value imputation, pivot cross-tabulation, revenue risk</div>
+          <div><strong>Sources:</strong> Kaggle Benchmark & HuggingFace Mirror</div>
+        </div>
+        <div style="display: flex; gap: 0.5rem; width: 100%; margin-top: auto; flex-wrap: wrap;">
+          <a href="${BASE_URL}reference/hotel-reservations-dataset-documentation/" class="btn btn-secondary btn-sm" style="flex: 1;">Documentation</a>
+          <a href="${BASE_URL}projects/hotel-reservation-analysis/" class="btn btn-primary btn-sm" style="flex: 1;">Case Study →</a>
+          <a href="https://www.kaggle.com/datasets/ahsan81/hotel-reservations-classification-dataset" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="width: 100%;">Kaggle Source ↗</a>
+        </div>
+      </div>
+
+      <!-- Dataset 3: PwC Call Center -->
+      <div id="call-center" class="metric-card dataset-card" data-domain="telecom" style="flex-direction: column; align-items: flex-start; padding: 1.75rem; gap: 1rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+          <span class="meta-pill" style="color: #2563eb; border-color: rgba(37, 99, 235, 0.4); background: rgba(37, 99, 235, 0.1);">Telecom BI Capstone</span>
+          <span class="meta-pill">5,000 Records • 10 Cols</span>
+        </div>
+        <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--text-primary); margin: 0;">PwC Call Center Performance</h2>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; margin: 0;">
+          A corporate simulation evaluating 5,000 customer service telephony records for Q1 2021. Tracks First Call Resolution (FCR ~72.9%), agent utilization, speed of answer (67.5s avg), and satisfaction scores (3.4 / 5.0 CSAT).
+        </p>
+        <div style="display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.82rem; color: var(--text-muted); width: 100%; border-top: 1px solid var(--border-subtle); padding-top: 0.75rem;">
+          <div><strong>Data Grain:</strong> Single customer service phone interaction</div>
+          <div><strong>Skills Practiced:</strong> Power Pivot, Star Schema, DAX Measures, Executive KPI cards</div>
+          <div><strong>Source:</strong> PwC Virtual BI Case Experience</div>
+        </div>
+        <div style="display: flex; gap: 0.5rem; width: 100%; margin-top: auto; flex-wrap: wrap;">
+          <a href="${BASE_URL}projects/call-center-performance-analysis/#doc-data-dictionary" class="btn btn-secondary btn-sm" style="flex: 1;">Data Dictionary</a>
+          <a href="${BASE_URL}projects/call-center-performance-analysis/" class="btn btn-primary btn-sm" style="flex: 1;">Full Capstone →</a>
+        </div>
+      </div>
+
+      <!-- Dataset 4: Course Workbooks -->
+      <div id="workbooks" class="metric-card dataset-card" data-domain="workbooks" style="flex-direction: column; align-items: flex-start; padding: 1.75rem; gap: 1rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+          <span class="meta-pill" style="color: var(--brand-purple); border-color: rgba(124, 58, 237, 0.4); background: rgba(124, 58, 237, 0.1);">Curriculum Workbooks</span>
+          <span class="meta-pill">10+ Workbooks • Excel (.xlsx)</span>
+        </div>
+        <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--text-primary); margin: 0;">Chapter Practice Workbooks</h2>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; margin: 0;">
+          Pre-built exercise workbooks and completed instructor demonstrations saved in <code>11_Demos_and_Workbooks/</code>, including <em>Conditional Formatting & Absolute Relative.xlsx</em>, <em>Formulas_&_Functions_Part_1.xlsx</em>, and <em>2-Module_2 Test Data.xlsx</em>.
+        </p>
+        <div style="display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.82rem; color: var(--text-muted); width: 100%; border-top: 1px solid var(--border-subtle); padding-top: 0.75rem;">
+          <div><strong>Location:</strong> Google Drive Course Materials Folder</div>
+          <div><strong>Usage:</strong> Download to local disk to follow along with video lectures</div>
+        </div>
+        <div style="display: flex; gap: 0.5rem; width: 100%; margin-top: auto;">
+          <a href="https://drive.google.com/drive/folders/1FbT96Hyp9KZbmjT2UeP-CVK0gL1JPn0T" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" style="width: 100%;">
+            Open Course Materials in Google Drive ↗
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Data Quality & Governance Callout -->
+    <div style="background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-lg); padding: 1.75rem;">
+      <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 0.75rem;">🛡️ Data Quality Standards Across Datasets</h3>
+      <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+        In real-world data jobs, 80% of an analyst's time is spent preparing and verifying data. All datasets in our library are grounded in the <strong>DAMA 6 Dimensions of Data Quality</strong>:
+      </p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; font-size: 0.85rem;">
+        <div style="background: var(--bg-surface-elevated); padding: 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);"><strong>1. Completeness:</strong> Zero unplanned null keys in critical dimensions.</div>
+        <div style="background: var(--bg-surface-elevated); padding: 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);"><strong>2. Uniqueness:</strong> Deduplication across primary order/booking IDs.</div>
+        <div style="background: var(--bg-surface-elevated); padding: 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);"><strong>3. Timeliness:</strong> ISO-compliant date formatting (YYYY-MM-DD).</div>
+        <div style="background: var(--bg-surface-elevated); padding: 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);"><strong>4. Validity:</strong> List validation enforcement on categorical fields.</div>
+        <div style="background: var(--bg-surface-elevated); padding: 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);"><strong>5. Accuracy:</strong> Reconciled totals matching accounting ledgers.</div>
+        <div style="background: var(--bg-surface-elevated); padding: 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);"><strong>6. Consistency:</strong> Cross-table relationship referential integrity.</div>
+      </div>
+    </div>
+  `;
+
+  fs.writeFileSync(
+    path.join(outDir, 'index.html'),
+    renderPageLayout({
+      title: 'Enterprise Dataset Library',
+      pageId: 'datasets',
+      type: 'dataset',
+      content: html,
+      activeNav: 'datasets',
+      breadcrumbs: [{ label: 'Dataset Library' }]
+    }),
+    'utf8'
+  );
+}
+
+// M. Build Unified Learning Resources Hub (resources/index.html)
+function buildResources() {
+  console.log('[BUILD] Building Learning Resources Hub...');
+  const outDir = path.join(DIST_DIR, 'resources');
+  ensureDir(outDir);
+
+  const html = `
+    <div class="page-header-box">
+      <span class="page-category-badge">Unified Directory</span>
+      <h1 class="page-title">Central Learning Resources Hub</h1>
+      <p class="page-subtitle">A comprehensive, single-entry directory bringing together all external tools, downloadable workbooks, source code repositories, and technical reference guides.</p>
+    </div>
+
+    <!-- Core Integrated Resources Grid -->
+    <div class="metrics-grid" style="grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
+      
+      <!-- Resource 1: YouTube Video -->
+      <div class="metric-card" style="flex-direction: column; align-items: flex-start; padding: 1.75rem; gap: 1rem;">
+        <div style="display: flex; justify-content: space-between; width: 100%;">
+          <span class="meta-pill" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.4); background: rgba(239, 68, 68, 0.1);">Video Lecture</span>
+          <span class="meta-pill">5+ Hours</span>
+        </div>
+        <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--text-primary); margin: 0;">Full YouTube Masterclass</h2>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; margin: 0;">
+          The complete masterclass lecture covering interface navigation, cell mechanics, formulas, dynamic arrays, tables, pivot tables, data cleaning, Power Query ETL, and DAX modeling.
+        </p>
+        <div style="display: flex; gap: 0.5rem; width: 100%; margin-top: auto;">
+          <a href="${BASE_URL}#course-video-player" class="btn btn-primary btn-sm" style="flex: 1;">Watch on Dashboard</a>
+          <a href="https://youtu.be/uv1bxe2gdnU?si=3x0z6LYU5uSkwShe" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="flex: 1;">YouTube ↗</a>
+        </div>
+      </div>
+
+      <!-- Resource 2: MindMeister Mind Map -->
+      <div class="metric-card" style="flex-direction: column; align-items: flex-start; padding: 1.75rem; gap: 1rem;">
+        <div style="display: flex; justify-content: space-between; width: 100%;">
+          <span class="meta-pill" style="color: #d97706; border-color: rgba(217, 119, 6, 0.4); background: rgba(217, 119, 6, 0.1);">Interactive Map</span>
+          <span class="meta-pill">9 Modules</span>
+        </div>
+        <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--text-primary); margin: 0;">Course Mind Map (MindMeister)</h2>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; margin: 0;">
+          Interactive visual mind map tracing how each lesson, concept, and technique connects across the curriculum. Includes local high-resolution offline architecture diagrams.
+        </p>
+        <div style="display: flex; gap: 0.5rem; width: 100%; margin-top: auto;">
+          <a href="${BASE_URL}mindmap/" class="btn btn-primary btn-sm" style="flex: 1;">Explore Mind Map</a>
+          <a href="https://www.mindmeister.com/app/map/3782166881?t=I9gXHbkAlV" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="flex: 1;">MindMeister ↗</a>
+        </div>
+      </div>
+
+      <!-- Resource 3: Google Drive Course Materials -->
+      <div class="metric-card" style="flex-direction: column; align-items: flex-start; padding: 1.75rem; gap: 1rem;">
+        <div style="display: flex; justify-content: space-between; width: 100%;">
+          <span class="meta-pill" style="color: #2563eb; border-color: rgba(37, 99, 235, 0.4); background: rgba(37, 99, 235, 0.1);">Google Drive</span>
+          <span class="meta-pill">Workbooks & Slides</span>
+        </div>
+        <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--text-primary); margin: 0;">Google Drive Materials Hub</h2>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; margin: 0;">
+          Official course repository containing presentation decks, starter Excel files, raw datasets, demo workbooks, and completed instructor solutions.
+        </p>
+        <div style="display: flex; gap: 0.5rem; width: 100%; margin-top: auto;">
+          <a href="https://drive.google.com/drive/folders/1FbT96Hyp9KZbmjT2UeP-CVK0gL1JPn0T" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" style="width: 100%;">
+            Open Materials Folder in Google Drive ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- Resource 4: GitHub Repository -->
+      <div class="metric-card" style="flex-direction: column; align-items: flex-start; padding: 1.75rem; gap: 1rem;">
+        <div style="display: flex; justify-content: space-between; width: 100%;">
+          <span class="meta-pill" style="color: var(--brand-purple); border-color: rgba(124, 58, 237, 0.4); background: rgba(124, 58, 237, 0.1);">Open Source</span>
+          <span class="meta-pill">Git / CI/CD</span>
+        </div>
+        <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--text-primary); margin: 0;">GitHub Source Repository</h2>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; margin: 0;">
+          The open-source code repository hosting the complete Obsidian Markdown vault, GitHub Actions continuous deployment workflows, and the static site generator.
+        </p>
+        <div style="display: flex; gap: 0.5rem; width: 100%; margin-top: auto;">
+          <a href="https://github.com/Sohila-Khaled-Abbas/COURSE-EXCEL-ZERO-TO-HERO" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="width: 100%;">
+            View on GitHub (Sohila-Khaled-Abbas) ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- Resource 5: Dataset Library -->
+      <div class="metric-card" style="flex-direction: column; align-items: flex-start; padding: 1.75rem; gap: 1rem;">
+        <div style="display: flex; justify-content: space-between; width: 100%;">
+          <span class="meta-pill" style="color: #107c41; border-color: rgba(16, 124, 65, 0.4); background: rgba(16, 124, 65, 0.1);">Internal Library</span>
+          <span class="meta-pill">36K+ Records</span>
+        </div>
+        <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--text-primary); margin: 0;">Enterprise Dataset Library</h2>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; margin: 0;">
+          Verified benchmark datasets for Superstore, Hotel Reservations (36K), and PwC Call Center simulation, complete with data dictionaries and grain specifications.
+        </p>
+        <div style="display: flex; gap: 0.5rem; width: 100%; margin-top: auto;">
+          <a href="${BASE_URL}datasets/" class="btn btn-primary btn-sm" style="width: 100%;">Explore Dataset Catalog →</a>
+        </div>
+      </div>
+
+      <!-- Resource 6: Obsidian Vault Guide -->
+      <div class="metric-card" style="flex-direction: column; align-items: flex-start; padding: 1.75rem; gap: 1rem;">
+        <div style="display: flex; justify-content: space-between; width: 100%;">
+          <span class="meta-pill" style="color: var(--text-primary); border-color: var(--border-default);">Knowledge Base</span>
+          <span class="meta-pill">PKM Architecture</span>
+        </div>
+        <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--text-primary); margin: 0;">Obsidian Publishing Guide</h2>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; margin: 0;">
+          Documentation detailing how Obsidian Markdown notes synchronize through GitHub into static HTML pages, frontmatter conventions, callouts, and wikilinks.
+        </p>
+        <div style="display: flex; gap: 0.5rem; width: 100%; margin-top: auto;">
+          <a href="${BASE_URL}obsidian-guide/" class="btn btn-secondary btn-sm" style="width: 100%;">Read Publishing Guide →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Quick Technical Desk References -->
+    <div>
+      <div class="section-heading-row">
+        <h2>📚 Technical Desk References & Tools</h2>
+      </div>
+      <div class="metrics-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+        <a href="${BASE_URL}reference/keyboard-shortcuts/" class="metric-card" style="text-decoration: none; padding: 1.25rem;">
+          <span style="font-size: 1.5rem; margin-bottom: 0.25rem;">⌨️</span>
+          <h3 style="font-size: 1rem; font-weight: 700; color: var(--text-primary);">Keyboard Shortcuts Guide</h3>
+          <p style="font-size: 0.8rem; color: var(--text-muted);">Windows & Mac navigation, formatting, and formula shortcuts.</p>
+        </a>
+
+        <a href="${BASE_URL}reference/excel-cheat-sheet/" class="metric-card" style="text-decoration: none; padding: 1.25rem;">
+          <span style="font-size: 1.5rem; margin-bottom: 0.25rem;">📋</span>
+          <h3 style="font-size: 1rem; font-weight: 700; color: var(--text-primary);">Excel Formula Cheat Sheet</h3>
+          <p style="font-size: 0.8rem; color: var(--text-muted);">One-page desk reference of essential syntax and arguments.</p>
+        </a>
+
+        <a href="${BASE_URL}formulas/" class="metric-card" style="text-decoration: none; padding: 1.25rem;">
+          <span style="font-size: 1.5rem; margin-bottom: 0.25rem;">⚡</span>
+          <h3 style="font-size: 1rem; font-weight: 700; color: var(--text-primary);">Formula Encyclopedia</h3>
+          <p style="font-size: 0.8rem; color: var(--text-muted);">65+ searchable functions with syntax breakdowns and examples.</p>
+        </a>
+
+        <a href="${BASE_URL}concepts/" class="metric-card" style="text-decoration: none; padding: 1.25rem;">
+          <span style="font-size: 1.5rem; margin-bottom: 0.25rem;">💡</span>
+          <h3 style="font-size: 1rem; font-weight: 700; color: var(--text-primary);">Atomic Concepts</h3>
+          <p style="font-size: 0.8rem; color: var(--text-muted);">25 foundational mental models for data architecture and logic.</p>
+        </a>
+      </div>
+    </div>
+  `;
+
+  fs.writeFileSync(
+    path.join(outDir, 'index.html'),
+    renderPageLayout({
+      title: 'Learning Resources Hub',
+      pageId: 'resources',
+      type: 'resource',
+      content: html,
+      activeNav: 'resources',
+      breadcrumbs: [{ label: 'Learning Resources' }]
+    }),
+    'utf8'
+  );
+}
+
+// N. Build Obsidian Publishing Guide (obsidian-guide/index.html)
+function buildObsidianGuide() {
+  console.log('[BUILD] Building Obsidian Publishing Guide...');
+  const outDir = path.join(DIST_DIR, 'obsidian-guide');
+  ensureDir(outDir);
+
+  const html = `
+    <div class="page-header-box">
+      <span class="page-category-badge">Vault to Web Architecture</span>
+      <h1 class="page-title">Obsidian to Website Publishing Guide</h1>
+      <p class="page-subtitle">Learn how this platform connects an author-friendly Obsidian Markdown vault with automated GitHub Actions CI/CD to generate a lightning-fast, accessible static educational website on GitHub Pages.</p>
+    </div>
+
+    <!-- Publishing Architecture Pipeline Diagram -->
+    <div style="background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-lg); padding: 1.75rem; margin-bottom: 3rem;">
+      <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 1rem;">🔄 Automated Git-Backed Publishing Pipeline</h3>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+        <div style="background: var(--bg-surface-elevated); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--brand-purple); text-transform: uppercase;">Stage 1</div>
+          <h4 style="font-size: 1rem; margin: 0.35rem 0;">Obsidian Vault</h4>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Author notes locally in Markdown with YAML frontmatter, wikilinks, and callouts.</p>
+        </div>
+
+        <div style="background: var(--bg-surface-elevated); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+          <div style="font-size: 0.75rem; font-weight: 700; color: #2563eb; text-transform: uppercase;">Stage 2</div>
+          <h4 style="font-size: 1rem; margin: 0.35rem 0;">Git & GitHub</h4>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Push commits to <code>main</code> branch. Version control tracks every lesson revision.</p>
+        </div>
+
+        <div style="background: var(--bg-surface-elevated); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--brand-primary); text-transform: uppercase;">Stage 3</div>
+          <h4 style="font-size: 1rem; margin: 0.35rem 0;">GitHub Actions</h4>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;"><code>.github/workflows/deploy.yml</code> checks out repo, installs Node, and runs build script.</p>
+        </div>
+
+        <div style="background: var(--bg-surface-elevated); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+          <div style="font-size: 0.75rem; font-weight: 700; color: #d97706; text-transform: uppercase;">Stage 4</div>
+          <h4 style="font-size: 1rem; margin: 0.35rem 0;">SSG (build.js)</h4>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Parses vault, converts Obsidian syntax, validates links, builds HTML in <code>dist/</code>.</p>
+        </div>
+
+        <div style="background: var(--bg-surface-elevated); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+          <div style="font-size: 0.75rem; font-weight: 700; color: #107c41; text-transform: uppercase;">Stage 5</div>
+          <h4 style="font-size: 1rem; margin: 0.35rem 0;">GitHub Pages</h4>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Deploys static site to global CDN with zero server maintenance and instant load times.</p>
+        </div>
+      </div>
+      <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">
+        <strong>Zero Duplication Principle:</strong> You never have to manually update HTML or JSON when editing curriculum notes. The Obsidian Markdown files in <code>02_Notes/</code>, <code>03_Concepts/</code>, and <code>04_Formulas/</code> are the single source of truth.
+      </div>
+    </div>
+
+    <!-- Supported Obsidian Syntax Conventions -->
+    <div style="margin-bottom: 3.5rem;">
+      <div class="section-heading-row">
+        <h2>📝 Supported Obsidian Syntax & Conventions</h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-lg); padding: 1.5rem;">
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;">1. YAML Frontmatter</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 0.75rem;">
+            Every educational note begins with YAML frontmatter to populate metadata badges, difficulty indicators, and search tags:
+          </p>
+          <pre style="background: var(--bg-surface-elevated); padding: 0.85rem; border-radius: var(--radius-md); font-size: 0.82rem; overflow-x: auto;"><code>---
+title: "Modern XLOOKUP Mastery"
+module: "Module 3: Formulas & Functions"
+difficulty: "intermediate"
+tags: [xlookup, lookup, dynamic-arrays]
+video_chapter: "Module 3: Formulas & Functions"
+video_timestamp: "01:38:56"
+---</code></pre>
+        </div>
+
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-lg); padding: 1.5rem;">
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;">2. Obsidian Callouts</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 0.75rem;">
+            Use blockquotes with <code>&gt; [!type] Title</code>. These automatically render as colored alert boxes with icons:
+          </p>
+          <pre style="background: var(--bg-surface-elevated); padding: 0.85rem; border-radius: var(--radius-md); font-size: 0.82rem; overflow-x: auto;"><code>&amp;gt; [!tip] Best Practice
+&amp;gt; Always use XLOOKUP instead of VLOOKUP.
+
+&amp;gt; [!warning] Common Mistake
+&amp;gt; Forgetting absolute $ references in copied formulas.</code></pre>
+        </div>
+
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-lg); padding: 1.5rem;">
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;">3. Wikilinks Resolution</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 0.75rem;">
+            Internal vault links using <code>[[Note Name]]</code> or <code>[[Note Name|Custom Text]]</code> are indexed and translated into clean static web URLs:
+          </p>
+          <pre style="background: var(--bg-surface-elevated); padding: 0.85rem; border-radius: var(--radius-md); font-size: 0.82rem; overflow-x: auto;"><code>Refer to [[Relative vs Absolute Referencing]]
+or practice with [[Ex03 - Formulas and Functions|Lab 3]].</code></pre>
+        </div>
+
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-lg); padding: 1.5rem;">
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;">4. Code Blocks with Copy</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 0.75rem;">
+            Fenced code blocks with language identifiers (<code>excel</code>, <code>dax</code>, <code>powerquery</code>) are automatically wrapped with language headers and one-click copy buttons.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Safe Publishing & Privacy Policy -->
+    <div style="background: var(--bg-surface); border: 1px solid var(--border-default); border-left: 5px solid var(--brand-primary); border-radius: var(--radius-lg); padding: 1.75rem; margin-bottom: 3.5rem;">
+      <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 0.75rem;">🔒 Safe Publishing Rules & Privacy Hygiene</h3>
+      <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">
+        To ensure sensitive files, local environment configurations, or unpublished drafts are never exposed on GitHub Pages, the publishing workflow enforces strict exclusion rules:
+      </p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+        <div style="background: var(--bg-surface-elevated); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+          <strong style="color: #ef4444; display: block; margin-bottom: 0.35rem;">⛔ Excluded by Default (.gitignore)</strong>
+          <ul style="font-size: 0.85rem; color: var(--text-muted); padding-left: 1.25rem; margin: 0; line-height: 1.5;">
+            <li><code>.obsidian/</code> workspace configuration & plugins</li>
+            <li>Local machine paths, credentials, and tokens</li>
+            <li>Large raw binaries not meant for Git tracking</li>
+            <li>Temporary editor swap and lock files</li>
+          </ul>
+        </div>
+        <div style="background: var(--bg-surface-elevated); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+          <strong style="color: var(--brand-primary); display: block; margin-bottom: 0.35rem;">✓ Published Content Allowlist</strong>
+          <ul style="font-size: 0.85rem; color: var(--text-muted); padding-left: 1.25rem; margin: 0; line-height: 1.5;">
+            <li><code>02_Notes/</code> — 38 structured curriculum lessons</li>
+            <li><code>03_Concepts/</code> — 25 atomic mental models</li>
+            <li><code>04_Formulas/</code> — 65+ formula encyclopedia notes</li>
+            <li><code>05_Practice/</code>, <code>06_Projects/</code>, <code>07_Reference/</code>, <code>08_Revision/</code></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step-by-Step Guide for Adding Content -->
+    <div style="background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-lg); padding: 1.75rem;">
+      <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 1rem;">🚀 How to Publish a New Lesson or Concept</h3>
+      <ol style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.7; padding-left: 1.5rem; margin: 0;">
+        <li>Open your local Obsidian vault in <code>COURSE-EXCEL-ZERO-TO-HERO</code>.</li>
+        <li>Create a new Markdown note inside the relevant folder (e.g. <code>02_Notes/03_Formulas_and_Functions/</code>).</li>
+        <li>Add the YAML frontmatter block with <code>title</code>, <code>module</code>, and <code>difficulty</code>.</li>
+        <li>Write your lesson content using standard Markdown headings, callouts, and wikilinks.</li>
+        <li>Commit your changes and push to GitHub:
+          <pre style="background: var(--bg-surface-elevated); padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); margin: 0.5rem 0; font-size: 0.85rem;"><code>git add .
+git commit -m "Add Lesson: Advanced Dynamic Arrays"
+git push origin main</code></pre>
+        </li>
+        <li>The GitHub Actions workflow triggers automatically and deploys the update to GitHub Pages within ~60 seconds!</li>
+      </ol>
+    </div>
+  `;
+
+  fs.writeFileSync(
+    path.join(outDir, 'index.html'),
+    renderPageLayout({
+      title: 'Obsidian Publishing Guide',
+      pageId: 'obsidian-guide',
+      type: 'guide',
+      content: html,
+      activeNav: 'obsidian-guide',
+      breadcrumbs: [{ label: 'Obsidian Publishing Guide' }]
+    }),
+    'utf8'
+  );
+}
+
+// O. Build 404 Page (404.html)
 function build404() {
   console.log('[BUILD] Building 404 Page...');
   const html = `
@@ -1664,12 +2739,54 @@ function build404() {
   );
 }
 
-// K. Build Search Index (search-index.json)
+// P. Build Search Index (search-index.json)
 function buildSearchIndex() {
   console.log('[BUILD] Generating Search Index (search-index.json)...');
 
+  const specialPages = [
+    {
+      title: 'Start Here: Course Orientation & Study Guide',
+      url: `${BASE_URL}start-here/`,
+      type: 'guide',
+      category: 'Orientation',
+      tags: ['start here', 'orientation', 'study guide', 'prerequisites', 'learning loop'],
+      snippet: 'Welcome guide explaining the 8-step active learning loop, prerequisites, study pacing, and how to use the video, mind map, notes, and datasets together.'
+    },
+    {
+      title: 'Course Mind Map & Visual Curriculum',
+      url: `${BASE_URL}mindmap/`,
+      type: 'mindmap',
+      category: 'Visual Learning',
+      tags: ['mind map', 'curriculum', 'architecture', 'mindmeister', 'visual'],
+      snippet: 'Interactive MindMeister mind map and local enterprise architecture diagrams connecting all 9 modules from grid mechanics to DAX.'
+    },
+    {
+      title: 'Enterprise Dataset Library & Labs',
+      url: `${BASE_URL}datasets/`,
+      type: 'dataset',
+      category: 'Datasets',
+      tags: ['datasets', 'superstore', 'hotel reservations', 'call center', 'practice data'],
+      snippet: 'Verified benchmark datasets including Sample Superstore (9,994 rows), Hotel Reservations (36,275 bookings), and PwC Call Center (5,000 calls).'
+    },
+    {
+      title: 'Central Learning Resources Hub',
+      url: `${BASE_URL}resources/`,
+      type: 'resource',
+      category: 'Resources',
+      tags: ['resources', 'video', 'drive', 'github', 'mind map', 'cheatsheets'],
+      snippet: 'Unified directory of all course materials, Google Drive workbooks, YouTube masterclass, GitHub repository, and cheat sheets.'
+    },
+    {
+      title: 'Obsidian to Website Publishing Guide',
+      url: `${BASE_URL}obsidian-guide/`,
+      type: 'guide',
+      category: 'Vault Architecture',
+      tags: ['obsidian', 'publishing', 'github actions', 'markdown', 'workflow'],
+      snippet: 'Guide to the Obsidian-to-GitHub-to-Website static publishing pipeline, YAML frontmatter standards, callouts, and wikilink conventions.'
+    }
+  ];
+
   const searchEntries = database.allFiles.map(f => {
-    // Generate clean text snippet (first 140 chars)
     const cleanSnippet = f.body
       .replace(/^#+.*$/gm, '')
       .replace(/>.*$/gm, '')
@@ -1687,7 +2804,7 @@ function buildSearchIndex() {
       tags: f.tags,
       snippet: cleanSnippet
     };
-  });
+  }).concat(specialPages);
 
   fs.writeFileSync(
     path.join(DIST_DIR, 'search-index.json'),
@@ -1696,7 +2813,7 @@ function buildSearchIndex() {
   );
 }
 
-// L. Copy Static Assets (CSS, JS, Images)
+// Q. Copy Static Assets (CSS, JS, Images)
 function copyAssets() {
   console.log('[BUILD] Copying styles, scripts, and media assets...');
   const assetOutDir = path.join(DIST_DIR, 'assets');
@@ -1745,14 +2862,19 @@ function buildAll() {
   console.log(`  - Revision: ${database.revision.length}`);
 
   buildDashboard();
+  buildStartHere();
   buildCurriculum();
+  buildMindMap();
   buildLessons();
   buildConcepts();
   buildFormulas();
   buildPractice();
+  buildDatasets();
   buildRevision();
   buildProjects();
   buildReference();
+  buildResources();
+  buildObsidianGuide();
   build404();
   buildSearchIndex();
   copyAssets();
@@ -1764,3 +2886,4 @@ function buildAll() {
 }
 
 buildAll();
+

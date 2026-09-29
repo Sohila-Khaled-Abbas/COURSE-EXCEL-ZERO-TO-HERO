@@ -41,6 +41,11 @@ check(fs.existsSync(path.join(DIST_DIR, 'search-index.json')), 'search-index.jso
 check(fs.existsSync(path.join(DIST_DIR, 'assets', 'styles.css')), 'assets/styles.css must exist');
 check(fs.existsSync(path.join(DIST_DIR, 'assets', 'app.js')), 'assets/app.js must exist');
 check(fs.existsSync(path.join(DIST_DIR, 'curriculum', 'index.html')), 'curriculum/index.html must exist');
+check(fs.existsSync(path.join(DIST_DIR, 'start-here', 'index.html')), 'start-here/index.html must exist');
+check(fs.existsSync(path.join(DIST_DIR, 'mindmap', 'index.html')), 'mindmap/index.html must exist');
+check(fs.existsSync(path.join(DIST_DIR, 'datasets', 'index.html')), 'datasets/index.html must exist');
+check(fs.existsSync(path.join(DIST_DIR, 'resources', 'index.html')), 'resources/index.html must exist');
+check(fs.existsSync(path.join(DIST_DIR, 'obsidian-guide', 'index.html')), 'obsidian-guide/index.html must exist');
 check(fs.existsSync(path.join(DIST_DIR, 'practice', 'index.html')), 'practice/index.html must exist');
 check(fs.existsSync(path.join(DIST_DIR, 'revision', 'index.html')), 'revision/index.html must exist');
 check(fs.existsSync(path.join(DIST_DIR, 'formulas', 'index.html')), 'formulas/index.html must exist');

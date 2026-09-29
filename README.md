@@ -32,14 +32,20 @@ Experience the entire curriculum through our responsive, browser-based learning 
 
 | Feature | Description |
 | :--- | :--- |
-| **📊 Learning Dashboard** | Personalized starting point with real-time course completion percentage dial, smart "Continue Learning" CTA, and quick access to bookmarked notes. |
+| **🚀 Start Here Orientation** | 8-step learning loop (*Watch → Understand → Explore → Practice → Validate → Apply → Revise → Build a Portfolio*), prerequisites, study path, and AI verification guidelines. |
+| **📺 Masterclass Video Hub** | Embedded responsive 16:9 YouTube player (`uv1bxe2gdnU`) with 9 module-level seekable chapter buttons and fallback link. |
+| **🧠 Interactive Course Mind Map** | Live MindMeister (`3782166881`) interactive embed with view toggles and local high-resolution diagram backups. |
+| **📊 Learning Dashboard & Study Planner** | Personalized dashboard with real-time course completion gauge, "Continue Learning" CTA, and pace selector (Casual, Steady, Intensive) with completion ETA. |
+| **💾 Datasets & Hands-On Labs** | Interactive catalog of benchmark datasets (Sample Superstore [9,994 rows], Hotel Reservations [36,275 rows], PwC Call Center [5,000 records], chapter workbooks) with verified mirrors (Kaggle, Hugging Face, Google Drive). |
 | **🗺️ 9-Module Roadmap** | Interactive progression from Excel fundamentals to data hygiene, formulas, tables, PivotTables, dashboard design, cleaning, Power Query ETL, and DAX. |
-| **📖 38 Interactive Lessons** | Syntax-highlighted formulas with one-click copy, callouts (tips, notes, warnings), reading time, video timestamps, and "Mark as Complete" toggles. |
+| **📖 38 Interactive Lessons** | Syntax-highlighted formulas with one-click copy, callouts, reading time, seekable video timestamps, Obsidian sync bar, and smart relationship widgets. |
 | **🎯 Practice & Quizzes** | 7 guided exercises with collapsible step-by-step solution walkthroughs, multi-level business challenges, AI labs, and interactive self-check quizzes. |
 | **🗂️ 3D Flip Flashcards** | Active recall deck with 3D flip animation, shuffle, keyboard shortcuts (`Space`, `Arrows`), and self-assessment tracking ("Know it" vs "Review again"). |
 | **⚡ 65+ Formula Library** | Searchable directory categorized by Aggregation, Date & Time, DAX, Dynamic Array, Logical, Lookup, and Text with syntax and argument breakdowns. |
 | **💼 Portfolio & Projects** | Full case study documentation for the **PwC Call Center Performance Analysis** capstone and **Hotel Reservation Cancellation Analysis**. |
-| **🔍 Site-Wide Search** | Instant `Ctrl + K` fuzzy search modal across all 207 pages with keyboard navigation. |
+| **🧰 Unified Resources Hub** | Central index connecting YouTube, MindMeister, Google Drive Workbooks, GitHub Source, Datasets, and Cheatsheets. |
+| **📝 Obsidian Publishing Guide** | Comprehensive documentation on markdown frontmatter, wikilinks, callouts, and GitHub Actions CI/CD publishing pipeline. |
+| **🔍 Site-Wide Search** | Instant `Ctrl + K` fuzzy search modal across all 212 pages with keyboard navigation. |
 | **🌓 Theme & Persistence** | Dark and light spreadsheet aesthetics, persistent user preferences, and privacy-friendly browser LocalStorage without any external tracking. |
 
 
