@@ -13,13 +13,35 @@
 [![Capstone Project](https://img.shields.io/badge/Capstone-PwC%20Call%20Center%20BI-06b6d4)](06_Projects/Call%20Center%20Performance%20Analysis/Project%20Overview.md)
 [![AI for Excel](https://img.shields.io/badge/AI%20Track-Twistly%20%26%20Claude-8b5cf6)](03_Concepts/AI%20for%20Data%20Analysts%20MOC.md)
 [![Benchmark Dataset](https://img.shields.io/badge/Benchmark%20Dataset-Sample%20Superstore-orange)](07_Reference/Sample%20Superstore%20Dataset%20Documentation.md)
+[![Interactive Learning Platform](https://img.shields.io/badge/Live%20Platform-GitHub%20Pages-107c41?logo=githubpages&logoColor=white)](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/)
 [![CI Validation](https://github.com/Sohila-Khaled-Abbas/COURSE-EXCEL-ZERO-TO-HERO/actions/workflows/lint.yml/badge.svg)](https://github.com/Sohila-Khaled-Abbas/COURSE-EXCEL-ZERO-TO-HERO/actions)
 
-**A production-grade Obsidian Knowledge System, Data Analytics Curriculum, and GitHub Portfolio Repository for mastering modern Microsoft Excel, Power Query, Power Pivot, DAX, AI-Assisted Workflows, and Executive Dashboard Engineering.**
+**A production-grade Obsidian Knowledge System, Interactive Learning Web Platform, Data Analytics Curriculum, and GitHub Portfolio Repository for mastering modern Microsoft Excel, Power Query, Power Pivot, DAX, AI-Assisted Workflows, and Executive Dashboard Engineering.**
 
-[Explore Dashboard](00_Home/Course%20Dashboard.md) • [Course Curriculum](01_Course/Course%20Curriculum.md) • [Live Mindmap](https://www.mindmeister.com/app/map/3782166881?t=I9gXHbkAlV) • [AI Track](03_Concepts/AI%20for%20Data%20Analysts%20MOC.md) • [Superstore Dataset](07_Reference/Sample%20Superstore%20Dataset%20Documentation.md) • [Call Center Capstone](06_Projects/Call%20Center%20Performance%20Analysis/Project%20Overview.md) • [Portfolio Case Study](10_Portfolio/Call%20Center%20Analysis%20Portfolio%20Case%20Study.md) • [Implementation Log](implementation.md) • [Contributing](CONTRIBUTING.md) • [Citation](CITATION.cff)
+[🌐 Interactive Web Platform](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/) • [Explore Dashboard](00_Home/Course%20Dashboard.md) • [Course Curriculum](01_Course/Course%20Curriculum.md) • [Live Mindmap](https://www.mindmeister.com/app/map/3782166881?t=I9gXHbkAlV) • [AI Track](03_Concepts/AI%20for%20Data%20Analysts%20MOC.md) • [Superstore Dataset](07_Reference/Sample%20Superstore%20Dataset%20Documentation.md) • [Call Center Capstone](06_Projects/Call%20Center%20Performance%20Analysis/Project%20Overview.md) • [Portfolio Case Study](10_Portfolio/Call%20Center%20Analysis%20Portfolio%20Case%20Study.md) • [Implementation Log](implementation.md) • [Contributing](CONTRIBUTING.md) • [Citation](CITATION.cff)
 
 </div>
+
+---
+
+## 🌐 Interactive Web Learning Platform (GitHub Pages)
+
+Experience the entire curriculum through our responsive, browser-based learning platform:
+
+🚀 **Live Deployment**: **[https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/)**
+
+| Feature | Description |
+| :--- | :--- |
+| **📊 Learning Dashboard** | Personalized starting point with real-time course completion percentage dial, smart "Continue Learning" CTA, and quick access to bookmarked notes. |
+| **🗺️ 9-Module Roadmap** | Interactive progression from Excel fundamentals to data hygiene, formulas, tables, PivotTables, dashboard design, cleaning, Power Query ETL, and DAX. |
+| **📖 38 Interactive Lessons** | Syntax-highlighted formulas with one-click copy, callouts (tips, notes, warnings), reading time, video timestamps, and "Mark as Complete" toggles. |
+| **🎯 Practice & Quizzes** | 7 guided exercises with collapsible step-by-step solution walkthroughs, multi-level business challenges, AI labs, and interactive self-check quizzes. |
+| **🗂️ 3D Flip Flashcards** | Active recall deck with 3D flip animation, shuffle, keyboard shortcuts (`Space`, `Arrows`), and self-assessment tracking ("Know it" vs "Review again"). |
+| **⚡ 65+ Formula Library** | Searchable directory categorized by Aggregation, Date & Time, DAX, Dynamic Array, Logical, Lookup, and Text with syntax and argument breakdowns. |
+| **💼 Portfolio & Projects** | Full case study documentation for the **PwC Call Center Performance Analysis** capstone and **Hotel Reservation Cancellation Analysis**. |
+| **🔍 Site-Wide Search** | Instant `Ctrl + K` fuzzy search modal across all 207 pages with keyboard navigation. |
+| **🌓 Theme & Persistence** | Dark and light spreadsheet aesthetics, persistent user preferences, and privacy-friendly browser LocalStorage without any external tracking. |
+
 
 ---
 
