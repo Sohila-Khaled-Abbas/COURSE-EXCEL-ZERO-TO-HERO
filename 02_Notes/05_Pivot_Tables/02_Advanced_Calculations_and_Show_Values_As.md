@@ -37,15 +37,15 @@ Every field placed into the **Values** quadrant possesses two distinct computati
 
 ```mermaid
 flowchart LR
-    Raw[Raw Values Metric: Amount] --> Stage1[Stage 1: Summarize Values By]
-    Stage1 -->|SUM, COUNT, AVERAGE, MAX, MIN| Agg[Aggregated Grid Metric: $598,380]
-    Agg --> Stage2[Stage 2: Show Values As]
-    Stage2 -->|No Calculation| Default[Raw Number: $598,380]
-    Stage2 -->|% of Grand Total| PctGT[Percentage Share: 100.0%]
-    Stage2 -->|% of Column Total| PctCol[Category Share: 32.4%]
-    Stage2 -->|Difference From| Diff[Variance vs Baseline: +$14,200]
-    Stage2 -->|Running Total In| RunTot[Cumulative Sum: $184,500]
-    Stage2 -->|Rank Largest to Smallest| Rank[Market Position: #1]
+    Raw["Raw Values Metric: Amount"] --> Stage1["Stage 1: Summarize Values By"]
+    Stage1 -->|"SUM, COUNT, AVERAGE, MAX, MIN"| Agg["Aggregated Grid Metric: $598,380"]
+    Agg --> Stage2["Stage 2: Show Values As"]
+    Stage2 -->|"No Calculation"| Default["Raw Number: $598,380"]
+    Stage2 -->|"% of Grand Total"| PctGT["Percentage Share: 100.0%"]
+    Stage2 -->|"% of Column Total"| PctCol["Category Share: 32.4%"]
+    Stage2 -->|"Difference From"| Diff["Variance vs Baseline: +$14,200"]
+    Stage2 -->|"Running Total In"| RunTot["Cumulative Sum: $184,500"]
+    Stage2 -->|"Rank Largest to Smallest"| Rank["Market Position: #1"]
 ```
 
 ### Accessing Value Field Settings
@@ -80,13 +80,13 @@ A classic analytical best practice is to drag the **SAME field into the Values z
 
 ```mermaid
 flowchart TD
-    FieldList[PivotTable Fields Pane] --> Drag1[Drag 1: 'Amount' into Values]
-    FieldList --> Drag2[Drag 2: 'Amount' into Values AGAIN]
-    FieldList --> Drag3[Drag 3: 'Amount' into Values A THIRD TIME]
+    FieldList["PivotTable Fields Pane"] --> Drag1["Drag 1: Amount into Values"]
+    FieldList --> Drag2["Drag 2: Amount into Values AGAIN"]
+    FieldList --> Drag3["Drag 3: Amount into Values A THIRD TIME"]
 
-    Drag1 --> V1[Value 1: 'Sum of Amount'<br/>Custom Name: 'Total Sales ($)'<br/>Show Values As: No Calculation]
-    Drag2 --> V2[Value 2: 'Sum of Amount 2'<br/>Custom Name: '% of Total'<br/>Show Values As: % of Grand Total]
-    Drag3 --> V3[Value 3: 'Sum of Amount 3'<br/>Custom Name: 'Sales Rank'<br/>Show Values As: Rank Largest to Smallest]
+    Drag1 --> V1["Value 1: Sum of Amount<br/>Custom Name: Total Sales ($)<br/>Show Values As: No Calculation"]
+    Drag2 --> V2["Value 2: Sum of Amount 2<br/>Custom Name: % of Total<br/>Show Values As: % of Grand Total"]
+    Drag3 --> V3["Value 3: Sum of Amount 3<br/>Custom Name: Sales Rank<br/>Show Values As: Rank Largest to Smallest"]
 ```
 
 ### Resulting Dual-Metric Table (`Sample Data`):
