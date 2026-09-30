@@ -39,26 +39,35 @@ updated: 2026-09-28
 
 ```mermaid
 flowchart TD
-    C1["<b>Chapter 1: Introduction & GUI</b><br/>0:00 (16m 05s)<br/>Interface & Workspace Ergonomics"] --> C2["<b>Chapter 2: Data Management</b><br/>16:05 (1h 22m 51s)<br/>Data Types, Validation & Shortcuts"]
-    C2 --> C3["<b>Chapter 3: Formulas & Functions</b><br/>1:38:56 (56m 59s)<br/>Referencing, Logic, Lookups & DALC"]
-    C3 --> C4["<b>Chapter 4: Excel Tables</b><br/>2:35:55 (22m 33s)<br/>ListObjects & Structured Referencing"]
-    C4 --> C5["<b>Chapter 5: Pivot Tables</b><br/>2:58:28 (28m 30s)<br/>Multi-dimensional Aggregations & Slicers"]
-    C5 --> C6["<b>Chapter 6: Data Analysis Charts</b><br/>3:26:58 (27m 05s)<br/>Visual Storytelling & Decluttering"]
-    C6 --> C7["<b>Chapter 7: Importing & Data Cleaning</b><br/>3:54:03 (26m 27s)<br/>6 Dimensions of Quality & Ingestion"]
-    C7 --> C8["<b>Chapter 8: Power Query & M</b><br/>4:20:30 (43m 09s)<br/>Automated ETL, Unpivot & Joins"]
-    C8 --> C9["<b>Chapter 9: Data Modeling & DAX</b><br/>5:03:39 (36m 07s)<br/>Star Schemas, Relationships & Measures"]
-    C9 --> C10["<b>Final Project: PwC Call Center Analysis</b><br/>5:39:46 (2h 20m+)<br/>5,000 Records Operational Dashboard"]
+    subgraph TrackA ["🌱 TRACK A: CORE FOUNDATIONS & CALCULATION ENGINE"]
+        direction LR
+        C1["<b>Ch 1: Interface & GUI</b><br/>0:00 (16m)<br/>Ribbon & Grid Navigation"]
+        C2["<b>Ch 2: Data Management</b><br/>16:05 (1h 23m)<br/>Types, Masks & Validation"]
+        C3["<b>Ch 3: Formulas & Functions</b><br/>1:38:56 (57m)<br/>Logic, XLOOKUP & DALC"]
+        C1 ==> C2 ==> C3
+    end
 
-    style C1 fill:#1e293b,stroke:#3b82f6,stroke-width:2px,color:#fff
-    style C2 fill:#1e293b,stroke:#06b6d4,stroke-width:2px,color:#fff
-    style C3 fill:#1e293b,stroke:#10b981,stroke-width:2px,color:#fff
-    style C4 fill:#1e293b,stroke:#f59e0b,stroke-width:2px,color:#fff
-    style C5 fill:#1e293b,stroke:#ef4444,stroke-width:2px,color:#fff
-    style C6 fill:#1e293b,stroke:#8b5cf6,stroke-width:2px,color:#fff
-    style C7 fill:#1e293b,stroke:#ec4899,stroke-width:2px,color:#fff
-    style C8 fill:#1e293b,stroke:#14b8a6,stroke-width:2px,color:#fff
-    style C9 fill:#1e293b,stroke:#6366f1,stroke-width:2px,color:#fff
-    style C10 fill:#0f172a,stroke:#eab308,stroke-width:3px,color:#fff
+    subgraph TrackB ["⚡ TRACK B: TABULAR STRUCTURE & VISUAL ANALYTICS"]
+        direction LR
+        C4["<b>Ch 4: Excel Tables</b><br/>2:35:55 (23m)<br/>Structured Referencing"]
+        C5["<b>Ch 5: Pivot Tables</b><br/>2:58:28 (29m)<br/>Multi-Dimensional Analysis"]
+        C6["<b>Ch 6: Data Analysis Charts</b><br/>3:26:58 (27m)<br/>Visual Storytelling & Decluttering"]
+        C4 ==> C5 ==> C6
+    end
+
+    subgraph TrackC ["🚀 TRACK C: ENTERPRISE DATA ENGINEERING & BI CAPSTONE"]
+        direction LR
+        C7["<b>Ch 7: Data Quality & Cleaning</b><br/>3:54:03 (26m)<br/>6 Dimensions & Ingestion"]
+        C8["<b>Ch 8: Power Query & M</b><br/>4:20:30 (43m)<br/>Automated ETL & Joins"]
+        C9["<b>Ch 9: Data Modeling & DAX</b><br/>5:03:39 (36m)<br/>Star Schemas & Measures"]
+        C7 ==> C8 ==> C9
+    end
+
+    CAPSTONE["<b>⭐ Flagship Capstone: PwC Call Center Analysis</b><br/>5:39:46 (2h 20m) • 5,000 Records Operational Dashboard • Interactive Slicers & Agent Scorecards"]
+
+    TrackA ==>|Data Modeling Readiness| TrackB
+    TrackB ==>|Enterprise Pipelines| TrackC
+    TrackC ==>|Production Integration| CAPSTONE
 ```
 
 ---
