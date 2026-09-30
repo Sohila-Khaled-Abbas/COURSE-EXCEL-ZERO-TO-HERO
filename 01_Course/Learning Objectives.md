@@ -12,11 +12,29 @@ updated: 2026-09-28
 
 ```mermaid
 flowchart TD
-    REM[1. Remember: Shortcuts, Syntax, UI Elements] --> UND[2. Understand: Referencing, Table Architecture, ETL]
-    UND --> APP[3. Apply: Functions, Validations, Slicers]
-    APP --> ANA[4. Analyze: Pivot Aggregations, Data Quality, Variances]
-    ANA --> EVA[5. Evaluate: KPIs, Business Performance, Agent Scorecards]
-    EVA --> CRE[6. Create: Interactive Dashboards, Portfolio Case Study]
+    subgraph Tier1 ["🌱 COGNITIVE TIER 1: KNOWLEDGE & COMPREHENSION"]
+        direction LR
+        REM["<b>1. Remember</b><br/>• Keyboard Shortcuts<br/>• Formula Syntax<br/>• UI Components"]
+        UND["<b>2. Understand</b><br/>• Cell Referencing Logic<br/>• Table ListObjects<br/>• ETL Pipeline Concepts"]
+        REM ==> UND
+    end
+
+    subgraph Tier2 ["⚡ COGNITIVE TIER 2: EXECUTION & DECONSTRUCTION"]
+        direction LR
+        APP["<b>3. Apply</b><br/>• XLOOKUP & Aggregations<br/>• Data Validation Rules<br/>• Slicer & Pivot Connections"]
+        ANA["<b>4. Analyze</b><br/>• Pivot Field Layouts<br/>• 6 Dimensions of Quality<br/>• Variance & Root Cause"]
+        APP ==> ANA
+    end
+
+    subgraph Tier3 ["🚀 COGNITIVE TIER 3: EVALUATION & SYNTHESIS"]
+        direction LR
+        EVA["<b>5. Evaluate</b><br/>• Operational KPIs (ASA/CSAT)<br/>• Agent Benchmark Matrix<br/>• Data Hygiene Audits"]
+        CRE["<b>6. Create</b><br/>• Executive BI Dashboards<br/>• Portfolio Case Studies<br/>• Production GitHub Repo"]
+        EVA ==> CRE
+    end
+
+    Tier1 ==>|Cognitive Progression| Tier2
+    Tier2 ==>|Executive Mastery| Tier3
 ```
 
 ---

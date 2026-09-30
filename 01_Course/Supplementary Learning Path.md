@@ -17,19 +17,33 @@ tags:
 This curated progression integrates core masterclass lectures with supplementary resources, visual blueprints, and advanced practice drills from the Gemini Notebook. It structures the 8-hour learning journey into 9 clear phases, progressing from interface literacy to enterprise portfolio artifacts.
 
 ```mermaid
-graph TD
-    A[Stage 1: Foundation] --> B[Stage 2: Core Excel Skills]
-    B --> C[Stage 3: Formulas & Functions]
-    C --> D[Stage 4: Data Cleaning]
-    D --> E[Stage 5: Data Analysis]
-    E --> F[Stage 6: Visualization]
-    F --> G[Stage 7: Advanced Excel & Modeling]
-    G --> H[Stage 8: Call Center Analysis Project]
-    H --> I[Stage 9: Further Learning & Career]
-    
-    style A fill:#e1f5fe,stroke:#0288d1
-    style G fill:#fff3e0,stroke:#f57c00
-    style H fill:#e8f5e9,stroke:#388e3c
+flowchart TD
+    subgraph Tier1 ["🌱 STAGE 1–3: CORE LITERACY & FORMULA RIGOR"]
+        direction LR
+        S1["<b>Stage 1: Foundation</b><br/>Interface & Blueprint"]
+        S2["<b>Stage 2: Core Skills</b><br/>Formatting & Shortcuts"]
+        S3["<b>Stage 3: Formulas</b><br/>Lookups & Logic"]
+        S1 ==> S2 ==> S3
+    end
+
+    subgraph Tier2 ["⚡ STAGE 4–6: DATA WRANGLING & VISUALIZATION"]
+        direction LR
+        S4["<b>Stage 4: Data Cleaning</b><br/>Quality & Ingestion"]
+        S5["<b>Stage 5: Data Analysis</b><br/>Pivot Aggregations"]
+        S6["<b>Stage 6: Visualization</b><br/>Chart Selection & Cards"]
+        S4 ==> S5 ==> S6
+    end
+
+    subgraph Tier3 ["🚀 STAGE 7–9: ENTERPRISE BI & CAREER LAUNCH"]
+        direction LR
+        S7["<b>Stage 7: Modeling</b><br/>Power Pivot & DAX"]
+        S8["<b>Stage 8: Capstone</b><br/>PwC Call Center Analysis"]
+        S9["<b>Stage 9: Career</b><br/>Portfolio & Interview Prep"]
+        S7 ==> S8 ==> S9
+    end
+
+    Tier1 ==>|Analytical Readiness| Tier2
+    Tier2 ==>|Production BI Pipeline| Tier3
 ```
 
 ---

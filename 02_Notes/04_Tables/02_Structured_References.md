@@ -37,20 +37,27 @@ video_url: "https://www.youtube.com/watch?v=uv1bxe2gdnU&t=9355s"
 In the master mindmap **"4-Tables and Structures of data"**, structured referencing represents the intellectual core of table data engineering:
 
 ```mermaid
-graph LR
-    Root[4-Tables and Structures of data] --> Benefits[Benefits of Using Tables]
-    Benefits --> AF[Automatic Formatting]
-    Benefits --> SR[Structured References]
-    Benefits --> DR[Dynamic Ranges]
-    Benefits --> FS[Easy Filtering & Sorting]
-    Benefits --> INT[Integration with Other Features]
-    
-    SR --> AtSign["Current Row: [@Column]"]
-    SR --> ColRef["Column Vector: Table[Column]"]
-    SR --> Modifiers["Special Items: [#Headers], [#Totals], [#Data], [#All]"]
-    SR --> CrossTab["Cross-Table Lookups: XLOOKUP / HLOOKUP"]
-    
-    style SR fill:#22c55e,stroke:#15803d,stroke-width:2px,color:#fff
+flowchart LR
+    subgraph Root ["🧱 4-Tables and Structures of data"]
+        direction TB
+        B["<b>Benefits of Using Tables</b>"]
+        AF["Automatic Formatting"]
+        DR["Dynamic Auto-Ranges"]
+        FS["Easy Filtering & Slicers"]
+        B --> AF & DR & FS
+    end
+
+    subgraph SR_Family ["⚡ STRUCTURED REFERENCING ARCHITECTURE"]
+        direction TB
+        SR["<b>Structured References Core</b>"]
+        AtSign["<b>Current Row Value</b><br/>[@ColumnName]"]
+        ColRef["<b>Entire Column Vector</b><br/>TableName[ColumnName]"]
+        Modifiers["<b>Special Table Items</b><br/>[#Headers], [#Totals], [#Data]"]
+        CrossTab["<b>Cross-Table Engineering</b><br/>XLOOKUP & Table Joins"]
+        SR --> AtSign & ColRef & Modifiers & CrossTab
+    end
+
+    Root ==>|Core Advantage| SR_Family
 ```
 
 ---

@@ -29,11 +29,29 @@ video_url: \"https://www.youtube.com/watch?v=uv1bxe2gdnU&t=5936s\"
 
 ```mermaid
 flowchart LR
-    A[1. Ask] --> B[2. Prepare]
-    B --> C[3. Process]
-    C --> D[4. Analyze]
-    D --> E[5. Share]
-    E --> F[6. Act]
+    subgraph S1 ["🎯 DISCOVERY & SOURCING"]
+        direction TB
+        A["<b>1. Ask</b><br/>• Frame Business Question<br/>• Identify Metrics & Scope"]
+        B["<b>2. Prepare</b><br/>• Sourcing & Extraction<br/>• Schema & Integrity Check"]
+        A ==> B
+    end
+
+    subgraph S2 ["⚡ WRANGLING & ANALYSIS"]
+        direction TB
+        C["<b>3. Process</b><br/>• Cleanse & Remove Duplicates<br/>• Audit Operational Nulls"]
+        D["<b>4. Analyze</b><br/>• Calculate Core KPIs<br/>• Uncover Patterns & Trends"]
+        C ==> D
+    end
+
+    subgraph S3 ["🚀 STRATEGIC IMPACT"]
+        direction TB
+        E["<b>5. Share</b><br/>• Executive BI Dashboards<br/>• Clear Visual Narratives"]
+        F["<b>6. Act</b><br/>• Leadership Decisions<br/>• Track Operational ROI"]
+        E ==> F
+    end
+
+    S1 ==>|Validated Source Data| S2
+    S2 ==>|Synthesized Insights| S3
 ```
 
 ## The 6 Phases Breakdown

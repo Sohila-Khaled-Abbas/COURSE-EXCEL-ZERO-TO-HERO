@@ -62,21 +62,16 @@ Selecting the wrong file extension can permanently destroy your work, compromise
 
 ```mermaid
 flowchart TD
-    A["Spreadsheet File Types"] --> B["OpenXML Architecture (ZIP + XML)"]
-    A --> C["Binary Architecture (BIFF12)"]
-    A --> D["Plain Text (Delimited)"]
+    Start{{"<b>Choose Your File Format</b><br/>Analytical Scenario"}}
 
-    B --> B1["XLSX: Standard / Macro-Safe"]
-    B --> B2["XLSM: Macro-Enabled (VBA)"]
+    Start -->|VBA Macros Needed?| MacroCheck{"Contains Automation?"}
+    MacroCheck -->|Yes: Standard Team Sharing| XLSM["<b>.XLSM</b><br/>OpenXML Macro-Enabled<br/>• Preserves VBA projects<br/>• Triggers Trust Center alert"]
+    MacroCheck -->|Yes: Heavy Model / Fast Save| XLSB_M["<b>.XLSB</b><br/>Excel Binary Workbook<br/>• Preserves VBA automation<br/>• 50% smaller & 3x faster"]
 
-    C --> C1["XLSB: Fast / Compressed Binary"]
-
-    D --> D1["CSV: Universal Flat Data Set"]
-
-    style A fill:#1e293b,stroke:#3b82f6,stroke-width:2px,color:#fff
-    style B fill:#0f172a,stroke:#06b6d4,stroke-width:1px,color:#fff
-    style C fill:#0f172a,stroke:#10b981,stroke-width:1px,color:#fff
-    style D fill:#0f172a,stroke:#f59e0b,stroke-width:1px,color:#fff
+    Start -->|No Macros: Production Standard| SizeCheck{"Data Size & Purpose?"}
+    SizeCheck -->|Standard Team Analytics| XLSX["<b>.XLSX</b><br/>OpenXML Standard (ZIP + XML)<br/>• Macro-free & secure<br/>• Up to 1,048,576 rows"]
+    SizeCheck -->|Large File >30MB / Slow Open| XLSB["<b>.XLSB</b><br/>Excel Binary Workbook<br/>• Instant binary load<br/>• Solves low-RAM lag"]
+    SizeCheck -->|External ETL / Raw Database Dump| CSV["<b>.CSV</b><br/>Comma-Separated Values<br/>• Universal flat text<br/>• Strips formats & formulas"]
 ```
 
 ### 1. `XLSX` (Excel OpenXML Spreadsheet) — *The Default Format*

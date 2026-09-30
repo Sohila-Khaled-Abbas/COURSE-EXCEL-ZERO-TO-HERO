@@ -86,25 +86,29 @@ Course ➔ Concepts ➔ Notes ➔ Practice ➔ AI Assistance ➔ Verification �
 
 ```mermaid
 flowchart LR
-    A[01 Course Hub] --> B[02 Lesson Notes]
-    B --> C[03 Atomic Concepts]
-    B --> D[04 Formula Reference]
-    C --> E[05 Practice & Challenges]
-    D --> E
-    E --> F[AI-Assisted Practice]
-    F --> G[06 Analytics Projects]
-    G --> H[10 Portfolio Case Study]
-    G --> I[08 Spaced Revision]
+    subgraph S1 ["📚 KNOWLEDGE ACQUISITION"]
+        direction TB
+        A["<b>01 Course Hub</b><br/>Syllabus & Milestones"]
+        B["<b>02 Lesson Notes</b><br/>38 Comprehensive Lectures"]
+        C["<b>03 Atomic Concepts</b><br/>26 Structural Models"]
+        D["<b>04 Formula Library</b><br/>66+ Analyzed Functions"]
+        A --> B --> C & D
+    end
 
-    style A fill:#1e293b,stroke:#3b82f6,stroke-width:2px,color:#fff
-    style B fill:#1e293b,stroke:#06b6d4,stroke-width:2px,color:#fff
-    style C fill:#1e293b,stroke:#10b981,stroke-width:2px,color:#fff
-    style D fill:#1e293b,stroke:#f59e0b,stroke-width:2px,color:#fff
-    style E fill:#1e293b,stroke:#ef4444,stroke-width:2px,color:#fff
-    style F fill:#1e293b,stroke:#8b5cf6,stroke-width:2px,color:#fff
-    style G fill:#1e293b,stroke:#06b6d4,stroke-width:2px,color:#fff
-    style H fill:#1e293b,stroke:#ec4899,stroke-width:2px,color:#fff
-    style I fill:#1e293b,stroke:#64748b,stroke-width:2px,color:#fff
+    subgraph S2 ["🎯 HANDS-ON APPLICATION"]
+        direction TB
+        E["<b>05 Practice & Labs</b><br/>Multi-Level Business Drills"]
+        F["<b>AI-Assisted Practice</b><br/>Prompting & Verification"]
+        C & D --> E --> F
+    end
+
+    subgraph S3 ["💼 ENTERPRISE ARTIFACTS"]
+        direction TB
+        G["<b>06 Analytics Projects</b><br/>Hotel & PwC Capstones"]
+        H["<b>10 Portfolio Showcase</b><br/>Recruiter Case Studies"]
+        I["<b>08 Spaced Revision</b><br/>Flashcards & Interview Prep"]
+        F --> G --> H & I
+    end
 ```
 
 ---
@@ -540,12 +544,30 @@ The `.obsidian/` configuration has been tuned for instant productivity:
 
 ```mermaid
 flowchart TD
-    A[Step 1: Open Course Dashboard] --> B[Step 2: Study Lesson Note in 02_Notes]
-    B --> C[Step 3: Dive into Atomic Concepts in 03_Concepts]
-    C --> D[Step 4: Execute Drills in 05_Practice]
-    D --> E[Step 5: Apply AI-Assisted Workflows with Verification]
-    E --> F[Step 6: Execute PwC Call Center Capstone]
-    F --> G[Step 7: Spaced Recall via Flashcards & Interview Prep]
+    subgraph Loop1 ["🌱 PHASE 1: DISCOVERY & CONCEPT STUDY"]
+        direction LR
+        S1["<b>Step 1: Dashboard</b><br/>Track Progress & Goals"]
+        S2["<b>Step 2: Lesson Notes</b><br/>Study Core Techniques"]
+        S3["<b>Step 3: Atomic Concepts</b><br/>Master Mental Models"]
+        S1 ==> S2 ==> S3
+    end
+
+    subgraph Loop2 ["⚡ PHASE 2: APPLICATION & LABS"]
+        direction LR
+        S4["<b>Step 4: Practice Drills</b><br/>Execute 5 Challenge Levels"]
+        S5["<b>Step 5: AI Acceleration</b><br/>Prompt with Verification"]
+        S4 ==> S5
+    end
+
+    subgraph Loop3 ["🚀 PHASE 3: CAPSTONE & CAREER PROOF"]
+        direction LR
+        S6["<b>Step 6: Flagship Capstone</b><br/>PwC 5,000 Records Model"]
+        S7["<b>Step 7: Spaced Recall</b><br/>Flashcards & Interview Prep"]
+        S6 ==> S7
+    end
+
+    Loop1 ==>|Application Gateway| Loop2
+    Loop2 ==>|Production BI Systems| Loop3
 ```
 
 1. **Before Learning**: Open `00_Home/Course Dashboard.md`, inspect module prerequisites and Bloom's taxonomy objectives.

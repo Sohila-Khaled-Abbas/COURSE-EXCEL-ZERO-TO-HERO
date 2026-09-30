@@ -41,24 +41,30 @@ video_url: "https://www.youtube.com/watch?v=uv1bxe2gdnU&t=9355s"
 This lesson addresses the bottom two core branches of the master **"4-Tables and Structures of data"** mindmap:
 
 ```mermaid
-graph TD
-    Root[4-Tables and Structures of data] --> TTF[Table Tools & Features]
-    Root --> DASH["It's Just a Dashboard!"]
-    
-    TTF --> DT[Design Tab]
-    TTF --> PT[Pivot Table Integration]
-    TTF --> PQ[Power Query Ingestion]
-    
-    DT --> TN[Table Name]
-    DT --> TSO[Table Style Options: Header, Total Row, Banded Rows/Cols]
-    DT --> IS[Insert Slicer]
-    
-    DASH --> Slicers[Interactive Slicers UI]
-    DASH --> DynamicTotals[Dynamic Filter-Aware Total Row KPIs]
-    DASH --> PivotWidget[Auto-Refreshing Pivot Widgets Sheet1]
-    
-    style DASH fill:#eab308,stroke:#ca8a04,stroke-width:2px,color:#000
-    style TTF fill:#3b82f6,stroke:#1d4ed8,stroke-width:2px,color:#fff
+flowchart TD
+    subgraph Root ["🧱 4-Tables and Structures of data"]
+        direction LR
+        TTF["<b>Table Tools & Features</b><br/>Ribbon Suite & Engineering"]
+        DASH["<b>Interactive Dashboard Layer</b><br/>Micro-BI directly on sheet"]
+    end
+
+    subgraph Tools ["🛠️ TABLE TOOLS ECOSYSTEM"]
+        direction TB
+        DT["<b>Design Tab Controls</b><br/>• Table Name & Resize<br/>• Total Row & Banded Styles<br/>• Slicer Integration"]
+        PT["<b>Pivot Table Integration</b><br/>• Dynamic Range Expansion<br/>• Auto-Refreshing Cache"]
+        PQ["<b>Power Query Ingestion</b><br/>• Flat Source Extraction<br/>• M Language Transformation"]
+    end
+
+    subgraph DashHub ["📊 THE 'JUST A DASHBOARD' ARCHITECTURE"]
+        direction TB
+        Slicers["<b>Interactive Slicers</b><br/>Multi-touch category filter"]
+        DynamicTotals["<b>Filter-Aware Total Row</b><br/>SUBTOTAL 109 logic"]
+        PivotWidget["<b>Connected Pivot Widgets</b><br/>Real-time executive summaries"]
+    end
+
+    TTF ==> Tools
+    DASH ==> DashHub
+    Tools -.->|Feeds Analytics| DashHub
 ```
 
 ---
@@ -69,10 +75,10 @@ Selecting any cell within an Excel Table activates the contextual **Table Design
 
 ```mermaid
 flowchart LR
-    Cell[Active Table Cell] --> Tab[Table Design Tab]
-    Tab --> A[1. Design Tab Suite]
-    Tab --> B[2. Pivot Table Connection]
-    Tab --> C[3. Power Query Ingestion]
+    Cell["<b>Active Table Cell</b><br/>Inside ListObject"] ==> Tab["<b>Table Design Tab</b><br/>Contextual Ribbon Controls"]
+    Tab ==> A["<b>1. Design Suite</b><br/>Styles & Options"]
+    Tab ==> B["<b>2. PivotTable</b><br/>Dynamic Summaries"]
+    Tab ==> C["<b>3. Power Query</b><br/>ETL Automation"]
 ```
 
 ### Pillar 1: The Design Tab Suite

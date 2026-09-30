@@ -31,10 +31,32 @@ Excel is not an isolated tool; it acts as the bridge between raw database extrac
 
 ```mermaid
 flowchart LR
-    A[Data Sources: SQL / ERP / CRM] --> B[Data Prep: Power Query / Excel]
-    B --> C[Modeling: Power Pivot / DAX]
-    C --> D[Reporting: Excel Dashboards / Power BI]
-    D --> E[Decision Making: Stakeholders]
+    subgraph S1 ["🔌 INGESTION"]
+        D1[("<b>Enterprise DBs</b><br/>SQL & Data Warehouses")]
+        D2[("<b>Business Ops</b><br/>ERP, CRM & REST APIs")]
+    end
+
+    subgraph S2 ["⚡ PREPARATION & ETL"]
+        P1["<b>Power Query Engine</b><br/>Data Hygiene & M Language"]
+        P2["<b>Excel Tables</b><br/>Structured Referencing"]
+        P1 --> P2
+    end
+
+    subgraph S3 ["🧠 MODELING & LOGIC"]
+        M1["<b>Power Pivot Engine</b><br/>Star Schemas & VertiPaq"]
+        M2["<b>DAX Measures</b><br/>Business Logic & Time Intel"]
+        M1 --> M2
+    end
+
+    subgraph S4 ["📊 CONSUMPTION & IMPACT"]
+        R1["<b>Executive Dashboards</b><br/>Interactive Slicers & KPIs"]
+        E1{{"<b>Strategic Action</b><br/>Data-Driven Decisions"}}
+        R1 --> E1
+    end
+
+    D1 & D2 ==> S2
+    S2 ==> S3
+    S3 ==> S4
 ```
 
 ## Core Concepts

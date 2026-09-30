@@ -26,8 +26,28 @@ video_url: \"https://www.youtube.com/watch?v=uv1bxe2gdnU&t=15630s\"
 ## The ETL Architecture
 ```mermaid
 flowchart LR
-    E[Extract: Files, DBs, Web] --> T[Transform: Clean, Unpivot, Shape]
-    T --> L[Load: Data Model or Sheet]
+    subgraph EXTRACT ["📥 1. EXTRACT (Sources)"]
+        direction TB
+        F1[("Excel Workbooks<br/>XLSX, XLSB, CSV")]
+        F2[("Enterprise SQL<br/>PostgreSQL / SQL Server")]
+        F3[("Web & APIs<br/>REST Endpoints / JSON")]
+    end
+
+    subgraph TRANSFORM ["⚡ 2. TRANSFORM (Power Query Engine)"]
+        direction TB
+        T1["<b>Applied Steps Pipeline</b><br/>• Standardize Data Types<br/>• Split & Text Cleaning"]
+        T2["<b>Relational Operations</b><br/>• Unpivot Columns (Wide to Tall)<br/>• Merge (Joins) & Append (Unions)"]
+        T1 ==> T2
+    end
+
+    subgraph LOAD ["📤 3. LOAD (Destinations)"]
+        direction TB
+        L1["<b>Worksheet Table</b><br/>ListObject on Grid (<1M rows)"]
+        L2["<b>Power Pivot Data Model</b><br/>VertiPaq Engine (Millions of rows)"]
+    end
+
+    EXTRACT ==>|Automated Ingestion| TRANSFORM
+    TRANSFORM ==>|Clean Analytical Tables| LOAD
 ```
 
 ## Why Power Query is a Game Changer
