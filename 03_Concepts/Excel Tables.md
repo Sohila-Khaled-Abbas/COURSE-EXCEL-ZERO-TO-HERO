@@ -52,13 +52,30 @@ Excel Tables eliminate this manual maintenance by dynamically expanding to encom
 Excel maintains an internal XML definition of the table bounds. When data is typed into the immediately adjacent bottom row or right column, the table engine automatically incorporates the new cells, styles them, and applies existing column formulas.
 
 ```mermaid
-flowchart TD
-    A[Raw Cell Range A1:J101] -->|Ctrl + T / Ctrl + L| B[Official Excel Table ListObject]
-    B --> C[Auto-Calculated Columns]
-    B --> D[Dynamic Auto-Expansion on New Records]
-    B --> E[Structured References @ColumnName]
-    B --> F[Filter-Aware Total Row SUBTOTAL 109]
-    B --> G[Seamless Ingestion into Power Query & PivotTables]
+flowchart LR
+    subgraph Raw ["⚠️ UNMANAGED RANGE (A1:J101)"]
+        direction TB
+        R1["<b>Static Coordinates</b><br/>Manual formula dragging"]
+        R2["<b>Fragile Boundaries</b><br/>Omitted from PivotTables"]
+        R1 --> R2
+    end
+
+    subgraph Gate ["⚡ CONVERSION GATE"]
+        T["<b>Ctrl + T / Ctrl + L</b><br/>Create ListObject Container"]
+    end
+
+    subgraph Table ["🚀 MANAGED EXCEL TABLE (ListObject)"]
+        direction TB
+        C1["<b>Calculated Columns</b><br/>Auto-propagates downward"]
+        C2["<b>Dynamic Expansion</b><br/>Encompasses new records"]
+        C3["<b>Structured References</b><br/>Readable [@ColumnName]"]
+        C4["<b>Filter-Aware Total Row</b><br/>SUBTOTAL 109 logic"]
+        C5["<b>Downstream BI Feeds</b><br/>Power Query & PivotTables"]
+        C1 --> C2 --> C3 --> C4 --> C5
+    end
+
+    Raw ==> Gate
+    Gate ==> Table
 ```
 
 ---

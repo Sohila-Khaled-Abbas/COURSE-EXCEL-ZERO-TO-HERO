@@ -44,12 +44,30 @@ As highlighted under **Benefits of Using Tables** in the Module 4 mindmap, struc
 3. **Automatic Uniformity**: Formulas written inside an Excel Table automatically expand down the entire column without manual dragging.
 
 ```mermaid
-graph TD
-    A[Structured Reference Token] --> B["[@ColumnName]: Active Row Value"]
-    A --> C["TableName[ColumnName]: Entire Data Column"]
-    A --> D["TableName[[#Headers], [Col]]: Header Label"]
-    A --> E["TableName[[#Totals], [Col]]: Summary Total"]
-    A --> F["TableName[[ColA]:[ColB]]: Column Span"]
+flowchart TD
+    Token{{"<b>Structured Reference Token</b><br/>Grammar & Scope"}}
+
+    subgraph Scalar ["📌 SCALAR SCOPE (Row-Level)"]
+        direction TB
+        AtRow["<b>[@ColumnName]</b><br/>Current evaluated row value<br/>Implicit intersection"]
+    end
+
+    subgraph Vector ["📊 VECTOR SCOPE (Column-Level)"]
+        direction TB
+        ColVec["<b>TableName[ColumnName]</b><br/>Entire column data array<br/>Excludes headers & totals"]
+        Span["<b>TableName[[ColA]:[ColB]]</b><br/>Contiguous multi-column slice"]
+    end
+
+    subgraph Structural ["🏗️ STRUCTURAL SCOPE (Table Metadata)"]
+        direction TB
+        Headers["<b>TableName[[#Headers], [Col]]</b><br/>Top text header label"]
+        Totals["<b>TableName[[#Totals], [Col]]</b><br/>Bottom aggregate summary"]
+        All["<b>TableName[#All]</b><br/>Complete matrix (Headers + Data + Totals)"]
+    end
+
+    Token ==>|Row Evaluation| Scalar
+    Token ==>|Array Calculation| Vector
+    Token ==>|Metadata Targets| Structural
 ```
 
 ---
