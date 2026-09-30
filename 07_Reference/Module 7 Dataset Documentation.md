@@ -85,13 +85,70 @@ flowchart TD
 
 | Dataset # | Official Filename | PwC Simulation Task | Business Domain | Record Count & Scope | Direct Official Download Link |
 | :---: | :--- | :--- | :--- | :--- | :--- |
-| **01** | `01 Call-Center-Dataset.xlsx` | **Call Centre Trends** | Customer Support Operations | $5,000$ calls, $8$ agents, Q1 2021 (Includes 4 ghost columns) | [Download 01 Call-Center-Dataset.xlsx](https://cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/01%20Call-Center-Dataset.xlsx) |
-| **02** | `02 Churn-Dataset.xlsx` | **Customer Retention** | Subscription & Customer Success | $7,043$ telco customers, 23 demographic & contract features | [Download 02 Churn-Dataset.xlsx](https://cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/02%20Churn-Dataset.xlsx) |
+| **01** | `01 Call-Center-Dataset.xlsx` | **The Call Centre Trends (Active)** | Customer Support Operations | $5,000$ calls, $8$ agents, Q1 2021 (Includes 4 ghost columns) | [Download 01 Call-Center-Dataset.xlsx](https://cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/01%20Call-Center-Dataset.xlsx) |
+| **02** | `02 Churn-Dataset.xlsx` | **The Customer Retention** | Subscription & Customer Success | $7,043$ telco customers, 25 demographic & contract features | [Download 02 Churn-Dataset.xlsx](https://cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/02%20Churn-Dataset.xlsx) |
 | **03** | `03 Diversity-Inclusion-Dataset.xlsx` | **Diversity & Inclusion** | Human Capital Management (HR) | $500$ employee records across corporate grades (FY20/FY21) | [Download 03 Diversity-Inclusion-Dataset.xlsx](https://cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/03%20Diversity-Inclusion-Dataset.xlsx) |
 
 > [!IMPORTANT]
 > **CDN Access & Automated Retrieval Notice:**
 > The download URLs above point directly to the official Forage Content Delivery Network (`cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/`). These are the authentic, unadulterated source files from the PwC Switzerland simulation, not third-party recreations or modified Kaggle re-uploads. Note that while automated web scrapers and crawlers may encounter Cloudflare bot-protection when requesting these CDN links programmatically, human users can download and open them directly in any web browser.
+
+---
+
+#### 🧩 Detailed Task Breakdown & Official DAX Models
+
+##### Task 1: The Call Centre Trends
+- **Client Sponsor**: **Claire** (Call Centre Manager at an international telecom company).
+- **Executive Mandate**: Create an executive Power BI dashboard reflecting all relevant Key Performance Indicators (KPIs) and operational metrics in the dataset to better understand customer trends and agent performance.
+- **2-Page Solution Architecture**:
+  - **The KPI Dashboard**: High-level overview of overall satisfaction (CSAT), answer vs abandonment rates, call arrival by time of day, and average speed of answer.
+  - **The Detail Page**: Topic-level drill-down and the **Agent's Performance Quadrant: Average Handle Time (Talk Duration) vs Calls Answered**.
+- **Official DAX Measures**:
+  ```dax
+  Total Call = DISTINCTCOUNT(CallData[Call Id])
+  No of Answered Call = CALCULATE(COUNT(CallData[Call Id]), 'CallData'[Answered (Y/N)]="Y")
+  No of Abandoned Call = CALCULATE(COUNT(CallData[Call Id]), 'CallData'[Answered (Y/N)]="N")
+  Abandoned Rate = DIVIDE([No of Abandoned Call], DISTINCTCOUNT(CallData[Call Id]))
+  Answ to Abandoned Rate = DIVIDE([No of Answered Call], [No of Abandoned Call])
+  Avg Speed of Answer = DIVIDE(SUM(CallData[Speed of answer in seconds]), [No of Answered Call])
+  Resolved Call = CALCULATE(COUNT(CallData[Resolved]), AND(CallData[Answered (Y/N)]="Y", CallData[Resolved]="Y"))
+  Call Resolution Rate (%) = DIVIDE([Resolved Call], [No of Answered Call])
+  Duration per Answered Call = DIVIDE(CALCULATE(SUM(CallData[CallDuration]), CallData[CallDuration]>0), [No of Answered Call])
+  Satisfaction Score = DIVIDE(CALCULATE(SUM(CallData[Satisfaction rating]), CallData[Answered (Y/N)]="Y"), [No of Answered Call])
+  ```
+- **Live Power BI Report**: [PwC Call Centre Dashboard (Interactive)](https://app.powerbi.com/links/_jx5u479wZ?ctid=af2c0734-cb42-464f-b6bf-2a241b6ada56&pbi_source=linkShare)
+
+##### Task 2: The Customer Retention
+- **Client Sponsor**: Retentions Manager (Telecommunications Industry).
+- **Executive Mandate**: Customers in telecom are hard-earned; the retention department historically contacted customers *after* they terminated their contracts (reactionary). They commissioned a predictive retention dashboard to identify customers at risk *before* cancellation.
+- **Key DAX Measures**:
+  ```dax
+  # Customer = DISTINCTCOUNT(ChurnDataset[CustID])
+  #Churn = CALCULATE(COUNT(ChurnDataset[Churn]), ChurnDataset[Churn]="Yes")
+  Churn Rate = DIVIDE('Measures Table'[#Churn], [# Customer])
+  # Dependents = CALCULATE(DISTINCTCOUNT(ChurnDataset[CustID]), ChurnDataset[Dependents]="Yes")
+  # DeviceProtection = CALCULATE(DISTINCTCOUNT(ChurnDataset[CustID]), ChurnDataset[DeviceProtection]="Yes")
+  # TechSupport = CALCULATE(DISTINCTCOUNT(ChurnDataset[CustID]), ChurnDataset[TechSupport]="Yes")
+  # Paperless = CALCULATE(DISTINCTCOUNT(ChurnDataset[CustID]), ChurnDataset[PaperlessBilling]="Yes")
+  ```
+- **Live Power BI Report**: [PwC Customer Churn & Retention Dashboard](https://app.powerbi.com/links/2DFLi_ipSW?ctid=af2c0734-cb42-464f-b6bf-2a241b6ada56&pbi_source=linkShare)
+
+##### Task 3: Diversity and Inclusion
+- **Client Sponsor**: Human Resources Leadership (Pharma Group AG).
+- **Executive Mandate**: Diagnose root causes behind the slow progress in achieving gender balance at the executive management level through hiring, promotion, and turnover analytics.
+- **Key DAX Measures**:
+  ```dax
+  #Men = CALCULATE(DISTINCTCOUNT('Pharma Group AG'[Employee ID]), 'Pharma Group AG'[Gender]="Male")
+  #Women = CALCULATE(DISTINCTCOUNT('Pharma Group AG'[Employee ID]), 'Pharma Group AG'[Gender]="Female")
+  #Leaver FY20 = CALCULATE(DISTINCTCOUNT('Pharma Group AG'[Employee ID]), 'Pharma Group AG'[FY20 leaver?]="Yes")
+  #Promoted Employee = CALCULATE([Total Employee EO FY20], 'Pharma Group AG'[Promotion in FY21?]="Yes")
+  Turnover Rate = DIVIDE([#Leaver FY20], 0.5*([Total Employee AB FY20]+[Total Employee EO FY20]))
+  Promotion Rate = DIVIDE([#Promoted Employee], [Total Employee EO FY20])
+  Promoted Men Rate = DIVIDE([#Promoted Men], [#Promoted Employee])
+  Promoted Women Rate = DIVIDE([#Promoted Women], [#Promoted Employee])
+  ```
+
+---
 
 #### 🏛️ Provenance, Documentation & Public Mirrors
 - **Canonical Simulation Write-up & Documentation**: [triwgani.github.io/pwc_digital.transformation](https://triwgani.github.io/pwc_digital.transformation/) — Independent project documentation comprehensively mapping all three simulation tasks and dataset schemas.

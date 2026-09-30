@@ -56,19 +56,52 @@ flowchart TD
 
 | Dataset # | Official Filename | PwC Simulation Task | Business Focus | Scope | Direct Official CDN Download Link |
 | :---: | :--- | :--- | :--- | :--- | :--- |
-| **01** | `01 Call-Center-Dataset.xlsx` | **Call Centre Trends (Active)** | Customer Experience Operations | $5,000$ calls, $8$ agents, Q1 2021 | [Download 01 Call-Center-Dataset.xlsx](https://cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/01%20Call-Center-Dataset.xlsx) |
-| **02** | `02 Churn-Dataset.xlsx` | **Customer Retention** | Subscription & Customer Success | $7,043$ telco customers, 23 attributes | [Download 02 Churn-Dataset.xlsx](https://cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/02%20Churn-Dataset.xlsx) |
-| **03** | `03 Diversity-Inclusion-Dataset.xlsx` | **Diversity & Inclusion** | Human Capital Management (HR) | $500$ employees, FY20/FY21 promotion cohorts | [Download 03 Diversity-Inclusion-Dataset.xlsx](https://cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/03%20Diversity-Inclusion-Dataset.xlsx) |
+| **01** | `01 Call-Center-Dataset.xlsx` | **The Call Centre Trends (Active)** | Customer Experience Operations | $5,000$ calls, $8$ agents, Q1 2021 | [Download 01 Call-Center-Dataset.xlsx](https://cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/01%20Call-Center-Dataset.xlsx) |
+| **02** | `02 Churn-Dataset.xlsx` | **The Customer Retention** | Subscription & Customer Success | $7,043$ telco customers, 25 attributes | [Download 02 Churn-Dataset.xlsx](https://cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/02%20Churn-Dataset.xlsx) |
+| **03** | `03 Diversity-Inclusion-Dataset.xlsx` | **Diversity & Inclusion** | Human Capital Management (HR) | $500$ employees, FY20/FY21 cohorts | [Download 03 Diversity-Inclusion-Dataset.xlsx](https://cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/03%20Diversity-Inclusion-Dataset.xlsx) |
 
 > [!IMPORTANT]
 > **Authentic Forage CDN Links & Browser Access:**
 > The download URLs above point directly to the official Forage Content Delivery Network (`cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/`). These are the authentic source files from the PwC Switzerland simulation, not third-party recreations or modified Kaggle re-uploads. Note that while automated web crawlers may encounter Cloudflare bot-protection when requesting these CDN links programmatically, human users can download and open them directly in any web browser.
 
+---
+
+### 🧩 Detailed Breakdown of the 3 PwC Simulation Tasks
+
+#### Task 1: The Call Centre Trends
+- **Client Sponsor**: **Claire** (Call Centre Manager at Telecom Client).
+- **Mandate**: Create an executive Power BI dashboard reflecting all relevant Key Performance Indicators (KPIs) and operational metrics in the dataset.
+- **Key Deliverables**:
+  - **The KPI Dashboard**: High-level view of overall customer satisfaction, answered/abandoned volume, calls by time, and Average Speed of Answer (ASA).
+  - **The Detail Page**: Topic-level drill-down and the **Agent's Performance Quadrant: Average Handle Time (Talk Duration) vs Calls Answered**.
+- **Live Power BI Report**: [PwC Call Centre Dashboard (Interactive)](https://app.powerbi.com/links/_jx5u479wZ?ctid=af2c0734-cb42-464f-b6bf-2a241b6ada56&pbi_source=linkShare)
+
+#### Task 2: The Customer Retention
+- **Client Sponsor**: Retentions Manager (Telecommunications Industry).
+- **Mandate**: Shift customer retention from reactive post-termination outreach to proactive churn risk identification using demographic, service, and ticketing features.
+- **Key DAX Measures**:
+  - `# Customer = DISTINCTCOUNT(ChurnDataset[CustID])`
+  - `#Churn = CALCULATE(COUNT(ChurnDataset[Churn]), ChurnDataset[Churn]="Yes")`
+  - `Churn Rate = DIVIDE('Measures Table'[#Churn], [# Customer])`
+  - Service Metrics: `# Partner`, `# Dependents`, `# Senior Citizen`, `# DeviceProtection`, `# OnlineSecurity`, `# OnlineBackup`, `# TechSupport`, `# StreamingTV`, `# StreamingMovies`, `# Paperless`, `# NonPaperless`.
+- **Live Power BI Report**: [PwC Customer Churn & Retention Dashboard](https://app.powerbi.com/links/2DFLi_ipSW?ctid=af2c0734-cb42-464f-b6bf-2a241b6ada56&pbi_source=linkShare)
+
+#### Task 3: Diversity and Inclusion
+- **Client Sponsor**: Human Resources Leadership (Pharma Group AG).
+- **Mandate**: Diagnose root causes behind the slow progress in achieving gender balance at the executive management level through hiring, promotion, and turnover analytics.
+- **Key DAX Measures**:
+  - Headcount: `#Men = CALCULATE(DISTINCTCOUNT('Pharma Group AG'[Employee ID]), 'Pharma Group AG'[Gender]="Male")`, `#Women = CALCULATE(DISTINCTCOUNT('Pharma Group AG'[Employee ID]), 'Pharma Group AG'[Gender]="Female")`
+  - Promotions: `#Promoted Employee = CALCULATE([Total Employee EO FY20], 'Pharma Group AG'[Promotion in FY21?]="Yes")`, `Promotion Rate = DIVIDE([#Promoted Employee], [Total Employee EO FY20])`
+  - Turnover: `#Leaver FY20 = CALCULATE(DISTINCTCOUNT('Pharma Group AG'[Employee ID]), 'Pharma Group AG'[FY20 leaver?]="Yes")`, `Turnover Rate = DIVIDE([#Leaver FY20], 0.5*([Total Employee AB FY20]+[Total Employee EO FY20]))`
+  - Gender Promotion Parity: `Promoted Men Rate = DIVIDE([#Promoted Men], [#Promoted Employee])`, `Promoted Women Rate = DIVIDE([#Promoted Women], [#Promoted Employee])`
+
+---
+
 ### 🏛️ Source Repositories & Reference Hubs
 | Source Entity | Platform / Repository | Description | Direct Access Link |
 | :--- | :--- | :--- | :--- |
-| **Complete Simulation Suite** | GitHub Repository | `Boomslang-Maverick/PWC-Forage-Power-BI-Virtual-Experience` (Contains all 3 original `.xlsx` files + task PDFs/briefs) | [GitHub: Boomslang-Maverick Suite](https://github.com/Boomslang-Maverick/PWC-Forage-Power-BI-Virtual-Experience) |
 | **Project Reference Hub** | Canonical Portfolio Documentation | `pwc_digital.transformation` by Tri Wulunggani | [triwgani.github.io/pwc_digital.transformation](https://triwgani.github.io/pwc_digital.transformation/) |
+| **Complete Simulation Suite** | GitHub Repository | `Boomslang-Maverick/PWC-Forage-Power-BI-Virtual-Experience` (Contains all 3 original `.xlsx` files + task PDFs/briefs) | [GitHub: Boomslang-Maverick Suite](https://github.com/Boomslang-Maverick/PWC-Forage-Power-BI-Virtual-Experience) |
 | **Task 1 Benchmark Mirror** | Public Repository | `globalsmile/Call-Center-Analysis` (`01 Call-Center-Dataset.xlsx`, 248 KB) | [GitHub: globalsmile/Call-Center-Analysis](https://github.com/globalsmile/Call-Center-Analysis/blob/main/01%20Call-Center-Dataset.xlsx) |
 | **Forage Virtual Simulation** | Educational Origin | PwC Switzerland Power BI & Digital Transformation Case Experience | [Forage: PwC Switzerland Experience](https://www.theforage.com/simulations/pwc-ch/power-bi-cqxg) |
 | **Course Master Asset** | Local Storage | Raw Course Workbook (`PWC Dataset.xlsx`, Sheet: `Source Data `) | `09_Source_Materials/Module 9/13/PWC Dataset.xlsx` |
@@ -76,7 +109,7 @@ flowchart TD
 
 > [!TIP]
 > **Portfolio Strategy Recommendation:**
-> If you are building a professional data analyst portfolio, completing all three tasks from this PwC simulation represents a premier end-to-end showcase:
+> Completing all three tasks from this PwC Switzerland simulation represents a premier end-to-end showcase:
 > 1. **Operations & Service Analytics**: Inbound ticketing, speed of answer, and agent CSAT scorecards (*Task 1*).
 > 2. **Revenue & Churn Retention Analytics**: Customer lifetime value, contract risk elasticity, and preventive retention modeling (*Task 2*).
 > 3. **Organizational & People Analytics**: Gender promotion parity, executive turnover, and DEI performance KPIs (*Task 3*).
