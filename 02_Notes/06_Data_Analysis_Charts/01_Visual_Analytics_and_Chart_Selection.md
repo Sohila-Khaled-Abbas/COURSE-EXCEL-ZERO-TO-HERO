@@ -319,6 +319,9 @@ flowchart LR
 
 #### 1. Scatter Plot (XY Scatter)
 - **Best For**: Investigating correlation, clusters, and causal hypotheses between **two continuous quantitative variables** (e.g., Lead Time vs. Cancellation Rate, or Speed of Answer vs. CSAT).
+- **Course Implementation (`Module_6_Demo.xlsx`, Chart3)**:
+  - **Dedicated Chartsheet Layout**: Created via `F11` as the standalone tab `Chart3`.
+  - **Mechanics**: Implements a dedicated full-screen Cartesian Scatter Plot (`chart7.xml`) evaluating bivariate relationship between **Sales** (`$P$2:$P$9995`) and **Quantity** (`$Q$2:$Q$9995`) across all 9,994 transaction records.
 - **Cartesian Architecture**: Variable X is plotted on the horizontal axis (independent variable); Variable Y is plotted on the vertical axis (dependent variable). Each record appears as a single point $(x, y)$.
 - **Excel Features**:
   - Right-click data points $\rightarrow$ **Add Trendline** (Linear, Exponential, Polynomial).
@@ -402,7 +405,7 @@ Applying the Master Chart Selection Matrix to the official course dataset **`Mod
 | **How did multi-year sales pace over time?** | `Order Year` *(2014–2017)* | `Annual Sales ($)` | **Line Chart** *(Sheet2 in `Module_6_Demo.xlsx`)* | Time-series trend line (`chart2.xml`) tracking revenue momentum: 2014 ($484.2k) $\rightarrow$ 2015 ($470.5k) $\rightarrow$ 2016 ($609.2k, +29.5%) $\rightarrow$ 2017 ($733.2k, +20.4%, $2.30M total). |
 | **How does transactional spread and variance distribute?** | Continuous Metrics | Dispersion & Outliers | **Box and Whisker Plot** *(Chart2 Chartsheet in `Module_6_Demo.xlsx`)* | Dedicated full-screen Chartsheet (`F11`) utilizing native Office 2016+ `boxWhisker` (`chartEx2.xml`) to calculate 5-number summary (Min, $Q_1$, Median, $Q_3$, Max) and isolate high-value transaction outliers beyond $1.5 \times \text{IQR}$. |
 | **How do sales and profits pace over time?** | `Order Date` *(Continuous Time)* | `Monthly Sales` & `Profit` | **Dual-Axis Line Chart** *(Straight lines)* | Exposes severe Q4 holiday surges (Nov–Dec peak) and reveals whether profits track revenue growth or erode during promotion pushes. |
-| **Does heavy discounting destroy profitability?** | `Discount` *(0% to 80%)* | `Profit Margin %` | **Scatter Plot (XY)** | Evaluates price elasticity across 9,994 transactions. Confirms margin collapse into severe losses once discount exceeds 20%. |
+| **Does transaction quantity correlate with revenue, and are there basket outliers?** | `Quantity` *(1 to 14 items)* | `Sales Amount ($)` | **Scatter Plot (XY)** *(Chart3 Chartsheet in `Module_6_Demo.xlsx`)* | Dedicated full-screen Chartsheet (`F11`) plotting all 9,994 transaction pairs (`$P$2:$P$9995` vs `$Q$2:$Q$9995`) to evaluate bivariate relationship between basket size and gross revenue, isolating extreme transaction outliers (e.g. single orders exceeding $10,000). |
 | **Where are our highest-volume sales territories?** | `State` *(Geographic, 48 states)* | `Sales Volume` | **Filled Map** *(Choropleth)* | California ($457.7k) and New York ($310.9k) visually dominate national geographic distribution. |
 | **How does revenue distribute within product hierarchies?** | `Category` $\rightarrow$ `Sub-Category` | `Sales Weight` | **Treemap** *(Hierarchical Rectangles)* | Shows nested weight of `Technology` (36.4%), `Furniture` (32.3%), and `Office Supplies` (31.3%) without chart-junk clutter. |
 | **Which Region-Category combinations are most profitable?** | `Region` *(Rows)*, `Category` *(Cols)* | `Sum of Profit` | **Heat Map** *(Pivot Table + 3-Color Scale)* | Matrix cross-tabulation highlights Central Furniture losses (-$2,871) vs West Technology windfalls (+$57,450). |
