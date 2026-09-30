@@ -45,31 +45,34 @@ Enterprise data workflows follow a multi-tier pipeline. Excel formulas operate o
 
 ```mermaid
 flowchart TD
-    subgraph Upstream ["1. Upstream Data Source (Scale & Filtering)"]
-        SQL["SQL Database / Data Warehouse"]
-        CRM["Enterprise ERP / CRM (SAP, Salesforce)"]
+    subgraph Upstream ["🏛️ 1. UPSTREAM SOURCING (Scale & Integrity)"]
+        direction LR
+        SQL[("SQL Data Warehouse<br/>Snowflake / BigQuery")]
+        CRM[("Operational Systems<br/>SAP, Salesforce, ERP")]
     end
 
-    subgraph Transformation ["2. Automated Ingestion & Cleaning"]
-        PQ["Power Query (M Engine)"]
+    subgraph Transformation ["⚡ 2. AUTOMATED ETL & DATA HYGIENE"]
+        direction LR
+        PQ["<b>Power Query Engine (M)</b><br/>• Non-destructive transformations<br/>• Automated refresh pipeline"]
     end
 
-    subgraph Modeling ["3. Semantic Model & Measures"]
-        Model["Power Pivot (Star Schema)"]
-        DAX["Explicit DAX Measures (Filter Context)"]
+    subgraph Modeling ["🧠 3. SEMANTIC MODELING & DAX"]
+        direction LR
+        Model["<b>Power Pivot Star Schema</b><br/>Fact & Dimension relationships"]
+        DAX["<b>Explicit DAX Measures</b><br/>Dynamic filter-context calculation"]
+        Model ==> DAX
     end
 
-    subgraph Presentation ["4. Visual Reporting & Targeted Logic"]
-        Pivot["Pivot Tables & Visuals"]
-        Formulas["Formulas (Targeted Local Analysis)"]
+    subgraph Presentation ["📊 4. EXECUTIVE PRESENTATION & LOCAL DRILL"]
+        direction LR
+        Pivot["<b>Pivot Tables & Interactive Slicers</b><br/>High-level aggregation cards"]
+        Formulas["<b>Targeted Excel Formulas</b><br/>Local edge-case adjustments"]
+        Pivot --> Formulas
     end
 
-    SQL --> PQ
-    CRM --> PQ
-    PQ --> Model
-    Model --> DAX
-    DAX --> Pivot
-    Pivot --> Formulas
+    Upstream ==>|Raw Extraction| Transformation
+    Transformation ==>|Clean Analytical Tables| Modeling
+    Modeling ==>|Optimized Data Feeds| Presentation
 ```
 
 ---
