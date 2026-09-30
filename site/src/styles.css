@@ -2094,13 +2094,17 @@ details.callout summary.callout-header {
 }
 
 .mermaid-viewport {
-  padding: 1.75rem 1rem;
+  padding: 2.25rem 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow-x: auto;
-  min-height: 120px;
-  background: var(--bg-surface);
+  min-height: 140px;
+  background-color: var(--bg-surface);
+  background-image: radial-gradient(var(--border-subtle) 1px, transparent 1px);
+  background-size: 20px 20px;
+  position: relative;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
 
 .mermaid-viewport svg {
@@ -2108,6 +2112,101 @@ details.callout summary.callout-header {
   height: auto !important;
   display: block;
   margin: 0 auto;
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.06));
+  font-family: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif !important;
+  transition: transform 0.2s ease;
+}
+
+/* Modern Roadmap Node Cards & Pill Badges */
+.mermaid-viewport svg .node rect,
+.mermaid-viewport svg .node polygon {
+  rx: 10px !important;
+  ry: 10px !important;
+  stroke-width: 1.75px !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.04));
+}
+
+.mermaid-viewport svg .node circle {
+  stroke-width: 2px !important;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.06));
+}
+
+.mermaid-viewport svg .node:hover rect,
+.mermaid-viewport svg .node:hover polygon,
+.mermaid-viewport svg .node:hover circle {
+  filter: drop-shadow(0 6px 18px rgba(16, 124, 65, 0.25)) !important;
+  cursor: pointer;
+}
+
+/* Modern Roadmap Subgraphs / Milestone Clusters */
+.mermaid-viewport svg .cluster rect {
+  rx: 16px !important;
+  ry: 16px !important;
+  stroke-width: 1.5px !important;
+  stroke-dasharray: 6 4 !important;
+  fill-opacity: 0.35 !important;
+}
+
+.mermaid-viewport svg .cluster span.nodeLabel,
+.mermaid-viewport svg .cluster .cluster-label {
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  font-size: 0.76rem !important;
+}
+
+/* Roadmap Curved Connectors & Paths */
+.mermaid-viewport svg .flowchart-link,
+.mermaid-viewport svg path.edge,
+.mermaid-viewport svg path.link {
+  stroke-width: 2px !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+  transition: stroke 0.2s ease, stroke-width 0.2s ease !important;
+}
+
+.mermaid-viewport svg .flowchart-link:hover,
+.mermaid-viewport svg path.edge:hover {
+  stroke-width: 3px !important;
+  stroke: var(--brand-primary) !important;
+}
+
+/* Arrowheads & Markers */
+.mermaid-viewport svg .marker {
+  fill: currentColor !important;
+  stroke: none !important;
+}
+
+/* Modern Pill Edge Labels (Milestone conditions along path) */
+.mermaid-viewport svg .edgeLabel {
+  background-color: var(--bg-surface) !important;
+  color: var(--text-secondary) !important;
+  padding: 3px 10px !important;
+  border-radius: 9999px !important;
+  border: 1px solid var(--border-default) !important;
+  font-size: 0.74rem !important;
+  font-weight: 600 !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06) !important;
+}
+
+.mermaid-viewport svg .edgeLabel p,
+.mermaid-viewport svg .edgeLabel span {
+  background: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Mindmap Modern Architecture */
+.mermaid-viewport svg .mindmap-node rect,
+.mermaid-viewport svg .mindmap-node circle {
+  rx: 12px !important;
+  ry: 12px !important;
+  stroke-width: 2px !important;
+}
+
+.mermaid-viewport svg .mindmap-node text {
+  font-weight: 600 !important;
 }
 
 .mermaid-loading-indicator {
