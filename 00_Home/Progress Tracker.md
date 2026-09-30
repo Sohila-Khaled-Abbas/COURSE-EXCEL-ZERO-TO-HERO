@@ -59,10 +59,10 @@ updated: 2026-09-28
 - [x] 26. Dashboard Layout Grid & Visual Hierarchy ✅ 2026-09-30
 
 ### Module 7: Data Quality, Cleaning & Enterprise Systems
-- [ ] 27. Six Dimensions of Data Quality
-- [ ] 28. Formula-Based & Tool-Based Data Cleaning
-- [ ] 29. Ingesting Data from CSV, XML, JSON, SQL & REST APIs
-- [ ] 30. Enterprise Business Systems (ERP, CRM, HRIS)
+- [x] 27. Six Dimensions of Data Quality ✅ 2026-10-01
+- [x] 28. Formula-Based & Tool-Based Data Cleaning ✅ 2026-10-01
+- [x] 29. Ingesting Data from CSV, XML, JSON, SQL & REST APIs ✅ 2026-10-01
+- [x] 30. Enterprise Business Systems (ERP, CRM, HRIS) ✅ 2026-10-01
 
 ### Module 8: Power Query & M Language
 - [ ] 31. Power Query ETL Engine & Applied Steps
