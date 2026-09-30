@@ -198,24 +198,23 @@ flowchart LR
 
 When you open Power Query Editor, you enter a specialized, self-contained workspace engineered specifically for data preparation. The interface is composed of six distinct functional viewports:
 
-```
-+---------------------------------------------------------------------------------------------------+
-|  [Ribbon] Home | Transform | Add Column | View | Tools | Help                                      |
-+-------------------+-----------------------------------------------------------+-------------------+
-|                   |  [Formula Bar]  = Table.TransformColumnTypes(#"Promoted", {..})              |
-|                   +-----------------------------------------------------------+ [Query Settings]  |
-|  [Queries Pane]   |  [Data Preview Grid]                                      | Properties:       |
-|                   |  ABC Customer | 123 OrderID | $ Total | Calendar Date     | Name: Orders      |
-|  • Hotel_Res      +---------------+-------------+---------+-------------------+                   |
-|  • People         |  John Doe     | 1001        | 250.00  | 2024-01-15        | Applied Steps:    |
-|  • Product        |  Jane Smith   | 1002        |  85.50  | 2024-01-16        | • Source          |
-|  • Query1         |  Acme Corp    | 1003        | 1200.00 | 2024-01-16        | • Promoted Headers|
-|  • Table 15 (Web) |  Global Ltd   | 1004        |  430.20 | 2024-01-17        | • Changed Type    |
-|                   |                                                           | • Filtered Rows   |
-+-------------------+-----------------------------------------------------------+-------------------+
-|  [Status Bar] 4 Columns, 1000 Rows | Column profiling based on top 1000 rows                      |
-+---------------------------------------------------------------------------------------------------+
-```
+| UI Viewport / Zone | Screen Location | Active Elements & Controls | Operational Purpose & Key Capabilities |
+| :--- | :--- | :--- | :--- |
+| **Ribbon Toolbar** | Top Header Dock | `Home` \| `Transform` \| `Add Column` \| `View` \| `Tools` \| `Help` | Command center housing ETL operations, row filtering, column splitting, merging, and loading destinations. |
+| **Formula Bar** | Upper-Center Dock | `= Table.TransformColumnTypes(#"Promoted Headers", {{"Customer", type text}, {"OrderID", Int64.Type}})` | Displays and allows direct modification of the active step's underlying declarative **M code** expression. |
+| **Queries Pane** | Left Sidebar Dock | • `Hotel_Res`<br/>• `People`<br/>• `Product`<br/>• `Query1`<br/>• `Table 15 (Web)` | Hierarchical navigation tree of all workbook queries, staging tables, parameters, and custom functions. |
+| **Data Preview Grid** | Central Main Stage | Live 1,000-row preview grid with column header data type icons (`ABC`, `123`, `$`, `📅`) and data profiling bars | Interactive, lazy-evaluated preview showing instant results of the currently selected transformation step. |
+| **Query Settings Pane** | Right Sidebar Dock | • **Properties**: Query Name (`Orders`), Description<br/>• **Applied Steps**: `Source` $\to$ `Promoted Headers` $\to$ `Changed Type` $\to$ `Filtered Rows` | Sequential dependency DAG (Directed Acyclic Graph) recording every transformation with time-travel inspection. |
+| **Status Bar** | Bottom Footer Dock | `4 Columns, 1000 Rows` \| `Column profiling based on top 1000 rows` | Telemetry bar displaying dataset metrics, execution status, and column profiling sample boundaries. |
+
+#### Data Preview Grid (Active Step: `Changed Type`)
+
+| Customer (`ABC` / `type text`) | OrderID (`123` / `Int64.Type`) | Total (`$` / `Currency.Type`) | Date (`📅` / `type date`) |
+| :--- | :---: | :---: | :---: |
+| **John Doe** | 1001 | $250.00 | 2024-01-15 |
+| **Jane Smith** | 1002 | $85.50 | 2024-01-16 |
+| **Acme Corp** | 1003 | $1,200.00 | 2024-01-16 |
+| **Global Ltd** | 1004 | $430.20 | 2024-01-17 |
 
 ### Component Breakdown:
 
