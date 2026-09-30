@@ -217,20 +217,20 @@ Located in `Sample_ Superstore` (Table: `Sample__Superstore`, coordinates `A1:S9
 
 ---
 
-## 📋 Tabs 3 & 4: `Chart1` (Chartsheet) & `Sheet2` (Analytical Laboratory)
+## 📋 Dedicated Tabs: `Chart1`, `Chart2`, `Chart3` & `Sheet2`
 
-### Tab 3: `Chart1` (Dedicated Chartsheet Layout)
-- **Architecture**: Created via shortcut `F11` (or *Move Chart* $\rightarrow$ *New sheet*). Unlike embedded floating charts, a Chartsheet occupies an entire full-screen worksheet without grid cell distractions.
-- **Embedded Visuals**:
-  1. **Clustered Column Chart**: Direct visual magnitude comparison across key categories.
-  2. **Statistical Histogram (`chartEx1.xml`)**: Employs automated binning with `gapWidth="0"` to reveal distribution shape and transaction density.
+### Tabs 3, 5 & 6: Dedicated Full-Screen Chartsheet Layouts (`F11`)
+Unlike embedded floating charts, these Dedicated Chartsheet tabs occupy full-screen worksheets without spreadsheet cell gridlines, ideal for boardroom projection and deep distribution inspection:
+1. **`Chart1` Chartsheet**: Houses Clustered Columns and a native statistical **Histogram** (`chartEx1.xml`) with zero gap width to reveal transaction frequency density.
+2. **`Chart2` Chartsheet**: Houses Clustered Columns and a native statistical **Box and Whisker Plot** (`chartEx2.xml`, `layoutId="boxWhisker"`) to isolate median lines, IQR spans, and transaction outliers.
+3. **`Chart3` Chartsheet**: Dedicated full-screen **Cartesian Scatter Plot** (`chart7.xml`) evaluating bivariate correlation between **Sales** (`$P$2:$P$9995`) and **Quantity** (`$Q$2:$Q$9995`) across all 9,994 transaction line items.
 
 ### Tab 4: `Sheet2` (Multi-Pivot Tables & Live Charts: Line, Pie, Donut)
 
 `Sheet2` serves as a multi-model visualization laboratory combining two distinct analytical aggregation levels:
 
 #### 1. Annual Time-Series Trajectory (Rows 3–8)
-Paired with a **Line Chart** (`chart3.xml`, `lineChart` with optional smoothing), plotting enterprise revenue expansion:
+Paired with a **Line Chart** (`chart2.xml`, `lineChart` with optional smoothing), plotting enterprise revenue expansion:
 
 | Calendar Year | Gross Annual Sales ($) | YoY Growth / Volume Trajectory |
 | :---: | :---: | :--- |
@@ -241,7 +241,7 @@ Paired with a **Line Chart** (`chart3.xml`, `lineChart` with optional smoothing)
 | **Total** | **\$2,297,200.86** | **Consistent Multi-Year Upward Momentum** |
 
 #### 2. Category Sales Composition (Rows 15–19)
-Paired with both a **Pie Chart** (`chart4.xml`) and an executive **Doughnut Chart** (`chart5.xml`, `holeSize="72"`):
+Paired with both a **Pie Chart** (`chart3.xml`) and an executive **Doughnut Chart** (`chart4.xml`, `holeSize="72"`):
 
 | Product Category | Total Sales ($) | Revenue Share (%) | Visual Encoding & Role |
 | :--- | :---: | :---: | :--- |
@@ -266,13 +266,14 @@ Paired with both a **Pie Chart** (`chart4.xml`) and an executive **Doughnut Char
 | **ChartEx 1** | `xl/charts/chartEx1.xml`| **Statistical Histogram** | `Chart1` (Dedicated Tab) | Native Office 2016+ statistical binning, 0% gap width |
 | **Chart 6** | `xl/charts/chart6.xml` | **Clustered Column Chart** | `Chart2` (Dedicated Tab) | Full-screen presentation mode, clustered distribution comparison |
 | **ChartEx 2** | `xl/charts/chartEx2.xml`| **Statistical Box & Whisker Plot** | `Chart2` (Dedicated Tab) | Native Office 2016+ `boxWhisker` layout, 5-number summary & outlier points |
+| **Chart 7** | `xl/charts/chart7.xml` | **Cartesian Scatter Plot** | `Chart3` (Dedicated Tab) | Bivariate correlation between Sales ($P) and Quantity ($Q) across 9,994 transactions |
 
 ---
 
 ## 💡 Practical Applications & Course Connections
 
-- **Lesson 6.1**: [[01_Visual_Analytics_and_Chart_Selection]] — Master Chart Selection Matrix, Comparison Charts, Line Trends, Pie vs Donut Part-to-Whole, Histogram & Box Plot.
-- **Lesson 6.2**: [[02_Formatting_and_Chart_Design_Rules]] — Gap Width tightening (50%–80%), Donut Hole Size (72%), Series Overlap (100%), and Dedicated Chartsheet layouts (`F11`).
+- **Lesson 6.1**: [[01_Visual_Analytics_and_Chart_Selection]] — Master Chart Selection Matrix, Comparison Charts, Line Trends, Pie vs Donut Part-to-Whole, Histogram, Box Plot, and Scatter Plot.
+- **Lesson 6.2**: [[02_Formatting_and_Chart_Design_Rules]] — Gap Width tightening (50%–80%), Donut Hole Size (72%), Series Overlap (100%), and Dedicated Chartsheet layouts (`F11`: `Chart1`, `Chart2`, `Chart3`).
 - **Lesson 6.3**: [[03_Dashboard_Visual_Hierarchy]] — Connecting `Sheet1` Stacked Columns, `Sheet2` Line Trends & Donut Composition to Executive Dashboards and multi-Pivot Slicers.
 - **Student Workbook Repository**: [`11_Demos_and_Workbooks/README.md`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/README.md)
 """
@@ -287,7 +288,7 @@ Paired with both a **Pie Chart** (`chart4.xml`) and an executive **Doughnut Char
             readme_text = f.read()
         
         old_m6_marker = "| **06: Charts & Visualizations** |"
-        new_m6_entry = f"| **06: Charts & Visualizations** | [`Module_6_Demo.xlsx`](06_Charts_and_Visualizations/Module_6_Demo.xlsx) | {len(sheetnames)} dedicated sheets: `Sample_ Superstore` (Table: `Sample__Superstore`, 9,994 records, $2.30M sales), `Sheet1` (**Stacked Column PivotChart** comparing regional sales across Central, East, South, West), `Chart1` (Dedicated full-screen **Chartsheet** with Clustered Columns & Histogram), `Sheet2` (Two PivotTables with **Line Trend Chart**, **Pie Chart**, and **Doughnut Chart** with 72% hole size), and `Chart2` (Dedicated full-screen **Chartsheet** with Clustered Columns & **Box and Whisker Plot**) | ✅ Verified |"
+        new_m6_entry = f"| **06: Charts & Visualizations** | [`Module_6_Demo.xlsx`](06_Charts_and_Visualizations/Module_6_Demo.xlsx) | {len(sheetnames)} dedicated sheets: `Sample_ Superstore` (Table: `Sample__Superstore`, 9,994 records, $2.30M sales), `Sheet1` (**Stacked Column PivotChart** comparing regional sales across Central, East, South, West), `Sheet2` (Two PivotTables with **Line Trend Chart**, **Pie Chart**, and **Doughnut Chart** with 72% hole size), `Chart1` (Dedicated full-screen **Chartsheet**: Clustered Columns & Histogram), `Chart2` (Dedicated **Chartsheet**: Box and Whisker Plot), and `Chart3` (Dedicated **Chartsheet**: Scatter Plot) | ✅ Verified |"
         
         lines = readme_text.splitlines()
         updated_lines = []

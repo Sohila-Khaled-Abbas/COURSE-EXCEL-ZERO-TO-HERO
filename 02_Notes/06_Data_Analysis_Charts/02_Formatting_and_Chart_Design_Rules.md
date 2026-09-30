@@ -156,11 +156,12 @@ DEFAULT EXCEL (219% Gap Width)        EXECUTIVE FORMATTED (60% Gap Width)
   - **Hotel Reservation Example**: Top Line: `TOTAL BOOKINGS` (`9pt Slate #64748B`), Bottom Line: `36,275` (`20pt Bold Navy #0F172A`).
   - **Superstore Demo Example (`Module_6_Demo.xlsx`)**: Top Line: `TOTAL SALES` (`9pt Slate`), Bottom Line: `$2,297,201` with sub-caption `12.5% Net Margin` (`20pt Bold Navy #0F172A`).
 
-### E. Dedicated Chartsheet Architecture vs. Embedded Dashboard (`Chart1` & `Chart2`)
+### E. Dedicated Chartsheet Architecture vs. Embedded Dashboard (`Chart1`, `Chart2`, `Chart3`)
 - **Embedded Chart (Object in Sheet)**: Best for executive dashboards (like `Sheet1` and `Sheet2`) where multiple charts, slicers, and KPI scorecards align side-by-side on a single unified canvas.
 - **Dedicated Chartsheet (Standalone Full-Screen Tab)**: Created instantly via keyboard shortcut **`F11`** (or right-click chart $\rightarrow$ *Move Chart* $\rightarrow$ *New sheet*). Best for high-density exploratory charts, detailed statistical distributions, or standalone boardroom presentations that require 100% full-screen focus without spreadsheet gridlines.
   - **`Chart1` Chartsheet (`Module_6_Demo.xlsx`)**: Houses Clustered Columns and a native statistical **Histogram** (`chartEx1.xml`) with zero gap width to reveal transaction density.
   - **`Chart2` Chartsheet (`Module_6_Demo.xlsx`)**: Houses Clustered Columns and a native statistical **Box and Whisker Plot** (`chartEx2.xml`, `layoutId="boxWhisker"`) to isolate median lines, IQR interquartile spans, and transaction outliers.
+  - **`Chart3` Chartsheet (`Module_6_Demo.xlsx`)**: Dedicated full-screen **Cartesian Scatter Plot** (`chart7.xml`) evaluating bivariate correlation between Sales and Quantity across all 9,994 transaction data points.
 
 ---
 

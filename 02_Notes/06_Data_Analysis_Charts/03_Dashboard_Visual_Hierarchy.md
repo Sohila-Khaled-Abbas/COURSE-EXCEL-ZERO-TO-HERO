@@ -110,7 +110,7 @@ flowchart TD
     subgraph SuperstoreTier3 ["Tier 3: Temporal Trends & Geographic Distribution"]
         SS_T1["Multi-Year Annual Pacing<br/>(Line Chart: Sheet2 in Module_6_Demo.xlsx — 2014-2017 upward trajectory from $484k to $733k)"]
         SS_T2["Territory Profitability Map<br/>(Filled Map: California $76.4k & NY $74.0k top profit states)"]
-        SS_T3["Distribution Analysis (Dedicated Chartsheets)<br/>(Chart1: Statistical Histogram | Chart2: Box & Whisker Plot)"]
+        SS_T3["Distribution & Correlation (Dedicated Chartsheets)<br/>(Chart1: Histogram | Chart2: Box Plot | Chart3: Scatter Plot)"]
     end
 
     SuperstoreTier1 --> SuperstoreTier2
