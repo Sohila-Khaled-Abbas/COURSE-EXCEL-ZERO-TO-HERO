@@ -73,8 +73,26 @@ flowchart TD
 
 ### Channel 1: From Table or Range (Local Workbook)
 - **Path**: **Data > From Sheet** or **Data > Get Data > From Other Sources > From Table/Range**.
-- **Mechanism**: Converts a standard worksheet range into an official Excel Table (`ListObject`, shortcut `Ctrl + T`) and loads it into the Power Query Editor.
-- **Use Case**: Cleaning data already pasted into Excel before feeding it into Data Models or PivotTables.
+- **Live Demo Implementation (`Module_7_Demo.xlsx`)**: Connects directly to the existing table `Hotel_Reservations` (36,275 rows) within the active workbook.
+- **Power Query M Script (Live from `Module_7_Demo.xlsx`)**:
+  ```powerquery
+  shared Hotel_Reservations = let
+      Source = Excel.CurrentWorkbook(){[Name="Hotel_Reservations"]}[Content],
+      #"Changed Type" = Table.TransformColumnTypes(Source,{
+          {"Booking_ID", type text}, {"no_of_adults", Int64.Type}, {"no_of_children", Int64.Type}, 
+          {"no_of_weekend_nights", Int64.Type}, {"no_of_week_nights", Int64.Type}, 
+          {"type_of_meal_plan", type text}, {"required_car_parking_space", Int64.Type}, 
+          {"room_type_reserved", type text}, {"lead_time", Int64.Type}, 
+          {"arrival_year", Int64.Type}, {"arrival_month", Int64.Type}, {"arrival_date", Int64.Type}, 
+          {"market_segment_type", type text}, {"repeated_guest", Int64.Type}, 
+          {"no_of_previous_cancellations", Int64.Type}, {"no_of_previous_bookings_not_canceled", Int64.Type}, 
+          {"avg_price_per_room", type number}, {"no_of_special_requests", Int64.Type}, 
+          {"booking_status", type text}
+      })
+  in
+      #"Changed Type";
+  ```
+- **Mechanism**: Reads the local table via `Excel.CurrentWorkbook(){[Name="..."]}[Content]`.
 - **Key Advantage**: Dynamic range expansion. When new rows are typed beneath the Excel Table, Power Query automatically incorporates them upon **Refresh** (`Alt + F5`).
 
 ---
@@ -109,30 +127,29 @@ flowchart TD
 ### Channel 3: From CSV / Text File (Delimited Flat Files)
 - **Path**: **Data > Get Data > From File > From Text/CSV**.
 - **Course Datasets**:
-  - `Hotel Reservations.csv` (36,275 rows, Table: `Hotel_Reservations` in `Module_7_Demo.xlsx`).
+  - `Sample_ Superstore.csv` (9,994 rows, Table: `Sample__Superstore` in `Module_7_Demo.xlsx`).
+  - `Hotel Reservations.csv` (36,275 rows).
   - `Supermarket data.csv` (46.08 MB retail transaction log).
 - **Core Parameters**:
   - **File Origin (Encoding)**: Default is `65001: Unicode (UTF-8)`. If Arabic characters appear garbled (e.g. `???` or `Ø¹Ù…ÙŠÙ„`), switch encoding to `1256: Arabic (Windows)` or `UTF-8 with BOM`.
   - **Delimiter**: Auto-detected (Comma `,`, Semicolon `;`, Tab `\t`, Pipe `|`). European regional exports commonly use semicolons.
   - **Data Type Detection**: Based on first 200 rows or entire dataset.
-- **Power Query M Script (Live from `Module_7_Demo.xlsx`)**:
+- **Power Query M Script (Live from `Module_7_Demo.xlsx` — `Sample_ Superstore`)**:
   ```powerquery
-  shared #"Hotel Reservations" = let
+  shared #"Sample_ Superstore" = let
       Source = Csv.Document(
-          File.Contents("D:\courses\Data Analysis 26-27\Hotel Reservations.csv"),
-          [Delimiter=",", Columns=19, QuoteStyle=QuoteStyle.None]
+          File.Contents("D:\courses\Data Analysis 26-27\Sample_ Superstore.csv"),
+          [Delimiter=",", Columns=19, Encoding=65001, QuoteStyle=QuoteStyle.None]
       ),
       #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
       #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{
-          {"Booking_ID", type text}, {"no_of_adults", Int64.Type}, {"no_of_children", Int64.Type},
-          {"no_of_weekend_nights", Int64.Type}, {"no_of_week_nights", Int64.Type},
-          {"type_of_meal_plan", type text}, {"required_car_parking_space", Int64.Type},
-          {"room_type_reserved", type text}, {"lead_time", Int64.Type},
-          {"arrival_year", Int64.Type}, {"arrival_month", Int64.Type}, {"arrival_date", Int64.Type},
-          {"market_segment_type", type text}, {"repeated_guest", Int64.Type},
-          {"no_of_previous_cancellations", Int64.Type}, {"no_of_previous_bookings_not_canceled", Int64.Type},
-          {"avg_price_per_room", type number}, {"no_of_special_requests", Int64.Type},
-          {"booking_status", type text}
+          {"Row ID", Int64.Type}, {"Order ID", type text}, {"Order Date", type text}, 
+          {"Ship Date", type text}, {"Ship Mode", type text}, {"Customer ID", type text}, 
+          {"Segment", type text}, {"Country", type text}, {"City", type text}, 
+          {"State", type text}, {"Region", type text}, {"Product ID", type text}, 
+          {"Category", type text}, {"Sub-Category", type text}, {"Product Name", type text}, 
+          {"Sales", type number}, {"Quantity", Int64.Type}, {"Discount", type number}, 
+          {"Profit", type number}
       })
   in
       #"Changed Type";

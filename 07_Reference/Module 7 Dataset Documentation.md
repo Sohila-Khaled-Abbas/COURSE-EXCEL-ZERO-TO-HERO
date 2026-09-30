@@ -4,12 +4,12 @@ dataset_name: Module 7 Data Cleaning & Ingestion Laboratory
 source_type: course-workbook
 source_ecosystem: Excel Zero to Hero Curriculum
 primary_file: 11_Demos_and_Workbooks/07_Data_Cleaning/Module_7_Demo.xlsx
-total_sheets: 3
-total_records: 46286
+total_sheets: 5
+total_records: 66762
 total_columns: 33
 status: verified
 created: 2026-09-30
-updated: 2026-09-30
+updated: 2026-10-01
 tags:
   - excel
   - dataset
@@ -28,7 +28,7 @@ tags:
 # 📦 Module 7 Dataset Documentation: Data Cleaning & Enterprise Ingestion
 
 > [!abstract] Dataset & Workbook Overview
-> The **Module 7 Demo Workbook** (`Module_7_Demo.xlsx`) serves as the official practice and operational laboratory for **Module 7: Importing Data and Data Cleaning**. It bridges multi-source ingestion channels with real-world data transformation workflows. Housing **51,269 combined operational records** across three production tables—**`Hotel_Reservations`** (36,275 rows), **`Sheet1` / PwC Call Center** (5,000 rows), and **`Sample_ Superstore`** (9,994 rows)—it operationalizes the **ETL (Extract, Transform, Load)** lifecycle and the **Modern Excel Analytics Stack (Power Query $\to$ Power Pivot $\to$ Pivot Tables)** directly inside Microsoft Excel.
+> The **Module 7 Demo Workbook** (`Module_7_Demo.xlsx`) serves as the official practice and operational laboratory for **Module 7: Importing Data and Data Cleaning**. It bridges multi-source enterprise ingestion channels (Excel, CSV, XML, JSON) with real-world data transformation workflows. Housing **66,745 combined operational records** across five production tables—**`Hotel_Reservations`** (36,275 rows), **`People`** (19,972 rows), **`Sample_ Superstore`** (9,994 rows), **`Product`** (504 rows), and **`Sheet1` / PwC Call Center** (5,000 rows)—it operationalizes the **ETL (Extract, Transform, Load)** lifecycle and the **Modern Excel Analytics Stack (Power Query $\to$ Power Pivot $\to$ Pivot Tables)** directly inside Microsoft Excel.
 
 ---
 
@@ -37,8 +37,10 @@ tags:
 | Tab Name | Tab Classification | Primary Object | Source Origin & Ingestion Channel | Key Educational Purpose & Transformation Scope |
 | :--- | :--- | :---: | :--- | :--- |
 | **`Hotel Reservations`** | Ingested Dataset ($36,276 \times 19$) | `Hotel_Reservations` (Table) | `Hotel Reservations.csv` via Power Query `Csv.Document` (Channel 3: CSV File) | Hospitality booking operations spanning 2017–2018. Demonstrates delimiter parsing, automated header promotion, numeric data typing (`Int64.Type`, `avg_price_per_room` currency), and outlier boundary analysis. |
+| **`Sample_ Superstore`** | Ingested Dataset ($9,995 \times 19$) | `Sample__Superstore` (Table) | `Sample_ Superstore.csv` via Power Query `Csv.Document` (Channel 3: CSV File, UTF-8 Encoding 65001) | Retail e-commerce transactions across Furniture, Office Supplies, and Technology. Demonstrates currency parsing, negative profit margins, hierarchical categories, and regional dimensional cross-filtering. |
+| **`People`** | Ingested Dataset ($19,973 \times 5$) | `People` (Table) | `JSON_F52E2B61-18A1-11d1-B105-00805F49916B3.json` via Power Query `Json.Document` (Channel 6: JSON File) | Enterprise personnel register (19,972 contact records from AdventureWorks). Demonstrates JSON array-to-table expansion, record flattening, column projection (`Id`, `FirstName`, `LastName`, `EmailAddress`, `PhoneNumber`), and MIME/extension troubleshooting. |
+| **`Product`** | Ingested Dataset ($505 \times 4$) | `Product` (Table) | `XML_F52E2B61-18A1-11d1-B105-00805F49916B1.xml` via Power Query `Xml.Tables` (Channel 5: XML File) | Manufacturing parts catalog (504 product lines from AdventureWorks). Demonstrates single-root XML parsing, node flattening (`ProductID`, `Name`, `ProductNumber`, `ListPrice`), and troubleshooting multi-root parsing errors. |
 | **`Sheet1`** | Ingested Dataset ($5,001 \times 10$) | `Sheet1` (Table) | `01 Call-Center-Dataset.xlsx` (`Sheet1`) via Power Query `Excel.Workbook` (Channel 2: Excel File) | Authentic PwC Switzerland call center operational log (5,000 customer inquiries across 8 agents). Primary ground for handling 946 operational nulls (`Speed of answer in seconds`), time serial casting, and canonical 10-column schema ingestion. |
-| **`Sample_ Superstore`** | Ingested Dataset ($9,995 \times 19$) | `Sample_Superstore` (Table) | `Sample_ Superstore.csv` via Power Query `Csv.Document` (Channel 3: CSV File, UTF-8 Encoding 65001) | Retail e-commerce transactions across Furniture, Office Supplies, and Technology. Demonstrates currency parsing, negative profit margins, hierarchical categories, and regional dimensional cross-filtering. |
 
 ---
 
@@ -252,9 +254,70 @@ in
     #"Changed Type";
 ```
 
-> [!NOTE]
-> **Comparison with Legacy Course Extract:**
-> Notice that ingesting the authentic Forage source file (`01 Call-Center-Dataset.xlsx`) maps directly to `Sheet1` with **exactly 10 clean operational columns**, whereas older uncleaned workbooks (like `PWC Dataset.xlsx`) retained 4 empty trailing formatting columns (`Column11`–`Column14`). Power Query allows analysts to ingest either source seamlessly, dropping phantom columns when present or ingesting the clean 10-column canonical schema directly.
+### 3. Retail E-Commerce Extraction (`Sample_ Superstore.csv`)
+```powerquery
+shared #"Sample_ Superstore" = let
+    // Step 1: Extract CSV payload using UTF-8 encoding (65001)
+    Source = Csv.Document(
+        File.Contents("D:\courses\Data Analysis 26-27\Sample_ Superstore.csv"),
+        [Delimiter=",", Columns=19, Encoding=65001, QuoteStyle=QuoteStyle.None]
+    ),
+    // Step 2: Promote first row of text to column headers
+    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    // Step 3: Enforce strict typed schema
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{
+        {"Row ID", Int64.Type}, {"Order ID", type text}, {"Order Date", type text}, 
+        {"Ship Date", type text}, {"Ship Mode", type text}, {"Customer ID", type text}, 
+        {"Segment", type text}, {"Country", type text}, {"City", type text}, 
+        {"State", type text}, {"Region", type text}, {"Product ID", type text}, 
+        {"Category", type text}, {"Sub-Category", type text}, {"Product Name", type text}, 
+        {"Sales", type number}, {"Quantity", Int64.Type}, {"Discount", type number}, 
+        {"Profit", type number}
+    })
+in
+    #"Changed Type";
+```
+
+### 4. Parts Catalog XML Extraction (`XML_F52E2B61-18A1-11d1-B105-00805F49916B1.xml`)
+```powerquery
+shared Product = let
+    // Step 1: Parse single-root XML document into nested table structures
+    Source = Xml.Tables(
+        File.Contents("D:\courses\Data Analysis 26-27\7-Introducation to Data Fields (Excel)\09_Source_Materials\Module 7\2-Importing Data\XML_F52E2B61-18A1-11d1-B105-00805F49916B1.xml")
+    ),
+    // Step 2: Navigate to nested Product records table
+    Table0 = Source{0}[Table],
+    // Step 3: Enforce strict numeric and string types across all 504 items
+    #"Changed Type" = Table.TransformColumnTypes(Table0,{
+        {"ProductID", Int64.Type}, 
+        {"Name", type text}, 
+        {"ProductNumber", type text}, 
+        {"ListPrice", type number}
+    })
+in
+    #"Changed Type";
+```
+
+### 5. Personnel Register JSON Extraction (`JSON_F52E2B61-18A1-11d1-B105-00805F49916B3.json`)
+```powerquery
+shared People = let
+    // Step 1: Read JSON document stream
+    Source = Json.Document(
+        File.Contents("D:\courses\Data Analysis 26-27\7-Introducation to Data Fields (Excel)\09_Source_Materials\Module 7\2-Importing Data\JSON_F52E2B61-18A1-11d1-B105-00805F49916B3.json")
+    ),
+    // Step 2: Extract nested People list object
+    PeopleList = Source[People],
+    // Step 3: Convert list of records into tabular format
+    TableFromList = Table.FromList(PeopleList, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+    // Step 4: Expand record keys into distinct columns (19,972 total rows)
+    ExpandedColumn = Table.ExpandRecordColumn(
+        TableFromList, 
+        "Column1", 
+        {"Id", "FirstName", "LastName", "EmailAddress", "PhoneNumber"}
+    )
+in
+    ExpandedColumn;
+```
 
 ---
 
@@ -285,7 +348,7 @@ in
 
 ---
 
-### Table 2: `PWC Source Data` ($5,000 \times 14$)
+### Table 2: `Sheet1` / PwC Call Center ($5,000 \times 10$)
 | Field Name | Data Type | Sample Value | Description & Cleaning Considerations |
 | :--- | :--- | :--- | :--- |
 | `Call Id` | Text | `001-A` | Unique call inquiry transaction key. |
@@ -298,10 +361,45 @@ in
 | `Speed of answer in seconds` | Integer | `30` | Queue hold time prior to agent connection. **Contains 946 nulls representing abandoned calls!** |
 | `AvgTalkDuration` | Time / DateTime | `00:03:45` | Total elapsed conversation duration with agent. |
 | `Satisfaction rating` | Integer | `3` | Customer CSAT rating on a scale of 1 to 5. Null when call was uncompleted. |
-| `Column11` | Any / Blank | `null` | **Ghost Column**: Blank spreadsheet residue from original Excel extract; to be dropped in Power Query. |
-| `Column12` | Any / Blank | `null` | **Ghost Column**: Blank spreadsheet residue to be removed. |
-| `Column13` | Text / Blank | `null` | **Ghost Column**: Blank spreadsheet residue to be removed. |
-| `Column14` | Text / Blank | `null` | **Ghost Column**: Blank spreadsheet residue to be removed. |
+
+---
+
+### Table 3: `Sample__Superstore` ($9,994 \times 19$)
+| Field Name | Data Type | Sample Value | Description & Cleaning Considerations |
+| :--- | :--- | :--- | :--- |
+| `Row ID` | Integer | `1` | Sequential transaction index (1 to 9,994). |
+| `Order ID` | Text | `CA-2016-152156` | Composite order key incorporating country, year, and serial. |
+| `Order Date` / `Ship Date` | Text / Date | `11/8/2016` | Order processing and dispatch timestamps. |
+| `Ship Mode` | Text | `Second Class` | Delivery priority (`Standard Class`, `Second Class`, `First Class`, `Same Day`). |
+| `Customer ID` / `Segment` | Text | `CG-12520` / `Consumer` | Client identifier and market segment (`Consumer`, `Corporate`, `Home Office`). |
+| `Country` / `City` / `State` / `Region` | Text | `United States` / `Henderson` / `Kentucky` / `South` | Geographic hierarchical dimensions for regional spatial analysis. |
+| `Product ID` / `Category` / `Sub-Category` | Text | `FUR-BO-10001798` / `Furniture` / `Bookcases` | Merchandise taxonomy across 3 departments and 17 sub-categories. |
+| `Product Name` | Text | `Bush Somerset Collection Bookcase` | Granular item description. Standardized casing and whitespace. |
+| `Sales` | Decimal / Currency | `261.96` | Gross transactional sales revenue in USD. |
+| `Quantity` | Integer | `2` | Units purchased per transaction line. |
+| `Discount` | Decimal / Percentage | `0.00` | Applied promotional discount rate ($0.00\text{ to }0.80$). |
+| `Profit` | Decimal / Currency | `41.91` | Net operational profit (contains negative values indicating unprofitable lines). |
+
+---
+
+### Table 4: `People` ($19,972 \times 5$)
+| Field Name | Data Type | Sample Value | Description & Cleaning Considerations |
+| :--- | :--- | :--- | :--- |
+| `Id` | Integer | `285` | Unique personnel/business entity identifier from AdventureWorks. |
+| `FirstName` | Text | `Syed` | Individual first name string. |
+| `LastName` | Text | `Abbas` | Individual last name string. |
+| `EmailAddress` | Text | `syed0@adventure-works.com` | Corporate email address. Audited for syntax validation. |
+| `PhoneNumber` | Text | `926-555-0182` | Formatted contact phone number. |
+
+---
+
+### Table 5: `Product` ($504 \times 4$)
+| Field Name | Data Type | Sample Value | Description & Cleaning Considerations |
+| :--- | :--- | :--- | :--- |
+| `ProductID` | Integer | `1` | Unique primary key for manufacturing inventory item. |
+| `Name` | Text | `Adjustable Race` | Component part designation. |
+| `ProductNumber` | Text | `AR-5381` | SKU / alphanumeric product code. |
+| `ListPrice` | Decimal / Currency | `0.0000` | Recommended catalog price in USD ($0.00 for non-salable sub-assembly parts). |
 
 ---
 
