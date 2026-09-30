@@ -18,14 +18,29 @@ updated: 2026-09-28
 
 ```mermaid
 flowchart LR
-    A[01 Course Hub] --> B[02 Lesson Notes]
-    B --> C[03 Concept Graph]
-    B --> D[04 Formula Reference]
-    C --> E[05 Practice & Challenges]
-    D --> E
-    E --> F[06 Real-World Projects]
-    F --> G[10 Portfolio Case Study]
-    F --> H[08 Revision & Spaced Recall]
+    subgraph S1 ["📚 CURRICULUM & KNOWLEDGE"]
+        CH["<b>01 Course Hub</b><br/>Syllabus & Milestones"]
+        LN["<b>02 Lesson Notes</b><br/>38 Modular Lessons"]
+        CG["<b>03 Concepts Graph</b><br/>26 Atomic Models"]
+        FR["<b>04 Formula Library</b><br/>66+ Analyzed Functions"]
+        CH --> LN
+        LN --> CG & FR
+    end
+
+    subgraph S2 ["🎯 ACTIVE PRACTICE & LABS"]
+        PR["<b>05 Practice Hub</b><br/>Multi-Level Exercises"]
+        AI["<b>AI-Assisted Drills</b><br/>Prompting & Verification"]
+        CG & FR --> PR
+        PR --> AI
+    end
+
+    subgraph S3 ["💼 ENTERPRISE ARTIFACTS"]
+        PJ["<b>06 Analytics Projects</b><br/>Hotel & PwC Capstones"]
+        PO["<b>10 Portfolio Showcase</b><br/>Recruiter Case Studies"]
+        RV["<b>08 Spaced Revision</b><br/>Flashcards & Interview Prep"]
+        AI --> PJ
+        PJ --> PO & RV
+    end
 ```
 
 ---

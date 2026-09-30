@@ -17,20 +17,31 @@ updated: 2026-09-28
 
 ```mermaid
 flowchart TD
-    S1[1. Understand] --> S2[2. Practice]
-    S2 --> S3[3. Apply]
-    S3 --> S4[4. Analyze]
-    S4 --> S5[5. Build]
-    S5 --> S6[6. Review]
-    S6 --> S7[7. Explain]
+    subgraph Milestone1 ["🌱 MILESTONE 1: FOUNDATIONS & CALCULATION ENGINE"]
+        direction LR
+        S1["<b>Stage 1: Understand</b><br/>• Interface & Grid System<br/>• 5 Core Data Types<br/>• Relative & Absolute Referencing"]
+        S2["<b>Stage 2: Practice</b><br/>• Statistical Aggregations<br/>• Multi-Condition Logic (SUMIFS)<br/>• Modern XLOOKUP Precision"]
+        S1 ==>|Formula Drills| S2
+    end
 
-    style S1 fill:#1e293b,stroke:#3b82f6,stroke-width:2px,color:#fff
-    style S2 fill:#1e293b,stroke:#06b6d4,stroke-width:2px,color:#fff
-    style S3 fill:#1e293b,stroke:#10b981,stroke-width:2px,color:#fff
-    style S4 fill:#1e293b,stroke:#f59e0b,stroke-width:2px,color:#fff
-    style S5 fill:#1e293b,stroke:#ef4444,stroke-width:2px,color:#fff
-    style S6 fill:#1e293b,stroke:#8b5cf6,stroke-width:2px,color:#fff
-    style S7 fill:#1e293b,stroke:#ec4899,stroke-width:2px,color:#fff
+    subgraph Milestone2 ["⚡ MILESTONE 2: DATA STRUCTURE, ETL & ANALYSIS"]
+        direction LR
+        S3["<b>Stage 3: Apply</b><br/>• Excel Tables Architecture<br/>• 6 Dimensions of Data Quality<br/>• Power Query Automated ETL"]
+        S4["<b>Stage 4: Analyze</b><br/>• Pivot Table Aggregations<br/>• Date & Numeric Grouping<br/>• Slicer & Timeline Filtering"]
+        S3 ==>|Pipeline Integration| S4
+    end
+
+    subgraph Milestone3 ["🚀 MILESTONE 3: EXECUTIVE BI SYSTEMS & CAREER MASTERY"]
+        direction LR
+        S5["<b>Stage 5: Build</b><br/>• Visual Hierarchy & Charts<br/>• Hotel Reservation Dashboard<br/>• PwC Call Center Analytics Capstone"]
+        S6["<b>Stage 6: Review</b><br/>• Spaced Recall Flashcards<br/>• Common Mistakes & Pitfalls<br/>• Timed Formula Challenges"]
+        S7["<b>Stage 7: Explain</b><br/>• Executive Portfolio Artifacts<br/>• Technical Interview Drills<br/>• Production GitHub Publishing"]
+        S5 ==>|Spaced Retention| S6
+        S6 ==>|Portfolio Polish| S7
+    end
+
+    Milestone1 ==>|Data Hygiene Readiness| Milestone2
+    Milestone2 ==>|Business Intelligence Pipeline| Milestone3
 ```
 
 ---

@@ -18,65 +18,74 @@ updated: 2026-09-28
 > Visual and structured Map of Content linking core modules, atomic concepts, formulas, and capstone analytics projects.
 
 ```mermaid
-graph TD
-    subgraph Fundamentals ["Phase 1: Foundations"]
-        GUI["[[01_Excel_Interface_and_GUI|Excel Interface]]"]
-        MGMT["[[01_Data_Types_and_Formatting|Data Management]]"]
-        VAL["[[03_Data_Validation_and_Integrity|Data Validation]]"]
+flowchart TD
+    subgraph Fundamentals ["🌱 Phase 1: Core Foundations"]
+        direction LR
+        GUI["<b>Excel Interface</b><br/>Ribbon & Grid Navigation"]
+        MGMT["<b>Data Management</b><br/>Data Types & Formatting"]
+        VAL["<b>Data Validation</b><br/>Input Rules & Dropdowns"]
+        GUI --> MGMT --> VAL
     end
 
-    subgraph Logic ["Phase 2: Formulas & Engine"]
-        REF["[[Relative vs Absolute References]]"]
-        MATH["[[02_Statistical_and_Aggregation_Functions|Aggregation]]"]
-        COND["[[03_Conditional_Logic_and_Decision_Making|Logic (IF/IFS)]]"]
-        LOOK["[[VLOOKUP vs XLOOKUP|Lookups (XLOOKUP)]]"]
-        DYN["[[07_Dynamic_Arrays_and_Modern_Formulas|Dynamic Arrays]]"]
+    subgraph Logic ["⚡ Phase 2: Formulas & Calculation Engine"]
+        direction LR
+        REF["<b>Referencing</b><br/>Relative vs Absolute ($)"]
+        MATH["<b>Aggregations</b><br/>SUM, COUNT, AVERAGE"]
+        COND["<b>Logic & Decisions</b><br/>IF, IFS, IFERROR"]
+        LOOK["<b>Modern Lookups</b><br/>XLOOKUP & INDEX/MATCH"]
+        REF --> MATH --> COND --> LOOK
     end
 
-    subgraph Structure ["Phase 3: Tables & Pivot"]
-        TBL["[[Excel Tables]]"]
-        STR["[[Structured References]]"]
-        PIV["[[Pivot Tables]]"]
-        SLC["[[Slicers and Timelines]]"]
+    subgraph Structure ["🧱 Phase 3: Tables & Dynamic Summaries"]
+        direction LR
+        TBL["<b>Excel Tables</b><br/>ListObjects Architecture"]
+        STR["<b>Structured References</b><br/>[@Column] & Headers"]
+        PIV["<b>Pivot Tables</b><br/>Multi-Dimensional Grids"]
+        SLC["<b>Slicers & Timelines</b><br/>Interactive Filtering"]
+        TBL --> STR --> PIV --> SLC
     end
 
-    subgraph DataEngineering ["Phase 4: Cleaning & ETL"]
-        DQ["[[Six Dimensions of Data Quality]]"]
-        CLN["[[Data Cleaning]]"]
-        PQ["[[Power Query]]"]
-        ETL["[[ETL Process]]"]
-        M["[[M Language]]"]
+    subgraph DataEngineering ["🔄 Phase 4: Data Quality & Power Query ETL"]
+        direction LR
+        DQ["<b>Data Quality</b><br/>6 Dimensions & Audit"]
+        CLN["<b>Data Cleaning</b><br/>Flash Fill & Text Split"]
+        PQ["<b>Power Query ETL</b><br/>Extract, Transform, Load"]
+        M["<b>M Language</b><br/>Applied Steps Pipeline"]
+        DQ --> CLN --> PQ --> M
     end
 
-    subgraph BI ["Phase 5: Modeling & DAX"]
-        DM["[[Dimensional Modeling]]"]
-        STAR["[[Star Schema vs Snowflake Schema]]"]
-        FACT["[[Fact vs Dimension Tables]]"]
-        DAX["[[Data Analysis Expressions (DAX)]]"]
+    subgraph BI ["🧠 Phase 5: Dimensional Modeling & DAX"]
+        direction LR
+        DM["<b>Dimensional Modeling</b><br/>Star & Snowflake Schemas"]
+        FACT["<b>Fact & Dimension</b><br/>1-to-Many Relationships"]
+        DAX["<b>DAX Measures</b><br/>CALCULATE & Time Intelligence"]
+        DM --> FACT --> DAX
     end
 
-    subgraph Projects ["Phase 6: Practical Projects"]
-        HOTEL["[[Hotel Reservation Analysis]]"]
-        PWC["[[Call Center Performance Analysis]]"]
-        PORT["[[Call Center Analysis Portfolio Case Study]]"]
+    subgraph Projects ["🚀 Phase 6: Production Analytics Projects"]
+        direction LR
+        HOTEL["<b>Hotel Reservation</b><br/>36K Bookings & Cancellations"]
+        PWC["<b>PwC Call Center</b><br/>5K Calls Operational BI"]
+        HOTEL --> PWC
     end
 
-    subgraph AIAssisted ["Phase 7: AI-Assisted Workflows"]
-        AIMOC["[[AI for Data Analysts MOC|AI MOC]]"]
-        AITOOLS["[[AI for Excel Overview|AI Tools (Twistly & Claude)]]"]
-        AIWORKFLOW["[[AI Excel Workflow|14-Step AI Workflow]]"]
-        AIPRACTICE["[[05_Practice/AI Assisted Excel/|10 AI Practice Drills]]"]
+    subgraph AIAssisted ["🤖 Phase 7: AI-Augmented Analytics"]
+        direction LR
+        AIMOC["<b>AI for Analysts</b><br/>Capabilities & Boundaries"]
+        AIWORKFLOW["<b>14-Step AI Workflow</b><br/>Prompting & Verification"]
+        AIMOC --> AIWORKFLOW
     end
 
-    Fundamentals --> Logic
-    Logic --> Structure
-    Structure --> DataEngineering
-    DataEngineering --> BI
-    Structure --> Projects
-    BI --> Projects
-    Projects --> PORT
-    Projects --> AIAssisted
-    AIAssisted --> PORT
+    PORT["<b>⭐ Executive Portfolio Showcase</b><br/>PwC Call Center Case Study Ready for Recruiters"]
+
+    Fundamentals ==> Logic
+    Logic ==> Structure
+    Structure ==> DataEngineering
+    DataEngineering ==> BI
+    BI ==> Projects
+    Structure -.->|Ad-Hoc Analysis| Projects
+    Projects ==> PORT
+    AIAssisted ==> PORT
 ```
 
 ---
