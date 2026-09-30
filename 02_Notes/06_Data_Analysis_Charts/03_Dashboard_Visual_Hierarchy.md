@@ -7,23 +7,24 @@ status: completed
 difficulty: advanced
 tags: [excel, lesson, dashboard, layout, visual-hierarchy, kpi-cards, slicers, hotel-reservations, case-study]
 prerequisites: ["[[01_Visual_Analytics_and_Chart_Selection]]", "[[02_Formatting_and_Chart_Design_Rules]]"]
-related_project: "[[Hotel Reservation Analysis]]", "[[Call Center Performance Analysis]]"
+related_project: ["[[Hotel Reservation Analysis]]", "[[Call Center Performance Analysis]]"]
 source: "https://youtu.be/uv1bxe2gdnU"
 created: 2026-09-28
 updated: 2026-09-30
 video_chapter: "Chapter 6 – Data Analysis Charts"
 video_timestamp: "3:26:58"
 video_url: "https://www.youtube.com/watch?v=uv1bxe2gdnU&t=12418s&pp=0gcJCWMAwfN6Pr3D"
-demo_workbook: "09_Source_Materials/Module 6/4- Hotel Reservation Dashboard.xlsx"
+demo_workbook: "11_Demos_and_Workbooks/06_Charts_and_Visualizations/Module_6_Demo.xlsx"
 ---
 
 # Lesson 6.3: Executive Dashboard Architecture, Layout & Visual Hierarchy
 
 > [!abstract] Learning Objective
-> Design and construct enterprise-grade, single-screen executive dashboards in Microsoft Excel. Structure information flow using the F-Pattern visual hierarchy, engineer high-impact KPI summary cards, coordinate multiple analytical chart families (Comparison, Trend, Composition, Distribution, and Maps), orchestrate multi-PivotChart filtering via Slicer Report Connections, and align components flawlessly with Excel's grid-snapping architecture.
+> Design and construct enterprise-grade, single-screen executive dashboards in Microsoft Excel. Structure information flow using the F-Pattern visual hierarchy, engineer high-impact KPI summary cards, coordinate multiple analytical chart families (Comparison, Trend, Composition, Distribution, and Maps), orchestrate multi-PivotChart filtering via Slicer Report Connections, and align components flawlessly with Excel's grid-snapping architecture. Ground every design pattern in real enterprise data from **`Module_6_Demo.xlsx`** (`Sample__Superstore`, 9,994 orders).
 
 > 🎥 **Video Chapter**: [Chapter 6 – Data Analysis Charts (3:26:58)](https://www.youtube.com/watch?v=uv1bxe2gdnU&t=12418s&pp=0gcJCWMAwfN6Pr3D)  
-> 📁 **Companion Source Workbook**: [`4- Hotel Reservation Dashboard.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/09_Source_Materials/Module%206/4-%20Hotel%20Reservation%20Dashboard.xlsx)
+> 📁 **Official Course Demo Workbook**: [`Module_6_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/06_Charts_and_Visualizations/Module_6_Demo.xlsx) *(Table: `Sample__Superstore`)*  
+> 📁 **Companion Case Study Workbook**: [`4- Hotel Reservation Dashboard.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/09_Source_Materials/Module%206/4-%20Hotel%20Reservation%20Dashboard.xlsx)
 
 ---
 
@@ -78,9 +79,48 @@ To implement the F-Pattern in Microsoft Excel, organize your worksheet into thre
 
 ---
 
-## 3. Case Study: The Hotel Reservation Dashboard
+## 3. Case Studies: Executive Dashboards
 
-Based directly on the course workbook [`4- Hotel Reservation Dashboard.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/09_Source_Materials/Module%206/4-%20Hotel%20Reservation%20Dashboard.xlsx) and dataset [`2- Hotel Reservations.csv`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/09_Source_Materials/Module%206/2-%20Hotel%20Reservations.csv):
+### Case Study A: The Enterprise Superstore Executive Cockpit (`Module_6_Demo.xlsx`)
+
+Applying the 3-Tier Dashboard Framework to the official course dataset **`Module_6_Demo.xlsx`** (*Sheet: `Sample_ Superstore`*, Table: `Sample__Superstore`, 9,994 transactions, $2,297,200.86 Sales, $286,397.02 Profit, 37,873 units sold):
+
+```mermaid
+flowchart TD
+    subgraph SuperstoreTier1 ["Tier 1: Enterprise KPI Scorecard Cards"]
+        SS_K1["Total Sales: $2,297,201"]
+        SS_K2["Total Profit: $286,397"]
+        SS_K3["Net Profit Margin: 12.5%"]
+        SS_K4["Total Units Sold: 37,873"]
+        SS_K5["Total Orders: 9,994 Records"]
+    end
+
+    subgraph SuperstoreTier2 ["Tier 2: Product & Segment Performance"]
+        SS_C1["Sub-Category Sales Volume<br/>(Horizontal Bar: Phones $330k, Chairs $328k lead)"]
+        SS_C2["Customer Segment Share<br/>(Donut Chart: Consumer 50.6%, Corp 30.7%, Home 18.7%)"]
+        SS_C3["Sub-Category Profit Anomalies<br/>(Diverging Bar: Copiers +$55.6k vs Tables -$17.7k)"]
+    end
+
+    subgraph SuperstoreTier3 ["Tier 3: Temporal Trends & Geographic Distribution"]
+        SS_T1["Monthly Sales & Profit Pacing<br/>(Dual-Axis Line Chart: Q4 Holiday surge in Nov-Dec)"]
+        SS_T2["Territory Profitability Map<br/>(Filled Map: California $76.4k & NY $74.0k top profit states)"]
+        SS_T3["Discount Sensitivity Matrix<br/>(Scatter Plot: Discloses profit collapse past 20% discount)"]
+    end
+
+    SuperstoreTier1 --> SuperstoreTier2
+    SuperstoreTier2 --> SuperstoreTier3
+```
+
+#### Key Superstore Business Insights Derived:
+1. **The Discount Margin Cliff**: Discounts below 20% maintain healthy 20%+ margins, but discounts exceeding 20% produce consistent negative profit margins across all four regions.
+2. **Loss-Leader Product Traps**: While `Tables` generates $206,966 in gross sales, it generates a **net loss of -$17,725 (-8.6% margin)** due to high shipping allowances and heavy promotional discounting.
+3. **Regional Technology Windfall**: The **West Region** accounts for $725,458 in sales and generates over **$108,418 in net profit**, driven primarily by high-margin Technology sales (`Copiers` and `Accessories`).
+
+---
+
+### Case Study B: The Hotel Reservation Dashboard (`4- Hotel Reservation Dashboard.xlsx`)
+
+Based directly on the companion course workbook [`4- Hotel Reservation Dashboard.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/09_Source_Materials/Module%206/4-%20Hotel%20Reservation%20Dashboard.xlsx) and dataset [`2- Hotel Reservations.csv`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/09_Source_Materials/Module%206/2-%20Hotel%20Reservations.csv):
 
 ```mermaid
 flowchart TD
@@ -140,12 +180,14 @@ When you create a Slicer for a PivotChart, it defaults to controlling *only that
 4. Click **OK**.
 5. Clicking a single button on your Slicer (e.g. selecting `Online TA`) now **dynamically filters and animates every chart across the entire dashboard simultaneously**!
 
-```
-SLICER: [Market Segment]
-  ├── [Online TA] ────► Filter PivotTable 1 (Channel Bar Chart)
-  ├── [Offline TO] ───► Filter PivotTable 2 (Monthly Seasonality Line)
-  ├── [Corporate] ────► Filter PivotTable 3 (Room Type Treemap)
-  └── [Direct] ───────► Filter PivotTable 4 (KPI Summary Cards)
+```mermaid
+flowchart LR
+    Slicer["Interactive Global Slicers<br/>• Region (West, East, Central, South)<br/>• Segment (Consumer, Corp, Home)<br/>• Category (Tech, Furniture, Office)"]
+
+    Slicer --> P1["PivotTable 1: Volume Performance<br/>pt_CategorySales (Horizontal Bar Chart)"]
+    Slicer --> P2["PivotTable 2: Timeline Pacing<br/>pt_MonthlyTrends (Dual-Axis Line Chart)"]
+    Slicer --> P3["PivotTable 3: Composition Mix<br/>pt_SegmentMix (Donut Chart)"]
+    Slicer --> P4["PivotTable 4: Executive Scorecard<br/>pt_KPICards (Sales, Profit, Margin Cards)"]
 ```
 
 ### D. Preparing for Executive Presentation

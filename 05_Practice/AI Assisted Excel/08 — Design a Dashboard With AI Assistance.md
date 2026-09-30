@@ -60,18 +60,12 @@ A well-trained AI will recommend:
 <summary>🔍 Click to Reveal Verified Executive Layout Blueprint</summary>
 
 ### 12-Column Executive Layout Wireframe:
-```text
-+-----------------------------------------------------------------------------------------+
-| [Header] PwC Call Center Performance Executive Cockpit | Slicers: [Month] [Department]  |
-+-----------------------------------------------------------------------------------------+
-| [KPI 1: 5,000 Calls] | [KPI 2: 81.1% Answer] | [KPI 3: 18.9% Abandon] | [KPI 4: 3.40 CSAT] |
-+-----------------------------------------------------------------------------------------+
-| [Chart 1: Inbound & Abandonment by Hour]    | [Chart 2: Agent Scorecard CSAT vs ASA]   |
-| (Combo Line/Column: Highlights Peak at 1pm) | (Horizontal Bar: Dan & Martha Top CSAT)  |
-+-----------------------------------------------------------------------------------------+
-| [Table: Agent Operational Matrix - Inbound, Answer %, Resolved %, ASA, CSAT Rating]    |
-+-----------------------------------------------------------------------------------------+
-```
+| Dashboard Region | Grid Allocation | Component & Indicators | Design Standard |
+| :--- | :--- | :--- | :--- |
+| **Top Banner** | Rows 1–4 (Cols A–L) | **PwC Call Center Performance Executive Cockpit** \| Slicers: `[Month]`, `[Department]` | Dark Navy branding, white high-contrast text |
+| **KPI Scorecard** | Rows 5–9 (Cols A–L) | • **Total Calls**: `5,000`<br/>• **Answered Rate**: `81.1%`<br/>• **Abandonment**: `18.9%`<br/>• **Avg CSAT**: `3.40 / 5.0` | 4 Cards across grid, 22pt Segoe UI, subtle gray border |
+| **Mid Analytical Views** | Rows 10–22 (Cols A–F / G–L) | • **Col A–F**: Inbound & Abandonment by Hour *(Combo Column/Line)*<br/>• **Col G–L**: Agent CSAT vs ASA *(Horizontal Bar)* | Zero baseline, 60% gap width, no 3D elements |
+| **Bottom Matrix** | Rows 23–34 (Cols A–L) | • **Agent Operational Matrix**: `Inbound`, `Answer %`, `Resolved %`, `ASA`, `CSAT` | Clean tabular form with data bars & conditional formatting |
 </details>
 
 ## Reflection

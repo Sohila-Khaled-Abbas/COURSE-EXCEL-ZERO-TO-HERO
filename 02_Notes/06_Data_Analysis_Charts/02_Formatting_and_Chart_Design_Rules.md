@@ -7,23 +7,24 @@ status: completed
 difficulty: intermediate
 tags: [excel, lesson, visualization, chart-design, decluttering, tufte, data-ink-ratio, color-theory]
 prerequisites: ["[[01_Visual_Analytics_and_Chart_Selection]]"]
-related_project: "[[Hotel Reservation Analysis]]", "[[Call Center Performance Analysis]]"
+related_project: ["[[Hotel Reservation Analysis]]", "[[Call Center Performance Analysis]]"]
 source: "https://youtu.be/uv1bxe2gdnU"
 created: 2026-09-28
 updated: 2026-09-30
 video_chapter: "Chapter 6 – Data Analysis Charts"
 video_timestamp: "3:26:58"
 video_url: "https://www.youtube.com/watch?v=uv1bxe2gdnU&t=12418s&pp=0gcJCWMAwfN6Pr3D"
-demo_workbook: "09_Source_Materials/Module 6/4- Hotel Reservation Dashboard.xlsx"
+demo_workbook: "11_Demos_and_Workbooks/06_Charts_and_Visualizations/Module_6_Demo.xlsx"
 ---
 
 # Lesson 6.2: Executive Formatting, Decluttering & Pre-Attentive Design
 
 > [!abstract] Learning Objective
-> Transform raw, cluttered default Excel charts into elegant, publication-grade executive visualizations. Apply Edward Tufte's Data-Ink Ratio, leverage pre-attentive visual attributes to guide executive attention in under 250 milliseconds, configure per-chart formatting geometry (gap width, stroke thickness, donut hole diameter), master professional color palettes (Categorical, Sequential, Diverging, and the 80/20 Accent Rule), and link dynamic formula titles directly to charts.
+> Transform raw, cluttered default Excel charts into elegant, publication-grade executive visualizations. Apply Edward Tufte's Data-Ink Ratio, leverage pre-attentive visual attributes to guide executive attention in under 250 milliseconds, configure per-chart formatting geometry (gap width, stroke thickness, donut hole diameter), master professional color palettes (Categorical, Sequential, Diverging, and the 80/20 Accent Rule), and link dynamic formula titles directly to charts using verified datasets from **`Module_6_Demo.xlsx`** (`Sample__Superstore`).
 
 > 🎥 **Video Chapter**: [Chapter 6 – Data Analysis Charts (3:26:58)](https://www.youtube.com/watch?v=uv1bxe2gdnU&t=12418s&pp=0gcJCWMAwfN6Pr3D)  
-> 📁 **Companion Source Workbook**: [`4- Hotel Reservation Dashboard.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/09_Source_Materials/Module%206/4-%20Hotel%20Reservation%20Dashboard.xlsx)
+> 📁 **Official Course Demo Workbook**: [`Module_6_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/06_Charts_and_Visualizations/Module_6_Demo.xlsx) *(Table: `Sample__Superstore`)*  
+> 📁 **Companion Case Study Workbook**: [`4- Hotel Reservation Dashboard.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/09_Source_Materials/Module%206/4-%20Hotel%20Reservation%20Dashboard.xlsx)
 
 ---
 
@@ -127,8 +128,8 @@ DEFAULT EXCEL (219% Gap Width)        EXECUTIVE FORMATTED (60% Gap Width)
 - **Donut Hole Size**: Set to **`70%`** (Format Data Series $\rightarrow$ *Doughnut Hole Size*). Default 50% leaves too thick a ring and too cramped a center.
 - **Labeling**: Select the series $\rightarrow$ Add Data Labels $\rightarrow$ *Label Options* $\rightarrow$ check **Category Name** and **Percentage**, and uncheck **Value**. Position labels *Outside End*.
 - **The Center Metric Card**: Insert a text box into the hollow center:
-  - Top Line (Header): `TOTAL BOOKINGS` (Calibri / Segoe UI, 9pt, Slate Gray `#64748B`).
-  - Bottom Line (Value): `36,275` (Segoe UI Bold, 20pt, Dark Navy `#0F172A`).
+  - **Hotel Reservation Example**: Top Line: `TOTAL BOOKINGS` (`9pt Slate #64748B`), Bottom Line: `36,275` (`20pt Bold Navy #0F172A`).
+  - **Superstore Demo Example (`Module_6_Demo.xlsx`)**: Top Line: `TOTAL SALES` (`9pt Slate`), Bottom Line: `$2,297,201` with sub-caption `12.5% Net Margin` (`20pt Bold Navy #0F172A`). Surround with the 3 Segment ring: Consumer (50.6%), Corporate (30.7%), Home Office (18.7%).
 
 ---
 
@@ -147,18 +148,16 @@ flowchart TD
 ### The 80/20 Accent Color Rule
 The most potent visual hierarchy technique in executive reporting:
 1. Format **80% of all data points in neutral, muted tones** (e.g. Slate Gray `#94A3B8` or Cool Gray `#CBD5E1`).
-2. Apply **one intentional, vibrant accent color** (e.g. Emerald Green `#10B981` or Deep Azure `#0284C7`) exclusively to the data point that demands executive action.
+2. Apply **one intentional, vibrant accent color** (e.g. Emerald Green `#10B981` or Crimson Red `#EF4444`) exclusively to the data point that demands executive action.
 
-```
-All Neutral (No Focus):              80/20 Accent Applied (Instant Insight):
-┌─────────────────────────┐          ┌─────────────────────────┐
-│ Online TA   ████████ 45%│          │ Online TA   ▓▓▓▓▓▓▓▓ 45%│ <-- [ACCENT BLUE: Drives Growth]
-│ Offline TO  ██████   28%│          │ Offline TO  ░░░░░░   28%│
-│ Direct      ████     15%│          │ Direct      ░░░░     15%│
-│ Corporate   ██        8%│          │ Corporate   ░░        8%│
-│ Aviation    █         4%│          │ Aviation    ░         4%│
-└─────────────────────────┘          └─────────────────────────┘
-```
+| Sub-Category (`Module_6_Demo.xlsx`) | Sales Volume | Net Profit | Margin % | Standard Palette (Visual Chaos) | 80/20 Accent Strategy (Executive Focus) |
+| :--- | :---: | :---: | :---: | :--- | :--- |
+| **Phones** | $330,007 | +$44,516 | 13.5% | Random blue column | Muted Slate (`#94A3B8`) |
+| **Chairs** | $328,449 | +$26,590 | 8.1% | Random orange column | Muted Slate (`#94A3B8`) |
+| **Storage** | $223,844 | +$21,279 | 9.5% | Random gray column | Muted Slate (`#94A3B8`) |
+| **Tables** | $206,966 | **-$17,725** | **-8.6%** | Random yellow column | 🔴 **CRIMSON ACCENT (`#EF4444`)** *(Immediate Intervention)* |
+| **Binders** | $203,413 | +$30,222 | 14.9% | Random green column | Muted Slate (`#94A3B8`) |
+| **Copiers** | $149,528 | **+$55,618** | **37.2%** | Random cyan column | 🟢 **EMERALD ACCENT (`#10B981`)** *(Top Margin Outlier)* |
 
 ### Color-Blind Accessibility (Deuteranopia & Protanopia)
 - Approximately 8% of male executives have red-green color deficiency.

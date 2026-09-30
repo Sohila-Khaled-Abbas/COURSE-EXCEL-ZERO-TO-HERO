@@ -15,16 +15,17 @@ video_chapter: "Chapter 6 – Data Analysis Charts"
 video_timestamp: "3:26:58"
 video_url: "https://www.youtube.com/watch?v=uv1bxe2gdnU&t=12418s&pp=0gcJCWMAwfN6Pr3D"
 mindmap_asset: "assets/module_6_charts_mindmap.png"
-demo_workbook: "09_Source_Materials/Module 6/4- Hotel Reservation Dashboard.xlsx"
+demo_workbook: "11_Demos_and_Workbooks/06_Charts_and_Visualizations/Module_6_Demo.xlsx"
 ---
 
 # Lesson 6.1: Visual Analytics, Data Types & The Master Chart Selection Matrix
 
 > [!abstract] Learning Objective
-> Master the taxonomy of data visualization in Microsoft Excel. Learn how data types (Qualitative: Nominal vs. Ordinal; Quantitative: Continuous vs. Discrete) dictate chart selection. Navigate all 8 analytical chart families (Comparison, Trend, Composition, Distribution, Relationship, Process, Intensity/Hierarchy, and Geographic) across 17 distinct chart types, understanding their statistical mechanics, perceptual strengths, and step-by-step Excel execution.
+> Master the taxonomy of data visualization in Microsoft Excel. Learn how data types (Qualitative: Nominal vs. Ordinal; Quantitative: Continuous vs. Discrete) dictate chart selection. Navigate all 8 analytical chart families (Comparison, Trend, Composition, Distribution, Relationship, Process, Intensity/Hierarchy, and Geographic) across 17 distinct chart types, understanding their statistical mechanics, perceptual strengths, and step-by-step Excel execution. Ground every visual rule in real-world enterprise datasets from **`Module_6_Demo.xlsx`** (`Sample__Superstore`, 9,994 records) and the Hotel Reservation Dashboard.
 
 > 🎥 **Video Chapter**: [Chapter 6 – Data Analysis Charts (3:26:58)](https://www.youtube.com/watch?v=uv1bxe2gdnU&t=12418s&pp=0gcJCWMAwfN6Pr3D)  
-> 📁 **Companion Source Workbook**: [`4- Hotel Reservation Dashboard.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/09_Source_Materials/Module%206/4-%20Hotel%20Reservation%20Dashboard.xlsx)  
+> 📁 **Official Course Demo Workbook**: [`Module_6_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/06_Charts_and_Visualizations/Module_6_Demo.xlsx) *(Table: `Sample__Superstore`)*  
+> 📁 **Companion Case Study Workbook**: [`4- Hotel Reservation Dashboard.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/09_Source_Materials/Module%206/4-%20Hotel%20Reservation%20Dashboard.xlsx)  
 > 🗺️ **Visual Taxonomy**: Based on the course mindmap [`assets/module_6_charts_mindmap.png`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/assets/module_6_charts_mindmap.png)
 
 ---
@@ -333,9 +334,28 @@ Use this reference table to select the scientifically optimal chart for any anal
 
 ---
 
-## 5. Practical Implementation: Hotel Reservation Case Study
+## 5. Practical Implementation: Course Datasets
 
-Applying the Master Chart Selection Matrix to the **Hotel Reservation Dataset** (`36,275 Bookings`, `09_Source_Materials/Module 6/4- Hotel Reservation Dashboard.xlsx`):
+### Case Study A: Enterprise Superstore Sales Analytics (`Module_6_Demo.xlsx`)
+
+Applying the Master Chart Selection Matrix to the official course dataset **`Module_6_Demo.xlsx`** (*Sheet: `Sample_ Superstore`*, Table: `Sample__Superstore`, `9,994 Transactions`, `$2,297,200.86 Sales`, `$286,397.02 Profit`, `37,873 Units Sold`):
+
+| Business Question | Independent Field | Dependent Metric | Selected Chart Type | Design Rationale & Grounded Metrics |
+| :--- | :--- | :--- | :--- | :--- |
+| **Which Sub-Categories generate top sales?** | `Sub-Category` *(Nominal, 17 items)* | `Sales ($)` | **Horizontal Bar Chart** *(Sorted Descending)* | `Phones` ($330,007) and `Chairs` ($328,449) lead volume. Horizontal orientation comfortably displays all 17 sub-categories without label tilt. |
+| **Which Sub-Categories are destroying profits?** | `Sub-Category` | `Profit ($)` / Margin % | **Diverging Bar Chart** *(Green/Red Accent)* | Immediately exposes net loss leaders: `Tables` (-$17,725), `Bookcases` (-$3,473), and `Supplies` (-$1,189) vs top performer `Copiers` (+$55,618, 37.2% margin). |
+| **What is our revenue split by Customer Segment?** | `Segment` *(Nominal, 3 groups)* | `% of Total Sales` | **Donut Chart** *(Hole size: 70%)* | Part-to-whole share: `Consumer` (50.6%), `Corporate` (30.7%), `Home Office` (18.7%). Center KPI scorecard card displays `$2.30M`. |
+| **How do sales and profits pace over time?** | `Order Date` *(Continuous Time)* | `Monthly Sales` & `Profit` | **Dual-Axis Line Chart** *(Straight lines)* | Exposes severe Q4 holiday surges (Nov–Dec peak) and reveals whether profits track revenue growth or erode during promotion pushes. |
+| **Does heavy discounting destroy profitability?** | `Discount` *(0% to 80%)* | `Profit Margin %` | **Scatter Plot (XY)** | Evaluates price elasticity across 9,994 transactions. Confirms margin collapse into severe losses once discount exceeds 20%. |
+| **Where are our highest-volume sales territories?** | `State` *(Geographic, 48 states)* | `Sales Volume` | **Filled Map** *(Choropleth)* | California ($457.7k) and New York ($310.9k) visually dominate national geographic distribution. |
+| **How does revenue distribute within product hierarchies?** | `Category` $\rightarrow$ `Sub-Category` | `Sales Weight` | **Treemap** *(Hierarchical Rectangles)* | Shows nested weight of `Technology` (36.4%), `Furniture` (32.3%), and `Office Supplies` (31.3%) without chart-junk clutter. |
+| **Which Region-Category combinations are most profitable?** | `Region` *(Rows)*, `Category` *(Cols)* | `Sum of Profit` | **Heat Map** *(Pivot Table + 3-Color Scale)* | Matrix cross-tabulation highlights Central Furniture losses (-$2,871) vs West Technology windfalls (+$57,450). |
+
+---
+
+### Case Study B: Hotel Reservation Case Study (`4- Hotel Reservation Dashboard.xlsx`)
+
+Applying the Master Chart Selection Matrix to the companion **Hotel Reservation Dataset** (`36,275 Bookings`, `09_Source_Materials/Module 6/4- Hotel Reservation Dashboard.xlsx`):
 
 | Business Question | Independent Field | Dependent Metric | Selected Chart Type | Design Rationale |
 | :--- | :--- | :--- | :--- | :--- |

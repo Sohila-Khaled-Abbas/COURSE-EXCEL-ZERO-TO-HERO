@@ -50,19 +50,12 @@ A data dashboard in Excel is not a canvas for artistic experimentation; it is a 
 ## Important Examples
 
 ### Grid Blueprint Structure
-```text
-+-------------------------------------------------------------------------+
-| [LOGO]  EXECUTIVE CALL CENTER PERFORMANCE REPORT     [RESET SLICERS]    |
-+-------------------------------------------------------------------------+
-| [Total Calls: 5,000] [Answered: 81.1%] [Resolved: 89.9%] [CSAT: 3.4/5] |
-+------------------------------------+------------------------------------+
-| [Calls by Topic - Bar Chart]       | [Call Volume by Hour - Area Chart] |
-|                                    |                                    |
-+------------------------------------+------------------------------------+
-| [Agent Performance Matrix Table]   | [Slicers: Agent, Topic, Month]     |
-|                                    |                                    |
-+------------------------------------+------------------------------------+
-```
+| Layout Tier | Section Scope | Visual Component & Example Data | Analytical Function |
+| :--- | :--- | :--- | :--- |
+| **Header Band** | Branding & Global Controls | `[LOGO] EXECUTIVE CALL CENTER PERFORMANCE REPORT` \| `[RESET SLICERS]` | Establishes title context and one-click filter reset macro |
+| **Tier 1: North** | High-Priority KPI Scorecards | • **Total Calls**: `5,000`<br/>• **Answered Rate**: `81.1%`<br/>• **Resolved Rate**: `89.9%`<br/>• **Avg CSAT**: `3.4 / 5.0` | Immediate 5-second operational pulse check |
+| **Tier 2: Mid** | Comparative & Temporal Views | • **Calls by Topic**: `Horizontal Bar Chart`<br/>• **Call Volume by Hour**: `Area Chart` | Exposes customer pain points and intra-day staffing bottlenecks |
+| **Tier 3: South** | Operational Details & Slicers | • **Agent Performance Matrix**: `Interactive Data Table`<br/>• **Slicers**: `Agent`, `Topic`, `Month` | Granular agent-level audit and multi-dimensional interactive filtering |
 
 ### VBA One-Click Reset Macro
 ```vba
