@@ -4,9 +4,9 @@ dataset_name: Module 7 Data Cleaning & Ingestion Laboratory
 source_type: course-workbook
 source_ecosystem: Excel Zero to Hero Curriculum
 primary_file: 11_Demos_and_Workbooks/07_Data_Cleaning/Module_7_Demo.xlsx
-total_sheets: 5
-total_records: 66762
-total_columns: 33
+total_sheets: 6
+total_records: 68759
+total_columns: 37
 status: verified
 created: 2026-09-30
 updated: 2026-10-01
@@ -26,6 +26,10 @@ tags:
   - pubs
   - sql-server
   - mssql
+  - web-scraping
+  - wikipedia-egypt
+  - demographics
+  - arabic-data
   - data-quality
   - reference
 ---
@@ -33,7 +37,7 @@ tags:
 # 📦 Module 7 Dataset Documentation: Data Cleaning & Enterprise Ingestion
 
 > [!abstract] Dataset & Workbook Overview
-> The **Module 7 Demo Workbook** (`Module_7_Demo.xlsx`) serves as the official practice and operational laboratory for **Module 7: Importing Data and Data Cleaning**. It bridges multi-source enterprise ingestion channels (Excel, CSV, XML, JSON) with real-world data transformation workflows. Housing **66,745 combined operational records** across five production tables—**`Hotel_Reservations`** (36,275 rows), **`People`** (19,972 rows), **`Sample_ Superstore`** (9,994 rows), **`Product`** (504 rows), and **`Sheet1` / PwC Call Center** (5,000 rows)—it operationalizes the **ETL (Extract, Transform, Load)** lifecycle and the **Modern Excel Analytics Stack (Power Query $\to$ Power Pivot $\to$ Pivot Tables)** directly inside Microsoft Excel.
+> The **Module 7 Demo Workbook** (`Module_7_Demo.xlsx`) serves as the official practice and operational laboratory for **Module 7: Importing Data and Data Cleaning**. It bridges multi-source enterprise ingestion channels (Excel, CSV, XML, JSON, SQL Server Database, and Web Scraping) with real-world data transformation workflows. Housing **68,759 combined operational records** across six production tables—**`Hotel_Reservations`** (36,275 rows), **`People`** (19,972 rows), **`Sample_ Superstore`** (9,994 rows), **`Query1` / AdventureWorks SQL** (2,014 rows), **`Product`** (504 rows), and **`Sheet1` / PwC Call Center** (5,000 rows)—alongside live connection feeds from **Arabic Wikipedia Egyptian Demographics** (`Table 15`–`Table 19`), it operationalizes the **ETL (Extract, Transform, Load)** lifecycle and the **Modern Excel Analytics Stack (Power Query $\to$ Power Pivot $\to$ Pivot Tables)** directly inside Microsoft Excel.
 
 ---
 
@@ -46,6 +50,8 @@ tags:
 | **`People`** | Ingested Dataset ($19,973 \times 5$) | `People` (Table) | `JSON_F52E2B61-18A1-11d1-B105-00805F49916B3.json` via Power Query `Json.Document` (Channel 6: JSON File) | Enterprise personnel register (19,972 contact records from AdventureWorks). Demonstrates JSON array-to-table expansion, record flattening, column projection (`Id`, `FirstName`, `LastName`, `EmailAddress`, `PhoneNumber`), and MIME/extension troubleshooting. |
 | **`Product`** | Ingested Dataset ($505 \times 4$) | `Product` (Table) | `XML_F52E2B61-18A1-11d1-B105-00805F49916B1.xml` via Power Query `Xml.Tables` (Channel 5: XML File) | Manufacturing parts catalog (504 product lines from AdventureWorks). Demonstrates single-root XML parsing, node flattening (`ProductID`, `Name`, `ProductNumber`, `ListPrice`), and troubleshooting multi-root parsing errors. |
 | **`Sheet1`** | Ingested Dataset ($5,001 \times 10$) | `Sheet1` (Table) | `01 Call-Center-Dataset.xlsx` (`Sheet1`) via Power Query `Excel.Workbook` (Channel 2: Excel File) | Authentic PwC Switzerland call center operational log (5,000 customer inquiries across 8 agents). Primary ground for handling 946 operational nulls (`Speed of answer in seconds`), time serial casting, and canonical 10-column schema ingestion. |
+| **`Query1`** | Ingested Dataset ($2,015 \times 4$) | `Query1` (Table) | Microsoft SQL Server (`AdventureWorks2022`) via Power Query `Sql.Database` (Channel 7: Enterprise Database) | Pushdown SQL query returning 2,014 contact records (`FirstName LIKE 'A%'`) joined with `EmailAddress`. Demonstrates server-side predicate evaluation and direct enterprise RDBMS connectivity. |
+| **`Table 15`–`19`** | Connection-Only Data Feeds | Power Query Mashup Queries | Arabic Wikipedia (`التركيبة السكانية في مصر`) via `Web.BrowserContents` & `Html.Table` (Channel 8: Web Scraping) | 5 live demographic tables from Egyptian CAPMAS census data (Vital statistics, fertility targets, life expectancy, governorate populations, and land densities). Demonstrates CSS selector table scraping and dynamic web refresh. |
 
 ---
 
@@ -438,6 +444,43 @@ Northwind provides the cleanest possible illustration of the difference between 
 
 ---
 
+### 5. Egyptian Demographic Statistics Suite (Arabic Wikipedia Web Extraction)
+
+The workbook `Module_7_Demo.xlsx` incorporates live, automated web scraping connecting Excel directly to Arabic Wikipedia:
+- **Canonical Web Endpoint**: [Wikipedia: التركيبة السكانية في مصر (Demographics of Egypt)](https://ar.wikipedia.org/wiki/%D8%A7%D9%84%D8%AA%D8%B1%D9%83%D9%8A%D8%A8%D8%A9_%D8%A7%D9%84%D8%B3%D9%83%D8%A7%D9%86%D9%8A%D8%A9_%D9%81%D9%8A_%D9%85%D8%B5%D8%B1)
+- **Data Origin & Governance**: Demographic censuses, vital statistics, and regional projections compiled by Egypt's **Central Agency for Public Mobilization and Statistics (CAPMAS - الجهاز المركزي للتعبئة العامة والإحصاء)**.
+- **Ingestion Technology**: Power Query's headless web rendering engine (`Web.BrowserContents`) parsed into typed tabular datasets via CSS selectors in `Html.Table`.
+
+```mermaid
+flowchart TD
+    WIKI["Arabic Wikipedia Article\n(التركيبة السكانية في مصر)"] --> WB_GET["Power Query Engine:\nWeb.BrowserContents(URL)"]
+    WB_GET --> HTML_TAB["Html.Table(Source, CSS Selectors)\nParses HTML DOM & wikitable classes"]
+    
+    HTML_TAB --> T15["Table 15: Vital Statistics\n(Year, Births, Deaths, Natural Change, Crude Rates)"]
+    HTML_TAB --> T16["Table 16: Fertility Targets\n(Urban vs Rural Targets & Crude Birth Rates)"]
+    HTML_TAB --> T17["Table 17: Life Expectancy\n(Historical Trajectory & Projections)"]
+    HTML_TAB --> T18["Table 18: 2024 Governorate Split\n(Urban/Rural Ratios & Headcounts)"]
+    HTML_TAB --> T19["Table 19: Area & Population Density\n(Total Area, Inhabited %, Pop Density)"]
+
+    style WIKI fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style WB_GET fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    style HTML_TAB fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    style T15 fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    style T16 fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    style T17 fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    style T18 fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    style T19 fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+```
+
+#### 📦 The 5 Web-Scraped Ingestion Feeds
+1. **`Table 15` — Vital Statistics of Egypt**: Multi-decade time series tracking national population, total live births, deaths, natural population growth, crude birth rate per 1,000, crude death rate per 1,000, net migration rate, and total fertility rate.
+2. **`Table 16` — Birth & Fertility Rate Projections**: Compares total national crude birth rates and targets against urban and rural breakdown benchmarks (`معدل الخصوبة الفعلي في الريف / الحضر`).
+3. **`Table 17` — Life Expectancy Historical Progression**: Life expectancy at birth (`متوسط العمر المتوقع بالسنوات`) tracked from mid-20th century to present.
+4. **`Table 18` — 2024 Population by Governorate**: Detailed spatial breakdown across Egypt's 27 governorates, reporting urban population ratio (`نسبة الحضر`), 2024 census headcount, total rural population, and total urban population.
+5. **`Table 19` — Governorate Land Area & Inhabited Density**: Geographic territory ($km^2$), percentage of inhabited land area relative to total area, total population in thousands, and true demographic density concentrated within inhabited valleys and oases.
+
+---
+
 As executed live in `Module_7_Demo.xlsx`, data flows through the classic three-tier enterprise ETL cycle:
 
 ```mermaid
@@ -648,6 +691,54 @@ in
     ExpandedColumn;
 ```
 
+### 6. SQL Server Pushdown Query (`Query1` from AdventureWorks2022)
+```powerquery
+shared Query1 = let
+    // Step 1: Transmit pushdown SQL query directly to local AdventureWorks2022 instance
+    Source = Sql.Database("localhost", "AdventureWorks2022", [
+        Query="SELECT #(lf)    p.BusinessEntityID, #(lf)    p.FirstName, #(lf)    p.LastName, #(lf)    e.EmailAddress#(lf)FROM Person.Person AS p#(lf)LEFT JOIN Person.EmailAddress AS e #(lf)    ON p.BusinessEntityID = e.BusinessEntityID#(lf)WHERE p.FirstName LIKE 'A%';"
+    ])
+in
+    Source;
+```
+
+### 7. Arabic Wikipedia Egyptian Demographics Web Extraction (`Table 15` & `Table 18`)
+```powerquery
+shared #"Table 15" = let
+    // Step 1: Ingest rendered web page DOM from Arabic Wikipedia
+    Source = Web.BrowserContents("https://ar.wikipedia.org/wiki/%D8%A7%D9%84%D8%AA%D8%B1%D9%83%D9%8A%D8%A8%D8%A9_%D8%A7%D9%84%D8%B3%D9%83%D8%A7%D9%86%D9%8A%D8%A9_%D9%81%D9%8A_%D9%85%D8%B5%D8%B1"),
+    // Step 2: Extract target HTML table elements using CSS selector paths
+    #"Extracted Table From Html" = Html.Table(Source, {
+        {"Column1", "TABLE[id='mwAh4'] > * > TR > :nth-child(1)"}, 
+        {"Column2", "TABLE[id='mwAh4'] > * > TR > :nth-child(2)"}, 
+        {"Column3", "TABLE[id='mwAh4'] > * > TR > :nth-child(3)"}, 
+        {"Column4", "TABLE[id='mwAh4'] > * > TR > :nth-child(4)"}, 
+        {"Column5", "TABLE[id='mwAh4'] > * > TR > :nth-child(5)"}, 
+        {"Column6", "TABLE[id='mwAh4'] > * > TR > :nth-child(6)"}, 
+        {"Column7", "TABLE[id='mwAh4'] > * > TR > :nth-child(7)"}, 
+        {"Column8", "TABLE[id='mwAh4'] > * > TR > :nth-child(8)"}, 
+        {"Column9", "TABLE[id='mwAh4'] > * > TR > :nth-child(9)"}, 
+        {"Column10", "TABLE[id='mwAh4'] > * > TR > :nth-child(10)"}
+    }, [RowSelector="TABLE[id='mwAh4'] > * > TR"]),
+    // Step 3: Promote first row of HTML text to Arabic headers
+    #"Promoted Headers" = Table.PromoteHeaders(#"Extracted Table From Html", [PromoteAllScalars=true]),
+    // Step 4: Cast demographic time series into integers and decimals
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{
+        {"السنة", Int64.Type}, 
+        {"عدد السكان", type text}, 
+        {"المواليد", type text}, 
+        {"الوفيات", type text}, 
+        {"التغير الطبيعي", type text}, 
+        {"معدل المواليد الخام (لكل 1000)", type number}, 
+        {"معدل الوفيات الخام (لكل 1000)", type number}, 
+        {"التغير الطبيعي (لكل 1000)", type number}, 
+        {"معدل الهجرة الخام (لكل 1000)", type number}, 
+        {"معدل الخطوبة الكلي", type text}
+    })
+in
+    #"Changed Type";
+```
+
 ---
 
 ## 📋 Comprehensive Field Catalog
@@ -729,6 +820,43 @@ in
 | `Name` | Text | `Adjustable Race` | Component part designation. |
 | `ProductNumber` | Text | `AR-5381` | SKU / alphanumeric product code. |
 | `ListPrice` | Decimal / Currency | `0.0000` | Recommended catalog price in USD ($0.00 for non-salable sub-assembly parts). |
+
+---
+
+### Table 6: `Query1` / AdventureWorks SQL Pushdown ($2,014 \times 4$)
+| Field Name | Data Type | Sample Value | Description & Cleaning Considerations |
+| :--- | :--- | :--- | :--- |
+| `BusinessEntityID` | Integer | `1` | Foreign key matching `Person.Person` to `HumanResources.Employee`. |
+| `FirstName` | Text | `Ken` | First name filtered on SQL Server hardware via `WHERE p.FirstName LIKE 'A%'`. |
+| `LastName` | Text | `Sánchez` | Employee/contact surname string. |
+| `EmailAddress` | Text | `ken0@adventure-works.com` | Resolved via `LEFT JOIN Person.EmailAddress` on database engine. |
+
+---
+
+### Table 7: `Table 15` / Egypt Vital Statistics ($90 \times 10$)
+| Field Name | Data Type | Sample Value | Description & Cleaning Considerations |
+| :--- | :--- | :--- | :--- |
+| `السنة` | Whole Number | `2023` | Calendar year index. |
+| `عدد السكان` | Text / Integer | `105,914,000` | Mid-year total population headcount. Strip commas before calculation. |
+| `المواليد` | Text / Integer | `2,044,000` | Registered live births logged across Egypt. |
+| `الوفيات` | Text / Integer | `580,000` | Registered deaths logged across Egypt. |
+| `التغير الطبيعي` | Text / Integer | `1,464,000` | Net natural population growth ($\text{Births} - \text{Deaths}$). |
+| `معدل المواليد الخام (لكل 1000)` | Decimal | `19.4` | Crude birth rate per 1,000 residents. |
+| `معدل الوفيات الخام (لكل 1000)` | Decimal | `5.5` | Crude death rate per 1,000 residents. |
+| `التغير الطبيعي (لكل 1000)` | Decimal | `13.9` | Natural change rate per 1,000 residents. |
+| `معدل الهجرة الخام (لكل 1000)` | Decimal | `-0.5` | Net migration rate across international borders. |
+| `معدل الخطوبة الكلي` | Text / Decimal | `2.54` | Total fertility rate (average lifetime children per woman). |
+
+---
+
+### Table 8: `Table 18` / 2024 Population by Governorate ($27 \times 5$)
+| Field Name | Data Type | Sample Value | Description & Cleaning Considerations |
+| :--- | :--- | :--- | :--- |
+| `المحافظة` | Text | `القاهرة` | Governorate administrative entity name (Cairo, Giza, Alexandria, etc.). |
+| `نسبة الحضر[21]` | Decimal / Percentage | `1.000` | Urban population share. Clean footnote reference `[21]` from header. |
+| `عدد السكان (2024)` | Integer | `10,345,000` | Official projected total population for 2024. |
+| `عدد سكان الريف` | Integer | `0` | Rural headcount (`0` for fully urban governorates like Cairo, Port Said, Suez). |
+| `عدد سكان الحضر` | Integer | `10,345,000` | Urban resident headcount. |
 
 ---
 

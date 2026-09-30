@@ -745,11 +745,135 @@ When you build a data model in Excel's **Power Pivot**, you are applying relatio
 
 ## 5. Ingestion Channels 8 & 9: Website Scraping and REST APIs
 
-### Channel 8: From Website (HTML Table Scraping)
-- **Path**: **Data > Get Data > From Other Sources > From Web**.
-- **Inputs**: Enter the web URL (e.g., Wikipedia demographics, financial market rate tables, IMF economic indicators).
-- **Engine Logic**: Power Query navigates the DOM (Document Object Model) of the target web page, detects HTML `<table>` elements, and lists them as selectable tabular objects in the Navigator preview.
-- **Auto-Refresh**: If the web page publishes updated stock prices or currency data, clicking **Refresh** in Excel fetches the live web tables instantly without manual copying.
+### Channel 8: From Website (Live Case Study: Arabic Wikipedia Egyptian Demographics)
+
+Web scraping inside Power Query is one of Excel's most formidable capabilities. Rather than manually copying and pasting web tables—which destroys data types, breaks cell alignments, and fails whenever online data updates—Power Query connects directly to live web URLs, interprets HTML Document Object Models (DOM), and extracts tabular elements dynamically.
+
+#### 🌐 Live Course Implementation: Demographics of Egypt (`التركيبة السكانية في مصر`)
+In `Module_7_Demo.xlsx`, students extract live public demographic tables directly from Arabic Wikipedia:
+- **Source URL**: `https://ar.wikipedia.org/wiki/التركيبة_السكانية_في_مصر`
+- **Target Subject**: National demographic development, vital statistics, fertility rates, and governorate population distributions published by the Egyptian Central Agency for Public Mobilization and Statistics (CAPMAS).
+
+```mermaid
+flowchart TD
+    WIKI["Arabic Wikipedia Article\n(التركيبة السكانية في مصر)"] --> WB_GET["Power Query Engine:\nWeb.BrowserContents(URL)"]
+    WB_GET --> HTML_TAB["Html.Table(Source, CSS Selectors)\nParses HTML DOM & wikitable classes"]
+    
+    HTML_TAB --> T15["Table 15: Vital Statistics\n(Year, Births, Deaths, Natural Change, Crude Rates)"]
+    HTML_TAB --> T16["Table 16: Fertility Rates\n(Urban vs Rural Targets & Crude Birth Rates)"]
+    HTML_TAB --> T17["Table 17: Life Expectancy\n(Historical Trajectory & Projections)"]
+    HTML_TAB --> T18["Table 18: 2024 Governorate Split\n(Urban/Rural Ratios & Headcounts)"]
+    HTML_TAB --> T19["Table 19: Area & Population Density\n(Total Area, Inhabited %, Pop Density)"]
+
+    style WIKI fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style WB_GET fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    style HTML_TAB fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    style T15 fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    style T16 fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    style T17 fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    style T18 fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    style T19 fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+```
+
+---
+
+#### 📦 Extracted Demographic Tables & Schema Specifications
+
+The live extraction in `Module_7_Demo.xlsx` parses five distinct demographic datasets using CSS selector bindings:
+
+| Table ID | Table Topic & Scope | Key Extracted Columns | HTML / CSS Target Selector |
+| :--- | :--- | :--- | :--- |
+| **`Table 15`** | **Vital Statistics of Egypt** (Historical series) | `السنة`, `عدد السكان`, `المواليد`, `الوفيات`, `التغير الطبيعي`, `معدل المواليد الخام (لكل 1000)`, `معدل الوفيات الخام (لكل 1000)`, `معدل الهجرة الخام`, `معدل الخطوبة الكلي` | `TABLE[id='mwAh4'] > * > TR` |
+| **`Table 16`** | **Birth Rates & Fertility Targets** (Urban vs. Rural) | `العام`, `معدل المواليد الخام (المجموع)`, `معدل الخصوبة الفعلي الإجمالي (المستهدف)`, `معدل المواليد الخام (الحضر)`, `معدل المواليد الخام (الريف)` | `TABLE[id='mwBic'] > * > TR` |
+| **`Table 17`** | **Life Expectancy Trends** (Historical progression) | `العام`, `متوسط العمر المتوقع (بالسنوات)` | `TABLE[id='mwBoU'] > * > TR` |
+| **`Table 18`** | **2024 Population by Governorate** (Urban/Rural split) | `المحافظة`, `نسبة الحضر[21]`, `عدد السكان (2024)`, `عدد سكان الريف`, `عدد سكان الحضر` | `TABLE[id='mwBrY'] > * > TR` |
+| **`Table 19`** | **Governorate Land Area & Pop Density** | `المحافظة`, `المساحة كم2`, `نسبة المساحة المأهولة من المساحة الكلية`, `عدد السكان بالآلاف (2023-07-01)`, `الكثافة السكانية في المناطق المأهولة` | `SECTION:nth-child(3) > TABLE.wikitable.sortable:nth-child(3)` |
+
+---
+
+#### 💻 Authentic Power Query M Scripts from `Module_7_Demo.xlsx`
+
+##### 1. Vital Statistics Extraction (`Table 15`):
+```powerquery
+shared #"Table 15" = let
+    // 1. Fetch live rendered DOM via headless browser container
+    Source = Web.BrowserContents("https://ar.wikipedia.org/wiki/%D8%A7%D9%84%D8%AA%D8%B1%D9%83%D9%8A%D8%A8%D8%A9_%D8%A7%D9%84%D8%B3%D9%83%D8%A7%D9%86%D9%8A%D8%A9_%D9%81%D9%8A_%D9%85%D8%B5%D8%B1"),
+    
+    // 2. Query target HTML table by element ID using CSS column selectors
+    #"Extracted Table From Html" = Html.Table(Source, {
+        {"Column1", "TABLE[id='mwAh4'] > * > TR > :nth-child(1)"}, 
+        {"Column2", "TABLE[id='mwAh4'] > * > TR > :nth-child(2)"}, 
+        {"Column3", "TABLE[id='mwAh4'] > * > TR > :nth-child(3)"}, 
+        {"Column4", "TABLE[id='mwAh4'] > * > TR > :nth-child(4)"}, 
+        {"Column5", "TABLE[id='mwAh4'] > * > TR > :nth-child(5)"}, 
+        {"Column6", "TABLE[id='mwAh4'] > * > TR > :nth-child(6)"}, 
+        {"Column7", "TABLE[id='mwAh4'] > * > TR > :nth-child(7)"}, 
+        {"Column8", "TABLE[id='mwAh4'] > * > TR > :nth-child(8)"}, 
+        {"Column9", "TABLE[id='mwAh4'] > * > TR > :nth-child(9)"}, 
+        {"Column10", "TABLE[id='mwAh4'] > * > TR > :nth-child(10)"}
+    }, [RowSelector="TABLE[id='mwAh4'] > * > TR"]),
+    
+    // 3. Promote first row to Arabic column headers
+    #"Promoted Headers" = Table.PromoteHeaders(#"Extracted Table From Html", [PromoteAllScalars=true]),
+    
+    // 4. Cast metric columns to numbers and integers
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{
+        {"السنة", Int64.Type}, 
+        {"عدد السكان", type text}, 
+        {"المواليد", type text}, 
+        {"الوفيات", type text}, 
+        {"التغير الطبيعي", type text}, 
+        {"معدل المواليد الخام (لكل 1000)", type number}, 
+        {"معدل الوفيات الخام (لكل 1000)", type number}, 
+        {"التغير الطبيعي (لكل 1000)", type number}, 
+        {"معدل الهجرة الخام (لكل 1000)", type number}, 
+        {"معدل الخطوبة الكلي", type text}
+    })
+in
+    #"Changed Type";
+```
+
+##### 2. Governorate Demographics Extraction (`Table 18`):
+```powerquery
+shared #"Table 18" = let
+    Source = Web.BrowserContents("https://ar.wikipedia.org/wiki/%D8%A7%D9%84%D8%AA%D8%B1%D9%83%D9%8A%D8%A8%D8%A9_%D8%A7%D9%84%D8%B3%D9%83%D8%A7%D9%86%D9%8A%D8%A9_%D9%81%D9%8A_%D9%85%D8%B5%D8%B1"),
+    #"Extracted Table From Html" = Html.Table(Source, {
+        {"Column1", "TABLE[id='mwBrY'] > * > TR > :nth-child(1)"}, 
+        {"Column2", "TABLE[id='mwBrY'] > * > TR > :nth-child(2)"}, 
+        {"Column3", "TABLE[id='mwBrY'] > * > TR > :nth-child(3)"}, 
+        {"Column4", "TABLE[id='mwBrY'] > * > TR > :nth-child(4)"}, 
+        {"Column5", "TABLE[id='mwBrY'] > * > TR > :nth-child(5)"}
+    }, [RowSelector="TABLE[id='mwBrY'] > * > TR"]),
+    #"Promoted Headers" = Table.PromoteHeaders(#"Extracted Table From Html", [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{
+        {"المحافظة", type text}, 
+        {"نسبة الحضر[21]", type number}, 
+        {"عدد السكان (2024)", Int64.Type}, 
+        {"عدد سكان الريف", Int64.Type}, 
+        {"عدد سكان الحضر", Int64.Type}
+    })
+in
+    #"Changed Type";
+```
+
+---
+
+#### 🧼 Web Ingestion Cleaning Considerations
+
+Web scraping introduces unique data cleaning hurdles that every professional analyst must master:
+
+1. **Wikipedia Footnote References (`[21]`, `[a]`)**:
+   - In `Table 18`, the column header was imported as `نسبة الحضر[21]`.
+   - **Fix**: Rename column to `نسبة الحضر` or purge bracketed regex tokens using `Text.Select` / `Text.BeforeDelimiter`.
+2. **Hidden Linebreak Characters (`#(lf)`)**:
+   - In `Table 19`, multi-line HTML table cells import embedded linebreaks: `الكثافة السكانية#(lf)في المناطق المأهولة`.
+   - **Fix**: Use Power Query **Transform > Clean** or rename headers to eliminate embedded newline characters.
+3. **Thousand Separators & Comma Delimiters in Arabic Numbers**:
+   - Arabic Wikipedia articles often format large numbers with commas (`104,462,545`) or Arabic thousand separators (`،`).
+   - If imported as `type text`, applying mathematical formulas triggers `#VALUE!`.
+   - **Fix**: Replace commas `Table.ReplaceValue(..., ",", "", Replacer.ReplaceText)` before casting to `Int64.Type`.
+4. **Dynamic Refresh Advantage**:
+   - When CAPMAS publishes updated 2025 census numbers to the Wikipedia article, clicking **Data > Refresh All** in Excel automatically re-scrapes the webpage, runs all transformations, and updates the worksheet in seconds!
 
 ---
 
