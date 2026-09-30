@@ -33,11 +33,18 @@ The dollar sign `$` acts as a padlock:
 
 ```mermaid
 flowchart TD
-    F4[Press F4 Key] --> R[A1: Relative]
-    R -->|F4| ABS["$A$1: Absolute"]
-    ABS -->|F4| M1["A$1: Row Locked"]
-    M1 -->|F4| M2["$A1: Column Locked"]
-    M2 -->|F4| R
+    subgraph Cycle ["🔄 THE 4-WAY F4 TOGGLE CYCLE"]
+        direction TB
+        R["<b>1. Relative: A1</b><br/>🔓 Column & Row float freely<br/>Default coordinate state"]
+        ABS["<b>2. Absolute: $A$1</b><br/>🔒 Column & Row both locked<br/>Fixed benchmark or tax rate"]
+        M1["<b>3. Mixed: A$1</b><br/>🔓 Column floats, 🔒 Row locked<br/>Horizontal table headers"]
+        M2["<b>4. Mixed: $A1</b><br/>🔒 Column locked, 🔓 Row floats<br/>Vertical item keys"]
+        
+        R ==>|Press F4| ABS
+        ABS ==>|Press F4| M1
+        M1 ==>|Press F4| M2
+        M2 ==>|Press F4| R
+    end
 ```
 
 ## 4. Practical Example: Two-Way Multiplication Table
