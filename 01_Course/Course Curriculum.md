@@ -149,7 +149,7 @@ flowchart TD
 
 ### Chapter 8: Power Query & M Language
 - 🎥 **Video Timestamp**: [4:20:30](https://www.youtube.com/watch?v=uv1bxe2gdnU&t=15630s) | **Duration**: `43m 09s`
-- 🎯 **Core Competencies**: Extract, Transform, Load (ETL), Applied Steps DAG, Column splitting, Unpivot columns (wide-to-tall), Append (Union), Merge (Relational Joins), M Language (`let ... in`), Formula Bar editing
+- 🎯 **Core Competencies**: 4 Questions Framework (What?, Why?, Where?, How?), Power Query Interface Anatomy (Ribbon, Queries Pane, Preview Grid, Formula Bar, Query Settings DAG, Status Bar), Auto Refresh Data & Scheduled Polling (Period of time in minutes / file open), Core Transformations (Unpivot wide-to-tall, Delimiter split, Locale typing), Combining Data (Append Unions, Merge 6 Joins, Fuzzy matching), M Language Overview (Functional declarative paradigm, let...in, List/Record/Table primitives, Advanced Editor, REST APIs)
 - 📁 **Associated Lab Files**: `1-Power Query.xlsx`, `1.csv`, `2.csv`, `HR - Presentaion.pdf`, `Tester.xlsx`
 - 📝 **Dedicated Vault Notes**:
   - [[01_Power_Query_Fundamentals_and_ETL]]: Lesson 8.1: Power Query ETL Architecture & Applied Steps
