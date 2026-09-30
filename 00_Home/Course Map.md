@@ -99,7 +99,7 @@ graph TD
 - [[VLOOKUP vs XLOOKUP]] | [[INDEX and MATCH]] | [[Pivot Tables]] | [[Slicers and Timelines]]
 - [[Data Cleaning]] | [[Six Dimensions of Data Quality]] | [[Power Query]] | [[ETL Process]] | [[M Language]]
 - [[Dimensional Modeling]] | [[Star Schema vs Snowflake Schema]] | [[Fact vs Dimension Tables]]
-- [[Data Analysis Expressions (DAX)]] | [[Calculated Columns vs DAX Measures]] | [[Dashboard Design Principles]] | [[Data Analysis Life Cycle]]
+- [[Data Analysis Expressions (DAX)]] | [[Calculated Columns vs DAX Measures]] | [[Dashboard Design Principles]] | [[Chart Selection Matrix]] | [[Data Analysis Life Cycle]]
 - [[Human Skill vs AI Assistance]] | [[AI for Data Analysts MOC]]
 
 ### 3. Key Projects
