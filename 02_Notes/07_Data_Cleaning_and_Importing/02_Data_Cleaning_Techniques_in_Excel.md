@@ -341,10 +341,27 @@ flowchart TD
 
 An outlier is a data point that deviates drastically from the general pattern of the data.
 
-```
-       Normal Range: [Q1 - 1.5*IQR  <----->  Q3 + 1.5*IQR]
-       -----------------------------------------------------
-... --- [Lower Bound] ------ Q1 ----- Median ----- Q3 ------ [Upper Bound] --- [OUTLIER!] --->
+```mermaid
+flowchart LR
+    LowOut["<b>Extreme Low Outlier</b><br/>Value < (Q1 - 1.5*IQR)"]
+    LB["<b>Lower Fence</b><br/>Q1 - 1.5*IQR"]
+    Q1["<b>Q1 (25th %)</b><br/>First Quartile"]
+    Med["<b>Median (50th %)</b><br/>Robust Center"]
+    Q3["<b>Q3 (75th %)</b><br/>Third Quartile"]
+    UB["<b>Upper Fence</b><br/>Q3 + 1.5*IQR"]
+    HighOut["<b>Extreme High Outlier</b><br/>Value > (Q3 + 1.5*IQR)"]
+
+    LowOut -. "Violates Bound" .-> LB
+    LB === Q1 === Med === Q3 === UB
+    UB -. "Violates Bound" .-> HighOut
+
+    style LowOut fill:#ffebee,stroke:#c62828,stroke-width:2px
+    style LB fill:#fff3e0,stroke:#ef6c00
+    style Q1 fill:#e8f5e9,stroke:#2e7d32
+    style Med fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style Q3 fill:#e8f5e9,stroke:#2e7d32
+    style UB fill:#fff3e0,stroke:#ef6c00
+    style HighOut fill:#ffebee,stroke:#c62828,stroke-width:2px
 ```
 
 ### A. The Interquartile Range (IQR) Formula in Excel

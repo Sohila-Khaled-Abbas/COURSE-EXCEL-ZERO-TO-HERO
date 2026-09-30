@@ -31,36 +31,38 @@ The entire landscape of **Module 7: Importing Data and Data Cleaning** is struct
 
 ```mermaid
 flowchart TD
-    subgraph Root ["Module 7: 7-Importing Data and Data Cleaning"]
+    RootNode["<b>Module 7: 7-Importing Data and Data Cleaning</b>"]
+
+    subgraph IngestionBranch ["1. Importing Data (9 Ingestion Channels)"]
         direction TB
+        I1["<b>Table or Range</b><br/>Local Excel ListObject & Dynamic Ranges"]
+        I2["<b>Excel File</b><br/>External .xlsx, .xlsm, .xlsb workbooks"]
+        I3["<b>CSV File</b><br/>Delimited flat text files & encoding standards"]
+        I4["<b>Folder</b><br/>Batch multi-file consolidation & folder appending"]
+        I5["<b>XML</b><br/>Hierarchical Extensible Markup Language schemas"]
+        I6["<b>JSON</b><br/>JavaScript Object Notation payloads & lists"]
+        I7["<b>Database</b><br/>• Direct Relational DBMS (SQL Server, MySQL)<br/>• Special Query (Native SQL filtering)"]
+        I8["<b>Website</b><br/>Web scraping & structured HTML tables"]
+        I9["<b>API</b><br/>REST endpoints via Power Query M Web.Contents()"]
 
-        subgraph IngestionBranch ["1. Importing Data (9 Ingestion Channels)"]
-            direction TB
-            I1["<b>Table or Range</b><br/>Local Excel ListObject & Dynamic Ranges"]
-            I2["<b>Excel File</b><br/>External .xlsx, .xlsm, .xlsb workbooks"]
-            I3["<b>CSV File</b><br/>Delimited flat text files & encoding standards"]
-            I4["<b>Folder</b><br/>Batch multi-file consolidation & folder appending"]
-            I5["<b>XML</b><br/>Hierarchical Extensible Markup Language schemas"]
-            I6["<b>JSON</b><br/>JavaScript Object Notation payloads & lists"]
-            I7["<b>Database</b><br/>• Direct Relational DBMS (SQL Server, MySQL)<br/>• Special Query (Native SQL filtering)"]
-            I8["<b>Website</b><br/>Web scraping & structured HTML tables"]
-            I9["<b>API</b><br/>REST endpoints via Power Query M Web.Contents()"]
-
-            I1 --> I2 --> I3 --> I4 --> I5 --> I6 --> I7 --> I8 --> I9
-        end
-
-        subgraph CleaningBranch ["2. Data Cleaning (Hygiene & Governance)"]
-            direction TB
-            C1["<b>What Data Cleaning Means?</b><br/>• Definition & operational purpose<br/>• GIGO principle: Garbage In, Garbage Out<br/>• Cleansing vs. Wrangling vs. Validation"]
-            C2["<b>The Most Common Types of Data Problems?</b><br/>• Missing values, nulls & blanks<br/>• Duplicate records & partial duplicates<br/>• Inconsistent casing, formats & schema defects<br/>• Hidden whitespace (ASCII 32 & 160)<br/>• Numbers stored as text & type mismatches<br/>• Outliers & invalid domain bounds"]
-            C3["<b>Impact of Dirty Data on Analysis & Decisions</b><br/>• Distorted aggregations (SUM/AVERAGE)<br/>• Broken lookups (#N/A cascades in XLOOKUP)<br/>• Flawed executive forecasts & financial loss<br/>• Operational drag (80% cleaning time)<br/>• Legal, compliance & governance hazards"]
-
-            C1 --> C2 --> C3
-        end
-
-        Root --> IngestionBranch
-        Root --> CleaningBranch
+        I1 --> I2 --> I3 --> I4 --> I5 --> I6 --> I7 --> I8 --> I9
     end
+
+    subgraph CleaningBranch ["2. Data Cleaning (Hygiene & Governance)"]
+        direction TB
+        C1["<b>What Data Cleaning Means?</b><br/>• Definition & operational purpose<br/>• GIGO principle: Garbage In, Garbage Out<br/>• Cleansing vs. Wrangling vs. Validation"]
+        C2["<b>The Most Common Types of Data Problems?</b><br/>• Missing values, nulls & blanks<br/>• Duplicate records & partial duplicates<br/>• Inconsistent casing, formats & schema defects<br/>• Hidden whitespace (ASCII 32 & 160)<br/>• Numbers stored as text & type mismatches<br/>• Outliers & invalid domain bounds"]
+        C3["<b>Impact of Dirty Data on Analysis & Decisions</b><br/>• Distorted aggregations (SUM/AVERAGE)<br/>• Broken lookups (#N/A cascades in XLOOKUP)<br/>• Flawed executive forecasts & financial loss<br/>• Operational drag (80% cleaning time)<br/>• Legal, compliance & governance hazards"]
+
+        C1 --> C2 --> C3
+    end
+
+    RootNode --> IngestionBranch
+    RootNode --> CleaningBranch
+
+    style RootNode fill:#37474f,stroke:#263238,color:#fff,stroke-width:2px
+    style IngestionBranch fill:#e3f2fd,stroke:#1565c0,stroke-width:1px
+    style CleaningBranch fill:#ffebee,stroke:#c62828,stroke-width:1px
 ```
 
 ---
@@ -70,15 +72,45 @@ flowchart TD
 ### A. Formal Definition
 **Data Cleaning** (also termed *Data Cleansing*, *Data Scrubbing*, or *Data Sanitization*) is the systematic operational discipline of detecting, diagnosing, and correcting (or removing) corrupt, inaccurate, incomplete, incorrectly formatted, or duplicated records from a raw dataset before performing analytical modeling, formula computation, or dashboard visualization.
 
-```text
-RAW INGESTION                DATA CLEANING ENGINE                 ANALYSIS-READY ASSET
-┌─────────────────┐         ┌────────────────────────┐         ┌─────────────────────────┐
-│ • Trailing spaces│         │ 1. Audit & Profile     │         │ • Strict Data Types     │
-│ • "N/A" strings │ ──────> │ 2. Standardize Casing  │ ──────> │ • 100% Unique Keys      │
-│ • Green errors  │         │ 3. Trim ASCII 32 & 160 │         │ • Valid Business Bounds │
-│ • Duplicate rows│         │ 4. Impute / Tag Nulls  │         │ • High-Confidence Model │
-└─────────────────┘         └────────────────────────┘         └─────────────────────────┘
+```mermaid
+flowchart LR
+    subgraph RawStage ["1. RAW INGESTION"]
+        direction TB
+        R1["• Trailing & leading spaces"]
+        R2["• '#N/A' & corrupt strings"]
+        R3["• Green triangle type errors"]
+        R4["• Duplicate transaction rows"]
+    end
+
+    subgraph EngineStage ["2. DATA CLEANING ENGINE"]
+        direction TB
+        E1["1. Audit & Profile completeness"]
+        E2["2. Standardize casing & formats"]
+        E3["3. Trim ASCII 32 & CHAR(160)"]
+        E4["4. Impute or flag operational nulls"]
+    end
+
+    subgraph AssetStage ["3. ANALYSIS-READY ASSET"]
+        direction TB
+        A1["• Strict numeric & date types"]
+        A2["• 100% unique primary keys"]
+        A3["• Validated business bounds"]
+        A4["• High-confidence analytical model"]
+    end
+
+    RawStage ==> EngineStage
+    EngineStage ==> AssetStage
+
+    style RawStage fill:#ffebee,stroke:#c62828,stroke-width:2px
+    style EngineStage fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    style AssetStage fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
 ```
+
+| Pipeline Stage | Operational State | Typical Manifestations | Business & Analytical Impact |
+| :--- | :--- | :--- | :--- |
+| **1. Raw Ingestion** | Untamed transactional exports directly from source systems (POS, ERP, CRM, web). | Trailing spaces, numbers stored as text, duplicate rows, unhandled `#N/A` strings. | High risk of distorted calculations, broken lookups, and false executive metrics. |
+| **2. Cleaning Engine** | Systematic, audited transformation protocol (Excel formulas or Power Query steps). | Standardized text casing, stripped whitespace (ASCII 32 & 160), imputed/tagged nulls. | Transforms chaotic, unverified records into reproducible, audited data. |
+| **3. Analysis-Ready Asset** | Sanitized, validated tabular asset ready for modeling and visual dashboards. | Strict data types, 100% unique primary keys, bounded ranges, complete audit trail. | Reliable formulas, accurate PivotTables, and executive trust in decision-making. |
 
 ### B. Core Distinctions: Cleaning vs. Wrangling vs. Validation
 Analysts frequently confuse related terminology. In professional practice, these three concepts operate at distinct stages of the pipeline:
