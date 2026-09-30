@@ -34,15 +34,22 @@ Data visualization does not exist to decorate spreadsheets; it exists to **reduc
 
 ```mermaid
 flowchart TD
-    Visual["Visual Input (Dashboard / Chart)"] --> Pre["Pre-Attentive Processing (<250 ms)<br/>• Subconscious, instantaneous<br/>• Detected via: Color, Form, Spatial Position<br/>• Identifies anomalies & focal points"]
-    Visual --> Att["Attentive Processing (>500 ms)<br/>• Conscious, deliberate mental effort<br/>• Reading numbers, comparing lengths, decoding legends<br/>• Prone to cognitive fatigue"]
-    Pre --> Insight["Instant Business Insight"]
-    Att --> Insight
+    subgraph PreAttentiveRoadmap ["Cognitive Perception Pathway"]
+        direction TB
+        Visual["<b>Visual Dashboard Input</b><br/>Executive view on initial open"] 
+        
+        Visual --> Pre["<b>Pre-Attentive Processing (< 250 ms)</b><br/>• Instantaneous, subconscious perception<br/>• Detected via: 80/20 Accent Color, Position, Length<br/>• Detects anomalies & loss-leaders instantly"]
+        
+        Visual --> Att["<b>Attentive Processing (> 500 ms)</b><br/>• Conscious mental calculation & reading<br/>• Reading data labels, deciphering legends<br/>• Prone to cognitive fatigue if cluttered"]
+        
+        Pre ==> Insight["<b>Instant Executive Business Insight</b>"]
+        Att --> Insight
+    end
 ```
 
 ### Pre-Attentive Visual Attributes
 Pre-attentive attributes are visual properties our brain perceives **before conscious thought** occurs (< 250 milliseconds). Effective chart design harnesses these attributes to direct the viewer's gaze immediately to the primary business takeaway:
-- **Color**: Intensity, Hue, Saturation (e.g. highlighting a 32.8% cancellation spike in vibrant coral against muted gray bars).
+- **Color**: Intensity, Hue, Saturation (e.g. highlighting a 32.8% cancellation spike or Tables -$17.7k loss in vibrant crimson against muted slate bars).
 - **Form**: Length, Width, Shape, Enclosure (e.g. bar height representing revenue volume, a dashed line representing a target benchmark).
 - **Spatial Position**: Placement at the top-left (the first area read in Western business culture).
 
@@ -62,10 +69,14 @@ When inserting any chart in Excel, run it through the 5-step decluttering checkl
 
 ```mermaid
 flowchart LR
-    S1["1. Delete Chart Junk<br/>(3D, shadows, borders)"] --> S2["2. Tame Gridlines<br/>(Light gray or delete)"]
-    S2 --> S3["3. De-Duplicate Axes<br/>(Keep Labels OR Axis)"]
-    S3 --> S4["4. Direct Labeling<br/>(Eliminate detached legends)"]
-    S4 --> S5["5. Format Numbers<br/>(Currency, commas, zero decimals)"]
+    subgraph DeclutterRoadmap ["The 5-Step Executive Decluttering Roadmap"]
+        direction LR
+        S1["<b>Step 1: Delete Chart Junk</b><br/>Remove 3D bevels, shadows, borders"] 
+        --> S2["<b>Step 2: Tame Gridlines</b><br/>Mute to faint gray (#E2E8F0) or delete"]
+        --> S3["<b>Step 3: De-Duplicate Axes</b><br/>Keep either Data Labels OR Y-Axis"]
+        --> S4["<b>Step 4: Direct Labeling</b><br/>Eliminate disconnected floating legends"]
+        --> S5["<b>Step 5: Format Numbers</b><br/>Apply currency ($), commas, 0 decimals"]
+    end
 ```
 
 1. **Delete Chart Junk**:
@@ -93,10 +104,10 @@ Every chart type in the course mindmap requires specific geometric and formattin
 | :--- | :--- | :--- | :--- |
 | **Clustered Column / Bar** | **Gap Width** | `50%` to `80%` | Eliminates default 219% skinny bars, giving bars proper visual weight. |
 | **Overlapping Bars** | **Series Overlap** | `0%` (grouped) or `100%` (target/actual) | Prevents awkward staggered bars; standardizes comparison baselines. |
+| **Stacked Column / Bar** | **Series Overlap & Gap Width** | `100%` Overlap; `60%–80%` Gap Width | Clean, unified stacks; prevents unreadable floating middle segments. |
 | **Line Chart** | **Line Weight & Smoothing** | `2.25pt` – `3.0pt`; Marker `5pt`; Smoothing: **Off** | Straight segments preserve actual financial and operational precision. |
 | **Donut Chart** | **Doughnut Hole Size** | `65%` to `75%` | Leaves ample room for a clean center KPI Scorecard card. |
 | **Pie Chart** | **Angle of First Slice** | Rotate to `0°` (12 o'clock) | Largest slice begins at natural top reading position. |
-| **Stacked Bar / Column** | **Segment Count** | Max 3–4 segments; consistent sorting | Avoids cognitive overload and unreadable middle segments. |
 | **Scatter Plot** | **Marker Type & Gridlines** | `50%` opacity circles; faint gridlines | Prevents overplotting occlusion when thousands of records overlap. |
 | **Box Plot** | **Outlier & Mean Formatting** | Show Mean as `X`; highlight outliers | Differentiates typical distribution IQR from anomalies. |
 | **Heat Map** | **Color Scale Gradient** | Sequential 2-color / 3-color (No rainbow) | Preserves visual proportionality and color-blind accessibility. |
@@ -108,7 +119,7 @@ Every chart type in the course mindmap requires specific geometric and formattin
   2. Under *Series Options*, adjust **Gap Width** to between **50% and 80%**. The bars should look substantial, confident, and easy to scan.
   3. Ensure **Series Overlap** is set to `0%` for standard clustered columns.
 
-```
+```text
 DEFAULT EXCEL (219% Gap Width)        EXECUTIVE FORMATTED (60% Gap Width)
   │                                     │
   │   █         █         █             │   █████     █████     █████
@@ -119,12 +130,23 @@ DEFAULT EXCEL (219% Gap Width)        EXECUTIVE FORMATTED (60% Gap Width)
      (Weak, hard to compare)               (Solid, clear visual weight)
 ```
 
-### B. Line Charts: Stroke, Markers & Scales
+### B. Stacked Column Charts: Geometry & Regional Contribution (`Module_6_Demo.xlsx`, Sheet1)
+- **The Live Demo Implementation**: In `Module_6_Demo.xlsx` (*Sheet1*), the PivotChart displays Sub-Category sales broken down across 4 series (`Central`, `East`, `South`, `West`).
+- **Critical Formatting Guidelines**:
+  1. **Series Overlap**: Must be locked at **`100%`** to ensure column blocks stack perfectly on top of each other.
+  2. **Gap Width**: Set to **`60%–75%`** so the stacked bars feel solid and grounded across all 17 sub-categories.
+  3. **Stacking Sequence (Bottom to Top)**: Place the region with the most consistent baseline or largest sales volume at the bottom (`West` or `Central`).
+  4. **The Floating Middle Hazard**: Intermediate segments (`East`, `South`) lack a common zero baseline, making cross-category comparison difficult. To mitigate this:
+     - Apply distinct, accessible sequential colors across the 4 regions (`West`: Deep Navy `#1E3A8A`, `East`: Royal Blue `#2563EB`, `Central`: Sky Blue `#0284C7`, `South`: Slate `#94A3B8`).
+     - Display total aggregated value labels above each column so executives can assess category scale instantly without mental arithmetic.
+  5. **Legend Placement**: Relocate the legend from the default right side to the **top-right** (just below the chart title) aligned horizontally.
+
+### C. Line Charts: Stroke, Markers & Scales
 - **Stroke Thickness**: Standardize on `2.25pt` or `2.5pt` solid lines. Avoid hairline `0.75pt` lines that disappear on projectors.
 - **Data Markers**: Avoid placing giant circular markers on every single day of a 365-day annual timeline (it turns into an unreadable string of pearls). Only enable markers for monthly/quarterly aggregates or highlight the minimum, maximum, and final data points.
 - **Smooth Lines Caution**: While "Smoothed Line" creates visually pleasing bezier curves, it can fabricate artificial peaks and troughs that do not exist in the underlying data. Use straight line segments for financial and precision operational reporting.
 
-### C. Donut Charts: Geometry & Placement
+### D. Donut Charts: Geometry & Placement
 - **Donut Hole Size**: Set to **`70%`** (Format Data Series $\rightarrow$ *Doughnut Hole Size*). Default 50% leaves too thick a ring and too cramped a center.
 - **Labeling**: Select the series $\rightarrow$ Add Data Labels $\rightarrow$ *Label Options* $\rightarrow$ check **Category Name** and **Percentage**, and uncheck **Value**. Position labels *Outside End*.
 - **The Center Metric Card**: Insert a text box into the hollow center:
@@ -139,10 +161,21 @@ Unplanned, random color selection transforms a professional spreadsheet into vis
 
 ```mermaid
 flowchart TD
-    Palettes["Color Palettes in Analytics"] --> Cat["1. Categorical / Qualitative<br/>• Distinct hues for nominal categories<br/>• E.g. Channel: Navy, Teal, Amber, Slate"]
-    Palettes --> Seq["2. Sequential<br/>• Single hue, varying saturation/lightness<br/>• E.g. Revenue magnitude, Heatmaps"]
-    Palettes --> Div["3. Diverging<br/>• 2 contrasting hues anchored at neutral midpoint<br/>• E.g. Budget variance, Profit/Loss, +/- Net CSAT"]
-    Palettes --> Acc["4. The 80/20 Accent Rule<br/>• 80% Neutral Gray + 20% Vibrant Brand Accent<br/>• Directs eye instantly to the key business takeaway"]
+    subgraph PaletteRoadmap ["Enterprise Color Hierarchy Strategy"]
+        direction TB
+        subgraph Palettes ["Analytical Palette Selection"]
+            direction LR
+            Cat["<b>1. Categorical / Nominal</b><br/>• Distinct hues, equal luminance<br/>• Channels: Navy, Slate, Teal, Gold"]
+            Seq["<b>2. Sequential Gradient</b><br/>• Monochromatic saturation<br/>• Volume magnitude, Heatmaps"]
+            Div["<b>3. Diverging Bipolar</b><br/>• 2 contrasting hues + neutral center<br/>• Profit/Loss, Target Variance"]
+        end
+
+        subgraph Focus ["Executive Attention Mechanism"]
+            Acc["<b>4. The 80/20 Accent Rule</b><br/>• 80% Muted Slate Gray (#94A3B8)<br/>• 20% Vibrant Brand / Action Accent (Crimson #EF4444 or Emerald #10B981)"]
+        end
+
+        Palettes ==> Focus
+    end
 ```
 
 ### The 80/20 Accent Color Rule
@@ -174,11 +207,13 @@ Executive charts must never feature hardcoded, static text titles like `Chart 1`
 
 ```mermaid
 flowchart LR
-    F["Formula Cell (e.g. M1):<br/>='Total Bookings by Channel - Volume: ' & TEXT(SUM(Table[Bookings]), '#,##0')"] 
-    --> Click["Click Chart Title Border in Excel"]
-    --> Bar["Click Formula Bar, Type: =Sheet1!$M$1"]
-    --> Press["Press Enter"]
-    --> Dynamic["Chart Title Updates Automatically on Filter/Refresh!"]
+    subgraph DynamicTitlePipeline ["Live Formula-Driven Chart Title Pipeline"]
+        direction LR
+        F["<b>Step 1: Metric Formula Cell</b><br/><code>='Total Sales: ' & TEXT(SUM(Table[Sales]),'$#,##0')</code>"]
+        --> Border["<b>Step 2: Select Chart Title Border</b><br/>Click outer frame in Excel canvas"]
+        --> FormulaBar["<b>Step 3: Target Formula Bar</b><br/>Type <code>=Sheet1!$M$1</code>"]
+        --> Live["<b>Step 4: Real-Time Dynamic Synchronization</b><br/>Title recalculates instantly with slicers & data"]
+    end
 ```
 
 ### Step-by-Step Configuration:

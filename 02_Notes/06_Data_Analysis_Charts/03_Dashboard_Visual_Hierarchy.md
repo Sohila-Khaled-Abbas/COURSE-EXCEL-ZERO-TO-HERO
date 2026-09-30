@@ -37,10 +37,16 @@ A senior executive (CFO, COO, VP) should be able to scan your dashboard and unde
 
 ```mermaid
 flowchart TD
-    Eye["Executive Eye Tracking Flow (The F-Pattern)"]
-    Eye --> T1["Tier 1: Strategic Header & KPI Cards<br/>(Top-Left to Top-Right: Immediate high-level scorecards)"]
-    T1 --> T2["Tier 2: Core Analytical Views<br/>(Mid-Screen: Categorical comparisons, composition donuts, treemaps)"]
-    T2 --> T3["Tier 3: Time Dynamics & Spatial Context<br/>(Bottom: Monthly trendlines, geographic origin maps, detailed tables)"]
+    subgraph FPatternRoadmap ["Executive F-Pattern Scanning Roadmap"]
+        direction TB
+        Eye["<b>Executive Eye Scanning Pathway (The F-Pattern)</b><br/>Cognitive navigation in under 5 seconds"]
+        
+        Eye --> T1["<b>Tier 1: North (Strategic Scorecards & Slicers)</b><br/>• Top horizontal sweep: Title, Timeframe, KPI Summary Cards<br/>• Answers: What is our macro organizational health?"]
+        
+        T1 --> T2["<b>Tier 2: Center (Analytical Comparisons & Composition)</b><br/>• Second horizontal sweep: Regional Stacked Columns (Sheet1), Donut Charts<br/>• Answers: Which segments & categories drive performance?"]
+        
+        T2 --> T3["<b>Tier 3: South (Temporal Dynamics & Spatial Distribution)</b><br/>• Vertical stem sweep: Monthly Seasonality Lines, Geographic Maps, Outliers<br/>• Answers: When do trends peak and where do we intervene?"]
+    end
 ```
 
 ### The F-Pattern Reading Flow
@@ -58,7 +64,7 @@ To implement the F-Pattern in Microsoft Excel, organize your worksheet into thre
 | Dashboard Tier | Architecture Layer | Components & Metrics | Target Analytical Question |
 | :--- | :--- | :--- | :--- |
 | **Tier 1: North** | **Strategic Header & KPI Scorecards** | • **Total Bookings**: 36,275<br/>• **Cancellations**: 11,885<br/>• **Cancel Rate**: 32.8%<br/>• **Avg ADR**: $103.42<br/>• **Avg Lead Time**: 85 Days<br/>• **Global Slicers**: Year, Channel, Room Type | *What is our macro operational health right now? (Top 5-second pulse check)* |
-| **Tier 2: Center** | **Core Categorical & Compositional Views** | • **Market Segment**: Horizontal Bar Chart *(Online TA: 56.7%, Offline TO: 29.0%)*<br/>• **Booking Status**: Donut Chart *(Confirmed: 67.2%, Canceled: 32.8%)*<br/>• **Room Allocation**: Treemap *(Room 1: 77.5%, Room 4: 16.7%)* | *Which channels, segments, and inventory tiers are driving these numbers?* |
+| **Tier 2: Center** | **Core Categorical & Compositional Views** | • **Regional Category Breakdown**: Stacked Column Chart *(Sheet1 in Module_6_Demo.xlsx: 17 Sub-Categories across Central, East, South, West)*<br/>• **Market Segment**: Horizontal Bar Chart *(Online TA: 56.7%, Offline TO: 29.0%)*<br/>• **Booking Status**: Donut Chart *(Confirmed: 67.2%, Canceled: 32.8%)*<br/>• **Room Allocation**: Treemap *(Room 1: 77.5%, Room 4: 16.7%)* | *Which channels, segments, and inventory tiers are driving these numbers?* |
 | **Tier 3: South** | **Temporal Dynamics & Granular Drill-Down** | • **Seasonality Dynamics**: Dual-Series Line Chart *(Monthly Bookings vs Cancellations)*<br/>• **Spatial Origin**: Filled Choropleth Map *(Global Guest Distribution by Country)*<br/>• **Lead Time Impact**: Box Plot / Histogram *(Risk assessment)* | *When do these dynamics surge, where do guests come from, and where do we intervene?* |
 
 ### Tier 1: Strategic Header & KPI Scorecards
@@ -96,7 +102,7 @@ flowchart TD
     end
 
     subgraph SuperstoreTier2 ["Tier 2: Product & Segment Performance"]
-        SS_C1["Sub-Category Sales Volume<br/>(Horizontal Bar: Phones $330k, Chairs $328k lead)"]
+        SS_C1["Sub-Category Regional Contribution<br/>(Stacked Column PivotChart: Sheet1 in Module_6_Demo.xlsx — Phones $330k, Chairs $328k stacked across West, East, Central, South)"]
         SS_C2["Customer Segment Share<br/>(Donut Chart: Consumer 50.6%, Corp 30.7%, Home 18.7%)"]
         SS_C3["Sub-Category Profit Anomalies<br/>(Diverging Bar: Copiers +$55.6k vs Tables -$17.7k)"]
     end
@@ -115,6 +121,7 @@ flowchart TD
 1. **The Discount Margin Cliff**: Discounts below 20% maintain healthy 20%+ margins, but discounts exceeding 20% produce consistent negative profit margins across all four regions.
 2. **Loss-Leader Product Traps**: While `Tables` generates $206,966 in gross sales, it generates a **net loss of -$17,725 (-8.6% margin)** due to high shipping allowances and heavy promotional discounting.
 3. **Regional Technology Windfall**: The **West Region** accounts for $725,458 in sales and generates over **$108,418 in net profit**, driven primarily by high-margin Technology sales (`Copiers` and `Accessories`).
+4. **Sub-Category Regional Concentration (`Sheet1`)**: As displayed in the `Module_6_Demo.xlsx` Stacked Column PivotChart, `West` ($101,781) and `East` ($96,261) account for over 60% of `Chairs` sales, while `Phones` demonstrates similar coastal concentration with $100,615 in East and $98,684 in West. Central and South lag substantially in high-ticket tech products.
 
 ---
 
@@ -182,12 +189,23 @@ When you create a Slicer for a PivotChart, it defaults to controlling *only that
 
 ```mermaid
 flowchart LR
-    Slicer["Interactive Global Slicers<br/>• Region (West, East, Central, South)<br/>• Segment (Consumer, Corp, Home)<br/>• Category (Tech, Furniture, Office)"]
+    subgraph SlicerConnections ["Multi-Pivot Slicer Interactivity Architecture"]
+        direction LR
+        Slicer["<b>Interactive Global Slicers</b><br/>• Region (West, East, Central, South)<br/>• Segment (Consumer, Corp, Home)<br/>• Category (Tech, Furniture, Office)"]
 
-    Slicer --> P1["PivotTable 1: Volume Performance<br/>pt_CategorySales (Horizontal Bar Chart)"]
-    Slicer --> P2["PivotTable 2: Timeline Pacing<br/>pt_MonthlyTrends (Dual-Axis Line Chart)"]
-    Slicer --> P3["PivotTable 3: Composition Mix<br/>pt_SegmentMix (Donut Chart)"]
-    Slicer --> P4["PivotTable 4: Executive Scorecard<br/>pt_KPICards (Sales, Profit, Margin Cards)"]
+        subgraph VisualEndpoints ["Synchronized PivotCharts & Scorecards"]
+            direction TB
+            P1["<b>PivotChart 1: Stacked Columns (Sheet1)</b><br/><code>pt_SubCategorySales</code> (Regional Mix)"]
+            P2["<b>PivotChart 2: Timeline Pacing</b><br/><code>pt_MonthlyTrends</code> (Dual-Axis Line Chart)"]
+            P3["<b>PivotChart 3: Composition Mix</b><br/><code>pt_SegmentMix</code> (Donut KPI Centerpiece)"]
+            P4["<b>Scorecard 4: Executive KPIs</b><br/><code>pt_KPICards</code> (Sales, Margin %, Profit)"]
+        end
+
+        Slicer ==> P1
+        Slicer ==> P2
+        Slicer ==> P3
+        Slicer ==> P4
+    end
 ```
 
 ### D. Preparing for Executive Presentation

@@ -70,6 +70,45 @@ mindmap
       Maps
 ```
 
+```mermaid
+flowchart TD
+    subgraph MasterRoadmap ["Visual Analytics Master Taxonomy Roadmap"]
+        direction TB
+        
+        subgraph S_Data ["1. Data Classification Layer"]
+            direction LR
+            D1["<b>Qualitative Data</b><br/>• Nominal (Unordered Groups)<br/>• Ordinal (Ranked Sequence)"]
+            D2["<b>Quantitative Data</b><br/>• Continuous (Decimal Scales)<br/>• Discrete (Countable Integers)"]
+        end
+
+        subgraph S_Goals ["2. Analytical Purpose Layer"]
+            direction LR
+            G1["<b>Comparison</b><br/>Magnitude differences"]
+            G2["<b>Trends</b><br/>Time evolution"]
+            G3["<b>Composition</b><br/>Part-to-whole share"]
+            G4["<b>Distribution</b><br/>Spread & outliers"]
+            G5["<b>Relationship</b><br/>Bivariate correlation"]
+            G6["<b>Process</b><br/>Pipeline conversion"]
+            G7["<b>Intensity</b><br/>Matrix & hierarchy"]
+            G8["<b>Geographic</b><br/>Spatial distribution"]
+        end
+
+        subgraph S_Charts ["3. Production Visual Encodings (Module 6 Demo)"]
+            direction LR
+            C1["<b>Column & Bar Charts</b><br/>• Clustered Column<br/>• Stacked Column (Sheet1 PivotChart)"]
+            C2["<b>Line & Area Charts</b><br/>• Seasonality Trends<br/>• Cumulative Pacing"]
+            C3["<b>Donut & Pie Charts</b><br/>• Segment Composition<br/>• Center KPI Scorecard"]
+            C4["<b>Box Plot & Histogram</b><br/>• 5-Number Summary<br/>• Frequency Bins"]
+            C5["<b>Scatter Plots (XY)</b><br/>• Discount Margin Cliff<br/>• Regression Fit"]
+            C6["<b>Funnel Charts</b><br/>• Pipeline Stages"]
+            C7["<b>Treemap & Heatmaps</b><br/>• Category Hierarchy<br/>• Regional Matrix"]
+            C8["<b>Filled Choropleth Maps</b><br/>• State Sales Density"]
+        end
+
+        S_Data ==> S_Goals ==> S_Charts
+    end
+```
+
 ![Module 6 Data Analysis Charts Mindmap](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/assets/module_6_charts_mindmap.png)
 
 ---
@@ -181,8 +220,14 @@ flowchart LR
 - **Excel Ribbon**: `Insert` $\rightarrow$ `Charts` $\rightarrow$ `Clustered Bar`.
 
 #### 3. Stacked Column Chart
-- **Best For**: Comparing the **total magnitude** of categories while simultaneously displaying the **subgroup composition** across 2–4 sub-segments (e.g. Total Bookings by Year, stacked by Canceled vs. Not Canceled).
-- **Limitation**: Only the bottom segment and the total top edge share a common baseline. Intermediate segments float, making precise comparison between subgroups difficult.
+- **Best For**: Comparing the **total magnitude** of categories while simultaneously displaying the **subgroup composition** across 2–4 sub-segments.
+- **Course Implementation (`Module_6_Demo.xlsx`, Sheet1)**:
+  - **Pivot Table Structure**: Rows = `Category` & `Sub-Category` (17 items); Columns = `Region` (`Central`, `East`, `South`, `West`); Values = `Sum of Sales`.
+  - **Visual Insight**: Shows total sales for each sub-category while revealing geographic contribution. For instance, `Phones` ($330,007) and `Chairs` ($328,449) lead national volume, with the `East` ($100,615) and `West` ($101,781) regions contributing over 60% of volume.
+- **Analytical Trade-offs & Limitations**:
+  - **Baseline Advantage**: The bottom series (`Central`) and the overall top bar edge share a common zero/total baseline.
+  - **Floating Segments Limitation**: Intermediate segments (`East`, `South`) "float" on top of the segments below them, making precise visual comparison of East sales across categories difficult without data labels.
+- **Excel Ribbon**: `Insert` $\rightarrow$ `Charts` $\rightarrow$ `Insert Column or Bar Chart` $\rightarrow$ `Stacked Column`.
 
 #### 4. Stacked Bar Chart
 - **Best For**: Comparing totals and sub-segments when category names are long.
@@ -343,6 +388,7 @@ Applying the Master Chart Selection Matrix to the official course dataset **`Mod
 | Business Question | Independent Field | Dependent Metric | Selected Chart Type | Design Rationale & Grounded Metrics |
 | :--- | :--- | :--- | :--- | :--- |
 | **Which Sub-Categories generate top sales?** | `Sub-Category` *(Nominal, 17 items)* | `Sales ($)` | **Horizontal Bar Chart** *(Sorted Descending)* | `Phones` ($330,007) and `Chairs` ($328,449) lead volume. Horizontal orientation comfortably displays all 17 sub-categories without label tilt. |
+| **How do Sub-Category sales break down across the 4 commercial regions?** | `Sub-Category` *(Rows)*, `Region` *(Columns)* | `Total Sales ($)` | **Stacked Column PivotChart** *(Sheet1 in `Module_6_Demo.xlsx`)* | Visualizes cumulative sub-category volume while breaking down the regional contributions of `Central`, `East`, `South`, and `West`. Exposes that `West` ($101.8k) and `East` ($96.3k) generate 60.3% of `Chairs` revenue, while `Phones` ($100.6k East, $98.7k West) exhibits similar coastal dominance. |
 | **Which Sub-Categories are destroying profits?** | `Sub-Category` | `Profit ($)` / Margin % | **Diverging Bar Chart** *(Green/Red Accent)* | Immediately exposes net loss leaders: `Tables` (-$17,725), `Bookcases` (-$3,473), and `Supplies` (-$1,189) vs top performer `Copiers` (+$55,618, 37.2% margin). |
 | **What is our revenue split by Customer Segment?** | `Segment` *(Nominal, 3 groups)* | `% of Total Sales` | **Donut Chart** *(Hole size: 70%)* | Part-to-whole share: `Consumer` (50.6%), `Corporate` (30.7%), `Home Office` (18.7%). Center KPI scorecard card displays `$2.30M`. |
 | **How do sales and profits pace over time?** | `Order Date` *(Continuous Time)* | `Monthly Sales` & `Profit` | **Dual-Axis Line Chart** *(Straight lines)* | Exposes severe Q4 holiday surges (Nov–Dec peak) and reveals whether profits track revenue growth or erode during promotion pushes. |
