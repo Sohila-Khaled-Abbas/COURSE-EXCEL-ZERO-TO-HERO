@@ -333,9 +333,25 @@ Understanding where data comes from is the defining differentiator between a jun
 
 ---
 
+## 7. Connecting Course Datasets to Enterprise Systems
+
+Every dataset explored across this course directly corresponds to an authentic enterprise business system:
+
+| Course Dataset | Origin System Category | Underlying Operational Engine | Real-World System Analogs | Primary Analyst Questions |
+| :--- | :--- | :--- | :--- | :--- |
+| **`PWC Source Data`**<br/>([`Module_7_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/07_Data_Cleaning/Module_7_Demo.xlsx)) | **CRM / Support Desk** | Customer inquiry tickets, agent queue speeds, call durations, CSAT ratings. | Salesforce Service Cloud, Zendesk, ServiceNow | Which agents resolve inquiries fastest? What topics cause customer abandonment? |
+| **`Hotel Reservations`**<br/>([`Module_7_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/07_Data_Cleaning/Module_7_Demo.xlsx)) | **Hospitality ERP / PMS** | Guest bookings, room inventory, ADR pricing, meal packages, cancellation flags. | Oracle Opera PMS, SAP Hospitality, Amadeus | What lead time predicts cancellation? Which market segments generate highest ADR? |
+| **`Supermarket data.csv`**<br/>(`09_Source_Materials/Module 7`) | **Retail ERP / POS** | High-volume cashier transaction lines, branch revenues, payment methods. | SAP Retail, NCR Counterpoint, Dynamics Commerce | Which product lines drive profitability across regional branches? |
+| **`AdventureWorks SQL`**<br/>(`Quries.sql`) | **Manufacturing ERP** | Production catalog, Bill of Materials (BOM), employee contact registers. | SAP S/4HANA Manufacturing, Oracle E-Business Suite | How do product numbers map to sales orders and employee directories? |
+
+---
+
 ## Related Knowledge
 - Notes: [[01_Data_Quality_Dimensions_and_Audit]], [[02_Data_Cleaning_Techniques_in_Excel]], [[03_Importing_Data_from_Enterprise_Sources]]
 - Concepts: [[ETL Process]], [[Dimensional Modeling]], [[Power Query]], [[Data Cleaning]]
-- Course Demos:
-  - `09_Source_Materials/Module 7/3-ERP - CRM - HR Systems/1-Introduction to Business Systems.pptx`
-  - `09_Source_Materials/Module 7/3-ERP - CRM - HR Systems/2-Business Systems for Data Analysts.pptx`
+- Course Demos & Reference:
+  - Reference: [[Module 7 Dataset Documentation]]
+  - Demo Workbook: [`Module_7_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/07_Data_Cleaning/Module_7_Demo.xlsx)
+  - Slide Decks:
+    - `09_Source_Materials/Module 7/3-ERP - CRM - HR Systems/1-Introduction to Business Systems.pptx`
+    - `09_Source_Materials/Module 7/3-ERP - CRM - HR Systems/2-Business Systems for Data Analysts.pptx`

@@ -298,6 +298,15 @@ Accessible via **Data > Data Validation**.
 | **Date Horizons** | `Date` $\rightarrow$ `less than or equal to =TODAY()` | Blocks future hire dates or future transaction stamps from polluting historical reports. |
 | **Custom Formula** | `Custom` $\rightarrow$ `=ISNUMBER(A2)` | Ensures user inputs strictly numeric data without alphabetical characters or symbols. |
 
+### 6. Removing Phantom Ghost Columns (`Column11`–`Column14` in `Module_7_Demo.xlsx`)
+When ingesting sheets from older Excel workbooks or manual templates, formatting residual cells outside the used range creates blank **Ghost Columns** (`Column11`, `Column12`, `Column13`, `Column14` as seen in our `PWC Source Data` extract).
+- **The Problem**: These columns contain `null` across all 5,000 rows, bloating workbook size, confusing downstream PivotTable field lists, and degrading calculation speed.
+- **Power Query Solution**:
+  ```powerquery
+  #"Removed Columns" = Table.RemoveColumns(#"Changed Type", {"Column11", "Column12", "Column13", "Column14"})
+  ```
+- **Excel Native Solution**: Select column headers `K:N` $\rightarrow$ Right-click $\rightarrow$ **Delete** (or press `Ctrl + -`).
+
 ---
 
 ## 5. Handling Missing Values: The 3 Analytical Strategies

@@ -81,32 +81,86 @@ flowchart TD
 
 ### Channel 2: From External Excel File (`.xlsx`, `.xlsm`, `.xlsb`)
 - **Path**: **Data > Get Data > From File > From Excel Workbook**.
+- **Live Demo Implementation (`Module_7_Demo.xlsx`)**: Ingesting `PWC Dataset.xlsx` (Sheet: `Source Data `) into table `ExternalData_2` (5,000 rows, 14 columns).
 - **Mechanism**: Reads metadata from an unopened external workbook. The **Navigator** dialog presents two object types:
   - 📋 **Table Objects** (Blue header icon): Represents formatted Excel Tables (`Ctrl + T`). **Recommended!** Tables automatically handle variable row counts without capturing empty trailing rows.
   - 📄 **Sheet Objects** (Sheet icon): Represents the raw grid. May contain blank header rows, titles, and empty cells outside the used range that require manual trimming.
+- **Power Query M Script (Live from `Module_7_Demo.xlsx`)**:
+  ```powerquery
+  shared #"Source Data" = let
+      Source = Excel.Workbook(
+          File.Contents("D:\courses\Data Analysis 26-27\7-Introducation to Data Fields (Excel)\09_Source_Materials\Module 9\13\PWC Dataset.xlsx"),
+          null,
+          true
+      ),
+      #"Source Data _Sheet" = Source{[Item="Source Data ",Kind="Sheet"]}[Data],
+      #"Promoted Headers" = Table.PromoteHeaders(#"Source Data _Sheet", [PromoteAllScalars=true]),
+      #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{
+          {"Call Id", type text}, {"Agent", type text}, {"Date", type date},
+          {"Time", type datetime}, {"Topic", type text}, {"Answered (Y/N)", type text},
+          {"Resolved", type text}, {"Speed of answer in seconds", Int64.Type},
+          {"AvgTalkDuration", type datetime}, {"Satisfaction rating", Int64.Type},
+          {"Column11", type any}, {"Column12", type any}, {"Column13", type text}, {"Column14", type text}
+      })
+  in
+      #"Changed Type";
+  ```
 
 ---
 
 ### Channel 3: From CSV / Text File (Delimited Flat Files)
 - **Path**: **Data > Get Data > From File > From Text/CSV**.
-- **Course Dataset**: `Supermarket data.csv` (46 MB retail transaction log).
+- **Course Datasets**:
+  - `Hotel Reservations.csv` (36,275 rows, Table: `Hotel_Reservations` in `Module_7_Demo.xlsx`).
+  - `Supermarket data.csv` (46.08 MB retail transaction log).
 - **Core Parameters**:
   - **File Origin (Encoding)**: Default is `65001: Unicode (UTF-8)`. If Arabic characters appear garbled (e.g. `???` or `Ø¹Ù…ÙŠÙ„`), switch encoding to `1256: Arabic (Windows)` or `UTF-8 with BOM`.
   - **Delimiter**: Auto-detected (Comma `,`, Semicolon `;`, Tab `\t`, Pipe `|`). European regional exports commonly use semicolons.
   - **Data Type Detection**: Based on first 200 rows or entire dataset.
+- **Power Query M Script (Live from `Module_7_Demo.xlsx`)**:
+  ```powerquery
+  shared #"Hotel Reservations" = let
+      Source = Csv.Document(
+          File.Contents("D:\courses\Data Analysis 26-27\Hotel Reservations.csv"),
+          [Delimiter=",", Columns=19, QuoteStyle=QuoteStyle.None]
+      ),
+      #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+      #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{
+          {"Booking_ID", type text}, {"no_of_adults", Int64.Type}, {"no_of_children", Int64.Type},
+          {"no_of_weekend_nights", Int64.Type}, {"no_of_week_nights", Int64.Type},
+          {"type_of_meal_plan", type text}, {"required_car_parking_space", Int64.Type},
+          {"room_type_reserved", type text}, {"lead_time", Int64.Type},
+          {"arrival_year", Int64.Type}, {"arrival_month", Int64.Type}, {"arrival_date", Int64.Type},
+          {"market_segment_type", type text}, {"repeated_guest", Int64.Type},
+          {"no_of_previous_cancellations", Int64.Type}, {"no_of_previous_bookings_not_canceled", Int64.Type},
+          {"avg_price_per_room", type number}, {"no_of_special_requests", Int64.Type},
+          {"booking_status", type text}
+      })
+  in
+      #"Changed Type";
+  ```
 
 ```mermaid
 flowchart LR
-    CSV["Supermarket data.csv\n(Raw Flat Text)"] --> Connect["Data > From Text/CSV\nEncoding: UTF-8\nDelimiter: Comma (,)"]
+    CSV["Hotel Reservations.csv\n(Raw Flat Text, 36,275 Rows)"] --> Connect["Data > From Text/CSV\nDelimiter: Comma (,)"]
     Connect --> Preview["Preview Dialog\n(Examines first 200 rows)"]
-    Preview --> Transform["Transform Data\n(Promote Headers,\nCast Total to Currency)"]
-    Transform --> Load["Close & Load To...\n(Data Model / Pivot Table)"]
+    Preview --> Transform["Transform Data\n(Promote Headers,\nCast Types in M)"]
+    Transform --> Load["Close & Load\n(Table: Hotel_Reservations)"]
 
     style CSV fill:#ffebee,stroke:#c62828
     style Connect fill:#fff3e0,stroke:#ef6c00
     style Preview fill:#e1f5fe,stroke:#0288d1
     style Transform fill:#e8f5e9,stroke:#2e7d32
     style Load fill:#d1c4e9,stroke:#512da8
+```
+
+```text
+36  ETL:
+37
+38  E -: Extract Data   -->> (Done)
+39                      |
+40  T -: Transform Data -->> (In-Progress Practice in Module_7_Demo.xlsx)
+41  L -: Load Data      -->> (Done)
 ```
 
 ---

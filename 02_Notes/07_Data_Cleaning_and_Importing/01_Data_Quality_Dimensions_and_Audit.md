@@ -264,7 +264,45 @@ Generate a distinct list of categorical dimension values to expose typos:
 
 ---
 
-## 6. Real-World Case Studies
+## 6. Real-World Case Studies & Live Laboratory Integration
+
+The data quality and governance concepts taught in this lesson are actively operationalized in the course workbook: [`Module_7_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/07_Data_Cleaning/Module_7_Demo.xlsx).
+
+### The Live ETL Pipeline Architecture (Demo Execution)
+As established in our live practice session:
+```text
+36  ETL:
+37
+38  E -: Extract Data   -->> (Done)
+39                      |
+40  T -: Transform Data -->> (Active Practice in Module_7_Demo.xlsx)
+41  L -: Load Data      -->> (Done)
+```
+
+```mermaid
+flowchart LR
+    subgraph E ["E: Extract Data (Done)"]
+        CSV["Hotel Reservations.csv\n(36,275 Records)"]
+        XLS["PWC Dataset.xlsx\n(5,000 Call Records)"]
+    end
+
+    subgraph T ["T: Transform Data (Active Practice)"]
+        T1["Audit & Clean Nulls\n(Speed of answer 946 nulls)"]
+        T2["Drop Phantom Columns\n(Remove Column11–Column14)"]
+        T3["Enforce Data Types\n(Dates, Times, Decimals)"]
+    end
+
+    subgraph L ["L: Load Data (Done)"]
+        Tbl1["Table: Hotel_Reservations"]
+        Tbl2["Table: ExternalData_2 (PWC)"]
+    end
+
+    E ==> T ==> L
+
+    style E fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style T fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    style L fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+```
 
 ### Case Study A: The 46MB Supermarket Retail Dataset (`Supermarket data.csv`)
 In the companion course dataset (`09_Source_Materials/Module 7/2-Importing Data/Supermarket data.csv`):
@@ -275,13 +313,25 @@ In the companion course dataset (`09_Source_Materials/Module 7/2-Importing Data/
   3. *Zero Baseline Validation*: `Unit_Price` values containing occasional negative entries (`-$14.50`) caused by unflagged merchandise refund entries.
 
 ### Case Study B: The PwC Call Center Audit (Distinguishing Operational Nulls)
-In the 5,000-row Call Center dataset (`Module 7` & `Module 8`):
+In `Module_7_Demo.xlsx` (Sheet: **`PWC Source Data`**, Table: `ExternalData_2`):
+- **Authentic Provenance**: Originates from the **PwC Switzerland – Call Centre Trends** case study on **Forage** (*PwC Switzerland Power BI Virtual Experience*).
+  - *Direct Dataset Download*: [Official Forage CDN (`01 Call-Center-Dataset.xlsx`)](https://cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/01%20Call-Center-Dataset.xlsx)
+  - *Canonical Mirror*: [GitHub: globalsmile/Call-Center-Analysis](https://github.com/globalsmile/Call-Center-Analysis/blob/main/01%20Call-Center-Dataset.xlsx)
+  - *Documentation Hub*: [triwgani.github.io/pwc_digital.transformation](https://triwgani.github.io/pwc_digital.transformation/)
 - **Initial Profile**: 946 blank cells were detected in `Speed of answer in seconds`, `AvgTalkDuration`, and `Satisfaction rating`.
 - **Amateur Reaction**: "Delete all 946 rows because they contain missing values!"
 - **Professional Governance Audit**:
   - The analyst audited column `Answered (Y/N)` against the 946 null records.
   - Correlation was **100.0%**: All 946 nulls occurred exclusively when `Answered == "N"` (abandoned customer calls).
   - *Conclusion*: These 946 nulls were **valid operational missing values**, not corrupt data! Deleting them would have deleted all customer abandonment records, artificially skewing the call resolution rate from 81.1% to a false 100%!
+
+### Case Study C: Hospitality Booking Governance (Hotel Reservations)
+In `Module_7_Demo.xlsx` (Sheet: **`Hotel Reservations`**, Table: `Hotel_Reservations`):
+- **Scale**: 36,275 reservation records spanning 2017–2018.
+- **Audit Findings**:
+  - *Uniqueness*: `Booking_ID` tested across all 36,275 rows—0 duplicates found.
+  - *Validity & Bounds*: `avg_price_per_room` contains 391 records with `$0.00` ADR. Investigation confirms these are legitimate *Complementary* market segment bookings.
+  - *Outliers*: `lead_time` reaches up to 443 days (investigated as advance wedding/conference bookings, retained without deletion).
 
 ---
 

@@ -52,6 +52,14 @@ try {
             Start-Sleep -Seconds $DebounceSeconds
             $global:pendingChanges = $false
             
+            # Trigger automated synchronizers for workbooks
+            if (Test-Path "$RepoRoot\scripts\sync_module_6_docs.py") {
+                python "$RepoRoot\scripts\sync_module_6_docs.py" 2>&1 | Out-Null
+            }
+            if (Test-Path "$RepoRoot\scripts\sync_module_7_docs.py") {
+                python "$RepoRoot\scripts\sync_module_7_docs.py" 2>&1 | Out-Null
+            }
+
             # Rebuild site docs if site generator exists
             if (Test-Path "$RepoRoot\site\build.js") {
                 Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [BUILD] Synchronizing documentation site & search index..." -ForegroundColor Cyan
