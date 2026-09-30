@@ -22,6 +22,8 @@ tags:
   - customer-retention
   - diversity-inclusion
   - adventureworks
+  - northwind
+  - pubs
   - sql-server
   - mssql
   - data-quality
@@ -303,7 +305,138 @@ Mastering the connection between Excel and SQL Server bridges the gap between sp
 | **String Cleaning** | `=TRIM(CLEAN(A2))` | `LTRIM(RTRIM(A2))` | Whitespace sanitization |
 | **Data Modeling** | Power Pivot Relationships (Star Schema) | Foreign Key Constraints (`REFERENCES DimTable(PK)`) | Eliminates helper lookup columns; powers multi-table DAX |
 
-## ⚙️ The Live ETL Lifecycle Architecture
+---
+
+### 4. Microsoft SQL Server Northwind & Pubs Sample Databases (Classic Relational Benchmarks)
+
+Beyond AdventureWorks, Microsoft's classic sample databases—**Northwind** and **pubs**—remain the world's most widely recognized educational relational datasets. They provide compact, highly interpretable relational schemas designed specifically for learning SQL queries, stored procedures, views, and data warehousing dimensional modeling.
+
+#### 🏛️ Canonical Origin & Microsoft Source Repository
+Microsoft maintains the original SQL Server creation and data-loading scripts in its official public repository:
+- **Official GitHub Repository**: [microsoft/sql-server-samples (Northwind & pubs)](https://github.com/microsoft/sql-server-samples/tree/master/samples/databases/northwind-pubs)
+- **Microsoft Learn Documentation**: [Downloading Sample Databases (Northwind & pubs)](https://learn.microsoft.com/dotnet/framework/data/adonet/sql/linq/downloading-sample-databases)
+- **Local Course Scripts**:
+  - `D:\courses\Data Analysis 26-27\instnwnd.sql` (Northwind database creation + data-loading script, 1,049,720 bytes)
+  - `D:\courses\Data Analysis 26-27\instpubs.sql` (pubs publishing database creation + data-loading script, 125,718 bytes)
+
+#### 📦 The Northwind Database Hierarchy & Object Catalog
+
+Northwind represents an international specialty food export-import business (*Northwind Traders*). It models sales transactions, catalog management, customer accounts, and employee territories:
+
+```mermaid
+flowchart TD
+    subgraph NORTHWIND ["Northwind Database Architecture"]
+        direction TB
+        
+        subgraph TABLES ["Base Tables (13 Tables)"]
+            T1["Customers (91 records)"]
+            T2["Orders (830 transactions)"]
+            T3["Order Details (2,155 line items)"]
+            T4["Products (77 catalog items)"]
+            T5["Categories (8 food groups)"]
+            T6["Suppliers (29 global vendors)"]
+            T7["Employees (9 sales staff)"]
+            T8["Shippers (3 freight carriers)"]
+            T9["Region (4 territories) & Territories (53)"]
+            T10["EmployeeTerritories (49 mapping links)"]
+            T11["CustomerDemographics & CustomerCustomerDemo"]
+        end
+
+        subgraph VIEWS ["Analytical Reporting Views (16 Views)"]
+            V1["Summary of Sales by Quarter"]
+            V2["Summary of Sales by Year"]
+            V3["Sales by Category"]
+            V4["Sales Totals by Amount"]
+            V5["Invoices & Order Details Extended"]
+            V6["Product Sales for 1997"]
+        end
+
+        TABLES --> VIEWS
+    end
+
+    style NORTHWIND fill:#fbfbfb,stroke:#37474f,stroke-width:2px
+    style TABLES fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style VIEWS fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+```
+
+```text
+Northwind Database Object Tree:
+Northwind
+├── 📁 Base Tables
+│   ├── Categories (8 rows)
+│   ├── CustomerCustomerDemo (0 rows)
+│   ├── CustomerDemographics (0 rows)
+│   ├── Customers (91 rows)
+│   ├── Employees (9 rows)
+│   ├── EmployeeTerritories (49 rows)
+│   ├── Order Details (2,155 rows)
+│   ├── Orders (830 rows)
+│   ├── Products (77 rows)
+│   ├── Region (4 rows)
+│   ├── Shippers (3 rows)
+│   ├── Suppliers (29 rows)
+│   └── Territories (53 rows)
+└── 📁 Core Saved Views / Reporting Queries
+    ├── Sales by Category
+    ├── Sales Totals by Amount
+    ├── Summary of Sales by Quarter
+    ├── Summary of Sales by Year
+    ├── Alphabetical list of products
+    ├── Category Sales for 1997
+    ├── Current Product List
+    ├── Customer and Suppliers by City
+    ├── Invoices
+    ├── Order Details Extended
+    ├── Order Subtotals
+    ├── Orders Qry
+    ├── Product Sales for 1997
+    ├── Products Above Average Price
+    ├── Products by Category
+    └── Quarterly Orders
+```
+
+#### 🛠️ Installation & Recreation Walkthroughs
+
+> [!IMPORTANT]
+> **Critical Script Execution Difference:**
+> Notice that `instnwnd.sql` contains the explicit instruction:
+> *`-- This script does not create a database. Run this script in the database you want the objects to be created. Default schema is dbo.`*
+> Therefore, you must create the empty database `Northwind` first or set the database context before running `instnwnd.sql`. In contrast, `instpubs.sql` automatically includes `CREATE DATABASE pubs`.
+
+##### 1. Command-Line Execution via `sqlcmd` (Recommended)
+You can create and load both databases in a single automated terminal command:
+```powershell
+# 1. Create empty database and run Northwind script
+sqlcmd -S . -E -d master -Q "IF DB_ID('Northwind') IS NULL CREATE DATABASE Northwind;"
+sqlcmd -S . -E -d Northwind -i "D:\courses\Data Analysis 26-27\instnwnd.sql"
+
+# 2. Run pubs script (automatically creates and populates pubs)
+sqlcmd -S . -E -i "D:\courses\Data Analysis 26-27\instpubs.sql"
+```
+
+##### 2. SQL Server Management Studio (SSMS) Execution
+1. Open **SSMS** and connect to your local server (`.` or `localhost`).
+2. Open a query window on `master` and create the database:
+   ```sql
+   IF DB_ID('Northwind') IS NULL CREATE DATABASE Northwind;
+   GO
+   ```
+3. Open `D:\courses\Data Analysis 26-27\instnwnd.sql` in SSMS (**File > Open > File...**).
+4. Verify the database selector dropdown is set to **`Northwind`** $\to$ press **F5**.
+5. Open `D:\courses\Data Analysis 26-27\instpubs.sql` in SSMS $\to$ press **F5**.
+
+#### 📊 Connecting Northwind to Excel & Power Pivot Star Schemas
+
+Northwind provides the cleanest possible illustration of the difference between flat spreadsheets and relational dimensional models:
+
+| Modeling Layer | Implementation in Northwind | Excel Traditional Workflow | Power Pivot / Modern BI Workflow |
+| :--- | :--- | :--- | :--- |
+| **Fact Tables** | `Orders` (830 rows), `Order Details` (2,155 rows) | Flattened into a single massive worksheet with repeated customer and product names. | Loaded as separate transactional tables retaining atomic granularity. |
+| **Dimension Tables** | `Customers` (91), `Products` (77), `Employees` (9), `Shippers` (3) | Looked up via thousands of `=VLOOKUP` or `=XLOOKUP` formulas across all 2,155 rows. | Kept as lightweight dimension tables linked via 1-to-many relationships (`CustomerID`, `ProductID`). |
+| **Calculation Engine** | Aggregations performed on database server or in DAX | Recalculated cell-by-cell on worksheet; file size balloons and scrolling lags. | Handled in-memory by the VertiPaq engine with near-instantaneous multi-level PivotTable slicing. |
+| **Reporting Views** | `Summary of Sales by Quarter`, `Sales by Category` | Manual formulas or complex helper sheets. | Ingested directly into Excel via **Data > Get Data > From SQL Server** for instant executive dashboards. |
+
+---
 
 As executed live in `Module_7_Demo.xlsx`, data flows through the classic three-tier enterprise ETL cycle:
 

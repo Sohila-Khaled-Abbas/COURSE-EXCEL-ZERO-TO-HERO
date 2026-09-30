@@ -456,6 +456,214 @@ sqlcmd -S . -E -Q "RESTORE DATABASE AdventureWorks2022 FROM DISK = N'D:\SQL Serv
 
 ---
 
+### 4. Microsoft Northwind & Pubs Sample Databases (Classic Relational Benchmarks)
+
+In addition to AdventureWorks, Microsoft created two foundational relational sample databases that have trained generations of data analysts, BI developers, and database administrators: **Northwind** and **pubs**.
+
+#### 🏛️ Canonical Origin & Microsoft Source Repository
+Microsoft maintains the original SQL Server creation and data-loading scripts in its official public repository:
+- **Official GitHub Repository**: [microsoft/sql-server-samples (Northwind & pubs)](https://github.com/microsoft/sql-server-samples/tree/master/samples/databases/northwind-pubs)
+- **Microsoft Learn Documentation**: [Downloading Sample Databases (Northwind & pubs)](https://learn.microsoft.com/dotnet/framework/data/adonet/sql/linq/downloading-sample-databases)
+- **Local Course Scripts**:
+  - `D:\courses\Data Analysis 26-27\instnwnd.sql` (Northwind database schema + sample data, ~1.05 MB)
+  - `D:\courses\Data Analysis 26-27\instpubs.sql` (pubs publishing database schema + sample data, ~125 KB)
+
+---
+
+#### 📦 The Northwind Database Architecture & Object Tree
+
+Northwind represents an authentic international specialty food export-import business (*Northwind Traders*). It models order capture, fulfillment, catalog management, customer accounts, and employee sales territories:
+
+```mermaid
+classDiagram
+    direction TB
+    class Customers {
+        string CustomerID PK
+        string CompanyName
+        string ContactName
+        string City
+        string Country
+    }
+    class Orders {
+        int OrderID PK
+        string CustomerID FK
+        int EmployeeID FK
+        date OrderDate
+        date ShippedDate
+        int ShipVia FK
+        decimal Freight
+    }
+    class OrderDetails {
+        int OrderID PK, FK
+        int ProductID PK, FK
+        decimal UnitPrice
+        smallint Quantity
+        real Discount
+    }
+    class Products {
+        int ProductID PK
+        string ProductName
+        int SupplierID FK
+        int CategoryID FK
+        decimal UnitPrice
+        smallint UnitsInStock
+    }
+    class Categories {
+        int CategoryID PK
+        string CategoryName
+        string Description
+    }
+    class Employees {
+        int EmployeeID PK
+        string LastName
+        string FirstName
+        string Title
+        int ReportsTo FK
+    }
+    class Shippers {
+        int ShipperID PK
+        string CompanyName
+        string Phone
+    }
+
+    Customers "1" --> "0..*" Orders : places
+    Employees "1" --> "0..*" Orders : manages
+    Shippers "1" --> "0..*" Orders : delivers
+    Orders "1" --> "1..*" OrderDetails : contains
+    Products "1" --> "0..*" OrderDetails : sold_in
+    Categories "1" --> "0..*" Products : categorizes
+```
+
+```text
+Northwind (Database Object Hierarchy)
+├── 📁 Base Tables (13 Tables)
+│   ├── Categories (8 rows)
+│   ├── CustomerCustomerDemo (0 rows)
+│   ├── CustomerDemographics (0 rows)
+│   ├── Customers (91 rows)
+│   ├── Employees (9 rows)
+│   ├── EmployeeTerritories (49 rows)
+│   ├── Order Details (2,155 rows)
+│   ├── Orders (830 rows)
+│   ├── Products (77 rows)
+│   ├── Region (4 rows)
+│   ├── Shippers (3 rows)
+│   ├── Suppliers (29 rows)
+│   └── Territories (53 rows)
+└── 📁 Core Reporting Views (Classic Microsoft Analytical Views)
+    ├── Sales by Category
+    ├── Sales Totals by Amount
+    ├── Summary of Sales by Quarter
+    ├── Summary of Sales by Year
+    ├── Alphabetical list of products
+    ├── Category Sales for 1997
+    ├── Current Product List
+    ├── Customer and Suppliers by City
+    ├── Invoices
+    ├── Order Details Extended
+    ├── Order Subtotals
+    ├── Orders Qry
+    ├── Product Sales for 1997
+    ├── Products Above Average Price
+    ├── Products by Category
+    └── Quarterly Orders
+```
+
+> [!NOTE]
+> **Why `instnwnd.sql` is Unique:**
+> Unlike typical database scripts that start with `CREATE DATABASE`, Microsoft's `instnwnd.sql` states:
+> *`-- This script does not create a database. Run this script in the database you want the objects to be created.`*
+> Therefore, you must first create an empty `Northwind` database or point your connection context to `Northwind` before executing it! In contrast, `instpubs.sql` automatically includes `CREATE DATABASE pubs`.
+
+---
+
+#### 🛠️ Installation & Recreation Walkthroughs
+
+##### Option A: Fast Command-Line Setup via `sqlcmd`
+Execute both scripts in seconds directly from PowerShell or Terminal:
+
+```powershell
+# 1. Create empty Northwind database and execute instnwnd.sql
+sqlcmd -S . -E -d master -Q "IF DB_ID('Northwind') IS NULL CREATE DATABASE Northwind;"
+sqlcmd -S . -E -d Northwind -i "D:\courses\Data Analysis 26-27\instnwnd.sql"
+
+# 2. Execute instpubs.sql (creates and populates the pubs database automatically)
+sqlcmd -S . -E -i "D:\courses\Data Analysis 26-27\instpubs.sql"
+```
+
+##### Option B: SQL Server Management Studio (SSMS) GUI
+1. Open **SSMS** and connect to your local server (`.` or `localhost`).
+2. Open a new query window and create the Northwind database:
+   ```sql
+   CREATE DATABASE Northwind;
+   GO
+   ```
+3. Open `D:\courses\Data Analysis 26-27\instnwnd.sql` in SSMS (**File > Open > File...**).
+4. Verify the available database dropdown in the top-left toolbar is set to **`Northwind`**.
+5. Press **F5** (or click **Execute**). All 13 tables, 16 views, and stored procedures are created and populated.
+6. Open `D:\courses\Data Analysis 26-27\instpubs.sql` $\to$ Press **F5**. The `pubs` database is created and populated.
+
+---
+
+#### 📊 Connecting Northwind to the Modern Excel Stack
+
+Northwind is the ultimate laboratory for bridging **Excel Spreadsheets $\leftrightarrow$ SQL Relational Modeling $\leftrightarrow$ Power Pivot Star Schemas**:
+
+```mermaid
+flowchart TD
+    subgraph SQL_SERVER ["Microsoft SQL Server (Northwind)"]
+        direction TB
+        TBL_CUST["Customers (91)"]
+        TBL_EMP["Employees (9)"]
+        TBL_PROD["Products (77)"]
+        TBL_ORD["Orders (830)"]
+        TBL_DET["Order Details (2,155)"]
+    end
+
+    subgraph EXCEL_ETL ["Excel Power Query (ETL)"]
+        PQ_CONN["Data > Get Data > From Database > From SQL Server\nSql.Database('.', 'Northwind')"]
+    end
+
+    subgraph POWER_PIVOT ["Power Pivot (VertiPaq Data Model)"]
+        direction TB
+        DIM_CUST[("Dim_Customer")]
+        DIM_EMP[("Dim_Employee")]
+        DIM_PROD[("Dim_Product")]
+        FACT_ORD[("Fact_Orders")]
+        FACT_DET[("Fact_OrderDetails")]
+
+        DIM_CUST -->|"1 : N (CustomerID)"| FACT_ORD
+        DIM_EMP -->|"1 : N (EmployeeID)"| FACT_ORD
+        FACT_ORD -->|"1 : N (OrderID)"| FACT_DET
+        DIM_PROD -->|"1 : N (ProductID)"| FACT_DET
+    end
+
+    subgraph REPORTING ["Excel PivotTable & Slicers"]
+        PT["Interactive Sales Dashboard\n• Revenue by Country (Customer)\n• Quota by Rep (Employee)\n• Product Category Gross Margin"]
+    end
+
+    SQL_SERVER ==> EXCEL_ETL
+    EXCEL_ETL ==> POWER_PIVOT
+    POWER_PIVOT ==> REPORTING
+
+    style SQL_SERVER fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style EXCEL_ETL fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    style POWER_PIVOT fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    style REPORTING fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+```
+
+1. **Eliminating the `VLOOKUP` Hell**:
+   - In traditional Excel, an analyst wanting to analyze Order Details by Customer Country, Product Category, and Sales Rep would write three separate `=VLOOKUP` or `=XLOOKUP` formulas repeated across **2,155 rows**, dramatically bloating workbook size and slowing calculation.
+   - In **Power Pivot**, loading `Orders`, `[Order Details]`, `Customers`, `Products`, and `Employees` and establishing 1-to-many relationships allows instantaneous multi-dimensional cross-filtering with zero lookup formulas!
+
+2. **Ingesting Pre-Built Analytical Views**:
+   - Instead of writing complex aggregations in Excel, an analyst can directly query Northwind's built-in views:
+     - `Summary of Sales by Quarter`: Returns pre-calculated quarterly totals.
+     - `Sales by Category`: Returns departmental performance.
+     - `Invoices`: Pre-joined view combining customer details, freight, items, and shipping addresses.
+
+---
+
 ### 🧠 Bridging Excel to SQL & Relational Database Concepts
 
 Transitioning from spreadsheet thinking to relational database thinking is the defining leap in a data analyst's career. Here is how core Excel operations translate to enterprise SQL concepts:
