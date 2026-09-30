@@ -4,11 +4,12 @@ dataset_name: Module 6 Charts & Executive Visual Analytics
 source_type: course-workbook
 source_ecosystem: Excel Zero to Hero Curriculum
 primary_file: 11_Demos_and_Workbooks/06_Charts_and_Visualizations/Module_6_Demo.xlsx
-total_sheets: 4
+total_sheets: 6
 total_transactions: 9994
 total_sales: 2297200.86
 total_profit: 286397.02
 total_units_sold: 37873
+total_charts: 9
 status: verified
 created: 2026-09-30
 updated: 2026-09-30
@@ -19,7 +20,10 @@ tags:
   - visualization
   - pivot-charts
   - stacked-columns
-  - area-chart
+  - line-chart
+  - pie-chart
+  - donut-chart
+  - histogram
   - chartsheet
   - superstore
   - visual-analytics
@@ -29,7 +33,7 @@ tags:
 # 📦 Module 6 Dataset Documentation: Charts & Executive Visual Analytics
 
 > [!abstract] Dataset & Workbook Overview
-> The **Module 6 Demo Workbook** (`Module_6_Demo.xlsx`) serves as the official practice and visual modeling laboratory for **Module 6: Data Analysis Charts**. It combines an enterprise retail dataset (**`Sample_ Superstore`**, Table: `Sample__Superstore`, 9,994 records across 19 fields) with production multi-dimensional analytical views, full-screen chartsheets, and time-series trend models across **4 dedicated sheets**. This environment bridges data management, pivot table summarization, and cognitive visual design into publication-grade executive charts.
+> The **Module 6 Demo Workbook** (`Module_6_Demo.xlsx`) serves as the official practice and visual modeling laboratory for **Module 6: Data Analysis Charts**. It combines an enterprise retail dataset (**`Sample_ Superstore`**, Table: `Sample__Superstore`, 9,994 records across 19 fields) with production multi-dimensional analytical views, full-screen chartsheets, time-series line trends, and category composition models across **6 dedicated sheets** housing **9 distinct chart objects**. This environment bridges data management, pivot table summarization, and cognitive visual design into publication-grade executive charts.
 
 ---
 
@@ -37,10 +41,11 @@ tags:
 
 | Tab Name | Tab Classification | Primary Object | Key Educational Purpose & Analytical Schema |
 | :--- | :--- | :---: | :--- |
-| **`Sample_ Superstore`** | Data Worksheet ($9,995 \\times 19$) | `Sample__Superstore` (Table) | 9,994 retail transaction line items spanning 2014–2017 across 4 geographic regions. Provides raw data for comparison bars, trend lines, donut composition, scatter plots, and filled maps. |
-| **`Sheet1`** | Analytical Summary ($20 \\times 7$) | PivotTable & Stacked Column PivotChart | Multi-dimensional cross-tabulation and PivotChart comparing **17 Sub-Categories across 4 Geographic Regions** (`Central`, `East`, `South`, `West`). Primary drill for stacked column geometry, gap width, and regional contribution analysis. |
-| **`Chart1`** | Dedicated Chartsheet (`F11`) | Clustered Column & Histogram | Full-screen standalone chartsheet generated via `F11`. Demonstrates dedicated executive presentation layout and native statistical **Histogram** binning (`chartEx1.xml` with zero gap width). |
-| **`Sheet2`** | Time-Series Summary ($8 \\times 2$) | PivotTable & Stacked Area Chart | Annual sales aggregation across 2014–2017 (\$2.30M Total) paired with a **Stacked Area Chart** (`AreaChart`, `grouping="stacked"`). Illustrates multi-year volume accumulation and long-term trajectory. |
+| **`Sample_ Superstore`** | Data Worksheet ($9,995 \times 19$) | `Sample__Superstore` (Table) | 9,994 retail transaction line items spanning 2014–2017 across 4 geographic regions. Provides raw data for comparison bars, trend lines, donut composition, scatter plots, and filled maps. |
+| **`Sheet1`** | Analytical Summary ($20 \times 7$) | PivotTable & Stacked Column PivotChart | Multi-dimensional cross-tabulation and PivotChart comparing **17 Sub-Categories across 4 Geographic Regions** (`Central`, `East`, `South`, `West`). Primary drill for stacked column geometry, gap width, and regional contribution analysis. |
+| **`Chart1`** | Dedicated Chartsheet (`F11`) | Clustered Column & Statistical Histogram | Full-screen standalone presentation tab generated via `F11`. Demonstrates dedicated executive layout and native statistical **Histogram** binning (`chartEx1.xml` with zero gap width). |
+| **`Sheet2`** | Multi-Pivot & Chart Laboratory ($19 \times 2$) | 2 PivotTables & 3 Charts (Line, Pie, Donut) | Houses two distinct analytical aggregations: (1) **Annual Sales Trend (2014–2017)** paired with a **Line Chart** (`chart2.xml`), and (2) **Category Sales Composition** paired with both a **Pie Chart** (`chart3.xml`) and a modern **Doughnut Chart** (`chart4.xml`, 72% hole size). |
+| **`Chart2`** | Dedicated Chartsheet (`F11`) | Clustered Column & Box and Whisker Plot | Second full-screen standalone presentation tab generated via `F11`. Features an executive **Box and Whisker (`boxWhisker`)** distribution chart (`chartEx2.xml`) and clustered column comparison (`chart6.xml`). |
 
 ---
 
@@ -56,9 +61,11 @@ flowchart TD
             direction TB
             PT1["<b>Sheet1: Sub-Category Regional Contribution</b><br/>• Rows: Category & Sub-Category (17 SKUs)<br/>• Columns: Region (Central, East, South, West)<br/>• Chart: Stacked Column PivotChart (100% Overlap, 65% Gap Width)"]
             
-            CS["<b>Chart1: Dedicated Chartsheet (F11)</b><br/>• Full-screen standalone presentation<br/>• Visualizes Clustered Columns & Statistical Histogram"]
+            CS1["<b>Chart1: Dedicated Chartsheet 1 (F11)</b><br/>• Full-screen standalone presentation<br/>• Visualizes Clustered Columns & Statistical Histogram (chartEx1.xml)"]
             
-            PT2["<b>Sheet2: Multi-Year Sales Trajectory</b><br/>• Rows: Grouped Order Year (2014, 2015, 2016, 2017)<br/>• Chart: Stacked Area Chart (Volume Accumulation)"]
+            PT2["<b>Sheet2: Multi-Pivot Visual Analytics Laboratory</b><br/>• Pivot 1: Annual Trend 2014–2017 &rarr; <b>Line Chart</b> (chart2.xml)<br/>• Pivot 2: Category Breakdown &rarr; <b>Pie Chart</b> (chart3.xml)<br/>• Pivot 2: KPI Donut Center &rarr; <b>Doughnut Chart</b> (chart4.xml, 72% Hole)"]
+
+            CS2["<b>Chart2: Dedicated Chartsheet 2 (F11)</b><br/>• Full-screen standalone presentation<br/>• Visualizes Clustered Columns & Statistical Box Plot (chartEx2.xml)"]
         end
 
         RawTable ==> AnalyticalLayers
@@ -124,16 +131,20 @@ Located in `Sample_ Superstore` (Table: `Sample__Superstore`, coordinates `A1:S9
 
 ---
 
-## 📋 Tabs 3 & 4: `Chart1` (Chartsheet) & `Sheet2` (Annual Trajectory)
+## 📋 Tabs 3 & 4: `Chart1` (Chartsheet) & `Sheet2` (Analytical Laboratory)
 
 ### Tab 3: `Chart1` (Dedicated Chartsheet Layout)
 - **Architecture**: Created via shortcut `F11` (or *Move Chart* $\rightarrow$ *New sheet*). Unlike embedded floating charts, a Chartsheet occupies an entire full-screen worksheet without grid cell distractions.
 - **Embedded Visuals**:
-  1. **Clustered Column Chart**: Direct visual magnitude comparison.
+  1. **Clustered Column Chart**: Direct visual magnitude comparison across key categories.
   2. **Statistical Histogram (`chartEx1.xml`)**: Employs automated binning with `gapWidth="0"` to reveal distribution shape and transaction density.
 
-### Tab 4: `Sheet2` (Yearly Sales Trajectory & Stacked Area Chart)
-- **PivotTable Aggregation**: Groups order timestamps by calendar year, revealing continuous enterprise expansion:
+### Tab 4: `Sheet2` (Multi-Pivot Tables & Live Charts: Line, Pie, Donut)
+
+`Sheet2` serves as a multi-model visualization laboratory combining two distinct analytical aggregation levels:
+
+#### 1. Annual Time-Series Trajectory (Rows 3–8)
+Paired with a **Line Chart** (`chart3.xml`, `lineChart` with optional smoothing), plotting enterprise revenue expansion:
 
 | Calendar Year | Gross Annual Sales ($) | YoY Growth / Volume Trajectory |
 | :---: | :---: | :--- |
@@ -143,27 +154,38 @@ Located in `Sample_ Superstore` (Table: `Sample__Superstore`, coordinates `A1:S9
 | **2017** | \$733,215.26 | +20.4% record revenue peak |
 | **Total** | **\$2,297,200.86** | **Consistent Multi-Year Upward Momentum** |
 
-- **Stacked Area Chart Encodings**: Demonstrates the cumulative stacking of annual revenue streams over time, emphasizing total volume capacity alongside trend trajectory.
+#### 2. Category Sales Composition (Rows 15–19)
+Paired with both a **Pie Chart** (`chart4.xml`) and an executive **Doughnut Chart** (`chart5.xml`, `holeSize="72"`):
+
+| Product Category | Total Sales ($) | Revenue Share (%) | Visual Encoding & Role |
+| :--- | :---: | :---: | :--- |
+| **Technology** | \$836,154.03 | **36.4%** | Primary revenue engine (Phones, Machines, Copiers) |
+| **Furniture** | \$741,999.80 | **32.3%** | High-volume core (Chairs, Tables, Bookcases) |
+| **Office Supplies** | \$719,047.03 | **31.3%** | Stable recurring volume (Storage, Binders, Paper) |
+| **Grand Total** | **\$2,297,200.86** | **100.0%** | **Perfect 3-Slice Part-to-Whole Composition** |
+
+- **Doughnut Chart Technical Geometry**: `holeSize=72` provides an optimal 72% center opening, perfectly sized to accommodate an embedded aggregate KPI metric card (`$2.30M Total Sales`).
 
 ---
 
-## 🎨 PivotChart Technical Specifications
+## 🎨 Complete Chart Inventory & Technical Specifications
 
-```mermaid
-flowchart LR
-    subgraph ChartSpecs ["Visual Analytics Technical Geometry"]
-        direction LR
-        S1["<b>Stacked Column (Sheet1)</b><br/>• 100% Series Overlap<br/>• 65% Gap Width<br/>• 4 Regional Series"]
-        --> S2["<b>Chartsheet (Chart1)</b><br/>• Full-screen F11 canvas<br/>• Histogram binning<br/>• Zero gap width"]
-        --> S3["<b>Stacked Area (Sheet2)</b><br/>• Annual time horizon<br/>• Cumulative volume fill<br/>• Pacing momentum"]
-    end
-```
+| Object ID | Package Location | Chart Type | Data Source / Sheet | Primary Visual Attributes |
+| :--- | :--- | :--- | :--- | :--- |
+| **Chart 1** | `xl/charts/chart1.xml` | **Stacked Column PivotChart** | `Sheet1` (`pt_SubCategorySales`) | 100% series overlap, 65% gap width, 4 regional stacks (Central, East, South, West) |
+| **Chart 2** | `xl/charts/chart2.xml` | **Line Chart** | `Sheet2` (Rows 3–7) | Time-series trend (2014–2017), straight/smooth line geometry |
+| **Chart 3** | `xl/charts/chart3.xml` | **Pie Chart** | `Sheet2` (Rows 15–18) | 3 categorical slices, part-to-whole share ($36.4\% / 32.3\% / 31.3\%$) |
+| **Chart 4** | `xl/charts/chart4.xml` | **Doughnut Chart** | `Sheet2` (Rows 15–18) | **72% Hole Size**, ideal for center KPI scorecard embed |
+| **Chart 5** | `xl/charts/chart5.xml` | **Clustered Column Chart** | `Chart1` (Dedicated Tab) | Full-screen presentation mode, clustered category comparison |
+| **ChartEx 1** | `xl/charts/chartEx1.xml`| **Statistical Histogram** | `Chart1` (Dedicated Tab) | Native Office 2016+ statistical binning, 0% gap width |
+| **Chart 6** | `xl/charts/chart6.xml` | **Clustered Column Chart** | `Chart2` (Dedicated Tab) | Full-screen presentation mode, clustered distribution comparison |
+| **ChartEx 2** | `xl/charts/chartEx2.xml`| **Statistical Box & Whisker Plot** | `Chart2` (Dedicated Tab) | Native Office 2016+ `boxWhisker` layout, 5-number summary & outlier points |
 
 ---
 
 ## 💡 Practical Applications & Course Connections
 
-- **Lesson 6.1**: [[01_Visual_Analytics_and_Chart_Selection]] — Master Chart Selection Matrix, Comparison Charts, and Area Trend Charts.
-- **Lesson 6.2**: [[02_Formatting_and_Chart_Design_Rules]] — Gap Width tightening (50%–80%), Series Overlap (100%), and Chartsheet layouts.
-- **Lesson 6.3**: [[03_Dashboard_Visual_Hierarchy]] — Connecting `Sheet1` Stacked Columns and `Sheet2` Area Trends to Executive Dashboards and multi-Pivot Slicers.
+- **Lesson 6.1**: [[01_Visual_Analytics_and_Chart_Selection]] — Master Chart Selection Matrix, Comparison Charts, Line Trends, Pie vs Donut Part-to-Whole, Histogram & Box Plot.
+- **Lesson 6.2**: [[02_Formatting_and_Chart_Design_Rules]] — Gap Width tightening (50%–80%), Donut Hole Size (72%), Series Overlap (100%), and Dedicated Chartsheet layouts (`F11`).
+- **Lesson 6.3**: [[03_Dashboard_Visual_Hierarchy]] — Connecting `Sheet1` Stacked Columns, `Sheet2` Line Trends & Donut Composition to Executive Dashboards and multi-Pivot Slicers.
 - **Student Workbook Repository**: [`11_Demos_and_Workbooks/README.md`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/README.md)

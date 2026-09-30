@@ -103,14 +103,14 @@ flowchart TD
 
     subgraph SuperstoreTier2 ["Tier 2: Product & Segment Performance"]
         SS_C1["Sub-Category Regional Contribution<br/>(Stacked Column PivotChart: Sheet1 in Module_6_Demo.xlsx — Phones $330k, Chairs $328k stacked across West, East, Central, South)"]
-        SS_C2["Customer Segment Share<br/>(Donut Chart: Consumer 50.6%, Corp 30.7%, Home 18.7%)"]
+        SS_C2["Category Sales Composition & KPI Donut<br/>(Doughnut Chart: Sheet2 in Module_6_Demo.xlsx — 72% Hole: Technology 36.4%, Furniture 32.3%, Office Supplies 31.3%)"]
         SS_C3["Sub-Category Profit Anomalies<br/>(Diverging Bar: Copiers +$55.6k vs Tables -$17.7k)"]
     end
 
     subgraph SuperstoreTier3 ["Tier 3: Temporal Trends & Geographic Distribution"]
-        SS_T1["Multi-Year & Monthly Pacing<br/>(Stacked Area Chart: Sheet2 in Module_6_Demo.xlsx — 2014-2017 volume expansion from $484k to $733k)"]
+        SS_T1["Multi-Year Annual Pacing<br/>(Line Chart: Sheet2 in Module_6_Demo.xlsx — 2014-2017 upward trajectory from $484k to $733k)"]
         SS_T2["Territory Profitability Map<br/>(Filled Map: California $76.4k & NY $74.0k top profit states)"]
-        SS_T3["Discount Sensitivity Matrix<br/>(Scatter Plot: Discloses profit collapse past 20% discount)"]
+        SS_T3["Distribution Analysis (Dedicated Chartsheets)<br/>(Chart1: Statistical Histogram | Chart2: Box & Whisker Plot)"]
     end
 
     SuperstoreTier1 --> SuperstoreTier2
@@ -122,7 +122,8 @@ flowchart TD
 2. **Loss-Leader Product Traps**: While `Tables` generates $206,966 in gross sales, it generates a **net loss of -$17,725 (-8.6% margin)** due to high shipping allowances and heavy promotional discounting.
 3. **Regional Technology Windfall**: The **West Region** accounts for $725,458 in sales and generates over **$108,418 in net profit**, driven primarily by high-margin Technology sales (`Copiers` and `Accessories`).
 4. **Sub-Category Regional Concentration (`Sheet1`)**: As displayed in the `Module_6_Demo.xlsx` Stacked Column PivotChart, `West` ($101,781) and `East` ($96,261) account for over 60% of `Chairs` sales, while `Phones` demonstrates similar coastal concentration with $100,615 in East and $98,684 in West. Central and South lag substantially in high-ticket tech products.
-5. **Multi-Year Volume Acceleration (`Sheet2`)**: Annual sales advanced from $484,248 in 2014 to $733,215 in 2017 (+51.4% overall increase), with major revenue inflection points in 2016 (+29.5% YoY) and 2017 (+20.4% YoY) as portrayed in the `Sheet2` Stacked Area Chart.
+5. **Multi-Year Volume Acceleration (`Sheet2`)**: Annual sales advanced from $484,248 in 2014 to $733,215 in 2017 (+51.4% overall increase), with major revenue inflection points in 2016 (+29.5% YoY) and 2017 (+20.4% YoY) as portrayed in the `Sheet2` Line Chart.
+6. **Tri-Category Structural Equilibrium (`Sheet2`)**: As illustrated in the `Sheet2` Pie and Doughnut Charts (`chart3.xml`, `chart4.xml`), revenue is remarkably well-balanced across high-level departments: `Technology` leads at 36.4% ($836,154), followed closely by `Furniture` at 32.3% ($741,999) and `Office Supplies` at 31.3% ($719,047), protecting the enterprise from single-sector downturns.
 
 ---
 

@@ -286,7 +286,10 @@ flowchart LR
 ```
 
 #### 1. Box Plot (Box and Whisker)
-- **Best For**: Comparing continuous distributions across multiple groups simultaneously (e.g., Lead Time by Customer Segment).
+- **Best For**: Comparing continuous distributions across multiple groups simultaneously (e.g., Lead Time by Customer Segment, Sales Distribution by Category).
+- **Course Implementation (`Module_6_Demo.xlsx`, Chart2)**:
+  - **Dedicated Chartsheet Layout**: Created via `F11` as the standalone tab `Chart2`.
+  - **Mechanics**: Implements Excel's native statistical engine (`chartEx2.xml`, `layoutId="boxWhisker"`), automatically calculating the 5-number summary (Min, $Q_1$, Median, $Q_3$, Max) and plotting outlier points beyond $1.5 \times \text{IQR}$.
 - **Mathematical Framework**:
   - **Lower Whisker**: Minimum value within $Q_1 - 1.5 \times \text{IQR}$.
   - **Box Bottom**: 25th Percentile ($Q_1$).
@@ -395,13 +398,14 @@ Applying the Master Chart Selection Matrix to the official course dataset **`Mod
 | **Which Sub-Categories generate top sales?** | `Sub-Category` *(Nominal, 17 items)* | `Sales ($)` | **Horizontal Bar Chart** *(Sorted Descending)* | `Phones` ($330,007) and `Chairs` ($328,449) lead volume. Horizontal orientation comfortably displays all 17 sub-categories without label tilt. |
 | **How do Sub-Category sales break down across the 4 commercial regions?** | `Sub-Category` *(Rows)*, `Region` *(Columns)* | `Total Sales ($)` | **Stacked Column PivotChart** *(Sheet1 in `Module_6_Demo.xlsx`)* | Visualizes cumulative sub-category volume while breaking down the regional contributions of `Central`, `East`, `South`, and `West`. Exposes that `West` ($101.8k) and `East` ($96.3k) generate 60.3% of `Chairs` revenue, while `Phones` ($100.6k East, $98.7k West) exhibits similar coastal dominance. |
 | **Which Sub-Categories are destroying profits?** | `Sub-Category` | `Profit ($)` / Margin % | **Diverging Bar Chart** *(Green/Red Accent)* | Immediately exposes net loss leaders: `Tables` (-$17,725), `Bookcases` (-$3,473), and `Supplies` (-$1,189) vs top performer `Copiers` (+$55,618, 37.2% margin). |
-| **What is our revenue split by Customer Segment?** | `Segment` *(Nominal, 3 groups)* | `% of Total Sales` | **Donut Chart** *(Hole size: 70%)* | Part-to-whole share: `Consumer` (50.6%), `Corporate` (30.7%), `Home Office` (18.7%). Center KPI scorecard card displays `$2.30M`. |
+| **What is our revenue split by Category?** | `Category` *(3 items)* | `% of Total Sales` | **Pie Chart & Donut Chart** *(Sheet2 in `Module_6_Demo.xlsx`)* | `Technology` ($836.2k, 36.4%), `Furniture` ($742.0k, 32.3%), and `Office Supplies` ($719.0k, 31.3%). Modeled as both a clean 3-slice **Pie Chart** (`chart3.xml`) and a modern **Doughnut Chart** (`chart4.xml`) with an optimal **72% hole size** ready for an embedded `$2.30M` center KPI scorecard. |
+| **How did multi-year sales pace over time?** | `Order Year` *(2014–2017)* | `Annual Sales ($)` | **Line Chart** *(Sheet2 in `Module_6_Demo.xlsx`)* | Time-series trend line (`chart2.xml`) tracking revenue momentum: 2014 ($484.2k) $\rightarrow$ 2015 ($470.5k) $\rightarrow$ 2016 ($609.2k, +29.5%) $\rightarrow$ 2017 ($733.2k, +20.4%, $2.30M total). |
+| **How does transactional spread and variance distribute?** | Continuous Metrics | Dispersion & Outliers | **Box and Whisker Plot** *(Chart2 Chartsheet in `Module_6_Demo.xlsx`)* | Dedicated full-screen Chartsheet (`F11`) utilizing native Office 2016+ `boxWhisker` (`chartEx2.xml`) to calculate 5-number summary (Min, $Q_1$, Median, $Q_3$, Max) and isolate high-value transaction outliers beyond $1.5 \times \text{IQR}$. |
 | **How do sales and profits pace over time?** | `Order Date` *(Continuous Time)* | `Monthly Sales` & `Profit` | **Dual-Axis Line Chart** *(Straight lines)* | Exposes severe Q4 holiday surges (Nov–Dec peak) and reveals whether profits track revenue growth or erode during promotion pushes. |
 | **Does heavy discounting destroy profitability?** | `Discount` *(0% to 80%)* | `Profit Margin %` | **Scatter Plot (XY)** | Evaluates price elasticity across 9,994 transactions. Confirms margin collapse into severe losses once discount exceeds 20%. |
 | **Where are our highest-volume sales territories?** | `State` *(Geographic, 48 states)* | `Sales Volume` | **Filled Map** *(Choropleth)* | California ($457.7k) and New York ($310.9k) visually dominate national geographic distribution. |
 | **How does revenue distribute within product hierarchies?** | `Category` $\rightarrow$ `Sub-Category` | `Sales Weight` | **Treemap** *(Hierarchical Rectangles)* | Shows nested weight of `Technology` (36.4%), `Furniture` (32.3%), and `Office Supplies` (31.3%) without chart-junk clutter. |
 | **Which Region-Category combinations are most profitable?** | `Region` *(Rows)*, `Category` *(Cols)* | `Sum of Profit` | **Heat Map** *(Pivot Table + 3-Color Scale)* | Matrix cross-tabulation highlights Central Furniture losses (-$2,871) vs West Technology windfalls (+$57,450). |
-| **How did multi-year sales volume accumulate over time?** | `Order Year` *(2014–2017)* | `Annual Sales ($)` | **Stacked Area Chart** *(Sheet2 in `Module_6_Demo.xlsx`)* | Emphasizes total revenue volume expansion over time ($484.2k $\rightarrow$ $470.5k $\rightarrow$ $609.2k $\rightarrow$ $733.2k, $2.30M total) while illustrating steady upward pacing momentum. |
 | **How do transaction amounts distribute across order frequency?** | `Sales Amount ($)` | `Transaction Frequency` | **Statistical Histogram** *(Chart1 Chartsheet in `Module_6_Demo.xlsx`)* | Dedicated full-screen Chartsheet (`F11`) utilizing Excel native automated binning (`chartEx1.xml`) with zero gap width to expose right-skewed transaction density. |
 
 ---

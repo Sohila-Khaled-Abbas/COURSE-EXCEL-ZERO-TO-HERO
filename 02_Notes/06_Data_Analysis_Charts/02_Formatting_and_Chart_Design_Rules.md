@@ -142,24 +142,25 @@ DEFAULT EXCEL (219% Gap Width)        EXECUTIVE FORMATTED (60% Gap Width)
   5. **Legend Placement**: Relocate the legend from the default right side to the **top-right** (just below the chart title) aligned horizontally.
 
 ### C. Line Charts: Stroke, Markers & Scales
+- **Live Demo Implementation (`Module_6_Demo.xlsx`, Sheet2)**: The time-series **Line Chart** (`chart2.xml`) tracks annual sales expansion from 2014 ($484.2k) to 2017 ($733.2k).
 - **Stroke Thickness**: Standardize on `2.25pt` or `2.5pt` solid lines. Avoid hairline `0.75pt` lines that disappear on projectors.
 - **Data Markers**: Avoid placing giant circular markers on every single day of a 365-day annual timeline (it turns into an unreadable string of pearls). Only enable markers for monthly/quarterly aggregates or highlight the minimum, maximum, and final data points.
 - **Smooth Lines Caution**: While "Smoothed Line" creates visually pleasing bezier curves, it can fabricate artificial peaks and troughs that do not exist in the underlying data. Use straight line segments for financial and precision operational reporting.
 
-### D. Donut Charts: Geometry & Placement
-- **Donut Hole Size**: Set to **`70%`** (Format Data Series $\rightarrow$ *Doughnut Hole Size*). Default 50% leaves too thick a ring and too cramped a center.
+### D. Donut & Pie Charts: Geometry & Placement
+- **Donut Hole Size**: Set to **`70%–75%`** (Format Data Series $\rightarrow$ *Doughnut Hole Size*). Default 50% leaves too thick a ring and too cramped a center.
+  - **Live Demo Implementation (`Module_6_Demo.xlsx`, Sheet2)**: The category composition **Doughnut Chart** (`chart4.xml`) is configured with an exact **`72%` Hole Size** (`holeSize="72"` in OpenXML), dividing the ring cleanly across `Technology` (36.4%), `Furniture` (32.3%), and `Office Supplies` (31.3%).
+- **The 3-Slice Rule**: Both the Pie Chart (`chart3.xml`) and Donut Chart on `Sheet2` demonstrate the textbook guideline: limiting slices to $\le 5$ categories prevents angular confusion.
 - **Labeling**: Select the series $\rightarrow$ Add Data Labels $\rightarrow$ *Label Options* $\rightarrow$ check **Category Name** and **Percentage**, and uncheck **Value**. Position labels *Outside End*.
 - **The Center Metric Card**: Insert a text box into the hollow center:
   - **Hotel Reservation Example**: Top Line: `TOTAL BOOKINGS` (`9pt Slate #64748B`), Bottom Line: `36,275` (`20pt Bold Navy #0F172A`).
-  - **Superstore Demo Example (`Module_6_Demo.xlsx`)**: Top Line: `TOTAL SALES` (`9pt Slate`), Bottom Line: `$2,297,201` with sub-caption `12.5% Net Margin` (`20pt Bold Navy #0F172A`). Surround with the 3 Segment ring: Consumer (50.6%), Corporate (30.7%), Home Office (18.7%).
+  - **Superstore Demo Example (`Module_6_Demo.xlsx`)**: Top Line: `TOTAL SALES` (`9pt Slate`), Bottom Line: `$2,297,201` with sub-caption `12.5% Net Margin` (`20pt Bold Navy #0F172A`).
 
-### E. Stacked Area Charts & Dedicated Chartsheet Architecture (`Module_6_Demo.xlsx`)
-- **Stacked Area Charts (`Sheet2`)**:
-  - **Volume Accumulation**: When visualizing multi-year performance (2014–2017), a Stacked Area Chart emphasizes total sales mass while showing yearly pacing.
-  - **Gradient & Transparency**: Set area fill transparency to `20%–30%` or use clean solid tones with a crisp top boundary line (`1.5pt` solid line) so executives can track both total height and the rate of climb.
-- **Embedded vs. Dedicated Chartsheet Layout (`Chart1`, `F11`)**:
-  - **Embedded Chart (Object in Sheet)**: Best for executive dashboards where multiple charts, slicers, and KPI scorecards must align side-by-side on a single unified canvas.
-  - **Dedicated Chartsheet (Standalone Tab)**: Created instantly via keyboard shortcut **`F11`** (or right-click chart $\rightarrow$ *Move Chart* $\rightarrow$ *New sheet*). Best for high-density exploratory charts, detailed statistical **Histograms** with automated binning, or standalone boardroom presentations that require 100% full-screen focus without spreadsheet gridlines.
+### E. Dedicated Chartsheet Architecture vs. Embedded Dashboard (`Chart1` & `Chart2`)
+- **Embedded Chart (Object in Sheet)**: Best for executive dashboards (like `Sheet1` and `Sheet2`) where multiple charts, slicers, and KPI scorecards align side-by-side on a single unified canvas.
+- **Dedicated Chartsheet (Standalone Full-Screen Tab)**: Created instantly via keyboard shortcut **`F11`** (or right-click chart $\rightarrow$ *Move Chart* $\rightarrow$ *New sheet*). Best for high-density exploratory charts, detailed statistical distributions, or standalone boardroom presentations that require 100% full-screen focus without spreadsheet gridlines.
+  - **`Chart1` Chartsheet (`Module_6_Demo.xlsx`)**: Houses Clustered Columns and a native statistical **Histogram** (`chartEx1.xml`) with zero gap width to reveal transaction density.
+  - **`Chart2` Chartsheet (`Module_6_Demo.xlsx`)**: Houses Clustered Columns and a native statistical **Box and Whisker Plot** (`chartEx2.xml`, `layoutId="boxWhisker"`) to isolate median lines, IQR interquartile spans, and transaction outliers.
 
 ---
 
