@@ -56,6 +56,12 @@ try {
             Start-Sleep -Seconds $DebounceSeconds
             $global:pendingChanges = $false
 
+            # If an Excel workbook or Module 6 demo was modified, auto-synchronize documentation
+            if ($global:lastModifiedFile -like "*Module_6_Demo*" -or $global:lastModifiedFile -like "*11_Demos_and_Workbooks*") {
+                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [SYNC-DOCS] Synchronizing notes and dataset documentation from Excel workbook..." -ForegroundColor Magenta
+                python "$RepoRoot\scripts\sync_module_6_docs.py" 2>&1 | Out-Null
+            }
+
             # Rebuild site docs if site generator exists
             if (Test-Path "$RepoRoot\site\build.js") {
                 Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [BUILD] Synchronizing documentation site & search index..." -ForegroundColor Cyan

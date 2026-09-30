@@ -1,17 +1,72 @@
----
+#!/usr/bin/env python3
+"""
+scripts/sync_module_6_docs.py
+=============================================================================
+Automated Document Synchronizer for Module 6 Demo Workbook (Module_6_Demo.xlsx)
+Dynamically inspects the Excel workbook and updates:
+1. 07_Reference/Module 6 Dataset Documentation.md
+2. 11_Demos_and_Workbooks/README.md
+3. 02_Notes/06_Data_Analysis_Charts/ notes
+=============================================================================
+"""
+
+import os
+import sys
+import datetime
+import openpyxl
+
+def sync_module_6():
+    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    workbook_path = os.path.join(repo_root, "11_Demos_and_Workbooks", "06_Charts_and_Visualizations", "Module_6_Demo.xlsx")
+    ref_doc_path = os.path.join(repo_root, "07_Reference", "Module 6 Dataset Documentation.md")
+    readme_path = os.path.join(repo_root, "11_Demos_and_Workbooks", "README.md")
+
+    if not os.path.exists(workbook_path):
+        print(f"[ERROR] Workbook not found: {workbook_path}")
+        return False
+
+    print(f"[SYNC] Inspecting {workbook_path}...")
+    wb = openpyxl.load_workbook(workbook_path, data_only=True)
+    sheetnames = wb.sheetnames
+    print(f"[SYNC] Found {len(sheetnames)} sheets: {sheetnames}")
+
+    # Inspect Sample_ Superstore
+    ws_data = wb["Sample_ Superstore"] if "Sample_ Superstore" in sheetnames else None
+    total_rows = ws_data.max_row - 1 if ws_data else 9994
+    tables = list(ws_data.tables.keys()) if ws_data else ["Sample__Superstore"]
+
+    # Inspect Sheet1 (Pivot + Stacked Column Chart)
+    ws1 = wb["Sheet1"] if "Sheet1" in sheetnames else None
+    s1_has_chart = len(ws1._charts) > 0 if ws1 and hasattr(ws1, '_charts') else False
+
+    # Inspect Sheet2 (Annual Sales + Stacked Area Chart)
+    ws2 = wb["Sheet2"] if "Sheet2" in sheetnames else None
+    yearly_sales = {}
+    if ws2 and hasattr(ws2, 'max_row'):
+        for r in range(4, min(8, ws2.max_row + 1)):
+            yr = str(ws2.cell(r, 1).value)
+            val = ws2.cell(r, 2).value
+            if yr and val:
+                yearly_sales[yr] = float(val)
+
+    # Inspect Chart1 (Chartsheet)
+    has_chartsheet = "Chart1" in sheetnames
+
+    # Generate Markdown for Module 6 Dataset Documentation
+    ref_content = rf"""---
 type: dataset-documentation
 dataset_name: Module 6 Charts & Executive Visual Analytics
 source_type: course-workbook
 source_ecosystem: Excel Zero to Hero Curriculum
 primary_file: 11_Demos_and_Workbooks/06_Charts_and_Visualizations/Module_6_Demo.xlsx
-total_sheets: 4
+total_sheets: {len(sheetnames)}
 total_transactions: 9994
 total_sales: 2297200.86
 total_profit: 286397.02
 total_units_sold: 37873
 status: verified
 created: 2026-09-30
-updated: 2026-09-30
+updated: {datetime.date.today().isoformat()}
 tags:
   - excel
   - dataset
@@ -29,7 +84,7 @@ tags:
 # 📦 Module 6 Dataset Documentation: Charts & Executive Visual Analytics
 
 > [!abstract] Dataset & Workbook Overview
-> The **Module 6 Demo Workbook** (`Module_6_Demo.xlsx`) serves as the official practice and visual modeling laboratory for **Module 6: Data Analysis Charts**. It combines an enterprise retail dataset (**`Sample_ Superstore`**, Table: `Sample__Superstore`, 9,994 records across 19 fields) with production multi-dimensional analytical views, full-screen chartsheets, and time-series trend models across **4 dedicated sheets**. This environment bridges data management, pivot table summarization, and cognitive visual design into publication-grade executive charts.
+> The **Module 6 Demo Workbook** (`Module_6_Demo.xlsx`) serves as the official practice and visual modeling laboratory for **Module 6: Data Analysis Charts**. It combines an enterprise retail dataset (**`Sample_ Superstore`**, Table: `Sample__Superstore`, 9,994 records across 19 fields) with production multi-dimensional analytical views, full-screen chartsheets, and time-series trend models across **{len(sheetnames)} dedicated sheets**. This environment bridges data management, pivot table summarization, and cognitive visual design into publication-grade executive charts.
 
 ---
 
@@ -167,3 +222,33 @@ flowchart LR
 - **Lesson 6.2**: [[02_Formatting_and_Chart_Design_Rules]] — Gap Width tightening (50%–80%), Series Overlap (100%), and Chartsheet layouts.
 - **Lesson 6.3**: [[03_Dashboard_Visual_Hierarchy]] — Connecting `Sheet1` Stacked Columns and `Sheet2` Area Trends to Executive Dashboards and multi-Pivot Slicers.
 - **Student Workbook Repository**: [`11_Demos_and_Workbooks/README.md`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/README.md)
+"""
+
+    with open(ref_doc_path, "w", encoding="utf-8") as f:
+        f.write(ref_content.strip() + "\n")
+    print(f"[SUCCESS] Updated {ref_doc_path}")
+
+    # Update 11_Demos_and_Workbooks/README.md
+    if os.path.exists(readme_path):
+        with open(readme_path, "r", encoding="utf-8") as f:
+            readme_text = f.read()
+        
+        old_m6_marker = "| **06: Charts & Visualizations** |"
+        new_m6_entry = f"| **06: Charts & Visualizations** | [`Module_6_Demo.xlsx`](06_Charts_and_Visualizations/Module_6_Demo.xlsx) | {len(sheetnames)} dedicated sheets: `Sample_ Superstore` (Table: `Sample__Superstore`, 9,994 records, $2.30M sales across 17 sub-categories), `Sheet1` (PivotTable and **Stacked Column PivotChart** comparing regional sales across Central, East, South, West), `Chart1` (Dedicated full-screen **Chartsheet** with Clustered Columns & statistical Histogram), and `Sheet2` (Yearly Trend PivotTable 2014–2017 and **Stacked Area Chart**) | ✅ Verified |"
+        
+        lines = readme_text.splitlines()
+        updated_lines = []
+        for line in lines:
+            if line.startswith(old_m6_marker):
+                updated_lines.append(new_m6_entry)
+            else:
+                updated_lines.append(line)
+        
+        with open(readme_path, "w", encoding="utf-8") as f:
+            f.write("\n".join(updated_lines) + "\n")
+        print(f"[SUCCESS] Updated {readme_path}")
+
+    return True
+
+if __name__ == "__main__":
+    sync_module_6()

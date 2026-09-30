@@ -245,9 +245,12 @@ Trend charts illustrate how quantitative values evolve over continuous, chronolo
 - **Design Rule**: Keep line stroke thickness between `2.25pt` and `3pt`. When plotting multiple lines, limit series to a maximum of 3–4 lines to avoid the "spaghetti chart" effect.
 - **Excel Ribbon**: `Insert` $\rightarrow$ `Charts` $\rightarrow$ `Insert Line or Area Chart` $\rightarrow$ `Line with Markers`.
 
-#### 2. Area Chart
-- **Best For**: Emphasizing the **cumulative volume, mass, or total capacity** over time, alongside the general trendline (e.g. Total Energy Consumption over 24 hours, Cumulative Hotel Revenue).
-- **Watch Out**: Standard area charts can obscure underlying data series. Use transparent fills or stick to Stacked Area charts when comparing multiple non-overlapping cumulative streams.
+#### 2. Area Chart & Stacked Area Chart
+- **Best For**: Emphasizing the **cumulative volume, mass, or total capacity** over time, alongside the general trendline (e.g. Total Energy Consumption over 24 hours, Multi-Year Revenue Accumulation).
+- **Course Implementation (`Module_6_Demo.xlsx`, Sheet2)**:
+  - **Data Source**: Annual Sales PivotTable (2014: \$484.2K $\rightarrow$ 2015: \$470.5K $\rightarrow$ 2016: \$609.2K $\rightarrow$ 2017: \$733.2K, Total: \$2,297,200.86).
+  - **Visual Insight**: The **Stacked Area Chart** (`AreaChart`, `grouping="stacked"`) visually communicates the multi-year volume expansion of the enterprise, highlighting the +29.5% growth surge in 2016 and +20.4% in 2017.
+- **Watch Out**: Standard non-stacked area charts can obscure underlying data series. Use transparent fills or stick to Stacked Area charts when comparing multiple non-overlapping cumulative streams.
 
 ---
 
@@ -294,8 +297,10 @@ flowchart LR
 - **Excel Ribbon**: `Insert` $\rightarrow$ `Insert Statistic Chart` $\rightarrow$ `Box and Whisker`.
 
 #### 2. Histogram
-- **Best For**: Analyzing the frequency distribution of a single continuous variable (e.g. Lead Time, Order Value).
-- **Mechanics**: Divides raw values into contiguous, non-overlapping numeric bins (e.g., \$0–\$50, \$50–\$100) and displays the count of observations falling in each bin as adjacent vertical columns with **zero gap width**.
+- **Best For**: Analyzing the frequency distribution of a single continuous variable (e.g. Sales Transaction Value, Lead Time).
+- **Course Implementation (`Module_6_Demo.xlsx`, Chart1)**:
+  - **Standalone Chartsheet Architecture**: Featured on the dedicated `Chart1` full-screen tab created via `F11`.
+  - **Mechanics**: Implements Excel's native statistical engine (`chartEx1.xml`) utilizing automatic binning with **Gap Width locked at `0%`** to show frequency density without artificial gaps between adjacent value intervals.
 - **Excel Ribbon**: `Insert` $\rightarrow$ `Insert Statistic Chart` $\rightarrow$ `Histogram`. (Configure bin width and bin count by right-clicking the horizontal axis $\rightarrow$ *Format Axis*).
 
 #### 3. Density Plot (Kernel Density Estimation)
@@ -396,6 +401,8 @@ Applying the Master Chart Selection Matrix to the official course dataset **`Mod
 | **Where are our highest-volume sales territories?** | `State` *(Geographic, 48 states)* | `Sales Volume` | **Filled Map** *(Choropleth)* | California ($457.7k) and New York ($310.9k) visually dominate national geographic distribution. |
 | **How does revenue distribute within product hierarchies?** | `Category` $\rightarrow$ `Sub-Category` | `Sales Weight` | **Treemap** *(Hierarchical Rectangles)* | Shows nested weight of `Technology` (36.4%), `Furniture` (32.3%), and `Office Supplies` (31.3%) without chart-junk clutter. |
 | **Which Region-Category combinations are most profitable?** | `Region` *(Rows)*, `Category` *(Cols)* | `Sum of Profit` | **Heat Map** *(Pivot Table + 3-Color Scale)* | Matrix cross-tabulation highlights Central Furniture losses (-$2,871) vs West Technology windfalls (+$57,450). |
+| **How did multi-year sales volume accumulate over time?** | `Order Year` *(2014–2017)* | `Annual Sales ($)` | **Stacked Area Chart** *(Sheet2 in `Module_6_Demo.xlsx`)* | Emphasizes total revenue volume expansion over time ($484.2k $\rightarrow$ $470.5k $\rightarrow$ $609.2k $\rightarrow$ $733.2k, $2.30M total) while illustrating steady upward pacing momentum. |
+| **How do transaction amounts distribute across order frequency?** | `Sales Amount ($)` | `Transaction Frequency` | **Statistical Histogram** *(Chart1 Chartsheet in `Module_6_Demo.xlsx`)* | Dedicated full-screen Chartsheet (`F11`) utilizing Excel native automated binning (`chartEx1.xml`) with zero gap width to expose right-skewed transaction density. |
 
 ---
 

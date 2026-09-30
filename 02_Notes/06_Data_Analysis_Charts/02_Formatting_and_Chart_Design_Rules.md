@@ -153,6 +153,14 @@ DEFAULT EXCEL (219% Gap Width)        EXECUTIVE FORMATTED (60% Gap Width)
   - **Hotel Reservation Example**: Top Line: `TOTAL BOOKINGS` (`9pt Slate #64748B`), Bottom Line: `36,275` (`20pt Bold Navy #0F172A`).
   - **Superstore Demo Example (`Module_6_Demo.xlsx`)**: Top Line: `TOTAL SALES` (`9pt Slate`), Bottom Line: `$2,297,201` with sub-caption `12.5% Net Margin` (`20pt Bold Navy #0F172A`). Surround with the 3 Segment ring: Consumer (50.6%), Corporate (30.7%), Home Office (18.7%).
 
+### E. Stacked Area Charts & Dedicated Chartsheet Architecture (`Module_6_Demo.xlsx`)
+- **Stacked Area Charts (`Sheet2`)**:
+  - **Volume Accumulation**: When visualizing multi-year performance (2014–2017), a Stacked Area Chart emphasizes total sales mass while showing yearly pacing.
+  - **Gradient & Transparency**: Set area fill transparency to `20%–30%` or use clean solid tones with a crisp top boundary line (`1.5pt` solid line) so executives can track both total height and the rate of climb.
+- **Embedded vs. Dedicated Chartsheet Layout (`Chart1`, `F11`)**:
+  - **Embedded Chart (Object in Sheet)**: Best for executive dashboards where multiple charts, slicers, and KPI scorecards must align side-by-side on a single unified canvas.
+  - **Dedicated Chartsheet (Standalone Tab)**: Created instantly via keyboard shortcut **`F11`** (or right-click chart $\rightarrow$ *Move Chart* $\rightarrow$ *New sheet*). Best for high-density exploratory charts, detailed statistical **Histograms** with automated binning, or standalone boardroom presentations that require 100% full-screen focus without spreadsheet gridlines.
+
 ---
 
 ## 4. Executive Color Strategy & Psychology
