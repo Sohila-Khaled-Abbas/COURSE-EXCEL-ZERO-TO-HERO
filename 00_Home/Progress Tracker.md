@@ -54,9 +54,9 @@ updated: 2026-09-28
 - [x] 23. Slicers, Timelines, Report Connections & Report Filter Pages ✅ 2026-09-30
 
 ### Module 6: Data Analysis Charts & Visual Hierarchy
-- [ ] 24. Preattentive Attributes & Chart Selection Matrix
-- [ ] 25. Eliminating Chart Junk & Dynamic Titles
-- [ ] 26. Dashboard Layout Grid & Visual Hierarchy
+- [x] 24. Preattentive Attributes & Chart Selection Matrix ✅ 2026-09-30
+- [x] 25. Eliminating Chart Junk & Dynamic Titles ✅ 2026-09-30
+- [x] 26. Dashboard Layout Grid & Visual Hierarchy ✅ 2026-09-30
 
 ### Module 7: Data Quality, Cleaning & Enterprise Systems
 - [ ] 27. Six Dimensions of Data Quality
