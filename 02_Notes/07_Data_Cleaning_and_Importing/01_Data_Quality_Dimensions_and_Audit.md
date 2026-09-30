@@ -280,6 +280,37 @@ As established in our live practice session:
 ```
 
 ```mermaid
+flowchart TD
+    subgraph WB ["Microsoft Excel Workbook Ecosystem"]
+        direction TB
+        PQ["Power Query\n-->> Cleaning, Transformation & Modelling"]
+        PP["Power Pivot\n-->> Data Model & Relationships (Star Schema)"]
+        PT["Pivot Tables\n-->> Summary, Aggregations & Executive KPIs"]
+        
+        PQ ==>|"Clean Tables / Add to Data Model"| PP
+        PP ==>|"Relationships & DAX Measures"| PT
+    end
+
+    style WB fill:#fafafa,stroke:#37474f,stroke-width:2px
+    style PQ fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style PP fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    style PT fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+```
+
+```text
+Excel Workbook
+Pivot Tables    -->> Summary
+Power Query     -->> Cleaning and transformation and modelling
+Power Pivot     -->> Data Model -- Relationships
+```
+
+| Excel Tool Component | Functional Role | Operational Output | Real-World Application in this Module |
+| :--- | :--- | :--- | :--- |
+| **Power Query** | **Cleaning, transformation and modelling** | Automated, repeatable M recipes for extracting, reshaping, and typing data. | Ingesting `Hotel Reservations.csv` and `01 Call-Center-Dataset.xlsx`, stripping ghost columns, casting date/time serials. |
+| **Power Pivot** | **Data Model -- Relationships** | In-memory relational database (xVelocity engine), 1-to-many relationships, DAX formulas. | Connecting transactional tables (calls, bookings) to dimension tables (agents, dates, branches) without massive `XLOOKUP` helper columns. |
+| **Pivot Tables** | **Summary** | Dynamic drag-and-drop summaries, multidimensional cross-tabs, visual slicers. | Summarizing 5,000 call records by agent answer rate (81.08%), speed of answer (67.5s), and average CSAT (3.40 / 5.0). |
+
+```mermaid
 flowchart LR
     subgraph E ["E: Extract Data (Done)"]
         CSV["Hotel Reservations.csv\n(36,275 Records)"]

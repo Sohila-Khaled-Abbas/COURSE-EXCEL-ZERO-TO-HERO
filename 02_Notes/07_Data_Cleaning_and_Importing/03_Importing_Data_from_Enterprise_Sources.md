@@ -81,30 +81,28 @@ flowchart TD
 
 ### Channel 2: From External Excel File (`.xlsx`, `.xlsm`, `.xlsb`)
 - **Path**: **Data > Get Data > From File > From Excel Workbook**.
-- **Live Demo Implementation (`Module_7_Demo.xlsx`)**: Ingesting `PWC Dataset.xlsx` (Sheet: `Source Data `) into table `ExternalData_2` (5,000 rows, 14 columns).
+- **Live Demo Implementation (`Module_7_Demo.xlsx`)**: Ingesting the authentic PwC Forage dataset `01 Call-Center-Dataset.xlsx` (Sheet: `Sheet1`) into table `ExternalData_2` (5,000 call interaction records, 10 canonical columns).
 - **Mechanism**: Reads metadata from an unopened external workbook. The **Navigator** dialog presents two object types:
   - 📋 **Table Objects** (Blue header icon): Represents formatted Excel Tables (`Ctrl + T`). **Recommended!** Tables automatically handle variable row counts without capturing empty trailing rows.
   - 📄 **Sheet Objects** (Sheet icon): Represents the raw grid. May contain blank header rows, titles, and empty cells outside the used range that require manual trimming.
-- **Power Query M Script (Live from `Module_7_Demo.xlsx`)**:
+- **Power Query M Script (Authentic Forage Dataset)**:
   ```powerquery
   shared #"Source Data" = let
-      Source = Excel.Workbook(
-          File.Contents("D:\courses\Data Analysis 26-27\7-Introducation to Data Fields (Excel)\09_Source_Materials\Module 9\13\PWC Dataset.xlsx"),
-          null,
-          true
-      ),
-      #"Source Data _Sheet" = Source{[Item="Source Data ",Kind="Sheet"]}[Data],
-      #"Promoted Headers" = Table.PromoteHeaders(#"Source Data _Sheet", [PromoteAllScalars=true]),
+      Source = Excel.Workbook(File.Contents("D:\courses\Data Analysis 26-27\01 Call-Center-Dataset.xlsx"), null, true),
+      Sheet1_Sheet = Source{[Item="Sheet1", Kind="Sheet"]}[Data],
+      #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
       #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{
-          {"Call Id", type text}, {"Agent", type text}, {"Date", type date},
-          {"Time", type datetime}, {"Topic", type text}, {"Answered (Y/N)", type text},
-          {"Resolved", type text}, {"Speed of answer in seconds", Int64.Type},
-          {"AvgTalkDuration", type datetime}, {"Satisfaction rating", Int64.Type},
-          {"Column11", type any}, {"Column12", type any}, {"Column13", type text}, {"Column14", type text}
+          {"Call Id", type text}, {"Agent", type text}, {"Date", type date}, {"Time", type datetime}, 
+          {"Topic", type text}, {"Answered (Y/N)", type text}, {"Resolved", type text}, 
+          {"Speed of answer in seconds", Int64.Type}, {"AvgTalkDuration", type datetime}, {"Satisfaction rating", Int64.Type}
       })
   in
       #"Changed Type";
   ```
+
+> [!TIP]
+> **Clean Ingestion vs Legacy Phantom Columns:**
+> Ingesting the authentic source file (`01 Call-Center-Dataset.xlsx`) maps directly to `Sheet1` with **10 clean columns**. If ingesting an uncleaned legacy workbook (such as `PWC Dataset.xlsx`), trailing cell formats create 4 empty ghost columns (`Column11`–`Column14`), which an analyst purges in Power Query using `Table.RemoveColumns(#"Changed Type", {"Column11", "Column12", "Column13", "Column14"})`.
 
 ---
 
@@ -163,6 +161,31 @@ flowchart LR
 41  L -: Load Data      -->> (Done)
 ```
 
+```mermaid
+flowchart TD
+    subgraph WB ["Microsoft Excel Workbook Ecosystem"]
+        direction TB
+        PQ["Power Query\n-->> Cleaning, Transformation & Ingestion Modelling"]
+        PP["Power Pivot\n-->> Data Model & Relationships (Star Schema)"]
+        PT["Pivot Tables\n-->> Summary, Aggregations & Visual KPIs"]
+        
+        PQ ==>|"Clean Ingestion"| PP
+        PP ==>|"Relationships & DAX"| PT
+    end
+
+    style WB fill:#fafafa,stroke:#37474f,stroke-width:2px
+    style PQ fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style PP fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    style PT fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+```
+
+```text
+Excel Workbook
+Pivot Tables    -->> Summary
+Power Query     -->> Cleaning and transformation and modelling
+Power Pivot     -->> Data Model -- Relationships
+```
+
 ---
 
 ### Channel 4: From Folder (Batch Multi-File Consolidation)
@@ -211,6 +234,17 @@ Enterprise web services, microservices, and modern database exports frequently d
   - Automatically identifies nested `<Product>` records.
   - Flattens hierarchical XML nodes into tabular columns: `ProductID`, `Name`, `ProductNumber`, and `ListPrice`.
 
+> [!CAUTION]
+> **Real-World Error Audit: Multiple Root Elements (`Line 3027, position 2`)**
+> When importing the raw course file `XML_F52E2B61-18A1-11d1-B105-00805F49916B1.xml`, Power Query crashes with:
+> ```text
+> Unable to connect
+> Details: "Xml processing failed. Either the input is invalid or it isn't supported. 
+> (Internal error: There are multiple root elements. Line 3027, position 2.)"
+> ```
+> - **Forensic Cause**: W3C XML standard demands strictly **one single root node**. In this raw export, a second `<Products>` tree was accidentally duplicated starting at line 3027 (ending in `</Products_2>`).
+> - **The Fix**: Open the file in VS Code or Notepad, navigate to line 3026 (`</Products>`), delete the extraneous second block (lines 3027 to 6052), and save as UTF-8. The repaired file contains 504 clean product records and imports seamlessly.
+
 ---
 
 ### Channel 6: From JSON (JavaScript Object Notation)
@@ -221,7 +255,7 @@ Enterprise web services, microservices, and modern database exports frequently d
   FROM Person.Person
   FOR JSON PATH, ROOT('People');
   ```
-- **File Structure (`JSON_F52E2B61-18A1-11d1-B105-00805F49916B3.xml`)**:
+- **File Structure (`JSON_F52E2B61-18A1-11d1-B105-00805F49916B3.json`)**:
   ```json
   {
     "People": [
@@ -242,6 +276,25 @@ Enterprise web services, microservices, and modern database exports frequently d
     ]
   }
   ```
+
+> [!WARNING]
+> **Real-World Error Audit: JSON Trapped in an `.xml` File Extension**
+> In the source materials, the file was originally named `JSON_F52E2B61-18A1-11d1-B105-00805F49916B3.xml`.
+> 1. **Why "From XML" Fails**: If you attempt to import it via **Data > From XML**, the XML parser chokes on `{` at line 1, column 1 because curly braces are illegal in XML syntax!
+> 2. **Why "From JSON" Fails**: The Windows File Explorer file picker filters specifically for `*.json`, hiding the file from view.
+> 3. **The Fix**: 
+>    - **Option A (GUI)**: Rename the file extension from `.xml` to `.json` (`JSON_F52E2B61-18A1-11d1-B105-00805F49916B3.json`). It will immediately appear in **Data > From JSON**!
+>    - **Option B (Power Query M Code)**: Force Power Query to interpret the file as JSON regardless of its extension:
+>      ```powerquery
+>      let
+>          Source = Json.Document(File.Contents("D:\courses\Data Analysis 26-27\7-Introducation to Data Fields (Excel)\09_Source_Materials\Module 7\2-Importing Data\JSON_F52E2B61-18A1-11d1-B105-00805F49916B3.json")),
+>          PeopleList = Source[People],
+>          TableFromList = Table.FromList(PeopleList, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+>          ExpandedColumn = Table.ExpandRecordColumn(TableFromList, "Column1", {"Id", "FirstName", "LastName", "EmailAddress", "PhoneNumber"})
+>      in
+>          ExpandedColumn
+>      ```
+
 - **Power Query Record Expansion Workflow**:
   1. In Power Query, JSON loads as a `Record`.
   2. Click on the yellow hyperlinked `List` adjacent to `"People"`.
@@ -249,7 +302,7 @@ Enterprise web services, microservices, and modern database exports frequently d
   4. Click the **Expand Column** icon (`[>]<[<]`) in the upper-right corner of the column header.
   5. Select the target keys (`Id`, `FirstName`, `LastName`, `EmailAddress`, `PhoneNumber`).
   6. Uncheck *"Use original column name as prefix"*.
-  7. Instantly converts deeply nested JSON arrays into a pristine 20,000-row tabular dataset!
+  7. Instantly converts deeply nested JSON arrays into a pristine 19,972-row tabular dataset!
 
 ---
 

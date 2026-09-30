@@ -26,19 +26,26 @@ def extract_power_query_m(workbook_path):
     m_queries = {}
     try:
         with zipfile.ZipFile(workbook_path, 'r') as z:
-            if 'customXml/item1.xml' in z.namelist():
-                raw = z.read('customXml/item1.xml')
-                root = ET.fromstring(raw.decode('utf-16', errors='ignore'))
-                bdata = base64.b64decode(root.text.strip())
-                offset = 4
-                pkg_len = struct.unpack('<I', bdata[offset:offset+4])[0]
-                pkg_bytes = bdata[offset+4 : offset+4+pkg_len]
-                with zipfile.ZipFile(io.BytesIO(pkg_bytes)) as pz:
-                    if 'Formulas/Section1.m' in pz.namelist():
-                        m_content = pz.read('Formulas/Section1.m').decode('utf-8')
-                        queries = re.findall(r'shared\s+#"([^"]+)"\s*=\s*(let[\s\S]*?in\s+[^;]+);', m_content)
-                        for qname, qcode in queries:
-                            m_queries[qname] = qcode.strip()
+            for item in z.namelist():
+                if item.startswith('customXml/item') and not item.startswith('customXml/itemProps') and 'rels' not in item:
+                    try:
+                        raw = z.read(item)
+                        root = ET.fromstring(raw.decode('utf-16', errors='ignore'))
+                        if 'DataMashup' in root.tag and root.text:
+                            bdata = base64.b64decode(root.text.strip())
+                            offset = 4
+                            pkg_len = struct.unpack('<I', bdata[offset:offset+4])[0]
+                            pkg_bytes = bdata[offset+4 : offset+4+pkg_len]
+                            with zipfile.ZipFile(io.BytesIO(pkg_bytes)) as pz:
+                                if 'Formulas/Section1.m' in pz.namelist():
+                                    m_content = pz.read('Formulas/Section1.m').decode('utf-8')
+                                    queries = re.findall(r'shared\s+(?:#"([^"]+)"|([A-Za-z0-9_]+))\s*=\s*(let[\s\S]*?in\s+[^;]+);', m_content)
+                                    for q1, q2, qcode in queries:
+                                        qname = q1 if q1 else q2
+                                        m_queries[qname] = qcode.strip()
+                            break
+                    except Exception:
+                        continue
     except Exception as e:
         print(f"[WARN] Error extracting Power Query M: {e}")
     return m_queries

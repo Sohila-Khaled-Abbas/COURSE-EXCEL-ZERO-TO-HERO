@@ -4,8 +4,8 @@ dataset_name: Module 7 Data Cleaning & Ingestion Laboratory
 source_type: course-workbook
 source_ecosystem: Excel Zero to Hero Curriculum
 primary_file: 11_Demos_and_Workbooks/07_Data_Cleaning/Module_7_Demo.xlsx
-total_sheets: 2
-total_records: 36292
+total_sheets: 3
+total_records: 46286
 total_columns: 33
 status: verified
 created: 2026-09-30
@@ -28,7 +28,7 @@ tags:
 # 📦 Module 7 Dataset Documentation: Data Cleaning & Enterprise Ingestion
 
 > [!abstract] Dataset & Workbook Overview
-> The **Module 7 Demo Workbook** (`Module_7_Demo.xlsx`) serves as the official practice and operational laboratory for **Module 7: Importing Data and Data Cleaning**. It bridges multi-source ingestion channels with real-world data transformation workflows. Housing **41,275 combined operational records** across two production tables—**`Hotel_Reservations`** (36,275 rows) and **`PWC Source Data`** (5,000 rows)—it operationalizes the **ETL (Extract, Transform, Load)** lifecycle directly inside Microsoft Excel and Power Query.
+> The **Module 7 Demo Workbook** (`Module_7_Demo.xlsx`) serves as the official practice and operational laboratory for **Module 7: Importing Data and Data Cleaning**. It bridges multi-source ingestion channels with real-world data transformation workflows. Housing **51,269 combined operational records** across three production tables—**`Hotel_Reservations`** (36,275 rows), **`Sheet1` / PwC Call Center** (5,000 rows), and **`Sample_ Superstore`** (9,994 rows)—it operationalizes the **ETL (Extract, Transform, Load)** lifecycle and the **Modern Excel Analytics Stack (Power Query $\to$ Power Pivot $\to$ Pivot Tables)** directly inside Microsoft Excel.
 
 ---
 
@@ -37,7 +37,8 @@ tags:
 | Tab Name | Tab Classification | Primary Object | Source Origin & Ingestion Channel | Key Educational Purpose & Transformation Scope |
 | :--- | :--- | :---: | :--- | :--- |
 | **`Hotel Reservations`** | Ingested Dataset ($36,276 \times 19$) | `Hotel_Reservations` (Table) | `Hotel Reservations.csv` via Power Query `Csv.Document` (Channel 3: CSV File) | Hospitality booking operations spanning 2017–2018. Demonstrates delimiter parsing, automated header promotion, numeric data typing (`Int64.Type`, `avg_price_per_room` currency), and outlier boundary analysis. |
-| **`PWC Source Data`** | Ingested Dataset ($5,001 \times 14$) | `ExternalData_2` (Table) | `PWC Dataset.xlsx` (`Source Data ` sheet) via Power Query `Excel.Workbook` (Channel 2: Excel File) | Call center operational ticketing log (5,000 customer inquiries across 8 agents). Primary ground for handling 946 operational nulls (`Speed of answer in seconds`), time serial casting, and detecting 4 blank ghost columns (`Column11`–`Column14`). |
+| **`Sheet1`** | Ingested Dataset ($5,001 \times 10$) | `Sheet1` (Table) | `01 Call-Center-Dataset.xlsx` (`Sheet1`) via Power Query `Excel.Workbook` (Channel 2: Excel File) | Authentic PwC Switzerland call center operational log (5,000 customer inquiries across 8 agents). Primary ground for handling 946 operational nulls (`Speed of answer in seconds`), time serial casting, and canonical 10-column schema ingestion. |
+| **`Sample_ Superstore`** | Ingested Dataset ($9,995 \times 19$) | `Sample_Superstore` (Table) | `Sample_ Superstore.csv` via Power Query `Csv.Document` (Channel 3: CSV File, UTF-8 Encoding 65001) | Retail e-commerce transactions across Furniture, Office Supplies, and Technology. Demonstrates currency parsing, negative profit margins, hierarchical categories, and regional dimensional cross-filtering. |
 
 ---
 
@@ -146,6 +147,39 @@ flowchart TD
 41  L -: Load Data      -->> (Done)
 ```
 
+### 🏗️ Modern Excel Analytics Ecosystem Architecture
+
+```mermaid
+flowchart TD
+    subgraph WB ["Microsoft Excel Workbook Ecosystem"]
+        direction TB
+        PQ["Power Query\n-->> Cleaning, Transformation & Modelling"]
+        PP["Power Pivot\n-->> Data Model & Relationships (Star Schema)"]
+        PT["Pivot Tables\n-->> Summary, Aggregations & Executive KPIs"]
+        
+        PQ ==>|"Clean Tabular Model / Load"| PP
+        PP ==>|"Relationships & DAX Measures"| PT
+    end
+
+    style WB fill:#fafafa,stroke:#37474f,stroke-width:2px
+    style PQ fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style PP fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    style PT fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+```
+
+```text
+Excel Workbook
+Pivot Tables    -->> Summary
+Power Query     -->> Cleaning and transformation and modelling
+Power Pivot     -->> Data Model -- Relationships
+```
+
+| Layer | Core Functional Role | Technical Mechanism | Implementation in Module 7 & Course Demos |
+| :--- | :--- | :--- | :--- |
+| **Power Query** | **Cleaning, transformation and modelling** | Automated M-code pipeline (`Csv.Document`, `Excel.Workbook`, `Table.TransformColumnTypes`, `Table.RemoveColumns`) | Ingests raw external files, casts data types, purges ghost columns, and sanitizes missing values. |
+| **Power Pivot** | **Data Model -- Relationships** | VertiPaq columnar in-memory database engine, 1-to-many relationships, DAX measures | Creates relational star schema between operational tables and dimension tables without bloated `VLOOKUP` / `XLOOKUP` helper columns. |
+| **Pivot Tables** | **Summary** | Dynamic aggregations, multi-level grouping, interactive slicers, and timelines | Summarizes operational KPIs (e.g. Call Center 81.08% answer rate, Hotel cancellation distributions). |
+
 ---
 
 ## 💻 Live Power Query M Script Specifications
@@ -188,39 +222,39 @@ in
     #"Changed Type";
 ```
 
-### 2. PWC Call Center Extraction & Ghost Column Audit
+### 2. PWC Call Center Extraction (Original Forage Dataset: `01 Call-Center-Dataset.xlsx`)
 ```powerquery
 shared #"Source Data" = let
-    // Step 1: Extract worksheet object from external Excel file
+    // Step 1: Ingest authentic Forage Excel workbook
     Source = Excel.Workbook(
-        File.Contents("D:\courses\Data Analysis 26-27\7-Introducation to Data Fields (Excel)\09_Source_Materials\Module 9\13\PWC Dataset.xlsx"),
-        null,
+        File.Contents("D:\courses\Data Analysis 26-27\01 Call-Center-Dataset.xlsx"), 
+        null, 
         true
     ),
-    // Step 2: Navigate to specific sheet Data table
-    #"Source Data _Sheet" = Source{[Item="Source Data ",Kind="Sheet"]}[Data],
-    // Step 3: Promote first row to column headers
-    #"Promoted Headers" = Table.PromoteHeaders(#"Source Data _Sheet", [PromoteAllScalars=true]),
-    // Step 4: Transform column types (Notice the 4 uncleaned trailing ghost columns)
+    // Step 2: Navigate to Sheet1 data payload
+    Sheet1_Sheet = Source{[Item="Sheet1", Kind="Sheet"]}[Data],
+    // Step 3: Promote first row of headers
+    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+    // Step 4: Enforce strict typed schema across all 10 canonical operational fields
     #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{
-        {"Call Id", type text},
-        {"Agent", type text},
-        {"Date", type date},
-        {"Time", type datetime},
-        {"Topic", type text},
-        {"Answered (Y/N)", type text},
-        {"Resolved", type text},
-        {"Speed of answer in seconds", Int64.Type},
-        {"AvgTalkDuration", type datetime},
-        {"Satisfaction rating", Int64.Type},
-        {"Column11", type any},     // GHOST COLUMN TO BE REMOVED
-        {"Column12", type any},     // GHOST COLUMN TO BE REMOVED
-        {"Column13", type text},    // GHOST COLUMN TO BE REMOVED
-        {"Column14", type text}     // GHOST COLUMN TO BE REMOVED
+        {"Call Id", type text}, 
+        {"Agent", type text}, 
+        {"Date", type date}, 
+        {"Time", type datetime}, 
+        {"Topic", type text}, 
+        {"Answered (Y/N)", type text}, 
+        {"Resolved", type text}, 
+        {"Speed of answer in seconds", Int64.Type}, 
+        {"AvgTalkDuration", type datetime}, 
+        {"Satisfaction rating", Int64.Type}
     })
 in
     #"Changed Type";
 ```
+
+> [!NOTE]
+> **Comparison with Legacy Course Extract:**
+> Notice that ingesting the authentic Forage source file (`01 Call-Center-Dataset.xlsx`) maps directly to `Sheet1` with **exactly 10 clean operational columns**, whereas older uncleaned workbooks (like `PWC Dataset.xlsx`) retained 4 empty trailing formatting columns (`Column11`–`Column14`). Power Query allows analysts to ingest either source seamlessly, dropping phantom columns when present or ingesting the clean 10-column canonical schema directly.
 
 ---
 

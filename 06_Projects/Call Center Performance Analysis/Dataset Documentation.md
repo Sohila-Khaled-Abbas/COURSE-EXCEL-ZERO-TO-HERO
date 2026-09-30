@@ -30,16 +30,56 @@ tags:
 
 ---
 
-## 🌐 Official Sources, Provenance & Open Mirrors
+## 🌐 Official Sources, Provenance & The PwC Switzerland Simulation Suite
 
+The **Call Centre Trends** dataset analyzed in this capstone represents **Task 1** of the prestigious **PwC Switzerland Power BI Virtual Case Experience on Forage**. In corporate analytics, this simulation is renowned for preparing analysts to handle messy, multi-source operational data across three enterprise domains:
+
+```mermaid
+flowchart TD
+    PWC["PwC Switzerland Power BI Virtual Case Experience\n(Forage Enterprise Simulation)"]
+    
+    T1["Task 1: Call Centre Trends (This Project)\n(01 Call-Center-Dataset.xlsx)\n• 5,000 Inbound Inquiries | 8 Agents | Q1 2021\n• Ingested in Module_7_Demo.xlsx & Capstone"]
+    T2["Task 2: Customer Retention\n(02 Churn-Dataset.xlsx)\n• 7,043 Telco Customer Accounts\n• 23 Churn & Service Elasticity Attributes"]
+    T3["Task 3: Diversity & Inclusion\n(03 Diversity-Inclusion-Dataset.xlsx)\n• 500 Corporate Employee Records\n• Executive Hierarchy & Promotion Parity"]
+    
+    PWC --> T1
+    PWC --> T2
+    PWC --> T3
+    
+    style PWC fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    style T1 fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style T2 fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    style T3 fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+```
+
+### 📦 The Complete Tripartite Simulation Suite
+
+| Dataset # | Official Filename | PwC Simulation Task | Business Focus | Scope | Direct Official CDN Download Link |
+| :---: | :--- | :--- | :--- | :--- | :--- |
+| **01** | `01 Call-Center-Dataset.xlsx` | **Call Centre Trends (Active)** | Customer Experience Operations | $5,000$ calls, $8$ agents, Q1 2021 | [Download 01 Call-Center-Dataset.xlsx](https://cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/01%20Call-Center-Dataset.xlsx) |
+| **02** | `02 Churn-Dataset.xlsx` | **Customer Retention** | Subscription & Customer Success | $7,043$ telco customers, 23 attributes | [Download 02 Churn-Dataset.xlsx](https://cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/02%20Churn-Dataset.xlsx) |
+| **03** | `03 Diversity-Inclusion-Dataset.xlsx` | **Diversity & Inclusion** | Human Capital Management (HR) | $500$ employees, FY20/FY21 promotion cohorts | [Download 03 Diversity-Inclusion-Dataset.xlsx](https://cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/03%20Diversity-Inclusion-Dataset.xlsx) |
+
+> [!IMPORTANT]
+> **Authentic Forage CDN Links & Browser Access:**
+> The download URLs above point directly to the official Forage Content Delivery Network (`cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/`). These are the authentic source files from the PwC Switzerland simulation, not third-party recreations or modified Kaggle re-uploads. Note that while automated web crawlers may encounter Cloudflare bot-protection when requesting these CDN links programmatically, human users can download and open them directly in any web browser.
+
+### 🏛️ Source Repositories & Reference Hubs
 | Source Entity | Platform / Repository | Description | Direct Access Link |
 | :--- | :--- | :--- | :--- |
-| **Official Forage CDN** | Direct Binary Download | Raw Production Excel Dataset (`01 Call-Center-Dataset.xlsx`) | [Direct CDN Download](https://cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/01%20Call-Center-Dataset.xlsx) |
+| **Complete Simulation Suite** | GitHub Repository | `Boomslang-Maverick/PWC-Forage-Power-BI-Virtual-Experience` (Contains all 3 original `.xlsx` files + task PDFs/briefs) | [GitHub: Boomslang-Maverick Suite](https://github.com/Boomslang-Maverick/PWC-Forage-Power-BI-Virtual-Experience) |
+| **Project Reference Hub** | Canonical Portfolio Documentation | `pwc_digital.transformation` by Tri Wulunggani | [triwgani.github.io/pwc_digital.transformation](https://triwgani.github.io/pwc_digital.transformation/) |
+| **Task 1 Benchmark Mirror** | Public Repository | `globalsmile/Call-Center-Analysis` (`01 Call-Center-Dataset.xlsx`, 248 KB) | [GitHub: globalsmile/Call-Center-Analysis](https://github.com/globalsmile/Call-Center-Analysis/blob/main/01%20Call-Center-Dataset.xlsx) |
 | **Forage Virtual Simulation** | Educational Origin | PwC Switzerland Power BI & Digital Transformation Case Experience | [Forage: PwC Switzerland Experience](https://www.theforage.com/simulations/pwc-ch/power-bi-cqxg) |
-| **Project Reference Hub** | Canonical Documentation | `pwc_digital.transformation` by Triwgani | [triwgani.github.io/pwc_digital.transformation](https://triwgani.github.io/pwc_digital.transformation/) |
-| **GitHub Benchmark Mirror** | Public Repository | `globalsmile/Call-Center-Analysis` (`01 Call-Center-Dataset.xlsx`, 248 KB) | [GitHub: globalsmile/Call-Center-Analysis](https://github.com/globalsmile/Call-Center-Analysis/blob/main/01%20Call-Center-Dataset.xlsx) |
 | **Course Master Asset** | Local Storage | Raw Course Workbook (`PWC Dataset.xlsx`, Sheet: `Source Data `) | `09_Source_Materials/Module 9/13/PWC Dataset.xlsx` |
-| **Live Student Laboratory** | Hands-on Demo Workbook | Ingested via Power Query into Table `ExternalData_2` | `11_Demos_and_Workbooks/07_Data_Cleaning/Module_7_Demo.xlsx` |
+| **Live Student Laboratory** | Hands-on Demo Workbook | Ingested via Power Query into Table `ExternalData_2` | [`Module_7_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/07_Data_Cleaning/Module_7_Demo.xlsx) |
+
+> [!TIP]
+> **Portfolio Strategy Recommendation:**
+> If you are building a professional data analyst portfolio, completing all three tasks from this PwC simulation represents a premier end-to-end showcase:
+> 1. **Operations & Service Analytics**: Inbound ticketing, speed of answer, and agent CSAT scorecards (*Task 1*).
+> 2. **Revenue & Churn Retention Analytics**: Customer lifetime value, contract risk elasticity, and preventive retention modeling (*Task 2*).
+> 3. **Organizational & People Analytics**: Gender promotion parity, executive turnover, and DEI performance KPIs (*Task 3*).
 
 ---
 

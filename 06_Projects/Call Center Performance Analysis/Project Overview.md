@@ -20,12 +20,28 @@ updated: 2026-09-28
 > - **Primary Deliverable**: Interactive 3-tier Executive Excel Dashboard featuring KPI cards, agent performance scorecards, hourly volume trends, and a custom VBA filter reset macro.
 
 ```mermaid
-flowchart LR
-    A[5,000 Raw Call Records] --> B[Data Quality Audit & Cleaning]
-    B --> C[Excel Tables & Data Modeling]
-    C --> D[DAX Measures & Pivot Summaries]
-    D --> E[Interactive Executive Dashboard]
-    E --> F[Strategic Operational Recommendations]
+flowchart TD
+    subgraph WB ["Microsoft Excel Modern Analytics Architecture"]
+        direction TB
+        PQ["Power Query\n-->> Cleaning, Transformation & Modelling\n(946 Nulls Handled, Types Enforced)"]
+        PP["Power Pivot\n-->> Data Model & Relationships\n(Agent Dimensions, Date Tables, DAX Measures)"]
+        PT["Pivot Tables & Dashboards\n-->> Summary & Operational KPIs\n(Scorecards, CSAT Trends, Interactive Slicers)"]
+        
+        PQ ==>|"Clean Ingestion"| PP
+        PP ==>|"Measures & Relationships"| PT
+    end
+
+    style WB fill:#fafafa,stroke:#37474f,stroke-width:2px
+    style PQ fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style PP fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    style PT fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+```
+
+```text
+Excel Workbook
+Pivot Tables    -->> Summary
+Power Query     -->> Cleaning and transformation and modelling
+Power Pivot     -->> Data Model -- Relationships
 ```
 
 ## Quick Links to Project Modules
