@@ -21,6 +21,9 @@ tags:
   - pwc-ch-forage
   - customer-retention
   - diversity-inclusion
+  - adventureworks
+  - sql-server
+  - mssql
   - data-quality
   - reference
 ---
@@ -106,6 +109,199 @@ flowchart TD
 - **Local Course Asset**: `D:\courses\Data Analysis 26-27\Hotel Reservations.csv`.
 
 ---
+
+### 3. Microsoft SQL Server AdventureWorks2022 Enterprise Benchmark & Ingestion Lineage
+
+The **`People`** (19,972 rows) and **`Product`** (504 rows) tables in `Module_7_Demo.xlsx` are direct relational extracts derived from Microsoft's canonical enterprise OLTP benchmark database: **AdventureWorks2022**.
+
+#### 🏛️ Background & Provenance of AdventureWorks
+AdventureWorks is Microsoft's premier sample database simulating an international bicycle manufacturing corporation (*Adventure Works Cycles*). It demonstrates normalized enterprise relational architecture (3NF) encompassing Human Resources, Purchasing, Sales, and Production schemas.
+
+#### 💾 Local Database Backup & Restoration Specification
+In our local course environment, the complete database archive is stored as a compressed SQL Server backup file:
+- **Local Backup Path**: `D:\SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\AdventureWorks2022.bak`
+- **Target SQL Server Instance**: `localhost` / `.` / `Sohila` (Microsoft SQL Server 2022 Developer Edition v16.0.1200.5)
+- **Instance Default Data Directory**: `D:\SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\`
+
+```mermaid
+flowchart LR
+    BAK[("AdventureWorks2022.bak\n(D:\\SQL Server\\...\\Backup\\)")]
+    
+    subgraph RESTORE ["SQL Server 2022 Engine (Localhost / .)"]
+        REST_CMD["RESTORE DATABASE AdventureWorks2022\nWITH MOVE ... REPLACE"]
+    end
+    
+    subgraph DATA_FILES ["MSSQL DATA Directory"]
+        MDF[("AdventureWorks2022.mdf\n(Primary Data File: 215 MB)")]
+        LDF[("AdventureWorks2022_log.ldf\n(Transaction Log: 75 MB)")]
+    end
+    
+    BAK --> REST_CMD
+    REST_CMD --> MDF
+    REST_CMD --> LDF
+
+    style BAK fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    style RESTORE fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style DATA_FILES fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+```
+
+##### Step 1: Inspect Logical File Names via T-SQL
+Executing `RESTORE FILELISTONLY` reveals the internal logical data and transaction log file names:
+```sql
+RESTORE FILELISTONLY 
+FROM DISK = N'D:\SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\AdventureWorks2022.bak';
+GO
+```
+
+**Verified Logical File Metadata**:
+| LogicalName | PhysicalName in Backup | Type | FileGroupName | File ID | Size in Bytes |
+| :--- | :--- | :---: | :--- | :---: | :--- |
+| `AdventureWorks2022` | `C:\Program Files\...\AdventureWorks2022.mdf` | `D` (Data) | `PRIMARY` | 1 | 225,443,840 bytes (~215 MB) |
+| `AdventureWorks2022_log` | `C:\Program Files\...\AdventureWorks2022_log.ldf` | `L` (Log) | `NULL` | 2 | 78,643,200 bytes (~75 MB) |
+
+##### Step 2: Production T-SQL Restoration Script
+Execute the following script in SQL Server Management Studio (SSMS) or Azure Data Studio to restore the database to your local instance:
+```sql
+USE master;
+GO
+
+-- 1. Disconnect any active connections to prevent restore locks
+IF DB_ID('AdventureWorks2022') IS NOT NULL
+BEGIN
+    ALTER DATABASE AdventureWorks2022 SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+END
+GO
+
+-- 2. Restore database with file relocation to local MSSQL16 DATA directory
+RESTORE DATABASE AdventureWorks2022
+FROM DISK = N'D:\SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\AdventureWorks2022.bak'
+WITH 
+    MOVE N'AdventureWorks2022' TO N'D:\SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\AdventureWorks2022.mdf',
+    MOVE N'AdventureWorks2022_log' TO N'D:\SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\AdventureWorks2022_log.ldf',
+    REPLACE,
+    STATS = 10;
+GO
+
+-- 3. Return database to standard multi-user mode
+ALTER DATABASE AdventureWorks2022 SET MULTI_USER;
+GO
+```
+
+##### Step 3: Instant PowerShell / Terminal Execution via `sqlcmd`
+For fast headless execution:
+```powershell
+sqlcmd -S . -E -Q "RESTORE DATABASE AdventureWorks2022 FROM DISK = N'D:\SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\AdventureWorks2022.bak' WITH MOVE N'AdventureWorks2022' TO N'D:\SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\AdventureWorks2022.mdf', MOVE N'AdventureWorks2022_log' TO N'D:\SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\AdventureWorks2022_log.ldf', REPLACE, STATS = 10;"
+```
+
+##### Step 4: Graphical Restoration via SSMS
+1. Open **SQL Server Management Studio (SSMS)** and connect to `.` (or `localhost`).
+2. In **Object Explorer**, right-click **Databases** $\to$ select **Restore Database...**.
+3. Under **Source**, select **Device** $\to$ click the ellipsis `...` $\to$ click **Add**.
+4. Browse to `D:\SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\AdventureWorks2022.bak` and click **OK**.
+5. In the left navigation pane, click **Files** $\to$ verify or check **Relocate all files to folder** (ensuring paths target `D:\SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\`).
+6. In the left pane, click **Options** $\to$ check **Overwrite the existing database (WITH REPLACE)**.
+7. Click **OK**. Upon successful completion, SSMS will display: *"Database 'AdventureWorks2022' restored successfully."*
+
+---
+
+#### 🔗 The Course Extraction Pipeline: How `Quries.sql` Generated Course Files
+
+The course script `Quries.sql` (`09_Source_Materials/Module 7/2-Importing Data/Quries.sql`) bridges SQL Server tables directly into the XML, JSON, and Excel files analyzed in Module 7:
+
+```mermaid
+flowchart TD
+    AW[("AdventureWorks2022\n(SQL Server 2022)")]
+    
+    subgraph EXPORT ["T-SQL Extraction via Quries.sql"]
+        Q1["Query 1: FOR XML PATH('Product')\nFROM Production.Product"]
+        Q2["Query 2: FOR JSON PATH, ROOT('People')\nFROM Person.Person JOIN Email + Phone"]
+        Q3["Query 3: Native Pushdown Query\nFROM Person.Person JOIN EmailAddress\nWHERE EmailAddress LIKE 'a%'"]
+    end
+    
+    subgraph ARTIFACTS ["Generated Course Artifacts"]
+        F1["XML_F52E2B61-18A1-11d1-B105-00805F49916B1.xml\n(504 Products)"]
+        F2["JSON_F52E2B61-18A1-11d1-B105-00805F49916B3.json\n(19,972 Contact Records)"]
+        F3["Live Power Query Table\n(1,140 Rows Filtered on Server)"]
+    end
+    
+    subgraph EXCEL ["Module_7_Demo.xlsx"]
+        T1["Worksheet: Product\n(504 rows, 4 columns)"]
+        T2["Worksheet: People\n(19,972 rows, 5 columns)"]
+        T3["Pushdown SQL Feed\n(Direct Server Ingestion)"]
+    end
+    
+    AW --> Q1 --> F1 --> T1
+    AW --> Q2 --> F2 --> T2
+    AW --> Q3 --> F3 --> T3
+
+    style AW fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style EXPORT fill:#fff8e1,stroke:#f57f17,stroke-width:2px
+    style ARTIFACTS fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    style EXCEL fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+```
+
+1. **`Product` Table Lineage (XML Extraction)**:
+   - **T-SQL Source Query**:
+     ```sql
+     SELECT ProductID, Name, ProductNumber, ListPrice
+     FROM Production.Product
+     FOR XML PATH('Product'), ROOT('Products');
+     ```
+   - **Generated Artifact**: `XML_F52E2B61-18A1-11d1-B105-00805F49916B1.xml` ($504$ items).
+   - **Power Query Ingestion**: Parsed via `Xml.Tables(File.Contents(...))`, navigated to nested `Product` nodes, typed strictly into `ProductID` (`Int64.Type`), `Name` (`type text`), `ProductNumber` (`type text`), and `ListPrice` (`type number`).
+   - **Lineage Verification**: Querying `SELECT COUNT(*) FROM Production.Product;` in `AdventureWorks2022` returns **504 rows**—a 100% exact match.
+
+2. **`People` Table Lineage (JSON Extraction)**:
+   - **T-SQL Source Query**:
+     ```sql
+     SELECT 
+         p.BusinessEntityID AS Id,
+         p.FirstName,
+         p.LastName,
+         e.EmailAddress,
+         ph.PhoneNumber
+     FROM Person.Person p
+     LEFT JOIN Person.EmailAddress e ON p.BusinessEntityID = e.BusinessEntityID
+     LEFT JOIN Person.PersonPhone ph ON p.BusinessEntityID = ph.BusinessEntityID
+     FOR JSON PATH, ROOT('People');
+     ```
+   - **Generated Artifact**: `JSON_F52E2B61-18A1-11d1-B105-00805F49916B3.json` ($19,972$ records).
+   - **Power Query Ingestion**: Parsed via `Json.Document(File.Contents(...))`, converted `People` array into table lines, expanded 5 record keys: `Id`, `FirstName`, `LastName`, `EmailAddress`, `PhoneNumber`.
+   - **Lineage Verification**: Querying `SELECT COUNT(*) FROM Person.Person;` in `AdventureWorks2022` returns **19,972 rows**—a 100% exact match.
+
+3. **Direct Database Pushdown Connection (Channel 7)**:
+   - Rather than extracting intermediate flat files, analysts connect Excel directly to SQL Server:
+     - **Path**: **Data > Get Data > From Database > From SQL Server Database**.
+     - **Server**: `.` or `localhost`
+     - **Database**: `AdventureWorks2022`
+     - **SQL Statement**:
+       ```sql
+       SELECT 
+           p.BusinessEntityID AS Id,
+           p.FirstName,
+           p.LastName,
+           e.EmailAddress
+       FROM Person.Person p
+       JOIN Person.EmailAddress e ON p.BusinessEntityID = e.BusinessEntityID
+       WHERE e.EmailAddress LIKE 'a%';
+       ```
+   - **Pushdown Benefit**: The SQL Server query optimizer executes the join and filter in milliseconds on indexed columns, returning only the 1,140 matching records to Excel, eliminating network overhead and client-side processing bottlenecks.
+
+---
+
+#### 🧠 Connecting Excel to SQL & Relational Databases
+
+Mastering the connection between Excel and SQL Server bridges the gap between spreadsheet modeling and enterprise data engineering:
+
+| Analytical Operation | Excel Function / Feature | SQL Server Equivalent | Analytical Concept |
+| :--- | :--- | :--- | :--- |
+| **Lookup / Merge** | `=XLOOKUP(A2, Products!A:A, Products!B:B)` | `SELECT ... FROM Orders o LEFT JOIN Products p ON o.ProductID = p.ProductID` | Relational join connecting foreign key to primary key |
+| **Row Filtering** | AutoFilter (`Ctrl + Shift + L`) or `=FILTER()` | `WHERE o.OrderDate >= '2024-01-01' AND o.Status = 'Shipped'` | Predicate evaluation pruning non-matching rows |
+| **Conditional Aggregation**| `=SUMIFS(Revenue, Region, "North")` | `SELECT SUM(Revenue) FROM Sales WHERE Region = 'North'` | Aggregation with predicate filtering |
+| **Cross-Tabulation** | PivotTable (Rows: Category, Values: Sum of Sales) | `SELECT Category, SUM(Sales) FROM Orders GROUP BY Category` | Dimensional grouping and scalar reduction |
+| **Conditional Logic** | `=IF(A2>1000, "High", "Standard")` | `CASE WHEN Amount > 1000 THEN 'High' ELSE 'Standard' END` | Dynamic column categorization |
+| **String Cleaning** | `=TRIM(CLEAN(A2))` | `LTRIM(RTRIM(A2))` | Whitespace sanitization |
+| **Data Modeling** | Power Pivot Relationships (Star Schema) | Foreign Key Constraints (`REFERENCES DimTable(PK)`) | Eliminates helper lookup columns; powers multi-table DAX |
 
 ## ⚙️ The Live ETL Lifecycle Architecture
 

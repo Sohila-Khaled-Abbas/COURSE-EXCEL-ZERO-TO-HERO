@@ -331,7 +331,7 @@ Enterprise reporting relies on relational Database Management Systems (RDBMS) su
 flowchart TD
     subgraph ClientServer["Database Ingestion Architecture"]
         Excel["Microsoft Excel / Power Query"]
-        SQLServer[("Enterprise SQL Server\n(AdventureWorks / Production)")]
+        SQLServer[("Enterprise SQL Server 2022\n(AdventureWorks2022 / Localhost)")]
     end
 
     subgraph DirectOption["Approach A: Database Direct (GUI)"]
@@ -359,15 +359,15 @@ flowchart TD
 
 ### Approach A: Database (Standard Navigator Navigation)
 - **Path**: **Data > Get Data > From Database > From SQL Server Database**.
-- **Inputs**: Server Name (e.g., `localhost` or `sql-prod.corp.local`), Database Name (e.g., `AdventureWorks2022`).
-- **Data Connectivity Mode**: **Import** (caches data into Excel) vs **DirectQuery** (in Power BI).
+- **Inputs**: Server Name (`localhost` or `.`), Database Name (`AdventureWorks2022`).
+- **Data Connectivity Mode**: **Import** (caches data into Excel memory) vs **DirectQuery** (in Power BI).
 - **Execution**: The user selects pre-existing tables or views from the Navigator tree view.
 
 ---
 
 ### Approach B: Special Query (Native SQL Query Pushdown)
-In enterprise environments, tables contain millions of rows. Pulling an entire table across the corporate VPN just to filter for a single region is an anti-pattern.
-Instead, analysts utilize **Special Queries** under **Advanced Options > SQL statement**.
+In enterprise environments, tables contain millions of rows. Pulling an entire table across the corporate network just to filter for a single region is a performance anti-pattern.
+Instead, analysts utilize **Special Queries** under **Data > From SQL Server Database > Advanced Options > SQL statement**.
 
 #### Grounded Course Example from `Quries.sql`:
 ```sql
@@ -383,9 +383,155 @@ WHERE p.FirstName LIKE 'A%';
 ```
 
 #### Why "Special Query" is Superior for Analysts:
-1. **Query Pushdown / Query Folding**: The SQL Server hardware executes the `LEFT JOIN` and `WHERE` filter across high-speed NVMe storage and dedicated server RAM.
-2. **Minimal Network Overhead**: Instead of transferring 19,972 rows of `Person` and 19,972 rows of `EmailAddress` across the network, the database returns *only* the ~1,140 matching records starting with the letter `'A'`.
-3. **Column Projection**: Excludes unneeded binary images, password hashes, and GUIDs at the source level.
+1. **Query Pushdown / Query Folding**: The SQL Server engine executes the `LEFT JOIN` and `WHERE` filter across high-speed NVMe storage and dedicated server RAM.
+2. **Minimal Network Overhead**: Instead of transferring 19,972 rows of `Person` and 19,972 rows of `EmailAddress` across the network, the database returns *only* the ~1,140 matching records starting with `'A'`.
+3. **Column Projection**: Excludes unneeded binary images, password hashes, and row GUIDs at the database level.
+
+---
+
+### 🛠️ Hands-on Guide: Restoring `AdventureWorks2022.bak` in SQL Server
+
+To practice enterprise SQL ingestion locally, Microsoft provides the premier OLTP benchmark database: **`AdventureWorks2022`**.
+
+* **Backup File Location**: `D:\SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\AdventureWorks2022.bak`
+* **Target Instance**: `Microsoft SQL Server 2022 (Developer Edition)` running on `localhost` (Service: `MSSQLSERVER`)
+* **Default Data Directory**: `D:\SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\`
+
+#### Method 1: T-SQL Script (SSMS / Azure Data Studio / sqlcmd)
+Run the following script to inspect the logical file names and restore the database to your local data folder:
+
+```sql
+-- Step 1: Inspect backup metadata and logical file names
+RESTORE FILELISTONLY 
+FROM DISK = N'D:\SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\AdventureWorks2022.bak';
+GO
+
+-- Step 2: Restore database with MOVE to local instance DATA directory
+USE master;
+GO
+
+-- Release any active locks if database already exists
+IF DB_ID('AdventureWorks2022') IS NOT NULL
+BEGIN
+    ALTER DATABASE AdventureWorks2022 SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+END
+GO
+
+RESTORE DATABASE AdventureWorks2022
+FROM DISK = N'D:\SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\AdventureWorks2022.bak'
+WITH 
+    MOVE N'AdventureWorks2022' TO N'D:\SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\AdventureWorks2022.mdf',
+    MOVE N'AdventureWorks2022_log' TO N'D:\SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\AdventureWorks2022_log.ldf',
+    REPLACE,
+    STATS = 10;
+GO
+
+-- Set back to multi-user mode
+ALTER DATABASE AdventureWorks2022 SET MULTI_USER;
+GO
+
+-- Step 3: Verify restoration
+USE AdventureWorks2022;
+GO
+SELECT COUNT(*) AS [Total Persons] FROM Person.Person;        -- Returns 19,972
+SELECT COUNT(*) AS [Total Products] FROM Production.Product;    -- Returns 504
+GO
+```
+
+#### Method 2: Graphical User Interface (SSMS)
+1. Open **SQL Server Management Studio (SSMS)** and connect to Server Name: `.` or `localhost`.
+2. In Object Explorer, right-click **Databases** $\rightarrow$ select **Restore Database...**.
+3. Under **Source**, select the **Device** radio button $\rightarrow$ click the `...` button.
+4. In the dialog, verify Backup media is set to *File* $\rightarrow$ click **Add** $\rightarrow$ navigate to `D:\SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\AdventureWorks2022.bak` $\rightarrow$ click **OK**.
+5. In the left navigation pane:
+   - Click **Files**: Check the checkbox for **Relocate all files to folder** (or confirm files point to `D:\SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\`).
+   - Click **Options**: Check **Overwrite the existing database (WITH REPLACE)**.
+6. Click **OK**. A message will confirm: *"Database 'AdventureWorks2022' restored successfully."*
+
+#### Method 3: Instant PowerShell / Terminal Execution
+You can restore the database directly from your command line using `sqlcmd`:
+```powershell
+sqlcmd -S . -E -Q "RESTORE DATABASE AdventureWorks2022 FROM DISK = N'D:\SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\AdventureWorks2022.bak' WITH MOVE N'AdventureWorks2022' TO N'D:\SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\AdventureWorks2022.mdf', MOVE N'AdventureWorks2022_log' TO N'D:\SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\AdventureWorks2022_log.ldf', REPLACE, STATS = 10;"
+```
+
+---
+
+### 🧠 Bridging Excel to SQL & Relational Database Concepts
+
+Transitioning from spreadsheet thinking to relational database thinking is the defining leap in a data analyst's career. Here is how core Excel operations translate to enterprise SQL concepts:
+
+#### 1. Spreadsheets vs Relational Databases (RDBMS)
+
+| Architectural Dimension | Microsoft Excel Workbooks | Relational Databases (SQL Server / PostgreSQL) |
+| :--- | :--- | :--- |
+| **Data Storage Paradigm** | Flat 2D grid of rows and columns; cells can hold mixed formats and formulas. | Strictly typed, normalized tables governed by declarative schemas. |
+| **Data Normalization** | Often denormalized into wide flat files; redundant text repeated on every row. | Normalized (3NF) to eliminate update anomalies and duplication. |
+| **Referential Integrity** | None by default; accidental typos in IDs create broken lookup formulas. | Enforced Primary Keys (`PK`) and Foreign Keys (`FK`) that reject invalid entries. |
+| **Row Scalability** | Hard limit of 1,048,576 rows per worksheet. Calculation engine slows down past 200K rows. | Scales to hundreds of millions or billions of rows across distributed storage engines. |
+| **Concurrency & ACID** | Single active writer (or shared cloud editing prone to formula sync conflicts). | Full ACID compliance (Atomicity, Consistency, Isolation, Durability) supporting thousands of concurrent transactions. |
+
+#### 2. How `Quries.sql` Bridges SQL to XML, JSON, and Excel
+
+Notice how the script `Quries.sql` in our course materials demonstrates that SQL Server is the foundational source for multiple data formats:
+
+```mermaid
+flowchart TD
+    AW[("AdventureWorks2022\n(SQL Server 2022)")]
+    
+    Q1["Query 1: FOR XML PATH('Product')\n(Production.Product)"]
+    Q2["Query 2: FOR JSON PATH, ROOT('People')\n(Person.Person + Email + Phone)"]
+    Q3["Query 3: Native Special Query\n(Person LEFT JOIN EmailAddress)"]
+    
+    F1["XML_F52E2B61-18A1-11d1-B105-00805F49916B1.xml\n(504 Products -> Ingested into Module 7)"]
+    F2["JSON_F52E2B61-18A1-11d1-B105-00805F49916B3.json\n(19,972 People -> Ingested into Module 7)"]
+    F3["Excel Live Query Table\n(~1,140 Rows Filtered at Database Server)"]
+    
+    AW --> Q1 --> F1
+    AW --> Q2 --> F2
+    AW --> Q3 --> F3
+
+    style AW fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style F1 fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    style F2 fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    style F3 fill:#f3e5f5,stroke:#6a1b9a,stroke-width:2px
+```
+
+1. **`FOR XML PATH`**: Translates tabular relational rows into hierarchical XML nodes with elements and attributes.
+2. **`FOR JSON PATH`**: Formats rows into JSON arrays and objects, making database payloads ready for web APIs and microservices.
+3. **Pushdown SQL**: Ingests filtered relational rows directly into Excel without converting to intermediate files.
+
+#### 3. Excel Formulas vs SQL Equivalents
+
+| Analytical Operation | Excel Function / Feature | SQL Server Equivalent |
+| :--- | :--- | :--- |
+| **Lookup / Merge** | `=XLOOKUP(A2, Products!A:A, Products!B:B)` | `SELECT ... FROM Orders o LEFT JOIN Products p ON o.ProductID = p.ProductID` |
+| **Filtering** | AutoFilter (`Ctrl + Shift + L`) or `=FILTER()` | `WHERE o.OrderDate >= '2024-01-01' AND o.Status = 'Shipped'` |
+| **Aggregation** | `=SUMIFS(Revenue, Region, "North")` | `SELECT SUM(Revenue) FROM Sales WHERE Region = 'North'` |
+| **Cross-Tabulation** | PivotTable (Rows: Category, Values: Sum of Sales) | `SELECT Category, SUM(Sales) FROM Orders GROUP BY Category` |
+| **Conditional Categorization** | `=IF(A2>1000, "High", "Standard")` | `CASE WHEN Amount > 1000 THEN 'High' ELSE 'Standard' END` |
+| **String Cleaning** | `=TRIM(A2)` | `LTRIM(RTRIM(A2))` |
+| **Ranking** | `=RANK(C2, C$2:C$100)` | `RANK() OVER (ORDER BY Sales DESC)` |
+
+#### 4. Data Type Alignment Matrix
+
+Understanding how SQL Server data types translate to Power Query M types and Excel worksheet formatting prevents truncation and type mismatch errors:
+
+| SQL Server Data Type | Power Query M Data Type | Excel Worksheet Cell Display | Storage & Precision Considerations |
+| :--- | :--- | :--- | :--- |
+| `INT` / `SMALLINT` / `TINYINT` | `Int64.Type` | Number (0 decimals) | Whole integer values; no fractional decimal component. |
+| `BIGINT` | `Int64.Type` (or `type text` for large IDs) | Number or Text | Excel loses precision past 15 digits! High-cardinality IDs (e.g. credit cards, 64-bit snowflakes) must be cast to `type text`. |
+| `VARCHAR(n)` / `NVARCHAR(n)` | `type text` | General / Text | Text strings. `NVARCHAR` supports full international Unicode (UTF-16). |
+| `DECIMAL(p, s)` / `NUMERIC` | `type number` | Number with fixed decimals | Exact decimal arithmetic; preserves financial rounding precision. |
+| `MONEY` / `SMALLMONEY` | `Currency.Type` | Currency (`$#,##0.00`) | High-speed fixed-point currency representation ($4$ decimal places). |
+| `DATE` | `type date` | Date (`YYYY-MM-DD`) | Stored as whole serial integer in Excel; displays formatted date. |
+| `DATETIME` / `DATETIME2` | `type datetime` | Custom (`YYYY-MM-DD HH:MM:SS`) | Fractional serial number (integer = date, decimal = elapsed time). |
+| `BIT` | `type logical` | Boolean (`TRUE` / `FALSE`) | Binary flags (`0` = `FALSE`, `1` = `TRUE`). |
+
+#### 5. Star Schemas & The Power Pivot Connection
+When you build a data model in Excel's **Power Pivot**, you are applying relational database principles directly inside the workbook:
+- In relational databases, normalized tables are linked via **Foreign Key constraints**.
+- In Power Pivot, those same foreign keys define **1-to-Many Relationships** between Dimension Tables (e.g. `Dim_Customer`, `Dim_Product`, `Dim_Date`) and Fact Tables (e.g. `Fact_Sales`, `Fact_Calls`).
+- This eliminates the need for thousands of `=VLOOKUP()` formulas that bloat file size and drag recalculation speeds to a crawl.
 
 ---
 
