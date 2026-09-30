@@ -65,10 +65,10 @@ updated: 2026-09-28
 - [x] 30. Enterprise Business Systems (ERP, CRM, HRIS) ✅ 2026-10-01
 
 ### Module 8: Power Query & M Language
-- [ ] 31. Power Query ETL Engine & Applied Steps
-- [ ] 32. Core Transformations (Split, Replace, Unpivot)
-- [ ] 33. Combining Queries (Append vs Merge Joins)
-- [ ] 34. M Language Syntax & API Web Ingestion
+- [x] 31. Power Query ETL Engine & Applied Steps ✅ 2026-10-01
+- [x] 32. Core Transformations (Split, Replace, Unpivot) ✅ 2026-10-01
+- [x] 33. Combining Queries (Append vs Merge Joins) ✅ 2026-10-01
+- [x] 34. M Language Syntax & API Web Ingestion ✅ 2026-10-01
 
 ### Module 9: Data Modeling, Power Pivot & DAX
 - [ ] 35. Dimensional Modeling (Star vs Snowflake Schema)
