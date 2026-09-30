@@ -334,6 +334,8 @@ flowchart LR
 
 #### 1. Funnel Chart
 - **Best For**: Tracking progressive drop-off and conversion rates across sequential stages of a business pipeline.
+- **Course Implementation (`Module_6_Demo.xlsx`, Sheet2)**:
+  - **Mechanics**: Implements Excel's native Office 2016+ extended visual engine (`chartEx1.xml`, `layoutId="funnel"`) on `Sheet2` to plot volume retention and conversion tapering across commercial tiers.
 - **Course Applications**:
   - *Hotel Booking Funnel*: Search Impressions (100,000) $\rightarrow$ Room Views (45,000) $\rightarrow$ Reservation Inquiries (12,000) $\rightarrow$ Completed Bookings (5,000) $\rightarrow$ Checked-in Guests (3,400).
   - *Call Center Triage*: Incoming Calls $\rightarrow$ IVR Routed $\rightarrow$ Agent Answered $\rightarrow$ First Contact Resolved.
@@ -345,6 +347,8 @@ flowchart LR
 
 #### 1. Tree Map
 - **Best For**: Displaying hierarchical data and proportional parts-to-whole across high-cardinality categories.
+- **Course Implementation (`Module_6_Demo.xlsx`, Sheet2)**:
+  - **Mechanics**: Implements Excel's native Office 2016+ extended visual engine (`chartEx2.xml`, `layoutId="treemap"`) on `Sheet2` to map nested proportional category weights for `Technology` ($836.2k, 36.4%), `Furniture` ($742.0k, 32.3%), and `Office Supplies` ($719.0k, 31.3%) without column clutter.
 - **Visual Encoding**: Displays nested rectangles where the **area of each rectangle is proportional to its metric value**, and grouping is conveyed by color nesting.
 - **Advantage Over Pie Charts**: Can display 20–50 categories without visual overlap or label truncation.
 - **Excel Ribbon**: `Insert` $\rightarrow$ `Insert Hierarchy Chart` $\rightarrow$ `Treemap`.
@@ -406,8 +410,8 @@ Applying the Master Chart Selection Matrix to the official course dataset **`Mod
 | **How does transactional spread and variance distribute?** | Continuous Metrics | Dispersion & Outliers | **Box and Whisker Plot** *(Chart2 Chartsheet in `Module_6_Demo.xlsx`)* | Dedicated full-screen Chartsheet (`F11`) utilizing native Office 2016+ `boxWhisker` (`chartEx2.xml`) to calculate 5-number summary (Min, $Q_1$, Median, $Q_3$, Max) and isolate high-value transaction outliers beyond $1.5 \times \text{IQR}$. |
 | **How do sales and profits pace over time?** | `Order Date` *(Continuous Time)* | `Monthly Sales` & `Profit` | **Dual-Axis Line Chart** *(Straight lines)* | Exposes severe Q4 holiday surges (Nov–Dec peak) and reveals whether profits track revenue growth or erode during promotion pushes. |
 | **Does transaction quantity correlate with revenue, and are there basket outliers?** | `Quantity` *(1 to 14 items)* | `Sales Amount ($)` | **Scatter Plot (XY)** *(Chart3 Chartsheet in `Module_6_Demo.xlsx`)* | Dedicated full-screen Chartsheet (`F11`) plotting all 9,994 transaction pairs (`$P$2:$P$9995` vs `$Q$2:$Q$9995`) to evaluate bivariate relationship between basket size and gross revenue, isolating extreme transaction outliers (e.g. single orders exceeding $10,000). |
-| **Where are our highest-volume sales territories?** | `State` *(Geographic, 48 states)* | `Sales Volume` | **Filled Map** *(Choropleth)* | California ($457.7k) and New York ($310.9k) visually dominate national geographic distribution. |
-| **How does revenue distribute within product hierarchies?** | `Category` $\rightarrow$ `Sub-Category` | `Sales Weight` | **Treemap** *(Hierarchical Rectangles)* | Shows nested weight of `Technology` (36.4%), `Furniture` (32.3%), and `Office Supplies` (31.3%) without chart-junk clutter. |
+| **How does revenue distribute within product hierarchies?** | `Category` $\rightarrow$ `Sub-Category` | `Sales Weight` | **Treemap** *(Sheet2 in `Module_6_Demo.xlsx`)* | Native extended visual (`chartEx2.xml`) displaying nested area weights of `Technology` (36.4%), `Furniture` (32.3%), and `Office Supplies` (31.3%) without multi-level column clutter. |
+| **How does sales volume taper across commercial tiers?** | Commercial Stage / Tier | Volume Retained | **Funnel Chart** *(Sheet2 in `Module_6_Demo.xlsx`)* | Native extended visual (`chartEx1.xml`) illustrating step-by-step volume progression and conversion retention. |
 | **Which Region-Category combinations are most profitable?** | `Region` *(Rows)*, `Category` *(Cols)* | `Sum of Profit` | **Heat Map** *(Pivot Table + 3-Color Scale)* | Matrix cross-tabulation highlights Central Furniture losses (-$2,871) vs West Technology windfalls (+$57,450). |
 | **How do transaction amounts distribute across order frequency?** | `Sales Amount ($)` | `Transaction Frequency` | **Statistical Histogram** *(Chart1 Chartsheet in `Module_6_Demo.xlsx`)* | Dedicated full-screen Chartsheet (`F11`) utilizing Excel native automated binning (`chartEx1.xml`) with zero gap width to expose right-skewed transaction density. |
 

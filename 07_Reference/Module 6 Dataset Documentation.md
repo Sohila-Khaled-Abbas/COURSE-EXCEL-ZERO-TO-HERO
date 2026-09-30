@@ -9,7 +9,7 @@ total_transactions: 9994
 total_sales: 2297200.86
 total_profit: 286397.02
 total_units_sold: 37873
-total_charts: 9
+total_charts: 11
 status: verified
 created: 2026-09-30
 updated: 2026-09-30
@@ -33,7 +33,7 @@ tags:
 # 📦 Module 6 Dataset Documentation: Charts & Executive Visual Analytics
 
 > [!abstract] Dataset & Workbook Overview
-> The **Module 6 Demo Workbook** (`Module_6_Demo.xlsx`) serves as the official practice and visual modeling laboratory for **Module 6: Data Analysis Charts**. It combines an enterprise retail dataset (**`Sample_ Superstore`**, Table: `Sample__Superstore`, 9,994 records across 19 fields) with production multi-dimensional analytical views, full-screen chartsheets, time-series line trends, and category composition models across **6 dedicated sheets** housing **9 distinct chart objects**. This environment bridges data management, pivot table summarization, and cognitive visual design into publication-grade executive charts.
+> The **Module 6 Demo Workbook** (`Module_6_Demo.xlsx`) serves as the official practice and visual modeling laboratory for **Module 6: Data Analysis Charts**. It combines an enterprise retail dataset (**`Sample_ Superstore`**, Table: `Sample__Superstore`, 9,994 records across 19 fields) with production multi-dimensional analytical views, full-screen chartsheets, time-series line trends, and category composition models across **6 dedicated sheets** housing **11 distinct chart objects**. This environment bridges data management, pivot table summarization, and cognitive visual design into publication-grade executive charts.
 
 ---
 
@@ -168,7 +168,7 @@ Paired with both a **Pie Chart** (`chart3.xml`) and an executive **Doughnut Char
 
 ---
 
-## 🎨 Complete Chart Inventory & Technical Specifications
+## 🎨 Complete Chart Inventory & Technical Specifications (11 Objects)
 
 | Object ID | Package Location | Chart Type | Data Source / Sheet | Primary Visual Attributes |
 | :--- | :--- | :--- | :--- | :--- |
@@ -176,17 +176,19 @@ Paired with both a **Pie Chart** (`chart3.xml`) and an executive **Doughnut Char
 | **Chart 2** | `xl/charts/chart2.xml` | **Line Chart** | `Sheet2` (Rows 3–7) | Time-series trend (2014–2017), straight/smooth line geometry |
 | **Chart 3** | `xl/charts/chart3.xml` | **Pie Chart** | `Sheet2` (Rows 15–18) | 3 categorical slices, part-to-whole share ($36.4\% / 32.3\% / 31.3\%$) |
 | **Chart 4** | `xl/charts/chart4.xml` | **Doughnut Chart** | `Sheet2` (Rows 15–18) | **72% Hole Size**, ideal for center KPI scorecard embed |
+| **ChartEx 1** | `xl/charts/chartEx1.xml`| **Process Funnel Chart** | `Sheet2` (Category Tiers) | Native Office 2016+ `funnel` layout, step-by-step volume tapering |
+| **ChartEx 2** | `xl/charts/chartEx2.xml`| **Hierarchical Treemap** | `Sheet2` (Category Mix) | Native Office 2016+ `treemap` layout, nested proportional area rectangles |
 | **Chart 5** | `xl/charts/chart5.xml` | **Clustered Column Chart** | `Chart1` (Dedicated Tab) | Full-screen presentation mode, clustered category comparison |
-| **ChartEx 1** | `xl/charts/chartEx1.xml`| **Statistical Histogram** | `Chart1` (Dedicated Tab) | Native Office 2016+ statistical binning, 0% gap width |
+| **ChartEx 3** | `xl/charts/chartEx3.xml`| **Statistical Histogram** | `Chart1` (Dedicated Tab) | Native Office 2016+ statistical binning, 0% gap width |
 | **Chart 6** | `xl/charts/chart6.xml` | **Clustered Column Chart** | `Chart2` (Dedicated Tab) | Full-screen presentation mode, clustered distribution comparison |
-| **ChartEx 2** | `xl/charts/chartEx2.xml`| **Statistical Box & Whisker Plot** | `Chart2` (Dedicated Tab) | Native Office 2016+ `boxWhisker` layout, 5-number summary & outlier points |
+| **ChartEx 4** | `xl/charts/chartEx4.xml`| **Statistical Box & Whisker Plot** | `Chart2` (Dedicated Tab) | Native Office 2016+ `boxWhisker` layout, 5-number summary & outlier points |
 | **Chart 7** | `xl/charts/chart7.xml` | **Cartesian Scatter Plot** | `Chart3` (Dedicated Tab) | Bivariate correlation between Sales ($P) and Quantity ($Q) across 9,994 transactions |
 
 ---
 
 ## 💡 Practical Applications & Course Connections
 
-- **Lesson 6.1**: [[01_Visual_Analytics_and_Chart_Selection]] — Master Chart Selection Matrix, Comparison Charts, Line Trends, Pie vs Donut Part-to-Whole, Histogram, Box Plot, and Scatter Plot.
+- **Lesson 6.1**: [[01_Visual_Analytics_and_Chart_Selection]] — Master Chart Selection Matrix, Comparison Columns, Line Trends, Pie vs Donut Part-to-Whole, Funnel, Treemap, Histogram, Box Plot, and Scatter Plot.
 - **Lesson 6.2**: [[02_Formatting_and_Chart_Design_Rules]] — Gap Width tightening (50%–80%), Donut Hole Size (72%), Series Overlap (100%), and Dedicated Chartsheet layouts (`F11`: `Chart1`, `Chart2`, `Chart3`).
-- **Lesson 6.3**: [[03_Dashboard_Visual_Hierarchy]] — Connecting `Sheet1` Stacked Columns, `Sheet2` Line Trends & Donut Composition to Executive Dashboards and multi-Pivot Slicers.
+- **Lesson 6.3**: [[03_Dashboard_Visual_Hierarchy]] — Connecting `Sheet1` Stacked Columns, `Sheet2` Line Trends, Funnel, Treemap & Donut Composition to Executive Dashboards and multi-Pivot Slicers.
 - **Student Workbook Repository**: [`11_Demos_and_Workbooks/README.md`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/README.md)
