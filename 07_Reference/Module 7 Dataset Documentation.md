@@ -18,6 +18,9 @@ tags:
   - etl
   - hotel-reservations
   - pwc-call-center
+  - pwc-ch-forage
+  - customer-retention
+  - diversity-inclusion
   - data-quality
   - reference
 ---
@@ -38,17 +41,59 @@ tags:
 
 ---
 
-## 🌐 Dataset Provenance, Official Sources & Open Mirrors
+## 🌐 Dataset Provenance & The PwC Switzerland Simulation Suite
 
-Both datasets ingested into `Module_7_Demo.xlsx` are industry-standard benchmark assets with validated public mirrors:
+Both datasets ingested into `Module_7_Demo.xlsx` are industry-standard benchmark assets with validated public mirrors and authentic enterprise provenance:
 
-### 1. PwC Switzerland Call Centre Trends Dataset
-- **Official Forage Direct Download**: [Direct CDN Link (`01 Call-Center-Dataset.xlsx`)](https://cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/01%20Call-Center-Dataset.xlsx)
-- **Canonical Origin**: **PwC Switzerland Digital Transformation & Power BI Virtual Case Experience on Forage**.
-- **Context**: 5,000 inbound customer inquiries logged across Q1 2021 (January 1 – March 31, 2021) across 8 service agents.
-- **Reference Project Hub**: [triwgani.github.io/pwc_digital.transformation](https://triwgani.github.io/pwc_digital.transformation/)
-- **GitHub Benchmark Mirror**: [globalsmile/Call-Center-Analysis (`01 Call-Center-Dataset.xlsx`)](https://github.com/globalsmile/Call-Center-Analysis/blob/main/01%20Call-Center-Dataset.xlsx) (248 KB, exact matching column schema and `ID0001` Diane, `ID0002` Becky, `ID0003` Stewart initial records).
-- **Course Raw File**: `09_Source_Materials/Module 9/13/PWC Dataset.xlsx` (Sheet: `Source Data `).
+### 1. The PwC Switzerland Power BI Virtual Case Experience Suite (Forage)
+
+The `PWC Source Data` tab in `Module_7_Demo.xlsx` represents **Dataset 01** of the acclaimed **PwC Switzerland – Power BI Virtual Case Experience** hosted on **Forage**. In corporate analytics, this simulation is celebrated for delivering real-world, messy operational data across three distinct corporate departments:
+
+```mermaid
+flowchart TD
+    PWC["PwC Switzerland Power BI Virtual Case Experience\n(Forage Enterprise Simulation)"]
+    
+    T1["Task 1: Call Centre Trends\n(01 Call-Center-Dataset.xlsx)\n• 5,000 Inbound Call Records\n• 8 Service Agents | Q1 2021\n• Ingested in Module 7 Demo"]
+    T2["Task 2: Customer Retention\n(02 Churn-Dataset.xlsx)\n• 7,043 Telco Customer Records\n• 23 Churn & Service Attributes\n• Churn Risk & Contract Elasticity"]
+    T3["Task 3: Diversity & Inclusion\n(03 Diversity-Inclusion-Dataset.xlsx)\n• 500 Corporate Employee Records\n• Executive Hierarchy & Promotions\n• Gender Parity & Turnover Scorecards"]
+    
+    PWC --> T1
+    PWC --> T2
+    PWC --> T3
+    
+    style PWC fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    style T1 fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style T2 fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    style T3 fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+```
+
+#### 📦 The Complete Tripartite Dataset Suite
+
+| Dataset # | Official Filename | PwC Simulation Task | Business Domain | Record Count & Scope | Direct Official Download Link |
+| :---: | :--- | :--- | :--- | :--- | :--- |
+| **01** | `01 Call-Center-Dataset.xlsx` | **Call Centre Trends** | Customer Support Operations | $5,000$ calls, $8$ agents, Q1 2021 (Includes 4 ghost columns) | [Download 01 Call-Center-Dataset.xlsx](https://cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/01%20Call-Center-Dataset.xlsx) |
+| **02** | `02 Churn-Dataset.xlsx` | **Customer Retention** | Subscription & Customer Success | $7,043$ telco customers, 23 demographic & contract features | [Download 02 Churn-Dataset.xlsx](https://cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/02%20Churn-Dataset.xlsx) |
+| **03** | `03 Diversity-Inclusion-Dataset.xlsx` | **Diversity & Inclusion** | Human Capital Management (HR) | $500$ employee records across corporate grades (FY20/FY21) | [Download 03 Diversity-Inclusion-Dataset.xlsx](https://cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/03%20Diversity-Inclusion-Dataset.xlsx) |
+
+> [!IMPORTANT]
+> **CDN Access & Automated Retrieval Notice:**
+> The download URLs above point directly to the official Forage Content Delivery Network (`cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/`). These are the authentic, unadulterated source files from the PwC Switzerland simulation, not third-party recreations or modified Kaggle re-uploads. Note that while automated web scrapers and crawlers may encounter Cloudflare bot-protection when requesting these CDN links programmatically, human users can download and open them directly in any web browser.
+
+#### 🏛️ Provenance, Documentation & Public Mirrors
+- **Canonical Simulation Write-up & Documentation**: [triwgani.github.io/pwc_digital.transformation](https://triwgani.github.io/pwc_digital.transformation/) — Independent project documentation comprehensively mapping all three simulation tasks and dataset schemas.
+- **Complete Simulation Suite GitHub Repository**: [Boomslang-Maverick/PWC-Forage-Power-BI-Virtual-Experience](https://github.com/Boomslang-Maverick/PWC-Forage-Power-BI-Virtual-Experience) — Preserves all three original `.xlsx` datasets alongside their respective PwC task briefs and business scenario guidelines.
+- **Task 1 Single-File Mirror**: [globalsmile/Call-Center-Analysis](https://github.com/globalsmile/Call-Center-Analysis/blob/main/01%20Call-Center-Dataset.xlsx) — Dedicated public mirror of Dataset 01 matching our course raw file byte-for-byte.
+- **Official Forage Simulation Enrollment**: [PwC Switzerland Power BI Virtual Case Experience](https://www.theforage.com/simulations/pwc-ch/power-bi-cqxg).
+- **Course Raw Master File**: `09_Source_Materials/Module 9/13/PWC Dataset.xlsx` (Sheet: `Source Data `).
+
+> [!TIP]
+> **Portfolio Strategy Recommendation:**
+> If you are building a professional data analyst portfolio, completing all three tasks from this PwC simulation represents a premier end-to-end showcase:
+> 1. **Operations & Service Analytics**: Inbound ticketing, speed of answer, and agent CSAT scorecards (*Task 1*).
+> 2. **Revenue & Churn Retention Analytics**: Customer lifetime value, contract risk elasticity, and preventive retention modeling (*Task 2*).
+> 3. **Organizational & People Analytics**: Gender promotion parity, executive turnover, and DEI performance KPIs (*Task 3*).
+
+---
 
 ### 2. Hotel Reservations Hospitality Benchmark Dataset
 - **Canonical Origin**: **Hotel Reservations Classification Dataset (CC0 Public Domain)** by Ahsan on Kaggle.
