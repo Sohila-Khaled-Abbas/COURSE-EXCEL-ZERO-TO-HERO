@@ -142,20 +142,16 @@ Quantitative data represents objective measurements or counts where mathematical
 
 Every business question can be mapped to one of eight analytical objectives. The mindmap organizes the 17 essential chart types under these 8 families:
 
-```
-┌─────────────────────────────────┬────────────────────────────────────────────────────────┐
-│ Chart Family                    │ Included Chart Types (from Mindmap)                    │
-├─────────────────────────────────┼────────────────────────────────────────────────────────┤
-│ 1. Comparison Charts            │ Column, Bar, Stacked Column, Stacked Bar               │
-│ 2. Trend Charts                 │ Line Chart, Area Chart                                 │
-│ 3. Composition Charts           │ Pie Chart, Donut (Doughnut) Chart                      │
-│ 4. Distribution Charts          │ Box Plot, Histogram, Density Plot                      │
-│ 5. Relationship Charts          │ Scatter Plot                                           │
-│ 6. Process Visualisation        │ Funnel Chart                                           │
-│ 7. Intensity & Hierarchy Charts │ Tree Map, Heat Map                                     │
-│ 8. Geographic Charts            │ Maps (Choropleth / Filled Maps)                        │
-└─────────────────────────────────┴────────────────────────────────────────────────────────┘
-```
+| Chart Family | Included Chart Types (from Mindmap) | Primary Analytical Question |
+| :--- | :--- | :--- |
+| **1. Comparison Charts** | `Column`, `Bar`, `Stacked Column`, `Stacked Bar` | *Which category has the highest or lowest value?* |
+| **2. Trend Charts** | `Line Chart`, `Area Chart` | *How does this metric evolve over time?* |
+| **3. Composition Charts** | `Pie Chart`, `Donut (Doughnut) Chart` | *What is the relative share of each component to the whole?* |
+| **4. Distribution Charts** | `Box Plot`, `Histogram`, `Density Plot` | *How are data values spread across the range? Are there outliers?* |
+| **5. Relationship Charts** | `Scatter Plot` | *Is there a correlation between these two continuous variables?* |
+| **6. Process Visualisation** | `Funnel Chart` | *Where are users dropping off across workflow stages?* |
+| **7. Intensity & Hierarchy Charts** | `Tree Map`, `Heat Map` | *How do multi-level categories or 2D matrix densities compare?* |
+| **8. Geographic Charts** | `Maps (Choropleth / Filled Maps)` | *How does performance vary across geographic territories?* |
 
 ---
 
@@ -341,20 +337,16 @@ Use this reference table to select the scientifically optimal chart for any anal
 
 Applying the Master Chart Selection Matrix to the **Hotel Reservation Dataset** (`36,275 Bookings`, `09_Source_Materials/Module 6/4- Hotel Reservation Dashboard.xlsx`):
 
-```
-┌─────────────────────────────────┬──────────────────────┬────────────────────────┬───────────────────────────────────────────┐
-│ Business Question               │ Independent Field    │ Dependent Metric       │ Selected Chart Type                       │
-├─────────────────────────────────┼──────────────────────┼────────────────────────┼───────────────────────────────────────────┤
-│ Which channel drives bookings?  │ `market_segment_type`│ Total Bookings Count   │ Horizontal Bar Chart (Sorted Descending)  │
-│ What is our monthly seasonality?│ `arrival_month`      │ Count of Bookings      │ Line Chart with Markers                   │
-│ Cancellation share by status?   │ `booking_status`     │ % of Total Bookings    │ Donut Chart (Center KPI: 32.8% Cancel Rate)│
-│ How does lead time distribute?  │ `lead_time`          │ Booking Frequency      │ Box Plot (Lead Time by Market Segment)    │
-│ Where do guests travel from?    │ `country_code`       │ Total Guests           │ Filled Map (Choropleth by Country)        │
-│ Room Type vs Meal Plan volume?  │ `room_type`, `meal`  │ Revenue Contribution   │ Treemap (Hierarchical Rectangles)         │
-│ Booking pipeline conversion?    │ Booking Stages       │ Retained Volume        │ Funnel Chart                              │
-│ Peak arrival day vs month?      │ `arrival_date`, Month│ Total Arrivals         │ Heat Map (Pivot Table + Color Scale)      │
-└─────────────────────────────────┴──────────────────────┴────────────────────────┴───────────────────────────────────────────┘
-```
+| Business Question | Independent Field | Dependent Metric | Selected Chart Type | Design Rationale |
+| :--- | :--- | :--- | :--- | :--- |
+| **Which channel drives bookings?** | `market_segment_type` | Total Bookings Count | **Horizontal Bar Chart** *(Sorted Descending)* | Long category labels fit horizontally without crowding. |
+| **What is our monthly seasonality?** | `arrival_month` | Count of Bookings | **Line Chart** *(with Markers)* | Continuous chronological timeline reveals summer peaks and winter troughs. |
+| **Cancellation share by status?** | `booking_status` | % of Total Bookings | **Donut Chart** *(Center KPI: 32.8% Cancel Rate)* | Hollow core accommodates high-impact executive KPI scorecard card. |
+| **How does lead time distribute?** | `lead_time` | Booking Frequency | **Box Plot** *(Lead Time by Market Segment)* | Exposes median lead times, IQR variance, and cancellation threshold outliers. |
+| **Where do guests travel from?** | `country_code` | Total Guests | **Filled Map** *(Choropleth by Country)* | Direct geographic encoding for global territory density. |
+| **Room Type vs Meal Plan volume?** | `room_type`, `meal` | Revenue Contribution | **Treemap** *(Hierarchical Rectangles)* | Displays nested category area weights without multi-level column clutter. |
+| **Booking pipeline conversion?** | Booking Stages | Retained Volume | **Funnel Chart** | Visualizes step-by-step retention from inquiry to fulfilled stay. |
+| **Peak arrival day vs month?** | `arrival_date`, Month | Total Arrivals | **Heat Map** *(Pivot Table + Color Scale)* | High-density 2D matrix instantly highlights operational rush periods. |
 
 ---
 

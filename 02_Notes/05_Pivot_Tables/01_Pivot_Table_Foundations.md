@@ -163,21 +163,10 @@ Always convert the raw range into an official Excel Table (`Ctrl + T` or `Ctrl +
 3. In the dialog, choose **New Worksheet** (recommended for clean dashboard organization) or **Existing Worksheet**.
 4. Click **OK**.
 
-```
-┌────────────────────────────────────────────────────────┐
-│ Create PivotTable                                  [X] │
-├────────────────────────────────────────────────────────┤
-│ Choose the data that you want to analyze:              │
-│  (•) Select a table or range                           │
-│      Table/Range: Table2                               │
-│                                                        │
-│ Choose where you want the PivotTable report placed:    │
-│  (•) New Worksheet                                     │
-│  ( ) Existing Worksheet: _________________             │
-│                                                        │
-│ [OK]                                        [Cancel]   │
-└────────────────────────────────────────────────────────┘
-```
+| Dialog Configuration | Recommended Value | Architecture & Best Practice |
+| :--- | :--- | :--- |
+| **Data Source Selection** | `Select a table or range` $\rightarrow$ `Table2` | Binds directly to dynamic ListObject (`Table2`) so appended rows are captured automatically on refresh. |
+| **Report Destination** | `New Worksheet` *(Default)* | Isolates analytical summary from raw transactions, preventing layout collisions. |
 
 > [!TIP] Pro Tip: Naming Your Pivot Table Immediately
 > As soon as the Pivot Table is initialized, go to **PivotTable Analyze > PivotTable Name** (leftmost group in the ribbon) and rename it from the generic `PivotTable1` to a clear, functional name like `pt_CountrySales` or `pt_CategorySummary`. This is mandatory for professional workbooks that contain multiple tables and slicers.
@@ -211,25 +200,12 @@ flowchart TD
 
 In the **PivotTable Fields** task pane (toggle on/off via `PivotTable Analyze > Field List`), you drag column fields into four functional zones:
 
-```
-┌──────────────────────────────────────────────────────────────┐
-│  PIVOTTABLE FIELDS                                           │
-│  Choose fields to add to report:                             │
-│  [X] Order ID    [X] Product     [X] Country     [X] Month   │
-│  [X] Date        [X] Category    [X] Region      [X] Amount  │
-├──────────────────────────────┬───────────────────────────────┤
-│  FILTERS                     │  COLUMNS                      │
-│  ┌────────────────────────┐  │  ┌─────────────────────────┐  │
-│  │ Category               │  │  │ Region                  │  │
-│  └────────────────────────┘  │  └─────────────────────────┘  │
-├──────────────────────────────┼───────────────────────────────┤
-│  ROWS                        │  VALUES                       │
-│  ┌────────────────────────┐  │  ┌─────────────────────────┐  │
-│  │ Country                │  │  │ Sum of Amount           │  │
-│  │ Product                │  │  │ Average of Amount       │  │
-│  └────────────────────────┘  │  └─────────────────────────┘  │
-└──────────────────────────────┴───────────────────────────────┘
-```
+| Drop Zone | Placement Type | Active Demo Fields | Analytical Purpose |
+| :--- | :--- | :--- | :--- |
+| **Filters** *(Top-Left)* | Page-Level Filter | `Category` | Slices the entire Pivot Table report across high-level categorical segments without consuming row/col grid space. |
+| **Columns** *(Top-Right)* | Cross-Tab Header | `Region` | Distributes categorical dimensions horizontally across top headers to produce 2D matrices. |
+| **Rows** *(Bottom-Left)* | Vertical Hierarchy | `Country`, `Product` | Stacks categories vertically into expandable primary dimensions and hierarchical groups. |
+| **Values** *(Bottom-Right)* | Mathematical Engine | `Sum of Amount`, `Average of Amount` | Computes aggregate metrics (`SUM`, `AVERAGE`, `COUNT`, `MAX`, `MIN`) with customized number formatting. |
 
 1. **Rows (Primary Dimension)**:
    - Categorical dimensions placed here stack vertically.
@@ -276,21 +252,16 @@ Using the dataset from [`Module_5_Demo.xlsx`](file:///d:/courses/Data%20Analysis
    - In **Design > PivotTable Styles**, select a professional style (e.g., *Pivot Style Medium 9*).
 
 ### The Resulting Cross-Tabulation Grid
-```
-┌──────────────┬─────────────┬─────────────┬─────────────┐
-│ Country      │ Fruit       │ Vegetables  │ Grand Total │
-├──────────────┼─────────────┼─────────────┼─────────────┤
-│ Australia    │ $35,420     │ $42,180     │ $77,600     │
-│ Canada       │ $48,910     │ $39,640     │ $88,550     │
-│ France       │ $31,250     │ $28,900     │ $60,150     │
-│ Germany      │ $42,800     │ $51,320     │ $94,120     │
-│ New Zealand  │ $29,670     │ $34,110     │ $63,780     │
-│ UK           │ $44,530     │ $48,220     │ $92,750     │
-│ US           │ $58,940     │ $62,490     │ $121,430    │
-├──────────────┼─────────────┼─────────────┼─────────────┤
-│ Grand Total  │ $291,520    │ $306,860    │ $598,380    │
-└──────────────┴─────────────┴─────────────┴─────────────┘
-```
+| Country | Fruit | Vegetables | Grand Total |
+| :--- | :---: | :---: | :---: |
+| **Australia** | $35,420 | $42,180 | **$77,600** |
+| **Canada** | $48,910 | $39,640 | **$88,550** |
+| **France** | $31,250 | $28,900 | **$60,150** |
+| **Germany** | $42,800 | $51,320 | **$94,120** |
+| **New Zealand** | $29,670 | $34,110 | **$63,780** |
+| **UK** | $44,530 | $48,220 | **$92,750** |
+| **US** | $58,940 | $62,490 | **$121,430** |
+| **Grand Total** | **$291,520** | **$306,860** | **$598,380** |
 
 ---
 

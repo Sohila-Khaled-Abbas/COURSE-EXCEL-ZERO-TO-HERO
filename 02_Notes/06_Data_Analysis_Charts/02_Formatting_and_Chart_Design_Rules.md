@@ -88,21 +88,17 @@ flowchart LR
 
 Every chart type in the course mindmap requires specific geometric and formatting adjustments in Excel:
 
-```
-┌──────────────────────────┬─────────────────────────────┬────────────────────────────────────────────────────────┐
-│ Chart Type               │ Key Excel Setting           │ Best Practice Value                                    │
-├──────────────────────────┼─────────────────────────────┼────────────────────────────────────────────────────────┤
-│ Clustered Column / Bar   │ Gap Width                   │ 50% to 80% (Eliminates default 219% skinny bars)       │
-│ Overlapping Bars         │ Series Overlap              │ 0% for side-by-side; 100% for Target vs Actual         │
-│ Line Chart               │ Line Weight & Smoothing     │ 2.25pt – 3.0pt; Marker size: 5pt; Smoothing: Off       │
-│ Donut Chart              │ Doughnut Hole Size          │ 65% to 75% (Leaves ample room for center KPI Card)     │
-│ Pie Chart                │ Angle of First Slice        │ Rotate so largest slice starts at 12 o'clock (0°)      │
-│ Stacked Bar / Column     │ Segment Count               │ Maximum 3–4 segments; consistent sorting across stacks │
-│ Scatter Plot             │ Marker Type & Gridlines     │ Semi-transparent circles (50% opacity); faint gridlines│
-│ Box Plot                 │ Outlier & Mean Formatting   │ Show mean marker as an 'X'; highlight outlier points   │
-│ Heat Map                 │ Color Scale Gradient        │ 2-Color or 3-Color sequential gradient (No rainbow)    │
-└──────────────────────────┴─────────────────────────────┴────────────────────────────────────────────────────────┘
-```
+| Chart Type | Key Excel Setting | Best Practice Value | Design Rationale |
+| :--- | :--- | :--- | :--- |
+| **Clustered Column / Bar** | **Gap Width** | `50%` to `80%` | Eliminates default 219% skinny bars, giving bars proper visual weight. |
+| **Overlapping Bars** | **Series Overlap** | `0%` (grouped) or `100%` (target/actual) | Prevents awkward staggered bars; standardizes comparison baselines. |
+| **Line Chart** | **Line Weight & Smoothing** | `2.25pt` – `3.0pt`; Marker `5pt`; Smoothing: **Off** | Straight segments preserve actual financial and operational precision. |
+| **Donut Chart** | **Doughnut Hole Size** | `65%` to `75%` | Leaves ample room for a clean center KPI Scorecard card. |
+| **Pie Chart** | **Angle of First Slice** | Rotate to `0°` (12 o'clock) | Largest slice begins at natural top reading position. |
+| **Stacked Bar / Column** | **Segment Count** | Max 3–4 segments; consistent sorting | Avoids cognitive overload and unreadable middle segments. |
+| **Scatter Plot** | **Marker Type & Gridlines** | `50%` opacity circles; faint gridlines | Prevents overplotting occlusion when thousands of records overlap. |
+| **Box Plot** | **Outlier & Mean Formatting** | Show Mean as `X`; highlight outliers | Differentiates typical distribution IQR from anomalies. |
+| **Heat Map** | **Color Scale Gradient** | Sequential 2-color / 3-color (No rainbow) | Preserves visual proportionality and color-blind accessibility. |
 
 ### A. Column & Bar Charts: Taming the Gap Width
 - **The Default Flaw**: Excel defaults to a **Gap Width of 219%**, making columns appear like thin, fragile toothpicks with excessive empty space between them.

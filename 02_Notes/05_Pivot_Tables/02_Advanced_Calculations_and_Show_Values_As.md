@@ -90,21 +90,16 @@ flowchart TD
 ```
 
 ### Resulting Dual-Metric Table (`Sample Data`):
-```
-┌──────────────┬──────────────────┬─────────────────┬────────────┐
-│ Country      │ Total Sales ($)  │ % of Total      │ Sales Rank │
-├──────────────┼──────────────────┼─────────────────┼────────────┤
-│ US           │ $121,430         │ 20.3%           │ 1          │
-│ Germany      │ $94,120          │ 15.7%           │ 2          │
-│ UK           │ $92,750          │ 15.5%           │ 3          │
-│ Canada       │ $88,550          │ 14.8%           │ 4          │
-│ Australia    │ $77,600          │ 13.0%           │ 5          │
-│ New Zealand  │ $63,780          │ 10.7%           │ 6          │
-│ France       │ $60,150          │ 10.1%           │ 7          │
-├──────────────┼──────────────────┼─────────────────┼────────────┤
-│ Grand Total  │ $598,380         │ 100.0%          │            │
-└──────────────┴──────────────────┴─────────────────┴────────────┘
-```
+| Country | Total Sales ($) | % of Total | Sales Rank |
+| :--- | :---: | :---: | :---: |
+| **US** | $121,430 | 20.3% | **#1** |
+| **Germany** | $94,120 | 15.7% | **#2** |
+| **UK** | $92,750 | 15.5% | **#3** |
+| **Canada** | $88,550 | 14.8% | **#4** |
+| **Australia** | $77,600 | 13.0% | **#5** |
+| **New Zealand** | $63,780 | 10.7% | **#6** |
+| **France** | $60,150 | 10.1% | **#7** |
+| **Grand Total** | **$598,380** | **100.0%** | — |
 
 > [!TIP] Renaming Pivot Value Columns
 > Excel names duplicate fields `Sum of Amount 2`. You can overwrite this header directly by typing in the cell or changing **Custom Name** in Value Field Settings.  
@@ -145,19 +140,14 @@ Using [`Module_5_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introd
    - Number Format: Percentage (`0.0%`).
 
 ### Resulting Monthly Analysis Matrix
-```
-┌───────────┬──────────────────┬────────────────────┬──────────────┐
-│ Month     │ Monthly Revenue  │ Cumulative Revenue │ MoM Growth % │
-├───────────┼──────────────────┼────────────────────┼──────────────┤
-│ July      │ $84,320          │ $84,320            │ —            │
-│ August    │ $112,650         │ $196,970           │ +33.6%       │
-│ September │ $98,410          │ $295,380           │ -12.6%       │
-│ October   │ $145,200         │ $440,580           │ +47.5%       │
-│ November  │ $157,800         │ $598,380           │ +8.7%        │
-├───────────┼──────────────────┼────────────────────┼──────────────┤
-│ Total     │ $598,380         │ $598,380           │              │
-└───────────┴──────────────────┴────────────────────┴──────────────┘
-```
+| Month | Monthly Revenue | Cumulative Revenue | MoM Growth % | Performance Indicator |
+| :--- | :---: | :---: | :---: | :---: |
+| **July** | $84,320 | $84,320 | — | Baseline Month |
+| **August** | $112,650 | $196,970 | `+33.6%` | 🟢 Strong Expansion |
+| **September** | $98,410 | $295,380 | `-12.6%` | 🔴 Seasonal Dip |
+| **October** | $145,200 | $440,580 | `+47.5%` | 🟢 Peak Q4 Surge |
+| **November** | $157,800 | $598,380 | `+8.7%` | 🟢 Continued Growth |
+| **Total** | **$598,380** | **$598,380** | — | **Full Period** |
 
 ---
 

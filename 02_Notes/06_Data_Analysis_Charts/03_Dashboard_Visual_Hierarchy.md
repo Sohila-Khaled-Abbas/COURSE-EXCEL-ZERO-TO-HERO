@@ -54,30 +54,11 @@ Extensive eye-tracking research (Nielsen Norman Group) proves that Western busin
 
 To implement the F-Pattern in Microsoft Excel, organize your worksheet into three distinct architectural tiers:
 
-```
-┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
-│ TIER 1: STRATEGIC HEADER & KPI SCORECARD CARDS                                                   │
-│ [Dashboard Title & Last Refreshed]        [Slicer: Year]  [Slicer: Channel]  [Slicer: Room Type] │
-│ ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐         │
-│ │Total Bookings│  │Cancellations │  │Cancel Rate % │  │Avg Room (ADR)│  │Avg Lead Time │         │
-│ │   36,275     │  │   11,885     │  │    32.8%     │  │   $103.42    │  │   85 Days    │         │
-│ └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘         │
-├──────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ TIER 2: CORE ANALYTICAL & COMPOSITION VIEWS                                                      │
-│ ┌──────────────────────────────────────┐  ┌───────────────────┐  ┌─────────────────────────────┐ │
-│ │ Market Segment Performance           │  │ Booking Status    │  │ Room Type Contribution      │ │
-│ │ (Horizontal Bar Chart)               │  │ (Donut Chart)     │  │ (Treemap / Column Chart)    │ │
-│ │ • Online TA: 56.7%                   │  │ • Confirmed: 67.2%│  │ • Room_Type_1: 77.5%        │ │
-│ │ • Offline TO: 29.0%                  │  │ • Canceled:  32.8%│  │ • Room_Type_4: 16.7%        │ │
-│ └──────────────────────────────────────┘  └───────────────────┘  └─────────────────────────────┘ │
-├──────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ TIER 3: TEMPORAL TRENDS, SPATIAL CONTEXT & GRANULAR DRILL-DOWN                                   │
-│ ┌────────────────────────────────────────────────────────┐  ┌──────────────────────────────────┐ │
-│ │ Monthly Booking Seasonality & Cancellation Dynamics    │  │ Global Guest Origin              │ │
-│ │ (Line Chart with Dual Series: Total vs Canceled)       │  │ (Filled Map / Geographic Region) │ │
-│ └────────────────────────────────────────────────────────┘  └──────────────────────────────────┘ │
-└──────────────────────────────────────────────────────────────────────────────────────────────────┘
-```
+| Dashboard Tier | Architecture Layer | Components & Metrics | Target Analytical Question |
+| :--- | :--- | :--- | :--- |
+| **Tier 1: North** | **Strategic Header & KPI Scorecards** | • **Total Bookings**: 36,275<br/>• **Cancellations**: 11,885<br/>• **Cancel Rate**: 32.8%<br/>• **Avg ADR**: $103.42<br/>• **Avg Lead Time**: 85 Days<br/>• **Global Slicers**: Year, Channel, Room Type | *What is our macro operational health right now? (Top 5-second pulse check)* |
+| **Tier 2: Center** | **Core Categorical & Compositional Views** | • **Market Segment**: Horizontal Bar Chart *(Online TA: 56.7%, Offline TO: 29.0%)*<br/>• **Booking Status**: Donut Chart *(Confirmed: 67.2%, Canceled: 32.8%)*<br/>• **Room Allocation**: Treemap *(Room 1: 77.5%, Room 4: 16.7%)* | *Which channels, segments, and inventory tiers are driving these numbers?* |
+| **Tier 3: South** | **Temporal Dynamics & Granular Drill-Down** | • **Seasonality Dynamics**: Dual-Series Line Chart *(Monthly Bookings vs Cancellations)*<br/>• **Spatial Origin**: Filled Choropleth Map *(Global Guest Distribution by Country)*<br/>• **Lead Time Impact**: Box Plot / Histogram *(Risk assessment)* | *When do these dynamics surge, where do guests come from, and where do we intervene?* |
 
 ### Tier 1: Strategic Header & KPI Scorecards
 - **Header**: High-contrast title (`Hotel Reservation Analytics Dashboard`), subtitle with data scope (`36,275 Historical Bookings | 2017–2018`), and global filter slicers.

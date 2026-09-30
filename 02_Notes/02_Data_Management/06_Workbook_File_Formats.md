@@ -36,16 +36,12 @@ video_url: "https://www.youtube.com/watch?v=uv1bxe2gdnU&t=965s"
 
 ## 📌 The Four Core Formats at a Glance
 
-```text
-┌──────────┐      ┌────────────────────────────────────────────────────────┐
-│  FORMAT  │      │                     PRIMARY ROLE                       │
-├──────────┤      ├────────────────────────────────────────────────────────┤
-│   XLSX   │ ──>> │  Default standard format (OpenXML, macro-free)         │
-│   XLSM   │ ──>> │  Macro-enabled format (preserves VBA automation)       │
-│   XLSB   │ ──>> │  Fast binary format (50% smaller size, 2-4x faster)    │
-│   CSV    │ ──>> │  Raw data set (plain text, universal ETL interchange)  │
-└──────────┘      └────────────────────────────────────────────────────────┘
-```
+| File Format | Full Extension Name | Underlying Architecture | Primary Analytical Role | VBA Macro Support |
+| :--- | :--- | :--- | :--- | :---: |
+| **`.xlsx`** | Excel OpenXML Workbook | Compressed ZIP of XML files | Default modern standard; macro-free and secure | ❌ Stripped on Save |
+| **`.xlsm`** | Macro-Enabled Workbook | OpenXML + Binary VBA Project | Preserves VBA code, UserForms, and automation scripts | ✅ Fully Supported |
+| **`.xlsb`** | Excel Binary Workbook | Pure Proprietary Binary Stream | 50% smaller file size, 2–4x faster load time for massive models | ✅ Fully Supported |
+| **`.csv`** | Comma-Separated Values | Plain Text (ASCII / UTF-8) | Universal flat data interchange for SQL, Python, and Power Query | ❌ Plain Text Only |
 
 ---
 

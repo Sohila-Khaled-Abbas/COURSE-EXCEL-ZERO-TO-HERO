@@ -45,21 +45,12 @@ Effective dashboards structure information through **progressive disclosure** ac
 - **Tier 3 (South / Base)**: Temporal trends, seasonality lines, geographic maps, and granular operational drill-downs that answer *"How did this evolve over time, and where do we act?"*.
 
 ### 4. Layout Architecture & Anatomy
-```
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│ [Title: Hotel Performance]  [Date Range: 2017-2018]       [Slicers: Channel | Room]    │
-├──────────────┬──────────────┬──────────────┬──────────────┬────────────────────────────┤
-│ Total Revenue│ Total Bookings│ Cancel Rate %│ Average ADR  │ Lead Time (Days)           │
-│  $3,751,550  │    36,275    │    32.8%     │   $103.42    │      85.2                  │
-├──────────────┴──────────────┴──────────────┴──────────────┴────────────────────────────┤
-│ [Primary Bar: Revenue by Channel]           │ [Donut: Booking Status Split]            │
-│  • Online TA: 56.7%                         │  • Completed: 67.2%                      │
-│  • Offline TO: 29.0%                        │  • Canceled:  32.8%                      │
-├─────────────────────────────────────────────┴──────────────────────────────────────────┤
-│ [Seasonality Line: Monthly Booking & Cancellation Dynamics]                            │
-│  • High-season peak in Q3 (July–August); lowest cancellation in Winter                 │
-└────────────────────────────────────────────────────────────────────────────────────────┘
-```
+| Layout Tier | Section Scope | Visual Component & Example Data | Analytical Function |
+| :--- | :--- | :--- | :--- |
+| **Header Band** | Global Navigation | `Title: Hotel Performance` \| `Date Range: 2017–2018` \| `Slicers: Channel, Room Type` | Establishes organizational context and user interactivity controls |
+| **Tier 1: North** | KPI Scorecard Cards | • **Total Revenue**: `$3,751,550`<br/>• **Total Bookings**: `36,275`<br/>• **Cancel Rate**: `32.8%`<br/>• **Average ADR**: `$103.42`<br/>• **Avg Lead Time**: `85.2 Days` | 5-second pulse check on aggregate organizational performance |
+| **Tier 2: Mid** | Comparative & Compositional Views | • **Revenue by Channel**: `Horizontal Bar Chart` *(Online TA: 56.7%, Offline TO: 29.0%)*<br/>• **Booking Status Split**: `Donut Chart` *(Completed: 67.2%, Canceled: 32.8%)* | Explains operational drivers and volume contribution |
+| **Tier 3: South** | Temporal Dynamics & Seasonality | • **Monthly Booking & Cancellation Dynamics**: `Dual-Series Line Chart`<br/>*(Q3 Summer peak: 4,400 bookings/mo; Winter trough: 1,800 bookings/mo)* | Exposes seasonality patterns and forward planning risks |
 
 ### 5. Practical Example in Excel
 In the companion course workbook [`4- Hotel Reservation Dashboard.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/09_Source_Materials/Module%206/4-%20Hotel%20Reservation%20Dashboard.xlsx):

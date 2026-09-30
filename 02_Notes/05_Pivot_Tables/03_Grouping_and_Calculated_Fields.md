@@ -74,18 +74,13 @@ Instead of writing complex `IFS()` formulas to classify customer orders by size,
 5. Click **OK**.
 
 ### Resulting Order Size Distribution:
-```
-┌────────────────────┬─────────────────┬────────────────────┐
-│ Amount Range       │ Number of Orders│ % of Total Orders  │
-├────────────────────┼─────────────────┼────────────────────┤
-│ 0 - 2,500          │ 42              │ 19.4%              │
-│ 2,500 - 5,000      │ 68              │ 31.5%              │
-│ 5,000 - 7,500      │ 59              │ 27.3%              │
-│ 7,500 - 10,000     │ 47              │ 21.8%              │
-├────────────────────┼─────────────────┼────────────────────┤
-│ Total              │ 216             │ 100.0%             │
-└────────────────────┴─────────────────┴────────────────────┘
-```
+| Amount Range (EGP) | Number of Orders | % of Total Orders | Cumulative Volume |
+| :--- | :---: | :---: | :---: |
+| **0 – 2,500** | 42 | 19.4% | 19.4% |
+| **2,500 – 5,000** | 68 | 31.5% | 50.9% |
+| **5,000 – 7,500** | 59 | 27.3% | 78.2% |
+| **7,500 – 10,000** | 47 | 21.8% | 100.0% |
+| **Total** | **216** | **100.0%** | — |
 
 > [!CAUTION] Troubleshooting: Why is "Group..." Greyed Out or Throwing "Cannot group that selection"?
 > If you right-click on `Amount` in your Pivot Table and **Group...** is greyed out or displays an error, check these 4 common root causes:
@@ -138,22 +133,17 @@ In [`Module_5_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introduca
 5. Click **Add**, then click **OK**.
 6. Format the new column as **Percentage** (`0.0%`).
 
-```
-┌──────────────┬──────────────────┬────────────────┬───────────────┐
-│ Region       │ Total Sales      │ Total Profit   │ Profit Margin │
-├──────────────┼──────────────────┼────────────────┼───────────────┤
-│ Alexandria   │ $46,280,410      │ $6,479,257     │ 14.0%         │
-│ Aswan        │ $45,892,100      │ $6,424,894     │ 14.0%         │
-│ Cairo        │ $46,120,500      │ $6,456,870     │ 14.0%         │
-│ Giza         │ $45,950,200      │ $6,433,028     │ 14.0%         │
-│ Ismailia     │ $46,310,900      │ $6,483,526     │ 14.0%         │
-│ Luxor        │ $46,050,800      │ $6,447,112     │ 14.0%         │
-│ Mansoura     │ $46,180,300      │ $6,465,242     │ 14.0%         │
-│ Tanta        │ $46,215,700      │ $6,470,198     │ 14.0%         │
-├──────────────┼──────────────────┼────────────────┼───────────────┤
-│ Grand Total  │ $369,000,910     │ $51,660,127    │ 14.0%         │
-└──────────────┴──────────────────┴────────────────┴───────────────┘
-```
+| Region | Total Sales | Total Profit | Profit Margin |
+| :--- | :---: | :---: | :---: |
+| **Alexandria** | $46,280,410 | $6,479,257 | **14.0%** |
+| **Aswan** | $45,892,100 | $6,424,894 | **14.0%** |
+| **Cairo** | $46,120,500 | $6,456,870 | **14.0%** |
+| **Giza** | $45,950,200 | $6,433,028 | **14.0%** |
+| **Ismailia** | $46,310,900 | $6,483,526 | **14.0%** |
+| **Luxor** | $46,050,800 | $6,447,112 | **14.0%** |
+| **Mansoura** | $46,180,300 | $6,465,242 | **14.0%** |
+| **Tanta** | $46,215,700 | $6,470,198 | **14.0%** |
+| **Grand Total** | **$369,000,910** | **$51,660,127** | **14.0%** |
 
 ### Auditing with "List Formulas"
 When managing enterprise financial models containing multiple custom calculations:
@@ -195,15 +185,11 @@ Conditional Formatting heatmaps highlight outliers and top performers instantly.
 3. Click the small **Formatting Options widget** that appears next to the selected cell (or click **Manage Rules > Edit Rule**):
    - Choose: **`All cells showing "Sum of Amount" values for "Country" and "Category"`**.
 
-```
-┌──────────────────────────────────────────────────────────────┐
-│ Apply Rule To:                                               │
-│  ( ) Selected cells                                          │
-│  ( ) All cells showing "Sum of Amount" values                │
-│  (•) All cells showing "Sum of Amount" values for "Country"   │
-│      and "Category"                                          │
-└──────────────────────────────────────────────────────────────┘
-```
+| Formatting Scope Setting | Target Cell Coverage | Operational Behavior & Visual Impact |
+| :--- | :--- | :--- |
+| `Selected cells` | Current static coordinate range (`B4:G10`) | ❌ **Breaks on Filter**: Freezes if rows expand or new categories are added via slicers. |
+| `All cells showing "Sum of Amount"` | All values + Row & Column Grand Totals | ❌ **Scale Distortion**: Grand total ($598k) absorbs dark green; all data cells wash out. |
+| `All cells showing "Sum of Amount" for "Country" and "Category"` | Data cells exclusively *(Best Practice)* | ✅ **Isolated Matrix**: The heatmap color gradient dynamically reflects data cell variations only. |
 
 > [!IMPORTANT] Why This Option is Mandatory
 > If you select *"All cells showing 'Sum of Amount' values"*, Excel will include the **Grand Total** cell ($598,380) in the color gradient! The Grand Total will be dark green, and all individual data cells ($30,000–$60,000) will wash out into identical light red tones. Selecting the dimension-scoped option isolates the formatting strictly to the data cells!
