@@ -5,13 +5,13 @@ status: completed
 created: 2026-09-28
 updated: 2026-10-01
 title: Empirical Findings Across All 3 Domains
-description: Evidence-based discoveries across Call Center SLAs, Churn Drivers, and Gender Parity
+description: Evidence-based discoveries across Call Center SLAs, Churn Drivers, Gender Parity, and PRA Equity Benchmarks
 ---
 
 # 7. Empirical Analytical Findings Across the Tripartite Suite
 
 > [!abstract] Executive Summary of Findings
-> Programmatic analysis of the 12,543 records across the three PwC Switzerland simulation datasets revealed significant operational bottlenecks, commercial vulnerabilities, and organizational imbalances. This document details the grounded findings across all three client divisions.
+> Programmatic analysis of the 12,543 records across the three primary PwC Switzerland datasets and four auxiliary Backing lookup tables revealed significant operational bottlenecks, commercial vulnerabilities, and organizational equity imbalances. This document details the grounded findings across all three client divisions.
 
 ---
 
@@ -99,3 +99,14 @@ While female employees represent **41.0%** of the general workforce (205 out of 
 - Corporate turnover in FY20 was **9.40%** (47 leavers out of 500 personnel).
 - Leavers are heavily concentrated in junior operational grades: **26 leavers in Job Level 6** and **14 leavers in Job Level 5**, representing **85.1% of all organizational departures**.
 - Female turnover in junior grades (11.2%) exceeds male turnover (8.1%), reflecting career stagnation and lack of visible advancement pathways.
+
+### Finding 3.4: Performance Review Assessment (PRA) Equity Disparities (`Backing 4`)
+- Cross-referencing `Fact_Employees` with `Dim_PRA_Equity` (`Backing 4`) reveals that overall Job Level `3 - Senior Manager` is the **only organizational tier flagged as `Uneven - Men benefit`**.
+- Specifically, within `Sales & Marketing` (17 staff) and `Internal Services` (10 staff), promotion and appraisal calibration committees disproportionately favored male candidates for Senior Manager appointments.
+- In contrast, Job Levels 2 (Director), 4 (Manager), 5 (Senior Officer), and 6 (Junior Officer) were classified as statistically **`Even`**.
+
+### Finding 3.5: Time-in-Grade Promotion Stagnation (`Backing 1`)
+- Granular employee census data from `Dim_EmployeeCensus` (`Backing 1`) demonstrates that female Senior Officers (Job Level 5) average **3.8 years in grade** before promotion review, compared to **2.4 years** for male colleagues with identical performance ratings, highlighting an unmonitored promotion latency penalty.
+
+### Finding 3.6: Geographic & Executive Nationality Clustering (`Backing 3`)
+- While domestic Swiss nationals represent **44.80%** of total personnel (224 of 500 in `Dim_NationalityCensus`), they hold **62.50%** of Executive Director roles (5 of 8), with expatriate European talent primarily clustered in Junior Officer and Specialist ranks.

@@ -5,13 +5,13 @@ status: completed
 created: 2026-09-28
 updated: 2026-10-01
 title: Strategic Recommendations Across All 3 Domains
-description: Actionable operational, retention, and governance roadmaps for enterprise leadership
+description: Actionable operational, retention, and governance roadmaps for enterprise leadership including PRA equity remediation
 ---
 
 # 8. Strategic Business Recommendations Across All 3 Domains
 
 > [!abstract] Actionable Transformation Roadmap
-> Translating analytical findings into measurable enterprise value requires strategic alignment across operations, finance, and human resources. This roadmap outlines targeted initiatives, projected ROI, implementation timelines, and executive ownership for all three client divisions.
+> Translating analytical findings into measurable enterprise value requires strategic alignment across operations, finance, and human resources. This roadmap outlines targeted initiatives, projected ROI, implementation timelines, and executive ownership for all three client divisions, with dedicated governance actions informed by the auxiliary Backing tables.
 
 ---
 
@@ -91,6 +91,18 @@ description: Actionable operational, retention, and governance roadmaps for ente
 - **Projected Impact**: Compresses annual corporate turnover from 9.40% to **<7.0%**, reducing costly personnel replacement and retraining expenses.
 - **Timeline**: 90-day HR policy rollout.
 
+### Initiative 3.4: Target PRA Equity Recalibration in Senior Manager Grades (`Backing 4`)
+- **Problem**: `Backing 4` identifies Job Level `3 - Senior Manager` in `Sales & Marketing` and `Internal Services` as **`Uneven - Men benefit`**.
+- **Action**: Mandate a dual-evaluator review and independent HR ombudsman sign-off on all promotion packages for Senior Manager roles within Sales & Marketing and Internal Services.
+- **Projected Impact**: Restores statistical gender equity (`Even` PRA status) across all management tiers by FY22.
+- **Timeline**: Immediate compliance policy.
+
+### Initiative 3.5: Time-in-Grade Velocity Guardrails (`Backing 1`)
+- **Problem**: Female Senior Officers average 3.8 years in grade before promotion review, compared to 2.4 years for male peers.
+- **Action**: Institute an automated tenure flag in the HRIS alerting department leads when any high-performing specialist reaches 3.0 years in grade without promotional review.
+- **Projected Impact**: Eliminates promotion latency penalties and reduces voluntary specialist attrition.
+- **Timeline**: 60-day HRIS notification setup.
+
 ---
 
 ## 📊 Summary Transformation Roadmap & Executive Ownership
@@ -103,3 +115,5 @@ description: Actionable operational, retention, and governance roadmaps for ente
 | **Tech Ticket Auto-Trigger**| Cross-Functional Ops | High-Risk Churn Rate | Reduce escalation churn by 30% | 30 Days |
 | **Executive Mentorship** | Chief Diversity Officer | Exec Female % | Increase executive female share to 25.0% | 24 Months |
 | **Promotion Calibration** | HR Executive Committee | Female Promotion Rate | Achieve 1:1 promotion parity across genders | FY22 Cycle |
+| **PRA Equity Recalibration**| HR Compliance Lead | Uneven PRA Headcount | Eliminate all "Uneven - Men benefit" tiers | FY22 Cycle |
+| **Time-in-Grade Alerting** | Talent Development | Avg Years in Grade | Cap specialist time-in-grade at 3.0 years | 60 Days |
