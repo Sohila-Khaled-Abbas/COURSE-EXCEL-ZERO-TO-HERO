@@ -1,110 +1,126 @@
 ---
 type: project-documentation
-project_name: PwC Call Center Performance Analysis
+project_name: PwC Digital Transformation Analytics Suite
+status: completed
 created: 2026-09-28
 updated: 2026-10-01
-title: Master Data Dictionary
-description: Field definitions, data types, and permitted values across 3 datasets
+title: Master Data Dictionary & Galaxy Schema Specs
+description: Comprehensive field definitions, types, null handling, and relationship keys across 3 datasets
 ---
 
-# 3. Master Data Dictionary: PwC Switzerland Simulation Suite
+# 3. Master Data Dictionary & Galaxy Schema Specifications
 
-This master dictionary details the schema, data types, null distributions, and business definitions for all three datasets within the **PwC Switzerland Digital Transformation Virtual Case Experience**.
-
----
-
-## 📞 Dataset 01: The Call Centre Trends (`01 Call-Center-Dataset.xlsx`)
-- **Simulation Task**: Task 1 (Active Capstone Project)
-- **Client Stakeholder**: Claire (Call Centre Manager)
-- **Scope**: 5,000 Inbound Inquiries (Q1 2021) | 8 Dedicated Agents
-
-| Column Name | Official Data Type | Null Count | Allowed Values / Format | Description & Business Meaning |
-| :--- | :--- | :---: | :--- | :--- |
-| `Call Id` | Text | 0 | `ID0001` - `ID5000` | Unique alphanumeric identifier for each call interaction (Primary Key). |
-| `Agent` | Text | 0 | 8 Agents: `Diane`, `Becky`, `Stewart`, `Greg`, `Jim`, `Joe`, `Martha`, `Dan` | Name of the customer service representative assigned to the call. |
-| `Date` | Date | 0 | `YYYY-MM-DD` (2021-01-01 to 2021-03-31) | The calendar date on which the call arrived in queue. |
-| `Time` | Time / DateTime | 0 | `HH:MM:SS` (09:00:00 to 18:00:00) | Exact telephony switch timestamp when the customer dialed in. |
-| `Topic` | Text | 0 | 5 Topics: `Contract related`, `Technical Support`, `Payment related`, `Admin Support`, `Streaming` | Primary categorization of customer inquiry. |
-| `Answered (Y/N)` | Text | 0 | `Y`, `N` | Binary telephony pickup flag: `Y` = Connected (4,054), `N` = Abandoned (946). |
-| `Resolved` | Text | 0 | `Y`, `N` | Binary issue resolution flag: `Y` = Resolved (3,646), `N` = Unresolved (1,354). |
-| `Speed of answer in seconds` | Decimal / Int | 946 | `10` - `125` seconds | Duration caller waited in queue before pickup. **946 nulls reflect abandoned calls.** |
-| `AvgTalkDuration` | Time / Duration | 946 | `HH:MM:SS` (`00:00:30` - `00:07:00`) | Elapsed talk time between customer and agent. Null for abandoned calls. |
-| `Satisfaction rating` | Decimal / Int | 946 | `1` to `5` | Post-call CSAT rating (1 = Very Dissatisfied, 5 = Very Satisfied). Average: 3.40. |
+This master dictionary details the schema, data types, null distributions, business definitions, and relationship keys for all three datasets and extracted dimensions within the **PwC Switzerland Digital Transformation Galaxy Schema**.
 
 ---
 
-## 🔄 Dataset 02: The Customer Retention (`02 Churn-Dataset.xlsx`)
-- **Simulation Task**: Task 2 (Customer Retention & Predictive Risk Modeling)
-- **Client Stakeholder**: Retention Department Manager
-- **Scope**: 7,043 Customer Records | 25 Service, Contract & Ticket Attributes
+## 📞 Dataset 01: The Call Centre Trends (`Fact_Calls`)
+- **Simulation Task**: Task 1 (Call Centre Trends & SLA Operations)
+- **Client Stakeholder**: Claire (Call Centre Operations Manager)
+- **Scope**: 5,000 Inbound Telephony Interactions (Q1 2021: Jan 1 – Mar 31, 2021) | 8 Dedicated Agents
+- **Grain**: 1 Row = 1 Inbound Customer Call Interaction
 
-| Column Name | Official Data Type | Description & Analytical Significance |
-| :--- | :--- | :--- |
-| `CustID` | Text | Unique customer account identifier (Primary Key). |
-| `Gender` | Text | Customer gender identity (`Male`, `Female`). |
-| `SeniorCitizen` | Text | Demographic flag (`Yes`, `No`). |
-| `Partner` | Text | Marital / cohabitation status (`Yes`, `No`). |
-| `Dependents` | Text | Flag indicating whether customer has financial dependents (`Yes`, `No`). |
-| `Tenure_(Month)` | Whole Number | Continuous duration in months the customer has subscribed to services. |
-| `Phone` | Text | Subscription to telephony landline (`Yes`, `No`). |
-| `MultipleLines` | Text | Multiple phone lines service flag (`Yes`, `No`, `No phone service`). |
-| `Internet` | Text | Internet service provider tier (`DSL`, `Fiber optic`, `No`). |
-| `OnlineSecurity` | Text | Value-added cybersecurity add-on (`Yes`, `No`, `No internet service`). |
-| `OnlineBackup` | Text | Cloud data backup service add-on (`Yes`, `No`, `No internet service`). |
-| `DeviceProtection` | Text | Hardware warranty & insurance coverage (`Yes`, `No`, `No internet service`). |
-| `TechSupport` | Text | Premium technical support contract (`Yes`, `No`, `No internet service`). |
-| `StreamingTV` | Text | Television IPTV streaming package (`Yes`, `No`, `No internet service`). |
-| `StreamingMovies` | Text | On-demand movie streaming package (`Yes`, `No`, `No internet service`). |
-| `Contract` | Text | Contract commitment horizon (`Month-to-month`, `One year`, `Two year`). |
-| `PaperlessBilling` | Text | Electronic statement billing enrollment (`Yes`, `No`). |
-| `PaymentMethod` | Text | Payment channel (`Electronic check`, `Mailed check`, `Bank transfer`, `Credit card`). |
-| `MonthlyCharges` | Decimal Number | Monthly recurring subscription charge billed to customer. |
-| `TotalCharges` | Currency / Fixed Decimal | Lifetime cumulative billings across account tenure. |
-| `#AdminTickets` | Whole Number | Total administrative and billing complaints submitted. |
-| `#TechTickets` | Whole Number | Total technical support trouble tickets opened. |
-| `Churn` | Text | Target outcome flag indicating account termination (`Yes`, `No`). |
-| `SubsPeriod` | Text | Discretized tenure cohort grouping. |
-| `PaymentGroup` | Text | Aggregated billing category (Automated vs Manual payment). |
+| Column Name | Raw Excel Type | Power Query M Type | Null Count | Permitted Values / Format | Description & Business Meaning | Galaxy Schema Role |
+| :--- | :--- | :--- | :---: | :--- | :--- | :--- |
+| `Call Id` | Text | `type text` | 0 | `ID0001` - `ID5000` | Unique alphanumeric identifier for each call interaction. | **Primary Key** |
+| `Agent` | Text | `type text` | 0 | 8 Agents (`Diane`, `Becky`, `Stewart`, `Greg`, `Jim`, `Joe`, `Martha`, `Dan`) | Name of assigned representative. | **Foreign Key $\to$ `DimAgent[Agent]`** |
+| `Date` | Date | `type date` | 0 | `YYYY-MM-DD` (2021-01-01 to 2021-03-31) | Date call entered telephony queue. | **Foreign Key $\to$ `DimDate[Date]`** |
+| `Time` | Time / DateTime | `type time` | 0 | `HH:MM:SS` (09:00:00 to 18:00:00) | Exact switch queue arrival timestamp. | Dimension feature (Hour) |
+| `Topic` | Text | `type text` | 0 | 5 Topics (`Contract related`, `Technical Support`, `Payment related`, `Admin Support`, `Streaming`) | Customer inquiry classification. | **Foreign Key $\to$ `DimTopic[Topic]`** |
+| `Answered (Y/N)` | Text | `type text` | 0 | `'Y'`, `'N'` | Telephony pickup flag (`Y` = 4,054, `N` = 946). | Filtering & Slicing |
+| `Resolved` | Text | `type text` | 0 | `'Y'`, `'N'` | First-contact issue resolution flag (`Y` = 3,646, `N` = 1,354). | Performance metric |
+| `Speed of answer in seconds` | Integer | `Int64.Type` | **946** | `10` - `125` seconds | Elapsed queue wait duration before pickup. **946 operational nulls for abandoned calls.** | SLA measure calculation |
+| `AvgTalkDuration` | Time / Duration | `type time` / `duration`| **946** | `HH:MM:SS` (`00:00:30` - `00:07:00`) | Active agent conversation length. Null when abandoned. | Handle time (AHT) calculation |
+| `Satisfaction rating` | Integer | `Int64.Type` | **946** | `1` to `5` | Post-call CSAT rating (1 = Poor, 5 = Excellent). Average: 3.40 / 5.0. | Quality rating calculation |
 
 ---
 
-## 👥 Dataset 03: Diversity and Inclusion (`03 Diversity-Inclusion-Dataset.xlsx`)
-- **Simulation Task**: Task 3 (Executive Gender Parity & Human Resources BI)
-- **Client Stakeholder**: Human Resources Executive Leadership (Pharma Group AG)
-- **Scope**: 500 Corporate Employee Records | 32 Personnel & Promotion Attributes
+## 🔄 Dataset 02: Customer Retention (`Fact_Churn`)
+- **Simulation Task**: Task 2 (Customer Retention & Predictive Churn Risk)
+- **Client Stakeholder**: David Chen (VP of Customer Retention)
+- **Scope**: 7,043 Telecommunications Subscriber Accounts | 23 Raw Attributes
+- **Grain**: 1 Row = 1 Customer Account
 
-| Column Name | Official Data Type | Description & Organizational Significance |
-| :--- | :--- | :--- |
-| `Employee ID` | Text | Unique corporate personnel identification number (Primary Key). |
-| `Gender` | Text | Biological/Self-identified gender (`Male`, `Female`). |
-| `Job Level after FY20 promotions`| Text | Organizational hierarchy tier following FY20 appraisal cycle (Executive to Staff). |
-| `New hire FY20?` | Text | Cohort flag indicating recruitment within fiscal year 2020 (`Y`, `N`). |
-| `FY20 Performance Rating` | Decimal Number | Annual performance evaluation score (1.0 to 5.0). |
-| `Promotion in FY21?` | Text | Succession promotion flag awarded in fiscal year 2021 (`Yes`, `No`). |
-| `In base group for Promotion FY21`| Text | Eligibility filter flag for FY21 promotion pool. |
-| `Target hire balance` | Decimal Number | Benchmark diversity intake quota percentage. |
-| `FY20 leaver?` | Text | Turnover flag indicating resignation or departure during FY20 (`Yes`, `No`). |
-| `In base group for turnover FY20`| Text | Denominator baseline cohort for FY20 turnover rate calculation. |
-| `Department @01.07.2020` | Text | Corporate operational division as of baseline census date. |
-| `Leaver FY` | Text | Fiscal year of employee termination. |
-| `Job Level after FY21 promotions`| Text | Final corporate hierarchy rank following FY21 review. |
-| `Last Department in FY20` | Text | Final departmental assignment prior to departure or year-end. |
-| `FTE group` | Decimal Number | Full-Time Equivalent capacity fraction (1.0 = Full Time, 0.5 = Part Time). |
-| `Time type` | Text | Employment model (`Full-time`, `Part-time`). |
-| `Department & JL group PRA status`| Text | Performance Review Assessment calibration status. |
-| `Department & JL group for PRA` | Text | Combined analytical cohort grouping. |
-| `Job Level group PRA status` | Text | Level-specific PRA compliance metric. |
-| `Job Level group for PRA` | Text | Hierarchical tier classification for PRA evaluation. |
-| `Time in Job Level @01.07.2020` | Whole Number | Tenure in current grade measured in months. |
-| `Job Level before FY20 promotions`| Text | Starting grade prior to FY20 promotions. |
-| `Promotion in FY20?` | Text | Promotion flag awarded in fiscal year 2020 (`Yes`, `No`). |
-| `FY19 Performance Rating` | Decimal Number | Historical appraisal score from prior fiscal year. |
-| `Age group` | Text | Demographic age bracket (<20, 20-29, 30-39, 40-49, 50-59, 60+). |
-| `Age @01.07.2020` | Whole Number | Exact chronological age in years at census baseline. |
-| `Nationality 1` | Text | Primary citizenship / nationality identifier. |
-| `Region group: nationality 1` | Text | Continental region grouping. |
-| `Broad region group: nationality 1`| Text | Macro geographic economic zone. |
-| `Last hire date` | Date | Date of initial onboarding contract execution. |
-| `Years since last hire` | Whole Number | Cumulative organizational tenure in full years. |
-| `Rand` | Decimal Number | Pseudorandom uniform float [0, 1] used for test/validation sampling. |
+| Column Name | Raw Excel Type | Power Query M Type | Null Count | Permitted Values / Format | Description & Business Meaning | Galaxy Schema Role |
+| :--- | :--- | :--- | :---: | :--- | :--- | :--- |
+| `customerID` | Text | `type text` | 0 | Alphanumeric (e.g., `7590-VHVEG`) | Unique customer account identifier. | **Primary Key** |
+| `gender` | Text | `type text` | 0 | `'Female'`, `'Male'` | Biological / Demographic gender identity. | Demographic Slicer |
+| `SeniorCitizen` | Integer | `Int64.Type` | 0 | `0`, `1` | Binary flag indicating age 65+. | Demographic Slicer |
+| `Partner` | Text | `type text` | 0 | `'Yes'`, `'No'` | Marital or cohabitation status. | Demographic Feature |
+| `Dependents` | Text | `type text` | 0 | `'Yes'`, `'No'` | Flag indicating financial dependents. | Demographic Feature |
+| `tenure` | Integer | `Int64.Type` | 0 | `0` to `72` months | Total duration account has been active. | Retention Cohort Filter |
+| `PhoneService` | Text | `type text` | 0 | `'Yes'`, `'No'` | Fixed landline telephone service. | Core Service |
+| `MultipleLines` | Text | `type text` | 0 | `'Yes'`, `'No'`, `'No phone service'` | Multiple telephone lines contract. | Service Feature |
+| `InternetService` | Text | `type text` | 0 | `'DSL'`, `'Fiber optic'`, `'No'` | Internet delivery architecture. | Risk Driver Slicer |
+| `OnlineSecurity` | Text | `type text` | 0 | `'Yes'`, `'No'`, `'No internet service'` | Value-added cybersecurity add-on. | Retention Buffer |
+| `OnlineBackup` | Text | `type text` | 0 | `'Yes'`, `'No'`, `'No internet service'` | Cloud backup storage add-on. | Retention Buffer |
+| `DeviceProtection` | Text | `type text` | 0 | `'Yes'`, `'No'`, `'No internet service'` | Hardware warranty and insurance. | Retention Buffer |
+| `TechSupport` | Text | `type text` | 0 | `'Yes'`, `'No'`, `'No internet service'` | Dedicated technical assistance contract. | Retention Buffer |
+| `StreamingTV` | Text | `type text` | 0 | `'Yes'`, `'No'`, `'No internet service'` | IPTV subscription streaming service. | Entertainment Add-on |
+| `StreamingMovies` | Text | `type text` | 0 | `'Yes'`, `'No'`, `'No internet service'` | On-demand movie streaming package. | Entertainment Add-on |
+| `Contract` | Text | `type text` | 0 | `'Month-to-month'`, `'One year'`, `'Two year'` | Contract commitment horizon. | **Foreign Key $\to$ `DimContract[Contract]`** |
+| `PaperlessBilling` | Text | `type text` | 0 | `'Yes'`, `'No'` | Electronic statement billing enrollment. | Billing Channel |
+| `PaymentMethod` | Text | `type text` | 0 | `'Electronic check'`, `'Mailed check'`, `'Bank transfer (automatic)'`, `'Credit card (automatic)'` | Payment processing channel. | Risk Driver Slicer |
+| `MonthlyCharges` | Decimal | `type number` / `Currency.Type` | 0 | `$18.25` to `$118.75` | Monthly recurring subscription charge. | Revenue at Risk Metric |
+| `TotalCharges` | Text / Mixed | `Currency.Type` (Cleaned) | **11 blanks** | Cumulative lifetime billings. | 11 zero-tenure rows contain `' '`; cleaned to 0. | Financial Metric |
+| `numAdminTickets` | Integer | `Int64.Type` | 0 | `0` to `5` | Administrative / billing tickets opened. | Operational Friction |
+| `numTechTickets` | Integer | `Int64.Type` | 0 | `0` to `9` | Technical trouble tickets opened. | Leading Churn Indicator |
+| `Churn` | Text | `type text` | 0 | `'Yes'`, `'No'` | Target churn flag (`Yes` = 1,869, `No` = 5,174). | Target Outcome Metric |
 
+---
+
+## 👥 Dataset 03: Diversity and Inclusion (`Fact_Employees`)
+- **Simulation Task**: Task 3 (Executive Diversity & Human Capital Governance)
+- **Client Stakeholder**: Chief Diversity Officer & Executive HR Committee (Pharma Group AG)
+- **Scope**: 500 Corporate Employee Records (Sheet: `Pharma Group AG`) | 32 Attributes
+- **Grain**: 1 Row = 1 Corporate Personnel Record
+
+| Column Name | Raw Excel Type | Power Query M Type | Null Count | Permitted Values / Format | Description & Business Meaning | Galaxy Schema Role |
+| :--- | :--- | :--- | :---: | :--- | :--- | :--- |
+| `Employee ID` | Integer / Text | `type text` | 0 | `1` to `500` | Unique corporate employee identifier. | **Primary Key** |
+| `Gender` | Text | `type text` | 0 | `'Male'`, `'Female'` | Gender identity (`Male` = 295, `Female` = 205). | Primary Parity Metric |
+| `Job Level after FY20 promotions`| Text | `type text` | 0 | `1 - Executive` to `6 - Junior Officer` | Organizational rank following FY20 review. | Hierarchy Slicer |
+| `New hire FY20?` | Text | `type text` | 0 | `'Y'`, `'N'` | Intake cohort flag during FY20 (`Y` = 66, `N` = 434). | Workforce Inflow |
+| `FY20 Performance Rating` | Integer | `Int64.Type` | **87** | `1`, `2`, `3`, `4` | Appraisal score (Null for new hires). | Performance Evaluation |
+| `Promotion in FY21?` | Text | `type text` | 0 | `'Yes'`, `'No'` | Target promotion outcome in FY21 (`Yes` = 51, `No` = 449). | Promotion Rate Metric |
+| `In base group for Promotion FY21`| Text | `type text` | 0 | `'Yes'`, `'No'` | Eligibility denominator flag for promotion pool. | Eligibility Filter |
+| `Target hire balance` | Decimal | `type number` | 0 | `0.5` (50%) | Diversity intake quota target. | Benchmark Standard |
+| `FY20 leaver?` | Text | `type text` | 0 | `'Yes'`, `'No'` | Voluntary departure flag during FY20 (`Yes` = 47, `No` = 453). | Turnover Metric |
+| `In base group for turnover FY20`| Text | `type text` | 0 | `'Y'`, `'N'` | Eligibility denominator flag for turnover rate. | Turnover Baseline |
+| `Department @01.07.2020` | Text | `type text` | 0 | 6 Departments (`Operations`, `Sales & Marketing`, `Strategy`, `Human Resources`, `Finance`, `Legal`) | Baseline business unit. | **Foreign Key $\to$ `DimDepartment[Department]`** |
+| `Leaver FY` | Text | `type text` | **453** | `'FY20'` | Departure fiscal year (Null for active staff). | Exit Analysis |
+| `Job Level after FY21 promotions`| Text | `type text` | **47** | `1 - Executive` to `6 - Junior Officer` | Final organizational grade (Null for leavers). | Progression Matrix |
+| `FTE group` | Text | `type text` | 0 | `'1 FTE'`, `'0.8 FTE'`, `'0.5 FTE'` | Full-time equivalent capacity band. | Capacity Feature |
+| `Time type` | Text | `type text` | 0 | `'Full time'`, `'Part time'` | Employment contract schedule. | Contract Feature |
+| `Age group` | Text | `type text` | 0 | `20 to 29`, `30 to 39`, `40 to 49`, `50 to 59`, `60+` | Demographic age cohort. | Demographic Slicer |
+| `Nationality 1` | Text | `type text` | 0 | Country names (e.g., `Switzerland`, `Germany`, etc.) | Primary citizenship. | Diversity Feature |
+| `Years since last hire` | Integer | `Int64.Type` | 0 | `0` to `28` years | Cumulative tenure at organization. | Tenure Metric |
+
+---
+
+## 🏛️ Extracted Dimension Tables in the Galaxy Schema
+
+### 1. `DimDate` (Extracted from `Fact_Calls[Date]`)
+- **Grain**: 1 Row = 1 Calendar Day (90 distinct days in Q1 2021)
+- **Primary Key**: `Date`
+- **Attributes**: `Year` (2021), `Quarter` ("Q1"), `Month` (1–3), `Month Name` ("January", "February", "March"), `Day` (1–31), `Day of Week` ("Monday"–"Sunday"), `Is_Weekend` (0/1).
+
+### 2. `DimAgent` (Extracted from `Fact_Calls[Agent]`)
+- **Grain**: 1 Row = 1 Support Representative (8 dedicated agents)
+- **Primary Key**: `Agent`
+- **Attributes**: `Agent Name`, `Department` ("Customer Operations"), `Target_CSAT` (3.50), `Target_Answer_Rate` (0.85).
+
+### 3. `DimTopic` (Extracted from `Fact_Calls[Topic]`)
+- **Grain**: 1 Row = 1 Inquiry Classification (5 topics)
+- **Primary Key**: `Topic`
+- **Attributes**: `Topic Name`, `Category` ("Technical Support", "Finance & Accounts", "Administrative"), `Target_SLA_Seconds` (60s).
+
+### 4. `DimContract` (Extracted from `Fact_Churn[Contract]`)
+- **Grain**: 1 Row = 1 Contract Horizon (3 terms)
+- **Primary Key**: `Contract`
+- **Attributes**: `Contract Term` (`Month-to-month`, `One year`, `Two year`), `Commitment_Months` (1, 12, 24), `Risk_Tier` ("High Risk", "Moderate Risk", "Low Risk").
+
+### 5. `DimDepartment` (Extracted from `Fact_Employees[Department @01.07.2020]`)
+- **Grain**: 1 Row = 1 Corporate Division (6 business units)
+- **Primary Key**: `Department`
+- **Attributes**: `Department Name` (`Operations`, `Sales & Marketing`, `Strategy`, `Human Resources`, `Finance`, `Internal Audit / Legal`), `Division_Type` ("Revenue Generating" vs "Corporate Support").

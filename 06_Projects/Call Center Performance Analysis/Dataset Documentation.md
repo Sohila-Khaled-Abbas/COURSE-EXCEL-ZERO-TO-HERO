@@ -1,47 +1,45 @@
 ---
 type: project-documentation
-project_name: PwC Call Center Performance Analysis
+project_name: PwC Digital Transformation Analytics Suite
 source_ecosystem: PwC Switzerland Digital Transformation / Forage Virtual Case Experience
 canonical_url: https://triwgani.github.io/pwc_digital.transformation/
-github_mirror: https://github.com/globalsmile/Call-Center-Analysis/blob/main/01%20Call-Center-Dataset.xlsx
-timeframe: January 1, 2021 – March 31, 2021 (Q1 2021, 90 operational days)
-total_records: 5000
-total_agents: 8
-answer_rate: 81.08%
-resolution_rate: 72.92%
+github_mirror: https://github.com/Boomslang-Maverick/PWC-Forage-Power-BI-Virtual-Experience
+timeframe: Enterprise Analytical Baseline (Q1 2021 & FY20/FY21)
+total_records: 12543 (5,000 Calls + 7,043 Churn Accounts + 500 Employee Records)
+galaxy_schema: VertiPaq In-Memory Fact Constellation (3 Facts, 5 Dimensions)
 created: 2026-09-28
-updated: 2026-09-30
+updated: 2026-10-01
 tags:
 - pwc
+- galaxy-schema
 - call-center
+- customer-churn
+- diversity-inclusion
 - forage
 - power-bi
 - digital-transformation
 - dataset-documentation
-- benchmark
-- reference
-title: Dataset Provenance & Documentation
-description: Origin, authenticity, and Forage simulation metadata
+title: Tripartite Dataset Provenance & Galaxy Specifications
+description: Origin, authenticity, schemas, and VertiPaq memory characteristics across all 3 PwC datasets
 ---
 
-# 2. Master Dataset Documentation & Authentic Provenance
+# 2. Master Dataset Documentation: The Complete PwC Tripartite Suite
 
 > [!abstract] Provenance & Project Context
-> The **PwC Call Center Performance Analysis** dataset originates from the prestigious **PwC Switzerland – Call Centre Trends** job simulation program, hosted on **Forage** (*PwC Switzerland Digital Transformation & Power BI Virtual Case Experience*). Consisting of **5,000 inbound telephonic call interaction logs** recorded between **January 1 and March 31, 2021**, it serves as an industry-standard benchmark for call center operations, First Contact Resolution (FCR), Average Speed of Answer (ASA), and Customer Satisfaction (CSAT) scorecards.
+> The datasets analyzed in this project originate from the prestigious **PwC Switzerland Digital Transformation Virtual Case Experience**, hosted on **Forage**. Designed to simulate real-world management consulting engagements, the simulation comprises three distinct operational, financial, and human capital datasets. 
+> Rather than analyzing these in isolation, this project unifies all three into an enterprise-grade **Galaxy Schema (Fact Constellation Schema)** within the **Power Pivot (VertiPaq Engine)** layer.
 
 ---
 
-## 🌐 Official Sources, Provenance & The PwC Switzerland Simulation Suite
-
-The **Call Centre Trends** dataset analyzed in this capstone represents **Task 1** of the prestigious **PwC Switzerland Power BI Virtual Case Experience on Forage**. In corporate analytics, this simulation is renowned for preparing analysts to handle messy, multi-source operational data across three enterprise domains:
+## 🌐 Official Sources, Provenance & CDN Links
 
 ```mermaid
 flowchart TD
-    PWC["PwC Switzerland Power BI Virtual Case Experience\n(Forage Enterprise Simulation)"]
+    PWC["PwC Switzerland Digital Transformation Suite\n(Forage Enterprise Simulation)"]
     
-    T1["Task 1: Call Centre Trends (This Project)\n(01 Call-Center-Dataset.xlsx)\n• 5,000 Inbound Inquiries | 8 Agents | Q1 2021\n• Ingested in Module_7_Demo.xlsx & Capstone"]
-    T2["Task 2: Customer Retention\n(02 Churn-Dataset.xlsx)\n• 7,043 Telco Customer Accounts\n• 23 Churn & Service Elasticity Attributes"]
-    T3["Task 3: Diversity & Inclusion\n(03 Diversity-Inclusion-Dataset.xlsx)\n• 500 Corporate Employee Records\n• Executive Hierarchy & Promotion Parity"]
+    T1["Dataset 01: Call Centre Trends\n(01 Call-Center-Dataset.xlsx)\n• 5,000 Inbound Inquiries | 8 Agents | Q1 2021\n• Fact_Calls | DimDate | DimAgent | DimTopic"]
+    T2["Dataset 02: Customer Retention\n(02 Churn-Dataset.xlsx)\n• 7,043 Telco Customer Accounts | 23 Attributes\n• Fact_Churn | DimContract"]
+    T3["Dataset 03: Diversity & Inclusion\n(03 Diversity-Inclusion-Dataset.xlsx)\n• 500 Corporate Employee Records | 32 Attributes\n• Fact_Employees | DimDepartment"]
     
     PWC --> T1
     PWC --> T2
@@ -55,146 +53,142 @@ flowchart TD
 
 ### 📦 The Complete Tripartite Simulation Suite
 
-| Dataset # | Official Filename | PwC Simulation Task | Business Focus | Scope | Direct Official CDN Download Link |
-| :---: | :--- | :--- | :--- | :--- | :--- |
-| **01** | `01 Call-Center-Dataset.xlsx` | **The Call Centre Trends (Active)** | Customer Experience Operations | $5,000$ calls, $8$ agents, Q1 2021 | [Download 01 Call-Center-Dataset.xlsx](https://cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/01%20Call-Center-Dataset.xlsx) |
-| **02** | `02 Churn-Dataset.xlsx` | **The Customer Retention** | Subscription & Customer Success | $7,043$ telco customers, 25 attributes | [Download 02 Churn-Dataset.xlsx](https://cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/02%20Churn-Dataset.xlsx) |
-| **03** | `03 Diversity-Inclusion-Dataset.xlsx` | **Diversity & Inclusion** | Human Capital Management (HR) | $500$ employees, FY20/FY21 cohorts | [Download 03 Diversity-Inclusion-Dataset.xlsx](https://cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/03%20Diversity-Inclusion-Dataset.xlsx) |
-
-> [!IMPORTANT]
-> **Authentic Forage CDN Links & Browser Access:**
-> The download URLs above point directly to the official Forage Content Delivery Network (`cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/`). These are the authentic source files from the PwC Switzerland simulation, not third-party recreations or modified Kaggle re-uploads. Note that while automated web crawlers may encounter Cloudflare bot-protection when requesting these CDN links programmatically, human users can download and open them directly in any web browser.
+| Dataset # | Official Filename | Sheet Name | Row Count | Primary Domain | Direct Official CDN Download Link |
+| :---: | :--- | :--- | :---: | :--- | :--- |
+| **01** | `01 Call-Center-Dataset.xlsx` | `Sheet1` | 5,000 | Customer Operations & Telephony SLAs | [Download 01 Call-Center-Dataset.xlsx](https://cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/01%20Call-Center-Dataset.xlsx) |
+| **02** | `02 Churn-Dataset.xlsx` | `01 Churn-Dataset` | 7,043 | Customer Success & Revenue Risk | [Download 02 Churn-Dataset.xlsx](https://cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/02%20Churn-Dataset.xlsx) |
+| **03** | `03 Diversity-Inclusion-Dataset.xlsx` | `Pharma Group AG` | 500 | Human Capital & Executive Governance | [Download 03 Diversity-Inclusion-Dataset.xlsx](https://cdn.theforage.com/vinternships/companyassets/4sLyCPgmsy8DA6Dh3/03%20Diversity-Inclusion-Dataset.xlsx) |
 
 ---
 
-### 🧩 Detailed Breakdown of the 3 PwC Simulation Tasks
+## 📞 Dataset 01: The Call Centre Trends (`Fact_Calls`)
 
-#### Task 1: The Call Centre Trends
-- **Client Sponsor**: **Claire** (Call Centre Manager at Telecom Client).
-- **Mandate**: Create an executive Power BI dashboard reflecting all relevant Key Performance Indicators (KPIs) and operational metrics in the dataset.
-- **Key Deliverables**:
-  - **The KPI Dashboard**: High-level view of overall customer satisfaction, answered/abandoned volume, calls by time, and Average Speed of Answer (ASA).
-  - **The Detail Page**: Topic-level drill-down and the **Agent's Performance Quadrant: Average Handle Time (Talk Duration) vs Calls Answered**.
-- **Live Power BI Report**: [PwC Call Centre Dashboard (Interactive)](https://app.powerbi.com/links/_jx5u479wZ?ctid=af2c0734-cb42-464f-b6bf-2a241b6ada56&pbi_source=linkShare)
+### Scope & Summary Statistics
+- **Total Inbound Calls**: 5,000 records spanning January 1 to March 31, 2021 (90 calendar days).
+- **Roster**: 8 Dedicated Agents (`Becky`, `Dan`, `Diane`, `Greg`, `Jim`, `Joe`, `Martha`, `Stewart`).
+- **Answer Rate**: **81.08%** (4,054 answered / 5,000 total).
+- **Abandonment Rate**: **18.92%** (946 abandoned / 5,000 total).
+- **First-Contact Resolution (Answered)**: **89.94%** (3,646 resolved / 4,054 answered).
+- **Average Speed of Answer (ASA)**: **67.52 seconds**.
+- **Average Talk Duration (AHT)**: **3 minutes 45 seconds** (225 seconds).
+- **Average Customer Satisfaction (CSAT)**: **3.40 / 5.00**.
 
-#### Task 2: The Customer Retention
-- **Client Sponsor**: Retentions Manager (Telecommunications Industry).
-- **Mandate**: Shift customer retention from reactive post-termination outreach to proactive churn risk identification using demographic, service, and ticketing features.
-- **Key DAX Measures**:
-  - `# Customer = DISTINCTCOUNT(ChurnDataset[CustID])`
-  - `#Churn = CALCULATE(COUNT(ChurnDataset[Churn]), ChurnDataset[Churn]="Yes")`
-  - `Churn Rate = DIVIDE('Measures Table'[#Churn], [# Customer])`
-  - Service Metrics: `# Partner`, `# Dependents`, `# Senior Citizen`, `# DeviceProtection`, `# OnlineSecurity`, `# OnlineBackup`, `# TechSupport`, `# StreamingTV`, `# StreamingMovies`, `# Paperless`, `# NonPaperless`.
-- **Live Power BI Report**: [PwC Customer Churn & Retention Dashboard](https://app.powerbi.com/links/2DFLi_ipSW?ctid=af2c0734-cb42-464f-b6bf-2a241b6ada56&pbi_source=linkShare)
-
-#### Task 3: Diversity and Inclusion
-- **Client Sponsor**: Human Resources Leadership (Pharma Group AG).
-- **Mandate**: Diagnose root causes behind the slow progress in achieving gender balance at the executive management level through hiring, promotion, and turnover analytics.
-- **Key DAX Measures**:
-  - Headcount: `#Men = CALCULATE(DISTINCTCOUNT('Pharma Group AG'[Employee ID]), 'Pharma Group AG'[Gender]="Male")`, `#Women = CALCULATE(DISTINCTCOUNT('Pharma Group AG'[Employee ID]), 'Pharma Group AG'[Gender]="Female")`
-  - Promotions: `#Promoted Employee = CALCULATE([Total Employee EO FY20], 'Pharma Group AG'[Promotion in FY21?]="Yes")`, `Promotion Rate = DIVIDE([#Promoted Employee], [Total Employee EO FY20])`
-  - Turnover: `#Leaver FY20 = CALCULATE(DISTINCTCOUNT('Pharma Group AG'[Employee ID]), 'Pharma Group AG'[FY20 leaver?]="Yes")`, `Turnover Rate = DIVIDE([#Leaver FY20], 0.5*([Total Employee AB FY20]+[Total Employee EO FY20]))`
-  - Gender Promotion Parity: `Promoted Men Rate = DIVIDE([#Promoted Men], [#Promoted Employee])`, `Promoted Women Rate = DIVIDE([#Promoted Women], [#Promoted Employee])`
-
----
-
-### 🏛️ Source Repositories & Reference Hubs
-| Source Entity | Platform / Repository | Description | Direct Access Link |
-| :--- | :--- | :--- | :--- |
-| **Project Reference Hub** | Canonical Portfolio Documentation | `pwc_digital.transformation` by Tri Wulunggani | [triwgani.github.io/pwc_digital.transformation](https://triwgani.github.io/pwc_digital.transformation/) |
-| **Complete Simulation Suite** | GitHub Repository | `Boomslang-Maverick/PWC-Forage-Power-BI-Virtual-Experience` (Contains all 3 original `.xlsx` files + task PDFs/briefs) | [GitHub: Boomslang-Maverick Suite](https://github.com/Boomslang-Maverick/PWC-Forage-Power-BI-Virtual-Experience) |
-| **Task 1 Benchmark Mirror** | Public Repository | `globalsmile/Call-Center-Analysis` (`01 Call-Center-Dataset.xlsx`, 248 KB) | [GitHub: globalsmile/Call-Center-Analysis](https://github.com/globalsmile/Call-Center-Analysis/blob/main/01%20Call-Center-Dataset.xlsx) |
-| **Forage Virtual Simulation** | Educational Origin | PwC Switzerland Power BI & Digital Transformation Case Experience | [Forage: PwC Switzerland Experience](https://www.theforage.com/simulations/pwc-ch/power-bi-cqxg) |
-| **Course Master Asset** | Local Storage | Raw Course Workbook (`PWC Dataset.xlsx`, Sheet: `Source Data `) | `09_Source_Materials/Module 9/13/PWC Dataset.xlsx` |
-| **Live Student Laboratory** | Hands-on Demo Workbook | Ingested via Power Query into Table `ExternalData_2` | [`Module_7_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/07_Data_Cleaning/Module_7_Demo.xlsx) |
-
-> [!TIP]
-> **Portfolio Strategy Recommendation:**
-> Completing all three tasks from this PwC Switzerland simulation represents a premier end-to-end showcase:
-> 1. **Operations & Service Analytics**: Inbound ticketing, speed of answer, and agent CSAT scorecards (*Task 1*).
-> 2. **Revenue & Churn Retention Analytics**: Customer lifetime value, contract risk elasticity, and preventive retention modeling (*Task 2*).
-> 3. **Organizational & People Analytics**: Gender promotion parity, executive turnover, and DEI performance KPIs (*Task 3*).
-
----
-
-## 🔍 Ground-Truth Verification & Distinctive Field Matching
-
-The authenticity of this dataset is confirmed by its signature record markers and exact schema alignment:
-
-| Screenshot / Ingested Field | Canonical Dataset Field | Native Data Type | Sample Initial Values | Verification & Operational Significance |
+### Schema Specification
+| Field Name | Data Type | Null Count | Sample Value | Role in Galaxy Model |
 | :--- | :--- | :---: | :--- | :--- |
-| `Call Id` | `Call Id` | Text | `ID0001`, `ID0002`, `ID0003` | Unique primary key. Exactly 5,000 distinct records; zero duplicate keys. |
-| `Agent` | `Agent` | Text | `Diane`, `Becky`, `Stewart` | Telephony representative. Exactly 8 agents (`Diane`, `Becky`, `Stewart`, `Greg`, `Dan`, `Jim`, `Martha`, `Joe`). |
-| `Date` | `Date` | Date | `2021-01-01` | Date of call arrival spanning Q1 2021 (90 calendar days). |
-| `Time` | `Time` | Time / DateTime | `09:12:00` | Telephony ACD switch arrival timestamp. |
-| `Topic` | `Topic` | Text | `Contract related` | Customer inquiry category (5 topics: `Contract related`, `Payment related`, `Technical support`, `Admin support`, `Streaming`). |
-| `Answered (Y/N)` | `Answered (Y/N)` | Text | `Y`, `N` | Telephony pickup flag (`Y` = Answered, `N` = Abandoned). Exactly 4,054 answered vs 946 abandoned. |
-| `Resolved` | `Resolved` | Text | `Y`, `N` | Issue resolution outcome (`Y` = Resolved, `N` = Unresolved). 3,646 resolved. |
-| `Speed of answer in seconds` | `Speed of answer in seconds` | Integer | `30`, `null` | Customer queue hold duration. **Contains exactly 946 null values representing abandoned calls!** |
-| `AvgTalkDuration` | `AvgTalkDuration` | Time / DateTime | `00:03:45`, `null` | Active agent talk duration. Null for abandoned calls. |
-| `Satisfaction rating` | `Satisfaction rating` | Integer | `3`, `null` | Post-call CSAT rating from 1 (Lowest) to 5 (Highest). Average: `3.40 / 5.0`. |
-| `Column11`–`Column14` | *Phantom Excel Artifacts* | Blank / Null | `null` | Legacy residual formatting columns present in raw Excel export; purged in Power Query. |
+| `Call Id` | Text | 0 | `ID0001` | Primary Key |
+| `Agent` | Text | 0 | `Diane` | Foreign Key $\to$ `DimAgent[Agent]` |
+| `Date` | Date | 0 | `2021-01-01` | Foreign Key $\to$ `DimDate[Date]` |
+| `Time` | Time | 0 | `09:12:58` | Queue arrival timestamp |
+| `Topic` | Text | 0 | `Contract related` | Foreign Key $\to$ `DimTopic[Topic]` |
+| `Answered (Y/N)` | Text | 0 | `Y` | Telephony pickup flag (`Y`/`N`) |
+| `Resolved` | Text | 0 | `Y` | Issue resolution outcome (`Y`/`N`) |
+| `Speed of answer in seconds` | Integer | 946 | `109` | Queue hold wait time (Null when abandoned) |
+| `AvgTalkDuration` | Time | 946 | `00:03:45` | Conversation duration (Null when abandoned) |
+| `Satisfaction rating` | Integer | 946 | `4` | CSAT survey score 1–5 (Null when abandoned) |
 
 ---
 
-## 📊 Summary Operational Statistics (Audited)
+## 🔄 Dataset 02: Customer Retention & Churn Risk (`Fact_Churn`)
+
+### Scope & Summary Statistics
+- **Total Subscriber Accounts**: 7,043 telecommunications customers.
+- **Churn Count & Rate**: **1,869 churned customers (26.54% churn rate)**.
+- **Monthly Recurring Revenue (MRR)**: $456,116.60 total monthly billings.
+- **Monthly Churn Revenue at Risk**: **$139,130.85 per month** ($1,669,570.20 annualized).
+- **Average Customer Tenure**: 32.37 months (Churners: 17.98 months vs Retained: 37.57 months).
+- **Contract Vulnerability**:
+  - Month-to-Month: 3,875 accounts, **42.71% churn rate** (1,655 churned).
+  - One Year: 1,473 accounts, **11.27% churn rate** (166 churned).
+  - Two Year: 1,695 accounts, **2.83% churn rate** (48 churned).
+- **Internet Service Breakdown**:
+  - Fiber Optic: 3,096 accounts, **41.89% churn rate** (1,297 churned).
+  - DSL: 2,421 accounts, **18.96% churn rate** (459 churned).
+  - No Internet: 1,526 accounts, **7.40% churn rate** (113 churned).
+
+### Schema Specification
+| Field Name | Data Type | Null Count | Sample Value | Role in Galaxy Model |
+| :--- | :--- | :---: | :--- | :--- |
+| `customerID` | Text | 0 | `7590-VHVEG` | Primary Key |
+| `gender` | Text | 0 | `Female` | Demographic slice (`Female`, `Male`) |
+| `SeniorCitizen` | Integer | 0 | `0` | Binary demographic flag (`0`, `1`) |
+| `Partner` | Text | 0 | `Yes` | Marital status flag (`Yes`, `No`) |
+| `Dependents` | Text | 0 | `No` | Dependents flag (`Yes`, `No`) |
+| `tenure` | Integer | 0 | `1` | Continuous months subscribed |
+| `PhoneService` | Text | 0 | `No` | Fixed telephone landline subscription |
+| `MultipleLines` | Text | 0 | `No phone service`| Phone line tiers |
+| `InternetService` | Text | 0 | `DSL` | Internet technology (`DSL`, `Fiber optic`, `No`) |
+| `OnlineSecurity` | Text | 0 | `No` | Cybersecurity add-on service |
+| `OnlineBackup` | Text | 0 | `Yes` | Cloud backup add-on service |
+| `DeviceProtection` | Text | 0 | `No` | Hardware warranty add-on |
+| `TechSupport` | Text | 0 | `No` | Dedicated tech support contract |
+| `StreamingTV` | Text | 0 | `No` | IPTV television package |
+| `StreamingMovies` | Text | 0 | `No` | VOD streaming package |
+| `Contract` | Text | 0 | `Month-to-month` | Foreign Key $\to$ `DimContract[Contract]` |
+| `PaperlessBilling` | Text | 0 | `Yes` | Electronic billing flag |
+| `PaymentMethod` | Text | 0 | `Electronic check`| Payment channel |
+| `MonthlyCharges` | Decimal | 0 | `29.85` | Monthly recurring subscription charge |
+| `TotalCharges` | Decimal | 11 blanks | `29.85` | Cumulative lifetime charges (11 blanks cleaned to 0) |
+| `numAdminTickets` | Integer | 0 | `0` | Billing/admin tickets logged |
+| `numTechTickets` | Integer | 0 | `0` | Technical support tickets logged |
+| `Churn` | Text | 0 | `No` | Target outcome flag (`Yes`, `No`) |
+
+---
+
+## 👥 Dataset 03: Diversity & Inclusion (`Fact_Employees`)
+
+### Scope & Summary Statistics
+- **Total Corporate Personnel**: 500 employees at Pharma Group AG (sheet `Pharma Group AG`).
+- **Gender Balance**: 295 Male (59.0%), 205 Female (41.0%).
+- **Corporate Turnover**: **47 leavers in FY20 (9.40% annual turnover rate)**.
+- **FY21 Promotion Count & Rate**: **51 employees promoted (10.20% promotion rate)**.
+- **Executive Leadership Parity (Job Levels 1 & 2)**:
+  - Job Level 1 (Executive Director): 8 total personnel (7 Male, 1 Female $\to$ **12.5% Female**).
+  - Job Level 2 (Director): 19 total personnel (16 Male, 3 Female $\to$ **15.8% Female**).
+  - Job Level 3 (Senior Manager): 38 total personnel (30 Male, 8 Female $\to$ **21.1% Female**).
+  - Job Level 4 (Manager): 120 total personnel (75 Male, 45 Female $\to$ **37.5% Female**).
+  - Job Level 5 (Senior Officer): 135 total personnel (78 Male, 57 Female $\to$ **42.2% Female**).
+  - Job Level 6 (Junior Officer): 180 total personnel (89 Male, 91 Female $\to$ **50.6% Female**).
+
+### Schema Specification
+| Field Name | Data Type | Null Count | Sample Value | Role in Galaxy Model |
+| :--- | :--- | :---: | :--- | :--- |
+| `Employee ID` | Text | 0 | `1` | Primary Key |
+| `Gender` | Text | 0 | `Male` | Gender identity (`Male`, `Female`) |
+| `Job Level after FY20 promotions`| Text | 0 | `6 - Junior Officer` | Baseline job level |
+| `New hire FY20?` | Text | 0 | `N` | New hire intake flag (`Y`, `N`) |
+| `FY20 Performance Rating` | Integer | 87 | `2` | Annual performance score 1–4 (Null for new hires) |
+| `Promotion in FY21?` | Text | 0 | `No` | Target promotion flag (`Yes`, `No`) |
+| `In base group for Promotion FY21`| Text | 0 | `No` | Eligibility base cohort flag |
+| `Target hire balance` | Decimal | 0 | `0.5` | Target diversity hiring quota |
+| `FY20 leaver?` | Text | 0 | `No` | Voluntary departure flag (`Yes`, `No`) |
+| `In base group for turnover FY20`| Text | 0 | `Y` | Eligibility base cohort flag |
+| `Department @01.07.2020` | Text | 0 | `Operations` | Foreign Key $\to$ `DimDepartment[Department]` |
+| `Leaver FY` | Text | 453 | `FY20` | Fiscal year of departure (453 nulls for active staff) |
+| `Job Level after FY21 promotions`| Text | 47 | `6 - Junior Officer` | Post-promotion level (47 nulls for leavers) |
+| `FTE group` | Text | 0 | `1 FTE` | Full-time equivalent grouping |
+| `Time type` | Text | 0 | `Full time` | Employment schedule |
+| `Age group` | Text | 0 | `20 to 29` | Demographic age band |
+| `Nationality 1` | Text | 0 | `Switzerland` | Country of citizenship |
+| `Years since last hire` | Integer | 0 | `2` | Tenure duration at organization |
+
+---
+
+## 💾 VertiPaq Columnar Storage & Compression Footprint
+
+Because all three datasets are loaded into the **VertiPaq In-Memory Engine**, memory footprint is heavily determined by **column cardinality** (number of distinct values):
 
 ```mermaid
-pie title Call Answer Status (5,000 Interactions)
-    "Answered Calls (4,054)" : 81.08
-    "Abandoned Calls (946)" : 18.92
+flowchart LR
+    subgraph Storage ["VertiPaq Columnar Compression in Power Pivot"]
+        direction TB
+        Dictionary["1. Dictionary Encoding\n(Substitutes strings with integer IDs)"]
+        BitPack["2. Bit-Packing\n(Compresses IDs to minimum bits)"]
+        RLE["3. Run-Length Encoding (RLE)\n(Compresses repeating adjacent values)"]
+        
+        Dictionary --> BitPack --> RLE
+    end
 ```
 
-- **Total Inbound Inquiries**: `5,000` calls
-- **Call Answer Rate**: **`81.08%`** ($4,054$ answered / $5,000$ total)
-- **Customer Abandonment Rate**: **`18.92%`** ($946$ callers dropped before agent pickup)
-- **First Contact Resolution (FCR) Rate**: **`72.92%`** ($3,646$ resolved / $5,000$ total calls)
-- **Resolution Rate of Answered Calls**: **`89.94%`** ($3,646$ resolved / $4,054$ answered)
-- **Average Speed of Answer (Overall)**: `67.52 seconds`
-- **Average Talk Duration**: `3 minutes 45 seconds` ($00:03:45$)
-- **Average Satisfaction Rating (CSAT)**: **`3.40 / 5.0`** (rated across answered calls)
-
----
-
-## ⚙️ Data Cleaning & ETL Ingestion Pipeline
-
-In `Module_7_Demo.xlsx`, the dataset is ingested directly via Power Query from `09_Source_Materials/Module 9/13/PWC Dataset.xlsx` using the following M code:
-
-```powerquery
-shared #"Source Data" = let
-    // 1. Ingest workbook object
-    Source = Excel.Workbook(
-        File.Contents("D:\courses\Data Analysis 26-27\7-Introducation to Data Fields (Excel)\09_Source_Materials\Module 9\13\PWC Dataset.xlsx"), 
-        null, 
-        true
-    ),
-    // 2. Extract Data table from 'Source Data ' sheet
-    #"Source Data _Sheet" = Source{[Item="Source Data ",Kind="Sheet"]}[Data],
-    // 3. Promote first row to column headers
-    #"Promoted Headers" = Table.PromoteHeaders(#"Source Data _Sheet", [PromoteAllScalars=true]),
-    // 4. Transform data types
-    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{
-        {"Call Id", type text}, {"Agent", type text}, {"Date", type date}, 
-        {"Time", type datetime}, {"Topic", type text}, {"Answered (Y/N)", type text}, 
-        {"Resolved", type text}, {"Speed of answer in seconds", Int64.Type}, 
-        {"AvgTalkDuration", type datetime}, {"Satisfaction rating", Int64.Type}, 
-        {"Column11", type any}, {"Column12", type any}, {"Column13", type text}, {"Column14", type text}
-    }),
-    // 5. Purge 4 trailing ghost columns
-    #"Removed Ghost Columns" = Table.RemoveColumns(#"Changed Type", {"Column11", "Column12", "Column13", "Column14"})
-in
-    #"Removed Ghost Columns";
-```
-
----
-
-## Related Knowledge
-- Course Notes:
-  - [[01_Data_Quality_Dimensions_and_Audit]] — The 946 nulls operational audit.
-  - [[02_Data_Cleaning_Techniques_in_Excel]] — Purging ghost columns and handling nulls.
-  - [[03_Importing_Data_from_Enterprise_Sources]] — Power Query Excel connector.
-  - [[04_Business_Systems_for_Analysts]] — Connecting CRM / Call Center ticketing architectures.
-- Project Hub: [[Call Center Performance Analysis]]
-- Executive Portfolio: [[Call Center Analysis Portfolio Case Study]]
-- Reference: [[Module 7 Dataset Documentation]]
-- Demo Workbook: [`Module_7_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/07_Data_Cleaning/Module_7_Demo.xlsx)
+- **Low Cardinality Columns (< 10 distinct values)**: `Contract` (3), `InternetService` (3), `Topic` (5), `Department` (6), `Agent` (8), `Answered (Y/N)` (2), `Churn` (2), `Gender` (2). These achieve compression ratios exceeding **90%**!
+- **High Cardinality Primary Keys**: `Call Id` (5,000 distinct), `customerID` (7,043 distinct). In a production model, high cardinality primary keys are retained on fact tables solely for relationships and row identification, avoiding unnecessary calculated column additions to conserve RAM.
