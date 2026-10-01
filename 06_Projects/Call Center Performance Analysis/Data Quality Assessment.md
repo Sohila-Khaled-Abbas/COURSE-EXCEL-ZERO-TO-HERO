@@ -5,13 +5,13 @@ status: completed
 created: 2026-09-28
 updated: 2026-10-01
 title: Forensic Data Quality Audit & Hygiene
-description: Forensic null audit, anomaly detection, and Power Query recipes across all 3 datasets
+description: Forensic null audit, anomaly detection, and Power Query recipes across all 3 datasets and Backing 1-4 lookup tables
 ---
 
-# 4. Forensic Data Quality Assessment Across All 3 Datasets
+# 4. Forensic Data Quality Assessment Across All Datasets
 
 > [!abstract] Architectural Data Hygiene Standards
-> Clean, reliable analytical insights require a disciplined forensic audit of source data before modeling. In accordance with enterprise analytics engineering best practices, every dataset in the **PwC Switzerland Digital Transformation Suite** has undergone rigorous programmatic auditing for completeness, uniqueness, domain validity, and type consistency.
+> Clean, reliable analytical insights require a disciplined forensic audit of source data before modeling. In accordance with enterprise analytics engineering best practices, every dataset and auxiliary lookup sheet in the **PwC Switzerland Digital Transformation Suite** has undergone rigorous programmatic auditing for completeness, uniqueness, domain validity, and relational integrity.
 
 ---
 
@@ -46,19 +46,13 @@ answered_calls = df[df['Answered (Y/N)'] == 'Y']
 > 
 > **Never replace these nulls with zero!** Imputing zero for `Speed of answer` would distort average wait times by assuming 946 callers were answered instantaneously in 0.0 seconds!
 
-### Integrity & Domain Constraints
-- `Call Id` is strictly unique (5,000 distinct values, zero duplicates).
-- `Answered (Y/N)` and `Resolved` strictly contain binary `'Y'` and `'N'` flags.
-- `Satisfaction rating` strictly adheres to integer values between 1 and 5.
-- Call arrival timestamps strictly fall within operating business hours (09:00:00 to 18:00:00).
-
 ---
 
 ## 🔄 2. Forensic Audit: Dataset 02 — Customer Retention (`02 Churn-Dataset.xlsx`)
 
 ### Completeness & The "11 Blank Strings" Finding (7,043 Records)
 - **Total Customer Accounts**: 7,043 records.
-- **Attributes with Zero Missing Values**: `customerID`, `gender`, `SeniorCitizen`, `Partner`, `Dependents`, `tenure`, `PhoneService`, `MultipleLines`, `InternetService`, `OnlineSecurity`, `OnlineBackup`, `DeviceProtection`, `TechSupport`, `StreamingTV`, `StreamingMovies`, `Contract`, `PaperlessBilling`, `PaymentMethod`, `MonthlyCharges`, `numAdminTickets`, `numTechTickets`, `Churn`.
+- **Attributes with Zero Missing Values**: 22 fields.
 - **Attribute with Hidden Missing Values**:
   - `TotalCharges`: Contains exactly **11 rows with blank space strings (`' '`)** rather than standard SQL/Excel nulls!
 
@@ -79,52 +73,51 @@ blank_charges = df_churn[df_churn['TotalCharges'].str.strip() == '']
 #"Changed Type TotalCharges" = Table.TransformColumnTypes(#"Replaced Blank Space", {{"TotalCharges", Currency.Type}})
 ```
 
-### Domain Validity & Encoding Audit
-- `customerID` is strictly unique (7,043 distinct keys, zero duplicates).
-- `SeniorCitizen` is coded as binary integer `0` or `1`.
-- `Contract` strictly consists of 3 distinct values: `Month-to-month` (3,875), `One year` (1,473), `Two year` (1,695).
-- `Churn` strictly consists of binary strings: `No` (5,174) and `Yes` (1,869). Baseline churn rate = **26.54%**.
-
 ---
 
-## 👥 3. Forensic Audit: Dataset 03 — Diversity & Inclusion (`03 Diversity-Inclusion-Dataset.xlsx`)
+## 👥 3. Forensic Audit: Dataset 03 — Diversity & Inclusion Suite (`03 Diversity-Inclusion-Dataset.xlsx`)
 
-### Completeness & Structural Null Audit (500 Corporate Records)
-- **Total Employee Records**: 500 corporate personnel in sheet `Pharma Group AG`.
-- **Attributes with Zero Missing Values**: `Employee ID` (0), `Gender` (0), `New hire FY20?` (0), `Department @01.07.2020` (0), `FTE group` (0), `Time type` (0), `Age group` (0), `Nationality 1` (0), `Years since last hire` (0).
-- **Attributes with Structural / Conditional Missing Values**:
-  - `Leaver FY`: **453 nulls**. Exactly 47 employees left the company during FY20; the remaining 453 are active employees!
-  - `FY20 Performance Rating`: **87 nulls**. Represents new hires in FY20 who had not yet completed a full annual evaluation cycle.
-  - `Job Level after FY21 promotions`: **47 nulls**. Exactly corresponds to the 47 leavers who departed before the FY21 appraisal cycle.
-  - `FY19 Performance Rating`: **114 nulls**. Employees hired during FY20 or late FY19 without previous cycle evaluations.
-  - `Job Level before FY20 promotions`: **66 nulls**. Corresponds to new hires entering directly into their post-promotion grade.
+### 3.1 Primary Sheet: `Pharma Group AG` (500 Corporate Records)
+- **Total Employee Records**: 500 corporate personnel.
+- **Structural Missing Values**:
+  - `Leaver FY`: **453 nulls**. Exactly 47 employees departed in FY20 (9.40% turnover); the 453 nulls reflect active staff.
+  - `FY20 Performance Rating`: **87 nulls**. Represents new hires who had not completed an annual review.
+  - `Job Level after FY21 promotions`: **47 nulls**. Corresponds to leavers who departed before the FY21 appraisal cycle.
+  - `FY19 Performance Rating`: **114 nulls**. Employees hired during FY20 without previous year appraisals.
 
-### Forensic Verification of Personnel Leavers & Promoted Cohorts
-```python
-leavers = df_div[df_div['FY20 leaver?'] == 'Yes']
-# len(leavers) == 47 (Corporate annual turnover rate = 47 / 500 = 9.40%)
-# leavers['Leaver FY'].isnull().sum() == 0 (all 47 have documented departure fiscal year)
-# leavers['Job Level after FY21 promotions'].isnull().sum() == 47 (100% null because they left before FY21!)
+### 3.2 Auxiliary Sheets: `Backing 1` to `Backing 4` Forensic Audit
 
-stayed = df_div[df_div['FY20 leaver?'] == 'No']
-# len(stayed) == 453
-# stayed['Leaver FY'].isnull().sum() == 453 (100% null as expected!)
-```
+#### Sheet: `Backing 1` (Detailed Employee Census — 500 rows)
+- **Integrity**: Contains exactly 500 records mapping 1-to-1 to `Employee ID` 1 through 500.
+- **Key Columns**: `Y_GRADE` (Years in Grade, 1 to 15), `Y_SERVIC` (Years of Service, 0 to 28), `AGE` (21 to 64), `OC_RATE` (Occupancy rate, 1.0 = Full time).
+- **Validation**: Zero missing values in `Y_GRADE`, `Y_SERVIC`, or `AGE`. Can be ingested directly as an enriched employee dimension (`Dim_EmployeeCensus`).
 
-### Job Level Standardization
-- Job levels in the raw file combine numeric ranks and titles: e.g., `1 - Executive`, `2 - Director`, `3 - Senior Manager`, `4 - Manager`, `5 - Senior Officer`, `6 - Junior Officer`.
-- **Power Query Recipe**: Split column by delimiter ` - ` to extract `Job Level Rank` (Integer 1 to 6) and `Job Level Title` (Text) to allow proper executive hierarchy sorting in Pivot Tables and DAX measures.
+#### Sheet: `Backing 2` (Career Ladder & Promotion Hierarchy — 5 rows)
+- **Integrity**: Exactly 5 promotional transitions mapping each rank to its next higher grade without circular reference:
+  - `6 - Junior Officer` $\to$ `5 - Senior Officer` $\to$ `4 - Manager` $\to$ `3 - Senior Manager` $\to$ `2 - Director` $\to$ `1 - Executive`.
+- **Validation**: In the raw workbook, `Job Level before FY20 promotions` in sheet `Pharma Group AG` references this table via `=INDEX('Backing 2'!B:B, MATCH(...))`. Power Query replaces this formula with a native relational merge or relational model relationship!
+
+#### Sheet: `Backing 3` (Nationality Census & Demographic Benchmark — 21 rows)
+- **Integrity**: Lists 21 countries representing all 500 employees.
+- **Validation**: Programmatic summation:
+  $$\sum \text{Headcount} = 6 + 1 + 8 + 1 + 1 + 5 + 1 + 4 + 92 + 65 + 1 + 2 + 1 + 32 + 1 + 37 + 224 + 2 + 1 + 1 + 1 = \mathbf{500}$$
+  Matches total employee population with 100.0% precision!
+
+#### Sheet: `Backing 4` (Performance Review Assessment PRA Equity Matrix)
+- **Structure**: Contains two distinct benchmark lookup blocks:
+  1. **Department & Job Level Combinations (Rows 3–32)**: Maps 30 departmental tiers to PRA status (`Even`, `Uneven - Men benefit`, `Inconclusive`).
+  2. **Job Level Summaries (Rows 3–7, Cols Y-Z)**: Summarizes overall equity by job tier (`3 - Senior Manager` is the only tier classified as `Uneven - Men benefit`).
+- **Critical ETL Trap (Formula Decoupling)**: Columns in `Pharma Group AG` reference `Backing 4` via volatile `=INDEX('Backing 4'!U:U, MATCH(...))` formulas. In Power Query, ingest `Backing 4` as a dedicated dimension table (`Dim_PRA_Equity`) and connect it via relational keys in Power Pivot, eliminating brittle spreadsheet formula references.
 
 ---
 
 ## 📋 Comprehensive Forensic Data Quality Matrix
 
-| Quality Dimension | Dataset 01: Call Centre Trends | Dataset 02: Customer Retention | Dataset 03: Diversity & Inclusion |
-| :--- | :--- | :--- | :--- |
-| **Row Count** | 5,000 | 7,043 | 500 |
-| **Column Count** | 10 | 23 | 32 |
-| **Primary Key** | `Call Id` (100% unique) | `customerID` (100% unique) | `Employee ID` (100% unique) |
-| **Duplicate Rows**| 0 | 0 | 0 |
-| **Missing Values**| 946 nulls across 3 fields (Operational Nulls) | 11 blank spaces in `TotalCharges` (Zero Tenure) | 453 nulls in `Leaver FY`, 87 in Performance Rating |
-| **Required ETL Fix** | Preserve nulls; do not impute zero | Replace `' '` with `0` before currency casting | Standardize job level strings, parse numeric ranks |
-| **VertiPaq Readiness** | High dictionary compression | High dictionary compression | Extremely compact in-memory footprint |
+| Quality Dimension | Dataset 01: Call Centre | Dataset 02: Customer Churn | Dataset 03: Pharma Group AG | Backing 1 to 4 Lookups |
+| :--- | :--- | :--- | :--- | :--- |
+| **Row Count** | 5,000 | 7,043 | 500 | 500, 5, 21, 35 |
+| **Primary Key** | `Call Id` (100% unique) | `customerID` (100% unique) | `Employee ID` (100% unique) | Natural composite keys |
+| **Duplicate Rows**| 0 | 0 | 0 | 0 |
+| **Missing Values**| 946 operational nulls | 11 blank spaces (`TotalCharges`) | 453 nulls in `Leaver FY` | Zero nulls in lookup keys |
+| **Required ETL Fix** | Preserve nulls; do not impute zero | Replace `' '` with `0` before currency casting | Standardize job level strings | Decouple INDEX/MATCH formulas |
+| **VertiPaq Readiness** | High compression | High compression | Compact footprint | Instantaneous in-memory lookup |

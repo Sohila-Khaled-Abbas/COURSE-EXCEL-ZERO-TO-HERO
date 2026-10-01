@@ -5,12 +5,12 @@ status: completed
 created: 2026-09-28
 updated: 2026-10-01
 title: Master Data Dictionary & Galaxy Schema Specs
-description: Comprehensive field definitions, types, null handling, and relationship keys across 3 datasets
+description: Comprehensive field definitions, types, null handling, and relationship keys across 3 datasets and Backing 1-4 lookup tables
 ---
 
 # 3. Master Data Dictionary & Galaxy Schema Specifications
 
-This master dictionary details the schema, data types, null distributions, business definitions, and relationship keys for all three datasets and extracted dimensions within the **PwC Switzerland Digital Transformation Galaxy Schema**.
+This master dictionary details the schema, data types, null distributions, business definitions, and relationship keys for all three primary datasets, extracted dimensions, and the **four auxiliary Backing tables** (`Backing 1` to `Backing 4`) within the **PwC Switzerland Digital Transformation Galaxy Schema**.
 
 ---
 
@@ -93,34 +93,107 @@ This master dictionary details the schema, data types, null distributions, busin
 | `FTE group` | Text | `type text` | 0 | `'1 FTE'`, `'0.8 FTE'`, `'0.5 FTE'` | Full-time equivalent capacity band. | Capacity Feature |
 | `Time type` | Text | `type text` | 0 | `'Full time'`, `'Part time'` | Employment contract schedule. | Contract Feature |
 | `Age group` | Text | `type text` | 0 | `20 to 29`, `30 to 39`, `40 to 49`, `50 to 59`, `60+` | Demographic age cohort. | Demographic Slicer |
-| `Nationality 1` | Text | `type text` | 0 | Country names (e.g., `Switzerland`, `Germany`, etc.) | Primary citizenship. | Diversity Feature |
+| `Nationality 1` | Text | `type text` | 0 | Country names (e.g., `Switzerland`, `Germany`, etc.) | Primary citizenship. | **Foreign Key $\to$ `Dim_NationalityCensus[Nationality]`** |
 | `Years since last hire` | Integer | `Int64.Type` | 0 | `0` to `28` years | Cumulative tenure at organization. | Tenure Metric |
+| `Department & JL group for PRA` | Text | `type text` | 47 | Text (e.g., `2 - Director & Operations`) | Composite Department & Job Level key. | **Foreign Key $\to$ `Dim_PRA_Equity[Department_and_Job_Level]`** |
+| `Department & JL group PRA status` | Text | `type text` | 47 | `'Even'`, `'Uneven - Men benefit'`, `'Inconclusive'` | PRA equity classification evaluated via Backing 4. | Equity Metric |
+| `Job Level group for PRA` | Text | `type text` | 47 | `2 - Director` to `6 - Junior Officer` | Job Level key for PRA equity evaluation. | Hierarchy Key |
+| `Job Level group PRA status` | Text | `type text` | 47 | `'Even'`, `'Uneven - Men benefit'` | Level-wide equity classification from Backing 4. | Equity Metric |
 
 ---
 
-## 🏛️ Extracted Dimension Tables in the Galaxy Schema
+## 🏛️ The 4 Auxiliary Backing Tables (`03 Diversity-Inclusion-Dataset.xlsx`)
 
-### 1. `DimDate` (Extracted from `Fact_Calls[Date]`)
-- **Grain**: 1 Row = 1 Calendar Day (90 distinct days in Q1 2021)
-- **Primary Key**: `Date`
-- **Attributes**: `Year` (2021), `Quarter` ("Q1"), `Month` (1–3), `Month Name` ("January", "February", "March"), `Day` (1–31), `Day of Week` ("Monday"–"Sunday"), `Is_Weekend` (0/1).
+In `03 Diversity-Inclusion-Dataset.xlsx`, sheets `Backing 1` through `Backing 4` provide enriched employee-level continuous features, promotion progression mappings, nationality census benchmarks, and Performance Review Assessment (PRA) gender equity standards:
 
-### 2. `DimAgent` (Extracted from `Fact_Calls[Agent]`)
-- **Grain**: 1 Row = 1 Support Representative (8 dedicated agents)
-- **Primary Key**: `Agent`
-- **Attributes**: `Agent Name`, `Department` ("Customer Operations"), `Target_CSAT` (3.50), `Target_Answer_Rate` (0.85).
+### 1. `Backing 1`: Detailed Employee Census (`Dim_EmployeeCensus`)
+- **Source Sheet**: `Backing 1` (500 rows, 12 columns)
+- **Grain**: 1 Row = 1 Corporate Employee (`Employee ID` 1 to 500)
+- **Role in Model**: Enriched 1-to-1 extension dimension connecting to `Fact_Employees[Employee ID]`. Provides continuous numerical variables for tenure, age, and years in grade.
 
-### 3. `DimTopic` (Extracted from `Fact_Calls[Topic]`)
-- **Grain**: 1 Row = 1 Inquiry Classification (5 topics)
-- **Primary Key**: `Topic`
-- **Attributes**: `Topic Name`, `Category` ("Technical Support", "Finance & Accounts", "Administrative"), `Target_SLA_Seconds` (60s).
+| Column Name | M Data Type | Permitted Values / Range | Description & Analytical Value |
+| :--- | :--- | :--- | :--- |
+| `Employee ID` | `type text` | `1` to `500` | Primary Key linking 1-to-1 with `Fact_Employees`. |
+| `GENDER` | `type text` | `'Male'`, `'Female'` | Gender verification cross-check. |
+| `GRADE` | `type text` | `1 - Junior Officer` to `6 - Executive` | Internal grade classification. |
+| `FUNCTION` | `type text` | `Operations`, `Sales & Marketing`, `Strategy`, `HR`, `Finance`, `Internal Services` | Functional operating department. |
+| `OC_RATE` | `type number` | `1.0`, `0.8`, `0.5` | Occupancy / Full-Time Equivalent capacity rate. |
+| `PERFORM` | `Int64.Type` | `1`, `2`, `3`, `4` | Performance rating (1 to 4). |
+| `Y_GRADE` | `Int64.Type` | `1` to `15` years | **Years in Current Grade / Job Level**: Crucial for measuring promotion velocity and promotion stagnation! |
+| `AGE` | `Int64.Type` | `21` to `64` years | Continuous chronological age in years. |
+| `Y_SERVIC` | `Int64.Type` | `0` to `28` years | **Years of Total Organizational Service / Tenure**: Key for analyzing corporate retention. |
+| `Nationality` | `type text` | 21 Country names | Country of citizenship. |
+| `Rank 2` | `Int64.Type` | `1` to `500` | Relative employee seniority ranking index. |
 
-### 4. `DimContract` (Extracted from `Fact_Churn[Contract]`)
-- **Grain**: 1 Row = 1 Contract Horizon (3 terms)
-- **Primary Key**: `Contract`
-- **Attributes**: `Contract Term` (`Month-to-month`, `One year`, `Two year`), `Commitment_Months` (1, 12, 24), `Risk_Tier` ("High Risk", "Moderate Risk", "Low Risk").
+---
 
-### 5. `DimDepartment` (Extracted from `Fact_Employees[Department @01.07.2020]`)
-- **Grain**: 1 Row = 1 Corporate Division (6 business units)
-- **Primary Key**: `Department`
-- **Attributes**: `Department Name` (`Operations`, `Sales & Marketing`, `Strategy`, `Human Resources`, `Finance`, `Internal Audit / Legal`), `Division_Type` ("Revenue Generating" vs "Corporate Support").
+### 2. `Backing 2`: Career Progression & Promotion Ladder (`Dim_CareerLadder`)
+- **Source Sheet**: `Backing 2` (5 rows, 2 columns)
+- **Grain**: 1 Row = 1 Promotional Step in Corporate Career Ladder
+- **Role in Model**: Lookup dimension mapping every starting grade to its next promotional succession grade. In `Fact_Employees`, this table drives the logic for determining `Job Level before FY20 promotions`.
+
+| Column Name | M Data Type | Permitted Values | Succession Flow & Purpose |
+| :--- | :--- | :--- | :--- |
+| `Source_Grade` (`From_Grade`) | `type text` | `6 - Junior Officer`, `5 - Senior Officer`, `4 - Manager`, `3 - Senior Manager`, `2 - Director` | The starting job level before promotion. |
+| `Target_Grade` (`To_Grade`) | `type text` | `5 - Senior Officer`, `4 - Manager`, `3 - Senior Manager`, `2 - Director`, `1 - Executive` | The destination promotional job level upon promotion. |
+
+#### Promotion Hierarchy Mapping Matrix:
+```
+6 - Junior Officer    ──[Promoted To]──> 5 - Senior Officer
+5 - Senior Officer    ──[Promoted To]──> 4 - Manager
+4 - Manager           ──[Promoted To]──> 3 - Senior Manager
+3 - Senior Manager    ──[Promoted To]──> 2 - Director
+2 - Director          ──[Promoted To]──> 1 - Executive (C-Suite)
+```
+
+---
+
+### 3. `Backing 3`: Nationality Census & Demographic Benchmark (`Dim_NationalityCensus`)
+- **Source Sheet**: `Backing 3` (21 rows, 3 columns)
+- **Grain**: 1 Row = 1 Country / Nationality Cohort
+- **Role in Model**: Regional diversity benchmark table connecting to `Fact_Employees[Nationality 1]`.
+
+| Column Name | M Data Type | Permitted Values | Headcount | Description & Analytical Value |
+| :--- | :--- | :--- | :---: | :--- |
+| `Country_ID` | `Int64.Type` | `1` to `21` | — | Numeric country index. |
+| `Nationality` | `type text` | 21 Countries | — | Primary Key connecting to `Fact_Employees[Nationality 1]`. |
+| `Benchmark_Headcount` | `Int64.Type` | `1` to `224` | **500** | Cumulative employee count per nationality. |
+
+#### Top Nationalities Represented:
+1. **Switzerland**: 224 employees (**44.8%** of total workforce)
+2. **France**: 92 employees (**18.4%**)
+3. **Germany**: 65 employees (**13.0%**)
+4. **Spain**: 37 employees (**7.4%**)
+5. **Italy**: 32 employees (**6.4%**)
+6. **United Kingdom**: 8 employees (**1.6%**)
+7. **United States**: 6 employees (**1.2%**)
+8. **Austria**: 5 employees (**1.0%**)
+9. **Netherlands**: 4 employees (**0.8%**)
+10. **Other Countries (12 nations)**: 27 employees (**5.4%**)
+
+---
+
+### 4. `Backing 4`: Performance Review Assessment (PRA) Equity Matrix (`Dim_PRA_Equity`)
+- **Source Sheet**: `Backing 4` (30 rows for Department & Level combinations, 5 rows for Level summaries)
+- **Grain**: 1 Row = 1 Job Level & Department Cohort
+- **Role in Model**: Governance benchmark table classifying whether appraisal outcomes and promotions are statistically equitable across genders. Connects to `Fact_Employees[Department & JL group for PRA]`.
+
+| Column Name | M Data Type | Permitted Values | Description & Governance Meaning |
+| :--- | :--- | :--- | :--- |
+| `Department_and_Job_Level` | `type text` | e.g., `3 - Senior Manager & Sales & Marketing` | Composite Primary Key linking to `Fact_Employees`. |
+| `PRA_Status` | `type text` | `'Even'`, `'Uneven - Men benefit'`, `'Inconclusive'` | Statistical gender balance evaluation outcome. |
+| `Benchmark_Cohort_Size` | `Int64.Type` | `1` to `98` | Total personnel evaluated in this departmental tier. |
+
+#### Critical Empirical Governance Findings from `Backing 4`:
+- **Uneven - Men Benefit Cohorts**:
+  - `3 - Senior Manager & Internal Services`
+  - `3 - Senior Manager & Sales & Marketing`
+  - `4 - Manager & Sales & Marketing`
+  - Overall Job Level `3 - Senior Manager` is classified across the company as **`Uneven - Men benefit`**!
+- **Even / Balanced Cohorts**:
+  - `2 - Director & Operations`
+  - `3 - Senior Manager & Operations`
+  - `4 - Manager & Operations`, `5 - Senior Officer & Operations`, `6 - Junior Officer & Operations`
+  - Overall Job Levels `2 - Director`, `4 - Manager`, `5 - Senior Officer`, and `6 - Junior Officer` are classified as **`Even`**.
+- **Inconclusive Cohorts (Small Sample Size $<5$)**:
+  - All Director and Senior Manager positions within `Finance`, `HR`, and `Strategy` (sample sizes of 1 to 4 employees preclude statistical significance).
