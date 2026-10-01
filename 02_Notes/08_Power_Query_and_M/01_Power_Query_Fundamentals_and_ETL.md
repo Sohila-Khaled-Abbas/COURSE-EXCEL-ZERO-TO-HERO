@@ -10,7 +10,7 @@ prerequisites: ["[[01_Excel_Tables_Architecture]]", "[[03_Importing_Data_from_En
 related_project: "[[Call Center Performance Analysis]]"
 source: "https://youtu.be/uv1bxe2gdnU"
 created: 2026-09-28
-updated: 2026-10-01
+updated: 2026-10-02
 video_chapter: "Chapter 8 – Power Query & M Language"
 video_timestamp: "4:20:30"
 video_url: "https://www.youtube.com/watch?v=uv1bxe2gdnU&t=15630s"
