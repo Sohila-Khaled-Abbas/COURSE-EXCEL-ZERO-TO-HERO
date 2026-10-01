@@ -97,6 +97,8 @@ flowchart TD
 8. 🚀 [[Recommendations]] — Actionable staffing, process, & technology proposals for Claire
 9. 🔄 [[Project Retrospective]] — Engineering lessons & Digital Accelerator competencies
 10. 💼 [[Call Center Analysis Portfolio Case Study]] — Recruiter-ready showcase
+11. 🏗️ [[Dashboard Architecture Assessment]] — Forensic audit of workbook, 7 critical defects & target architecture
+12. 📱 [[Dashboard UX Specification]] — Product UX specs, personas, state machines & visual hierarchy
 
 ---
 
