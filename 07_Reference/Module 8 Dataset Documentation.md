@@ -5,8 +5,8 @@ source_type: course-workbook
 source_ecosystem: Excel Zero to Hero Curriculum
 primary_file: 11_Demos_and_Workbooks/08_Power_Query/Module_8_Demo.xlsx
 total_sheets: 1
-total_records: 5000
-total_columns: 10
+total_queries: 2
+total_columns: 32
 status: verified
 created: 2026-10-01
 updated: 2026-10-01
@@ -16,7 +16,11 @@ tags:
   - power-query
   - m-language
   - etl
-  - pwc-call-center
+  - adventureworks
+  - sql-server
+  - star-schema
+  - dim-date
+  - calendar-dimension
   - data-kitchen
   - data-model
   - vertipaq
@@ -27,7 +31,7 @@ tags:
 # 📦 Module 8 Dataset Documentation: Power Query & M Language Laboratory
 
 > [!abstract] Dataset & Workbook Overview
-> The **Module 8 Demo Workbook** ([`Module_8_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/08_Power_Query/Module_8_Demo.xlsx)) serves as the official practice and operational laboratory for **Module 8: Power Query & M Language**. It grounds students in the fundamental architectural shift from manual cell-based manipulation to automated, reproducible data pipelines. Built upon the conceptual metaphor of **"المطبخ بتاعنا" (The Data Kitchen)**, the workbook pairs a foundational bilingual strategy tab (**`Intro`**) with an automated Power Query M ingestion pipeline (**`Fact_Calls`**) streaming **5,000 operational records** from the authentic **PwC Switzerland Call Center Dataset** (`01 Call-Center-Dataset.xlsx`) directly into the **Power Pivot VertiPaq Data Model** (`ThisWorkbookDataModel`).
+> The **Module 8 Demo Workbook** ([`Module_8_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/08_Power_Query/Module_8_Demo.xlsx)) serves as the official practice and operational laboratory for **Module 8: Power Query & M Language**. It grounds students in the fundamental architectural shift from manual cell-based manipulation to automated, reproducible data pipelines. Built upon the conceptual metaphor of **"المطبخ بتاعنا" (The Data Kitchen)**, the workbook pairs a foundational bilingual strategy tab (**`Intro`**) with enterprise ETL pipelines—featuring **`Fact_Sales`** (a 13-step Star Schema mashup connecting to **Microsoft SQL Server `AdventureWorks2022`** across 7 relational tables) alongside **`Dim_Date`** (a derived calendar dimension table extracting distinct dates and enriching them with 6 temporal intelligence columns) streaming directly into the **Power Pivot VertiPaq Data Model** (`ThisWorkbookDataModel`) as a proper **Star Schema**.
 
 ---
 
@@ -36,8 +40,9 @@ tags:
 | Object / Tab Name | Object Classification | Dimensions / Scope | Ingestion Channel & Storage | Educational Purpose & Architectural Significance |
 | :--- | :--- | :---: | :--- | :--- |
 | **`Intro`** | Worksheet Tab | $47\text{ Rows} \times 23\text{ Columns}$ | Native Excel Worksheet Grid | Anchors the pedagogical blueprint answering the **4 Essential Questions (What, Why, Where, How)**. Introduces the **"Data Kitchen" (`المطبخ بتاعنا`)** metaphor and details why manual lookups and formula cleaning fail at scale. |
-| **`Fact_Calls`** | Power Query M Query | $5,000\text{ Rows} \times 10\text{ Columns}$ | Power Query M Formula (`Formulas/Section1.m`) | Extracts `Sheet1` from `"01 Call-Center-Dataset.xlsx"`, promotes headers, enforces strict typed contracts across 10 operational fields, and delivers the clean dataset into memory. |
-| **`ThisWorkbookDataModel`** | VertiPaq Data Model | $5,000\text{ Stored Records}$ | Power Pivot In-Memory Columnar Database | Stores `Fact_Calls` as a high-performance analytical model table without rendering raw rows into the Excel grid, preserving lightning-fast UI responsiveness and eliminating 1M worksheet row constraints. |
+| **`Fact_Sales`** | Power Query M Query | $25\text{ Normalized Columns}$ | Power Query M Formula (`Formulas/Section1.m`) | Connects to local SQL Server `AdventureWorks2022`, merges 7 relational tables via `Table.NestedJoin`, expands dimensional attributes, derives order status, enforces strict financial/date types, and delivers an enterprise Star Schema fact table. |
+| **`Dim_Date`** | Power Query M Query | $7\text{ Columns}$ | Power Query M Formula (`Formulas/Section1.m`) — Derived from `Fact_Sales` | Derives distinct `OrderDate` values from `Fact_Sales` via query-to-query reference, enriches each date with `Year`, `Quarter` (Q1–Q4), `Month`, `Month Name`, `Day`, and `Day Name` columns, forming the calendar dimension of the Star Schema. |
+| **`ThisWorkbookDataModel`** | VertiPaq Data Model | Multi-Table Star Schema | Power Pivot In-Memory Columnar Database | Stores `Fact_Sales` and `Dim_Date` as high-performance analytical model tables linked via `OrderDate` (1-to-Many), enabling Time Intelligence DAX measures without rendering raw rows into the Excel grid. |
 
 ---
 
@@ -96,63 +101,472 @@ From the operational summary documented in `Module_8_Demo.xlsx`:
 
 ---
 
-## 🛠️ Decompiled Power Query M Source Code
+## 🛠️ Pipeline 1: Enterprise SQL Server Multi-Table Mashup (`Fact_Sales`)
 
 Extracted directly from the embedded OpenXML package (`customXml/item6.xml` $\to$ `Formulas/Section1.m`) of [`Module_8_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/08_Power_Query/Module_8_Demo.xlsx):
 
 ```powerquery
 section Section1;
 
-shared Fact_Calls = let
-    Source = Excel.Workbook(File.Contents("D:\courses\Data Analysis 26-27\01 Call-Center-Dataset.xlsx"), null, true),
-    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
-    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
-    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Call Id", type text}, {"Agent", type text}, {"Date", type date}, {"Time", type time}, {"Topic", type text}, {"Answered (Y/N)", type text}, {"Resolved", type text}, {"Speed of answer in seconds", Int64.Type}, {"AvgTalkDuration", type datetime}, {"Satisfaction rating", Int64.Type}})
+shared Fact_Sales = let
+    //==================================================
+    // 1. CONNECT TO LOCAL SQL SERVER
+    //==================================================
+    Source = Sql.Database(
+        "localhost",
+        "AdventureWorks2022"
+    ),
+
+    //==================================================
+    // 2. NAVIGATE TO SQL SERVER TABLES
+    //==================================================
+    SalesOrderDetail = Source{
+        [Schema = "Sales", Item = "SalesOrderDetail"]
+    }[Data],
+
+    SalesOrderHeader = Source{
+        [Schema = "Sales", Item = "SalesOrderHeader"]
+    }[Data],
+
+    Product = Source{
+        [Schema = "Production", Item = "Product"]
+    }[Data],
+
+    ProductSubcategory = Source{
+        [Schema = "Production", Item = "ProductSubcategory"]
+    }[Data],
+
+    ProductCategory = Source{
+        [Schema = "Production", Item = "ProductCategory"]
+    }[Data],
+
+    SalesTerritory = Source{
+        [Schema = "Sales", Item = "SalesTerritory"]
+    }[Data],
+
+    ShipMethod = Source{
+        [Schema = "Purchasing", Item = "ShipMethod"]
+    }[Data],
+
+    //==================================================
+    // 3. BASE TABLE: SALES ORDER DETAILS
+    //    GRAIN: ONE ROW PER SALES ORDER LINE
+    //==================================================
+    Detail = Table.SelectColumns(
+        SalesOrderDetail,
+        {
+            "SalesOrderID",
+            "SalesOrderDetailID",
+            "ProductID",
+            "OrderQty",
+            "UnitPrice",
+            "UnitPriceDiscount",
+            "LineTotal"
+        }
+    ),
+
+    //==================================================
+    // 4. MERGE SALES ORDER HEADER
+    //==================================================
+    MergeHeader = Table.NestedJoin(
+        Detail,
+        {"SalesOrderID"},
+        SalesOrderHeader,
+        {"SalesOrderID"},
+        "Header",
+        JoinKind.LeftOuter
+    ),
+
+    ExpandHeader = Table.ExpandTableColumn(
+        MergeHeader,
+        "Header",
+        {
+            "OrderDate",
+            "DueDate",
+            "ShipDate",
+            "Status",
+            "OnlineOrderFlag",
+            "CustomerID",
+            "SalesPersonID",
+            "TerritoryID",
+            "ShipMethodID"
+        },
+        {
+            "OrderDate",
+            "DueDate",
+            "ShipDate",
+            "StatusID",
+            "OnlineOrderFlag",
+            "CustomerID",
+            "SalesPersonID",
+            "TerritoryID",
+            "ShipMethodID"
+        }
+    ),
+
+    //==================================================
+    // 5. MERGE PRODUCT
+    //==================================================
+    MergeProduct = Table.NestedJoin(
+        ExpandHeader,
+        {"ProductID"},
+        Product,
+        {"ProductID"},
+        "ProductLookup",
+        JoinKind.LeftOuter
+    ),
+
+    ExpandProduct = Table.ExpandTableColumn(
+        MergeProduct,
+        "ProductLookup",
+        {
+            "Name",
+            "ProductSubcategoryID"
+        },
+        {
+            "Product",
+            "ProductSubcategoryID"
+        }
+    ),
+
+    //==================================================
+    // 6. MERGE PRODUCT SUBCATEGORY
+    //==================================================
+    MergeSubcategory = Table.NestedJoin(
+        ExpandProduct,
+        {"ProductSubcategoryID"},
+        ProductSubcategory,
+        {"ProductSubcategoryID"},
+        "SubcategoryLookup",
+        JoinKind.LeftOuter
+    ),
+
+    ExpandSubcategory = Table.ExpandTableColumn(
+        MergeSubcategory,
+        "SubcategoryLookup",
+        {
+            "Name",
+            "ProductCategoryID"
+        },
+        {
+            "ProductSubCategory",
+            "ProductCategoryID"
+        }
+    ),
+
+    //==================================================
+    // 7. MERGE PRODUCT CATEGORY
+    //==================================================
+    MergeCategory = Table.NestedJoin(
+        ExpandSubcategory,
+        {"ProductCategoryID"},
+        ProductCategory,
+        {"ProductCategoryID"},
+        "CategoryLookup",
+        JoinKind.LeftOuter
+    ),
+
+    ExpandCategory = Table.ExpandTableColumn(
+        MergeCategory,
+        "CategoryLookup",
+        {"Name"},
+        {"ProductCategory"}
+    ),
+
+    //==================================================
+    // 8. MERGE SALES TERRITORY
+    //==================================================
+    MergeTerritory = Table.NestedJoin(
+        ExpandCategory,
+        {"TerritoryID"},
+        SalesTerritory,
+        {"TerritoryID"},
+        "TerritoryLookup",
+        JoinKind.LeftOuter
+    ),
+
+    ExpandTerritory = Table.ExpandTableColumn(
+        MergeTerritory,
+        "TerritoryLookup",
+        {
+            "Name",
+            "Group"
+        },
+        {
+            "Territory",
+            "TerritoryGroup"
+        }
+    ),
+
+    //==================================================
+    // 9. MERGE SHIPPING METHOD
+    //==================================================
+    MergeShipMethod = Table.NestedJoin(
+        ExpandTerritory,
+        {"ShipMethodID"},
+        ShipMethod,
+        {"ShipMethodID"},
+        "ShipMethodLookup",
+        JoinKind.LeftOuter
+    ),
+
+    ExpandShipMethod = Table.ExpandTableColumn(
+        MergeShipMethod,
+        "ShipMethodLookup",
+        {"Name"},
+        {"ShipMethod"}
+    ),
+
+    //==================================================
+    // 10. ADD READABLE ORDER STATUS
+    //==================================================
+    AddStatus = Table.AddColumn(
+        ExpandShipMethod,
+        "Status",
+        each
+            if [StatusID] = 1 then "In Process"
+            else if [StatusID] = 2 then "Approved"
+            else if [StatusID] = 3 then "Backordered"
+            else if [StatusID] = 4 then "Rejected"
+            else if [StatusID] = 5 then "Shipped"
+            else if [StatusID] = 6 then "Cancelled"
+            else "Unknown",
+        type text
+    ),
+
+    //==================================================
+    // 11. SET DATA TYPES
+    //==================================================
+    SetTypes = Table.TransformColumnTypes(
+        AddStatus,
+        {
+            {"SalesOrderID", Int64.Type},
+            {"SalesOrderDetailID", type number},
+            {"ProductID", Int64.Type},
+            {"ProductSubcategoryID", Int64.Type},
+            {"ProductCategoryID", Int64.Type},
+            {"CustomerID", Int64.Type},
+            {"SalesPersonID", Int64.Type},
+            {"TerritoryID", Int64.Type},
+            {"ShipMethodID", Int64.Type},
+            {"OrderQty", Int64.Type},
+            {"UnitPrice", Currency.Type},
+            {"UnitPriceDiscount", type number},
+            {"LineTotal", Currency.Type},
+            {"OrderDate", type date},
+            {"DueDate", type date},
+            {"ShipDate", type date},
+            {"StatusID", Int64.Type},
+            {"OnlineOrderFlag", type logical}
+        }
+    ),
+
+    //==================================================
+    // 12. RENAME COLUMNS TO MATCH VISUALS
+    //==================================================
+    RenameColumns = Table.RenameColumns(
+        SetTypes,
+        {
+            {"SalesOrderDetailID", "OrderDetailID"},
+            {"SalesOrderID", "OrderID"}
+        }
+    ),
+
+    //==================================================
+    // 13. REORDER FINAL FACT SALES COLUMNS
+    //==================================================
+    Final = Table.ReorderColumns(
+        RenameColumns,
+        {
+            "OrderDetailID",
+            "OrderID",
+            "OrderDate",
+            "DueDate",
+            "ShipDate",
+            "StatusID",
+            "Status",
+            "OnlineOrderFlag",
+            "CustomerID",
+            "SalesPersonID",
+            "TerritoryID",
+            "Territory",
+            "TerritoryGroup",
+            "ShipMethodID",
+            "ShipMethod",
+            "ProductID",
+            "Product",
+            "ProductSubCategory",
+            "ProductCategory",
+            "OrderQty",
+            "UnitPrice",
+            "UnitPriceDiscount",
+            "LineTotal",
+            "ProductSubcategoryID",
+            "ProductCategoryID"
+        },
+        MissingField.Ignore
+    )
+
 in
-    #"Changed Type";
+    Final;
 ```
 
 ```mermaid
-flowchart LR
-    S1["Source\nExcel.Workbook()"] --> S2["Navigation\n{[Item='Sheet1']}[Data]"]
-    S3["Promoted Headers\nTable.PromoteHeaders()"]
-    S2 --> S3
-    S4["Changed Type\nTable.TransformColumnTypes()"]
-    S3 --> S4
-    MODEL[("ThisWorkbookDataModel\n(Power Pivot Star Schema)")]
-    S4 --> MODEL
+flowchart TD
+    subgraph AW_SQL ["AdventureWorks2022 SQL Server (localhost)"]
+        direction TB
+        T1["Sales.SalesOrderDetail (Base Grain)"]
+        T2["Sales.SalesOrderHeader"]
+        T3["Production.Product"]
+        T4["Production.ProductSubcategory"]
+        T5["Production.ProductCategory"]
+        T6["Sales.SalesTerritory"]
+        T7["Purchasing.ShipMethod"]
+    end
 
-    style S1 fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
-    style S2 fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
-    style S3 fill:#ede7f6,stroke:#4527a0,stroke-width:2px
-    style S4 fill:#e0f2f1,stroke:#00695c,stroke-width:2px
-    style MODEL fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    subgraph M_ETL ["Power Query M Transformation DAG"]
+        direction TB
+        M1["1. Table.SelectColumns(Detail)"]
+        M2["2. Table.NestedJoin(Header)"]
+        M3["3. Table.NestedJoin(Product)"]
+        M4["4. Table.NestedJoin(Subcategory)"]
+        M5["5. Table.NestedJoin(Category)"]
+        M6["6. Table.NestedJoin(Territory)"]
+        M7["7. Table.NestedJoin(ShipMethod)"]
+        M8["8. Table.AddColumn(Status Logic)"]
+        M9["9. Table.TransformColumnTypes(Currency / Dates)"]
+        M10["10. Table.RenameColumns & ReorderColumns"]
+        
+        M1 --> M2 --> M3 --> M4 --> M5 --> M6 --> M7 --> M8 --> M9 --> M10
+    end
+
+    subgraph MODEL_DEST ["Power Pivot Data Model (ThisWorkbookDataModel)"]
+        DEST["Fact_Sales (25 Normalized Columns)\n• High-Speed Columnar Compression\n• Prepped for DAX Sales Measures"]
+    end
+
+    AW_SQL ==> M_ETL ==> MODEL_DEST
+
+    style AW_SQL fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    style M_ETL fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style MODEL_DEST fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
 ```
 
 ---
 
-## 📋 Data Dictionary: `Fact_Calls` Schema
+## 📋 Data Dictionary: `Fact_Sales` Schema ($25\text{ Columns}$)
 
-The resulting table `Fact_Calls` consists of **5,000 customer interaction logs** spanning Q1 2021 across 8 service agents:
-
-| Field Name | Storage Data Type | Sample Value | Business Meaning & Analytical Utility | Null Values & Integrity Rules |
+| Field Name | Storage Data Type | Sample Value | Business Meaning & Analytical Utility | Upstream Origin Table |
 | :--- | :--- | :--- | :--- | :--- |
-| `Call Id` | Text (`type text`) | `ID0001` | Unique transaction identifier for each inbound call. | 0 nulls. Primary key of inbound interaction log. |
-| `Agent` | Text (`type text`) | `Diane` | Representative handling the customer inquiry (8 agents: Diane, Becky, Stewart, Greg, Dan, Joe, Martha, Jim). | 0 nulls. Operational grouping dimension. |
-| `Date` | Date (`type date`) | `2021-01-01` | Calendar date on which call occurred (Jan 1, 2021 – Mar 31, 2021). | 0 nulls. Connects to `Dim_Date` in Star Schema. |
-| `Time` | Time (`type time`) | `09:12:00` | Exact arrival timestamp of incoming call. | 0 nulls. Used for hourly call arrival distribution. |
-| `Topic` | Text (`type text`) | `Contract related` | Inbound call subject category (`Contract related`, `Tech support`, `Payment related`, `Admin support`, `Streaming`). | 0 nulls. Categorical service slicing dimension. |
-| `Answered (Y/N)` | Text (`type text`) | `Y` | Indicator whether agent picked up (`Y`) or call was abandoned (`N`). | 0 nulls ($4,054\text{ Y} \mid 946\text{ N}$). Foundational KPI filter. |
-| `Resolved` | Text (`type text`) | `Y` | Indicator whether customer issue was successfully resolved. | 0 nulls ($3,646\text{ Y} \mid 1,354\text{ N}$). Resolution rate numerator. |
-| `Speed of answer in seconds` | Integer (`Int64.Type`) | `90` | Queue latency elapsed before agent answered call. | **946 nulls**. These represent unanswered calls ($N$) and must **never** be deleted or defaulted to 0! |
-| `AvgTalkDuration` | Datetime (`type datetime`) | `00:04:15` | Total elapsed duration of conversation with client. | Null when call was not answered. |
-| `Satisfaction rating` | Integer (`Int64.Type`) | `3` | Customer CSAT score collected post-call ($1\text{ to }5$ scale). | Null on unanswered/abandoned calls. Average calculated over answered calls only. |
+| `OrderDetailID` | Number (`type number`) | `1` | Primary key of line item record. | `Sales.SalesOrderDetail` |
+| `OrderID` | Integer (`Int64.Type`) | `43659` | Foreign key referencing sales order document. | `Sales.SalesOrderDetail` |
+| `OrderDate` | Date (`type date`) | `2011-05-31` | Transaction placement date. | `Sales.SalesOrderHeader` |
+| `DueDate` | Date (`type date`) | `2011-06-12` | Contractual delivery target date. | `Sales.SalesOrderHeader` |
+| `ShipDate` | Date (`type date`) | `2011-06-07` | Fulfillment warehouse dispatch date. | `Sales.SalesOrderHeader` |
+| `StatusID` | Integer (`Int64.Type`) | `5` | Raw status code ($1\text{ to }6$). | `Sales.SalesOrderHeader` |
+| `Status` | Text (`type text`) | `Shipped` | Human-readable status derived via conditional logic. | Derived (`Table.AddColumn`) |
+| `OnlineOrderFlag` | Logical (`type logical`) | `false` | Distinguishes e-commerce vs B2B salesperson orders. | `Sales.SalesOrderHeader` |
+| `CustomerID` | Integer (`Int64.Type`) | `29825` | Client corporate/retail identifier. | `Sales.SalesOrderHeader` |
+| `SalesPersonID` | Integer (`Int64.Type`) | `279` | Internal representative commission ID. | `Sales.SalesOrderHeader` |
+| `TerritoryID` | Integer (`Int64.Type`) | `5` | Sales territory region index. | `Sales.SalesOrderHeader` |
+| `Territory` | Text (`type text`) | `Southeast` | Geographic division designation. | `Sales.SalesTerritory` |
+| `TerritoryGroup` | Text (`type text`) | `North America` | Continental macro-region grouping. | `Sales.SalesTerritory` |
+| `ShipMethodID` | Integer (`Int64.Type`) | `5` | Logistics freight carrier ID. | `Sales.SalesOrderHeader` |
+| `ShipMethod` | Text (`type text`) | `CARGO TRANSPORT 5` | Delivery carrier method name. | `Purchasing.ShipMethod` |
+| `ProductID` | Integer (`Int64.Type`) | `776` | SKU manufacturing inventory ID. | `Production.Product` |
+| `Product` | Text (`type text`) | `Mountain-100 Black, 42` | Granular product title. | `Production.Product` |
+| `ProductSubCategory` | Text (`type text`) | `Mountain Bikes` | Intermediate merchandise category. | `Production.ProductSubcategory` |
+| `ProductCategory` | Text (`type text`) | `Bikes` | High-level merchandise department. | `Production.ProductCategory` |
+| `OrderQty` | Integer (`Int64.Type`) | `1` | Units ordered per line item. | `Sales.SalesOrderDetail` |
+| `UnitPrice` | Currency (`Currency.Type`) | `$2,024.99` | Price charged per unit in USD. | `Sales.SalesOrderDetail` |
+| `UnitPriceDiscount` | Decimal (`type number`) | `0.00` | Contractual discount rate applied ($0.00\text{–}0.40$). | `Sales.SalesOrderDetail` |
+| `LineTotal` | Currency (`Currency.Type`) | `$2,024.99` | Net financial revenue before tax ($\text{Qty} \times \text{Price} \times (1 - \text{Discount})$). | `Sales.SalesOrderDetail` |
+| `ProductSubcategoryID` | Integer (`Int64.Type`) | `1` | Taxonomy key for subcategory lookup. | `Production.Product` |
+| `ProductCategoryID` | Integer (`Int64.Type`) | `1` | Top-level taxonomy key for department lookup. | `Production.ProductSubcategory` |
+
+---
+
+## 🛠️ Pipeline 2: Derived Calendar Dimension (`Dim_Date`)
+
+```powerquery
+section Section1;
+
+shared Dim_Date = let
+    // 1. Reference the existing Fact_Sales query as input source
+    Source = Fact_Sales,
+
+    // 2. Isolate the date column — drop all non-date fields
+    #"Removed Other Columns" = Table.SelectColumns(Source, {"OrderDate"}),
+
+    // 3. Deduplicate to produce one row per unique calendar date
+    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns", {"OrderDate"}),
+
+    // 4. Extract Year component as integer
+    #"Inserted Year" = Table.AddColumn(#"Removed Duplicates", "Year",
+        each Date.Year([OrderDate]), Int64.Type),
+
+    // 5. Extract Month number (1–12)
+    #"Inserted Month" = Table.AddColumn(#"Inserted Year", "Month",
+        each Date.Month([OrderDate]), Int64.Type),
+
+    // 6. Extract full Month Name (e.g., "January", "February")
+    #"Inserted Month Name" = Table.AddColumn(#"Inserted Month", "Month Name",
+        each Date.MonthName([OrderDate]), type text),
+
+    // 7. Extract Day of Month (1–31)
+    #"Inserted Day" = Table.AddColumn(#"Inserted Month Name", "Day",
+        each Date.Day([OrderDate]), Int64.Type),
+
+    // 8. Extract Day Name (e.g., "Monday", "Tuesday")
+    #"Inserted Day Name" = Table.AddColumn(#"Inserted Day", "Day Name",
+        each Date.DayOfWeekName([OrderDate]), type text),
+
+    // 9. Extract Quarter of Year (1–4)
+    #"Inserted Quarter" = Table.AddColumn(#"Inserted Day Name", "Quarter",
+        each Date.QuarterOfYear([OrderDate]), Int64.Type),
+
+    // 10. Reorder columns into logical temporal hierarchy
+    #"Reordered Columns" = Table.ReorderColumns(#"Inserted Quarter",
+        {"OrderDate", "Year", "Quarter", "Month", "Month Name", "Day", "Day Name"}),
+
+    // 11. Format Quarter as "Q1", "Q2", "Q3", "Q4" for Slicer-friendly display
+    #"Added Prefix" = Table.TransformColumns(#"Reordered Columns",
+        {{"Quarter", each "Q" & Text.From(_, "en-AE"), type text}})
+in
+    #"Added Prefix";
+```
+
+### Data Dictionary: `Dim_Date` Schema ($7\text{ Columns}$)
+
+| Field Name | Storage Data Type | Sample Value | Business Meaning & Analytical Utility | Derivation Method |
+| :--- | :--- | :--- | :--- | :--- |
+| `OrderDate` | Date (`type date`) | `2011-05-31` | **Primary Key** — unique calendar date linking to `Fact_Sales[OrderDate]`. | `Table.Distinct` from `Fact_Sales` |
+| `Year` | Integer (`Int64.Type`) | `2014` | Calendar year for annual trend analysis and YoY comparisons. | `Date.Year([OrderDate])` |
+| `Quarter` | Text (`type text`) | `Q3` | Fiscal/calendar quarter label, Slicer-ready (`Q1`–`Q4`). | `"Q" & Text.From(Date.QuarterOfYear([OrderDate]))` |
+| `Month` | Integer (`Int64.Type`) | `7` | Month ordinal ($1$–$12$) for chronological sorting. | `Date.Month([OrderDate])` |
+| `Month Name` | Text (`type text`) | `July` | Full month name for PivotTable row labels and chart axes. | `Date.MonthName([OrderDate])` |
+| `Day` | Integer (`Int64.Type`) | `15` | Day of month ($1$–$31$). | `Date.Day([OrderDate])` |
+| `Day Name` | Text (`type text`) | `Friday` | Day of week name for weekday/weekend analysis patterns. | `Date.DayOfWeekName([OrderDate])` |
+
+```mermaid
+flowchart TD
+    subgraph STAR ["Star Schema Architecture (ThisWorkbookDataModel)"]
+        direction TB
+        FACT["<b>Fact_Sales</b>\n(25 Columns · ~121K Rows)\nOrderDetailID · OrderID · OrderDate\nProduct · Territory · LineTotal · ..."]
+        DIM["<b>Dim_Date</b>\n(7 Columns · ~1,124 Unique Dates)\nOrderDate · Year · Quarter\nMonth · Month Name · Day · Day Name"]
+        
+        DIM -->|"1-to-Many\nDim_Date[OrderDate] → Fact_Sales[OrderDate]"| FACT
+    end
+
+    style STAR fill:#fafafa,stroke:#37474f,stroke-width:2px
+    style FACT fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style DIM fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+```
 
 ---
 
 ## ⚡ Architectural Decision: Grid Load vs Data Model Load
 
-A defining architectural lesson of `Module_8_Demo.xlsx` is the decision to load `Fact_Calls` as **Connection-Only into the Data Model** (`ThisWorkbookDataModel`):
+A defining architectural lesson of `Module_8_Demo.xlsx` is the decision to load both tables as **Connection-Only into the Data Model** (`ThisWorkbookDataModel`):
 
 | Evaluation Dimension | Standard Worksheet Grid Load | Data Model (VertiPaq) Load (Module 8 Standard) |
 | :--- | :--- | :--- |
@@ -161,6 +575,7 @@ A defining architectural lesson of `Module_8_Demo.xlsx` is the decision to load 
 | **Workbook Responsiveness** | Scrolling and filtering large tables lags UI. | 0 grid rendering overhead; workbook opens instantaneously. |
 | **Analytical Capabilities** | Requires grid lookup formulas (`=XLOOKUP`). | Supports multi-table **Star Schema** relationships and explicit **DAX measures**. |
 | **Visual Presentation** | Raw rows clutter workbook tabs. | Grid remains pristine; reports surfaced strictly via **PivotTables & Slicers**. |
+| **Time Intelligence** | Requires manual year/month helper columns on the grid. | `Dim_Date` dimension enables DAX `TOTALYTD`, `SAMEPERIODLASTYEAR`, and calendar-based slicers natively. |
 
 ---
 

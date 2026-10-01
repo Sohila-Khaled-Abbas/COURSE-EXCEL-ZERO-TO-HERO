@@ -107,9 +107,8 @@ def sync_module_8():
 
     today_str = datetime.date.today().strftime("%Y-%m-%d")
 
-    # If Fact_Calls query exists, parse column types
-    fact_calls_m = m_queries.get('Fact_Calls', '')
-    col_types = parse_m_column_types(fact_calls_m) if fact_calls_m else []
+    dim_date_m = m_queries.get('Dim_Date', '')
+    fact_sales_m = m_queries.get('Fact_Sales', '')
 
     # 1. Update 07_Reference/Module 8 Dataset Documentation.md
     if os.path.exists(ref_doc_path):
@@ -117,12 +116,18 @@ def sync_module_8():
             content = f.read()
 
         content = re.sub(r'total_sheets:\s*\d+', f'total_sheets: {len(sheetnames)}', content)
+        content = re.sub(r'total_queries:\s*\d+', f'total_queries: {len(m_queries)}', content)
         content = re.sub(r'updated:\s*\d{4}-\d{2}-\d{2}', f'updated: {today_str}', content)
 
-        if fact_calls_m:
-            # Replace M code block
-            m_block_pattern = r'(```powerquery\s*section Section1;\s*shared Fact_Calls = let[\s\S]*?in\s+[^;]+;\s*```)'
-            new_m_block = f"```powerquery\nsection Section1;\n\nshared Fact_Calls = {fact_calls_m};\n```"
+        if dim_date_m:
+            m_block_pattern = r'(```powerquery\s*section Section1;\s*shared Dim_Date = let[\s\S]*?in\s+[^;]+;\s*```)'
+            new_m_block = f"```powerquery\nsection Section1;\n\nshared Dim_Date = {dim_date_m};\n```"
+            if re.search(m_block_pattern, content):
+                content = re.sub(m_block_pattern, lambda m: new_m_block, content)
+
+        if fact_sales_m:
+            m_block_pattern = r'(```powerquery\s*section Section1;\s*shared Fact_Sales = let[\s\S]*?in\s+[^;]+;\s*```)'
+            new_m_block = f"```powerquery\nsection Section1;\n\nshared Fact_Sales = {fact_sales_m};\n```"
             if re.search(m_block_pattern, content):
                 content = re.sub(m_block_pattern, lambda m: new_m_block, content)
 
@@ -131,41 +136,49 @@ def sync_module_8():
         print(f"[SYNC] Updated {ref_doc_path}")
 
     # 2. Update 02_Notes/08_Power_Query_and_M/04_Introduction_to_M_Language_and_APIs.md
-    if os.path.exists(note_4_path) and fact_calls_m:
+    if os.path.exists(note_4_path):
         with open(note_4_path, "r", encoding="utf-8") as f:
             n4_content = f.read()
 
-        m_block_pattern = r'(```powerquery\s*section Section1;\s*shared Fact_Calls = let[\s\S]*?in\s+[^;]+;\s*```)'
-        new_m_block = f"```powerquery\nsection Section1;\n\nshared Fact_Calls = {fact_calls_m};\n```"
-        if re.search(m_block_pattern, n4_content):
-            n4_content = re.sub(m_block_pattern, lambda m: new_m_block, n4_content)
+        updated = False
+        if dim_date_m:
+            m_block_pattern = r'(```powerquery\s*section Section1;\s*shared Dim_Date = let[\s\S]*?in\s+[^;]+;\s*```)'
+            new_m_block = f"```powerquery\nsection Section1;\n\nshared Dim_Date = {dim_date_m};\n```"
+            if re.search(m_block_pattern, n4_content):
+                n4_content = re.sub(m_block_pattern, lambda m: new_m_block, n4_content)
+                updated = True
+
+        if fact_sales_m:
+            m_block_pattern = r'(```powerquery\s*section Section1;\s*shared Fact_Sales = let[\s\S]*?in\s+[^;]+;\s*```)'
+            new_m_block = f"```powerquery\nsection Section1;\n\nshared Fact_Sales = {fact_sales_m};\n```"
+            if re.search(m_block_pattern, n4_content):
+                n4_content = re.sub(m_block_pattern, lambda m: new_m_block, n4_content)
+                updated = True
+
+        if updated:
             n4_content = re.sub(r'updated:\s*\d{4}-\d{2}-\d{2}', f'updated: {today_str}', n4_content)
             with open(note_4_path, "w", encoding="utf-8") as f:
                 f.write(n4_content)
             print(f"[SYNC] Updated {note_4_path}")
 
     # 3. Update 02_Notes/08_Power_Query_and_M/01_Power_Query_Fundamentals_and_ETL.md
-    if os.path.exists(note_1_path) and col_types:
+    if os.path.exists(note_1_path):
         with open(note_1_path, "r", encoding="utf-8") as f:
             n1_content = f.read()
 
-        cols_summary = ", ".join([f"`{c}` (`{t}`)" for c, t in col_types])
-        n1_pattern = r'(- \*\*Embedded Query `Fact_Calls`\*\*:[^\n]*\n\s*-\s*)[^\n]+'
-        replacement = f"\\g<1>{cols_summary}."
-        if re.search(n1_pattern, n1_content):
-            n1_content = re.sub(n1_pattern, replacement, n1_content)
-            n1_content = re.sub(r'updated:\s*\d{4}-\d{2}-\d{2}', f'updated: {today_str}', n1_content)
-            with open(note_1_path, "w", encoding="utf-8") as f:
-                f.write(n1_content)
-            print(f"[SYNC] Updated {note_1_path}")
+        n1_content = re.sub(r'updated:\s*\d{4}-\d{2}-\d{2}', f'updated: {today_str}', n1_content)
+        with open(note_1_path, "w", encoding="utf-8") as f:
+            f.write(n1_content)
+        print(f"[SYNC] Updated {note_1_path}")
 
     # 4. Update 11_Demos_and_Workbooks/README.md
     if os.path.exists(readme_path):
         with open(readme_path, "r", encoding="utf-8") as f:
             readme_text = f.read()
 
+        query_names = ', '.join(m_queries.keys()) if m_queries else 'Fact_Sales, Dim_Date'
         m8_pattern = r'\| \*\*08: Power Query & M\*\* \|.*'
-        replacement = f'| **08: Power Query & M** | [`Module_8_Demo.xlsx`](08_Power_Query/Module_8_Demo.xlsx) | Dedicated sheet `Intro` (bilingual 4 Questions framework & the Data Kitchen `المطبخ بتاعنا`), automated M ingestion query `Fact_Calls` streaming 5,000 PwC call records, strict type casting, and direct loading to `ThisWorkbookDataModel` | 🔥 Active Laboratory |'
+        replacement = f'| **08: Power Query & M** | [`Module_8_Demo.xlsx`](08_Power_Query/Module_8_Demo.xlsx) | Dedicated sheet `Intro` (bilingual 4 Questions framework & the Data Kitchen `المطبخ بتاعنا`), automated M pipelines `{query_names}` building a Star Schema with calendar dimension, strict type casting, and direct loading to `ThisWorkbookDataModel` | 🔥 Active Laboratory |'
 
         if re.search(m8_pattern, readme_text):
             readme_text = re.sub(m8_pattern, replacement, readme_text)

@@ -447,27 +447,46 @@ flowchart TD
 
 ---
 
-### B. Laboratory 2: The Data Kitchen & High-Performance Data Model Ingestion ([`Module_8_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/08_Power_Query/Module_8_Demo.xlsx))
+### B. Laboratory 2: The Data Kitchen & Enterprise Star Schema Model ([`Module_8_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/08_Power_Query/Module_8_Demo.xlsx))
 
-In our official Module 8 practice workbook, Power Query demonstrates the **Data Kitchen architecture** (`المطبخ بتاعنا`) by ingesting the authentic PwC Switzerland Call Center operational dataset directly into the **Power Pivot Data Model** (`ThisWorkbookDataModel`), completely bypassing physical worksheet row limits:
+In our official Module 8 practice workbook, Power Query demonstrates the **Data Kitchen architecture** (`المطبخ بتاعنا`) by ingesting multi-source enterprise data directly into the **Power Pivot Data Model** (`ThisWorkbookDataModel`), completely bypassing physical worksheet row limits, and building a proper **Star Schema** with a derived calendar dimension:
 
 ```mermaid
-flowchart LR
-    RAW["Raw External Source\n01 Call-Center-Dataset.xlsx\n(5,000 Inbound Records)"] --> PQ_M["Power Query M Engine\n(Query: Fact_Calls)\n• Excel.Workbook(File.Contents)\n• Table.PromoteHeaders\n• Table.TransformColumnTypes"]
-    PQ_M --> MODEL["VertiPaq Data Model\n(ThisWorkbookDataModel)\n• Connection-Only Pipeline\n• 0 Worksheet Grid Lag\n• Star Schema Foundation"]
+flowchart TD
+    subgraph SOURCES ["Multi-Source Enterprise Ingestion"]
+        S1["Microsoft SQL Server\n(AdventureWorks2022 - 7 Relational Tables)"]
+    end
 
-    style RAW fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    subgraph PQ_M ["Power Query M Engine (Module_8_Demo.xlsx)"]
+        direction TB
+        M1["<b>Query 1: Fact_Sales</b><br/>• Connects to AdventureWorks2022 on localhost<br/>• Joins 7 tables: Detail + Header + Product + SubCat + Cat + Territory + Shipping<br/>• Adds conditional Status, enforces Currency/Date types, reorders 25 columns"]
+        M2["<b>Query 2: Dim_Date</b><br/>• Derives from Fact_Sales via query-to-query reference<br/>• Extracts distinct OrderDate values<br/>• Enriches with Year, Quarter (Q1–Q4), Month Name, Day, Day Name<br/>• 7 temporal intelligence columns"]
+        M1 --> M2
+    end
+
+    subgraph MODEL ["Power Pivot VertiPaq Data Model (ThisWorkbookDataModel)"]
+        direction TB
+        V1["Fact_Sales Table (High-Speed Compressed Columnar Store)"]
+        V2["Dim_Date Table (Star Schema Calendar Dimension)"]
+        V3["1-to-Many Relationship: Dim_Date[OrderDate] → Fact_Sales[OrderDate]"]
+        V4["Ready for Time Intelligence DAX & Executive Dashboards"]
+    end
+
+    SOURCES ==> PQ_M ==> MODEL
+
+    style SOURCES fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
     style PQ_M fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
     style MODEL fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
 ```
 
-#### Workbook Structural Layout:
+#### Workbook Structural Layout & Live Pipelines:
 - **Sheet `Intro`**: Serves as the pedagogical blueprint, anchoring the **4 Questions Framework** and documenting why manual cleaning and standard lookups fail at scale.
-- **Embedded Query `Fact_Calls`**: Pure M script that extracts `Sheet1` from `"01 Call-Center-Dataset.xlsx"`, promotes headers, and establishes a strict 10-column typed schema contract:
-  - `Call Id` (`type text`), `Agent` (`type text`), `Date` (`type date`), `Time` (`type time`), `Topic` (`type text`), `Answered (Y/N)` (`type text`), `Resolved` (`type text`), `Speed of answer in seconds` (`Int64.Type`), `AvgTalkDuration` (`type datetime`), `Satisfaction rating` (`Int64.Type`).
+- **Embedded Pipeline 1 (`Fact_Sales`)**: A 13-step enterprise SQL Server mashup that performs nested relational joins (`Table.NestedJoin`), expands dimensional attributes (`Table.ExpandTableColumn`), computes dynamic conditional business logic (`Table.AddColumn`), enforces strict currency and date types (`Table.TransformColumnTypes`), and outputs 25 clean, analysis-ready fields.
+- **Embedded Pipeline 2 (`Dim_Date`)**: A derived calendar dimension that references `Fact_Sales` via query-to-query chaining (`Source = Fact_Sales`), extracts distinct `OrderDate` values via `Table.Distinct`, and enriches each date with 6 temporal intelligence columns using `Date.Year`, `Date.Month`, `Date.MonthName`, `Date.Day`, `Date.DayOfWeekName`, and `Date.QuarterOfYear`. Quarters are formatted as Slicer-friendly labels (`Q1`–`Q4`) via `Text.From` concatenation.
 - **Data Model Destination (`ThisWorkbookDataModel`)**:
-  - Rather than outputting 5,000 rows into an Excel grid table, the query is configured as **Only Create Connection** + **Add this data to the Data Model**.
-  - This perfectly illustrates the lesson's core mantra: *Power Query is the kitchen that prepares clean data to feed downstream Power Pivot and PivotTables without bloating the worksheet.*
+  - Both `Fact_Sales` and `Dim_Date` configured as **Only Create Connection** + **Add this data to the Data Model**.
+  - `Dim_Date` connects to `Fact_Sales` via `OrderDate` in a **1-to-Many relationship**, forming a proper **Star Schema**.
+  - This demonstrates the lesson's advanced mantra: *Power Query is the kitchen that prepares both fact and dimension tables, enabling Time Intelligence DAX measures without bloating the worksheet.*
 
 ---
 
