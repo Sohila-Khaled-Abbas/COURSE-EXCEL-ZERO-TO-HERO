@@ -99,6 +99,14 @@ flowchart TD
 10. 💼 [[Call Center Analysis Portfolio Case Study]] — Recruiter-ready showcase
 11. 🏗️ [[Dashboard Architecture Assessment]] — Forensic audit of workbook, 7 critical defects & target architecture
 12. 📱 [[Dashboard UX Specification]] — Product UX specs, personas, state machines & visual hierarchy
+13. 📖 [[KPI Dictionary]] — 38 explicit DAX measures across Call Center, Retention, and D&I
+14. 🎨 [[Dashboard Design System]] — Color tokens, typography, 8pt spatial grid & UI components
+15. 📐 [[Dashboard Wireframe]] — ASCII blueprints & exact grid coordinates for Portal and modules
+16. 📊 [[Dashboard Visualization Guide]] — Visual decision matrix & anti-pattern catalog
+17. 🤖 [[VBA Architecture]] — Modular production codebase (`modNavigation`, `modFilterController`, `modDataRefresh`, `modExportPDF`)
+18. ⚡ [[Excel Dashboard Performance]] — Memory benchmarks & the 7 golden performance rules
+19. ✅ [[Dashboard Testing Checklist]] — 32-point verification test suite
+20. 💼 [[Excel Dashboard Case Study]] — Master portfolio case study for recruiters
 
 ---
 
