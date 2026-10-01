@@ -103,39 +103,24 @@ Extracted directly from the embedded OpenXML package (`customXml/item6.xml` $\to
 ```powerquery
 section Section1;
 
-shared Fact_Calls = let
-    // Step 1: Ingest the external binary package of Dataset 01
-    Source = Excel.Workbook(File.Contents("D:\courses\Data Analysis 26-27\01 Call-Center-Dataset.xlsx"), null, true),
-    
-    // Step 2: Navigate container records to extract Sheet1 tabular matrix
-    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
-    
-    // Step 3: Promote first record into formal column header names
-    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
-    
-    // Step 4: Enforce strict typed schema contract across all 10 operational fields
-    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{
-        {"Call Id", type text}, 
-        {"Agent", type text}, 
-        {"Date", type date}, 
-        {"Time", type datetime}, 
-        {"Topic", type text}, 
-        {"Answered (Y/N)", type text}, 
-        {"Resolved", type text}, 
-        {"Speed of answer in seconds", Int64.Type}, 
-        {"AvgTalkDuration", type datetime}, 
-        {"Satisfaction rating", Int64.Type}
-    })
-in
+shared Fact_Calls = let
+    Source = Excel.Workbook(File.Contents("D:\courses\Data Analysis 26-27\01 Call-Center-Dataset.xlsx"), null, true),
+    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Call Id", type text}, {"Agent", type text}, {"Date", type date}, {"Time", type time}, {"Topic", type text}, {"Answered (Y/N)", type text}, {"Resolved", type text}, {"Speed of answer in seconds", Int64.Type}, {"AvgTalkDuration", type datetime}, {"Satisfaction rating", Int64.Type}})
+in
     #"Changed Type";
 ```
 
 ```mermaid
 flowchart LR
     S1["Source\nExcel.Workbook()"] --> S2["Navigation\n{[Item='Sheet1']}[Data]"]
-    S2 --> S3["Promoted Headers\nTable.PromoteHeaders()"]
-    S3 --> S4["Changed Type\nTable.TransformColumnTypes()"]
-    S4 --> MODEL[("ThisWorkbookDataModel\n(Power Pivot Star Schema)")]
+    S3["Promoted Headers\nTable.PromoteHeaders()"]
+    S2 --> S3
+    S4["Changed Type\nTable.TransformColumnTypes()"]
+    S3 --> S4
+    MODEL[("ThisWorkbookDataModel\n(Power Pivot Star Schema)")]
+    S4 --> MODEL
 
     style S1 fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
     style S2 fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
@@ -155,7 +140,7 @@ The resulting table `Fact_Calls` consists of **5,000 customer interaction logs**
 | `Call Id` | Text (`type text`) | `ID0001` | Unique transaction identifier for each inbound call. | 0 nulls. Primary key of inbound interaction log. |
 | `Agent` | Text (`type text`) | `Diane` | Representative handling the customer inquiry (8 agents: Diane, Becky, Stewart, Greg, Dan, Joe, Martha, Jim). | 0 nulls. Operational grouping dimension. |
 | `Date` | Date (`type date`) | `2021-01-01` | Calendar date on which call occurred (Jan 1, 2021 – Mar 31, 2021). | 0 nulls. Connects to `Dim_Date` in Star Schema. |
-| `Time` | Datetime (`type datetime`) | `09:12:00` | Exact arrival timestamp of incoming call. | 0 nulls. Used for hourly call arrival distribution. |
+| `Time` | Time (`type time`) | `09:12:00` | Exact arrival timestamp of incoming call. | 0 nulls. Used for hourly call arrival distribution. |
 | `Topic` | Text (`type text`) | `Contract related` | Inbound call subject category (`Contract related`, `Tech support`, `Payment related`, `Admin support`, `Streaming`). | 0 nulls. Categorical service slicing dimension. |
 | `Answered (Y/N)` | Text (`type text`) | `Y` | Indicator whether agent picked up (`Y`) or call was abandoned (`N`). | 0 nulls ($4,054\text{ Y} \mid 946\text{ N}$). Foundational KPI filter. |
 | `Resolved` | Text (`type text`) | `Y` | Indicator whether customer issue was successfully resolved. | 0 nulls ($3,646\text{ Y} \mid 1,354\text{ N}$). Resolution rate numerator. |

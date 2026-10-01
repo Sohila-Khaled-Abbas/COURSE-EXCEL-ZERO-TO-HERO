@@ -464,7 +464,7 @@ flowchart LR
 #### Workbook Structural Layout:
 - **Sheet `Intro`**: Serves as the pedagogical blueprint, anchoring the **4 Questions Framework** and documenting why manual cleaning and standard lookups fail at scale.
 - **Embedded Query `Fact_Calls`**: Pure M script that extracts `Sheet1` from `"01 Call-Center-Dataset.xlsx"`, promotes headers, and establishes a strict 10-column typed schema contract:
-  - `Call Id` (`type text`), `Agent` (`type text`), `Date` (`type date`), `Time` (`type datetime`), `Topic` (`type text`), `Answered (Y/N)` (`type text`), `Resolved` (`type text`), `Speed of answer in seconds` (`Int64.Type`), `AvgTalkDuration` (`type datetime`), and `Satisfaction rating` (`Int64.Type`).
+  - `Call Id` (`type text`), `Agent` (`type text`), `Date` (`type date`), `Time` (`type time`), `Topic` (`type text`), `Answered (Y/N)` (`type text`), `Resolved` (`type text`), `Speed of answer in seconds` (`Int64.Type`), `AvgTalkDuration` (`type datetime`), `Satisfaction rating` (`Int64.Type`).
 - **Data Model Destination (`ThisWorkbookDataModel`)**:
   - Rather than outputting 5,000 rows into an Excel grid table, the query is configured as **Only Create Connection** + **Add this data to the Data Model**.
   - This perfectly illustrates the lesson's core mantra: *Power Query is the kitchen that prepares clean data to feed downstream Power Pivot and PivotTables without bloating the worksheet.*

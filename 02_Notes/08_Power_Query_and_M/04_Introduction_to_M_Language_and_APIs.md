@@ -143,28 +143,47 @@ flowchart TD
 In M, data is organized into three primitive classifications and three foundational container structures:
 
 ```mermaid
-classDiagram
-    direction TB
-    class M_Types {
-        +Primitive Types
-        +Container Structures
-    }
-    class Primitives {
-        number (10, 42.5)
-        text ("Cairo", "USD")
-        logical (true, false)
-        date (#date(2024, 1, 1))
-        datetime (#datetime(..))
-        null
-    }
-    class Containers {
-        List { item1, item2, .. }
-        Record [ Key = Value, .. ]
-        Table #table( {cols}, {rows} )
-    }
+flowchart TD
+    subgraph M_TYPES ["M Language Type Hierarchy"]
+        direction TB
+        ROOT["<b>M Formula Language Types</b>"]
+        
+        subgraph PRIM ["Primitive Scalar Types"]
+            direction TB
+            P1["<b>number</b>: 10, 42.5, -3.14"]
+            P2["<b>text</b>: &quot;Cairo&quot;, &quot;USD&quot;"]
+            P3["<b>logical</b>: true, false"]
+            P4["<b>date</b>: #date(2024, 1, 1)"]
+            P5["<b>time</b>: #time(9, 30, 0)"]
+            P6["<b>datetime</b>: #datetime(2024, 1, 1, 9, 30, 0)"]
+            P7["<b>null</b>: missing value"]
+        end
+        
+        subgraph CONT ["Structured Containers"]
+            direction TB
+            C1["<b>List</b>: { item1, item2, ... }<br/>0-indexed ordered collection"]
+            C2["<b>Record</b>: [ Key = Value, ... ]<br/>Set of named field pairs"]
+            C3["<b>Table</b>: #table(cols, rows)<br/>Two-dimensional tabular matrix"]
+        end
+        
+        ROOT --> PRIM
+        ROOT --> CONT
+    end
 
-    M_Types <|-- Primitives
-    M_Types <|-- Containers
+    style M_TYPES fill:#fafafa,stroke:#37474f,stroke-width:2px
+    style ROOT fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    style PRIM fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style CONT fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    style P1 fill:#ffffff,stroke:#1565c0
+    style P2 fill:#ffffff,stroke:#1565c0
+    style P3 fill:#ffffff,stroke:#1565c0
+    style P4 fill:#ffffff,stroke:#1565c0
+    style P5 fill:#ffffff,stroke:#1565c0
+    style P6 fill:#ffffff,stroke:#1565c0
+    style P7 fill:#ffffff,stroke:#1565c0
+    style C1 fill:#ffffff,stroke:#ef6c00
+    style C2 fill:#ffffff,stroke:#ef6c00
+    style C3 fill:#ffffff,stroke:#ef6c00
 ```
 
 ### The Three Container Structures:
@@ -375,30 +394,12 @@ From our official practice workbook ([`Module_8_Demo.xlsx`](file:///d:/courses/D
 ```powerquery
 section Section1;
 
-shared Fact_Calls = let
-    // 1. Ingest external Excel workbook binary package
-    Source = Excel.Workbook(File.Contents("D:\courses\Data Analysis 26-27\01 Call-Center-Dataset.xlsx"), null, true),
-    
-    // 2. Navigate hierarchical package structure to target 'Sheet1' data table
-    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
-    
-    // 3. Promote first row containing field names to column headers
-    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
-    
-    // 4. Enforce canonical 10-column typed schema contract
-    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{
-        {"Call Id", type text}, 
-        {"Agent", type text}, 
-        {"Date", type date}, 
-        {"Time", type datetime}, 
-        {"Topic", type text}, 
-        {"Answered (Y/N)", type text}, 
-        {"Resolved", type text}, 
-        {"Speed of answer in seconds", Int64.Type}, 
-        {"AvgTalkDuration", type datetime}, 
-        {"Satisfaction rating", Int64.Type}
-    })
-in
+shared Fact_Calls = let
+    Source = Excel.Workbook(File.Contents("D:\courses\Data Analysis 26-27\01 Call-Center-Dataset.xlsx"), null, true),
+    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Call Id", type text}, {"Agent", type text}, {"Date", type date}, {"Time", type time}, {"Topic", type text}, {"Answered (Y/N)", type text}, {"Resolved", type text}, {"Speed of answer in seconds", Int64.Type}, {"AvgTalkDuration", type datetime}, {"Satisfaction rating", Int64.Type}})
+in
     #"Changed Type";
 ```
 
@@ -409,7 +410,7 @@ flowchart TD
         S1["<b>Step 1: Excel.Workbook(File.Contents(...))</b><br/>Streams binary content of 01 Call-Center-Dataset.xlsx into an in-memory package schema."]
         S2["<b>Step 2: Source{[Item='Sheet1',Kind='Sheet']}[Data]</b><br/>M Record Lookup navigating the workbook container to extract the raw Sheet1 cell matrix."]
         S3["<b>Step 3: Table.PromoteHeaders(..., [PromoteAllScalars=true])</b><br/>Promotes record 1 from body data into structured column identifiers."]
-        S4["<b>Step 4: Table.TransformColumnTypes(...)</b><br/>Enforces strict typed schema: Text, Dates, Datetime durations, and 64-bit Integers."]
+        S4["<b>Step 4: Table.TransformColumnTypes(...)</b><br/>Enforces strict typed schema: Text, Dates, Time of day, Duration timestamps, and 64-bit Integers."]
         S5["<b>Destination: ThisWorkbookDataModel</b><br/>Loaded directly into the VertiPaq Data Model without populating physical worksheet grid cells."]
         
         S1 --> S2 --> S3 --> S4 --> S5
