@@ -171,4 +171,41 @@ SORT file.name ASC
 | [[AI-Assisted Analysis Workflow]] | Case Study | Real-world execution audit on 5,000 PwC call records |
 | [[01 — Generate a Formula With AI\|10 AI Practice Drills]] | Hands-on Labs | Formula generation, debugging, and full manual rebuilds |
 
+---
+
+## 🛢️ 6. SQL Database Ingestion & Relational Analytics Track
+
+> [!abstract] Architectural Mission
+> Extending Excel beyond standalone CSVs by ingesting from live **Microsoft SQL Server relational databases** (Northwind, pubs, AdventureWorks2022, AdventureWorksDW2022) through a disciplined analytics engineering workflow:
+> $$\text{SQL Server} \to \text{Discovery} \to \text{Relational Joins} \to \text{Views} \to \text{Power Query} \to \text{Data Model} \to \text{DAX} \to \text{Dashboard} \to \text{VBA Automation}$$
+
+### Core Track Navigation
+- 🧭 **Master Map of Content**: [[SQL Database Ingestion MOC]]
+- 🗺️ **Project Roadmap & Difficulty Matrix**: [[Project Roadmap|SQL Project Roadmap]]
+- ⚙️ **Environment Setup**: [[SQL Server Learning Environment]] & [[SQL Server Installation References]]
+- 📚 **Microsoft Sample Sources**: [[Microsoft SQL Server Samples]]
+- 💼 **Interview Defense**: [[SQL Database Interview Questions]]
+
+### Database Discovery Labs (`11_Database_Labs/`)
+| Lab | Title | Core Focus | Link |
+| :---: | :--- | :--- | :--- |
+| **Lab 01** | Database Discovery | System catalogs (`sys.databases`, `INFORMATION_SCHEMA.TABLES`) | [[Lab_01_Database_Discovery]] |
+| **Lab 02** | Schema Exploration | Data types, nullability, precision, primary key constraints | [[Lab_02_Schema_Exploration]] |
+| **Lab 03** | Relationship Analysis | Automated FK mapping, composite keys, bridge table detection | [[Lab_03_Relationship_Analysis]] |
+| **Lab 04** | Data Profiling | Row counts, null ratios, boundary checks, orphan audits | [[Lab_04_Data_Profiling]] |
+| **Lab 05** | SQL Querying | Multi-table joins, `GROUP BY`, `HAVING` filters | [[Lab_05_SQL_Querying]] |
+| **Lab 06** | Analytical SQL | CTEs, `CASE`, Window Functions (`LAG`, `DENSE_RANK`) | [[Lab_06_Analytical_SQL]] |
+| **Lab 07** | SQL to Excel Ingestion | Ingestion architectures, Power Query M recipes, Query Folding | [[Lab_07_SQL_to_Excel_Ingestion]] |
+| **Lab 08** | Model Validation | 4-tier reconciliation methodology between SQL and Excel | [[Lab_08_Model_Validation]] |
+
+### Progressive Project Ladder (`12_SQL_Projects/`)
+| Project | Database | Level | Core Architecture | Project Documentation |
+| :--- | :--- | :---: | :--- | :--- |
+| **01: Northwind** | `Northwind` | Foundation | Joins, Net Sales views, Power Query ingestion, Pivot dashboard | [[12_SQL_Projects/01_Northwind_SQL_to_Excel/README\|Northwind Sales Analytics]] |
+| **02: pubs** | `pubs` | Intermediate | Many-to-many bridge tables, royalty weighting, avoiding double-counting | [[12_SQL_Projects/02_Pubs_Publishing_Analytics/README\|Pubs Publishing Intelligence]] |
+| **03: AdventureWorks** | `AdventureWorks2022` | Advanced | Enterprise 3NF OLTP (71 tables across 6 schemas), B2B vs B2C | [[12_SQL_Projects/03_AdventureWorks_Sales_Analytics/README\|AdventureWorks Enterprise Sales]] |
+| **04: AdventureWorksDW** | `AdventureWorksDW2022` | Advanced | Kimball Star Schema, Fact vs Dim separation, Power Pivot DAX | [[12_SQL_Projects/04_AdventureWorksDW_Dimensional_Analytics/README\|AdventureWorksDW Dimensional]] |
+| **05: Production Pipeline** | DW2022 / Multi | Expert | Decoupled Views $\to$ Power Query Folding $\to$ DAX $\to$ Modular VBA | [[12_SQL_Projects/05_Production_SQL_to_Excel_Pipeline/README\|Production Analytics Pipeline]] |
+
+
 

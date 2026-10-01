@@ -89,3 +89,18 @@ flowchart TD
 - [x] Articulate analytical decisions using the [[Call Center Analysis Portfolio Case Study]]. ✅ 2026-09-29
 - [x] Practice answering technical questions in [[Interview Questions]]. ✅ 2026-09-29
 - [x] Publish the GitHub repository with clean documentation and demonstrate technical proficiency. ✅ 2026-09-29
+
+## 阶段 8: Relational Engineering (SQL Server & Database Discovery)
+- [x] Configure Microsoft SQL Server 2022 local developer instance and install/restore official samples ([[SQL Server Learning Environment]] & [[SQL Server Installation References]]). ✅ 2026-10-01
+- [x] Master systematic database discovery: ANSI catalogs, schemas, tables, and physical storage ([[Lab_01_Database_Discovery]]). ✅ 2026-10-01
+- [x] Profile data types, null distributions, boundary constraints, and orphan records across 8 labs ([[Lab_04_Data_Profiling]]). ✅ 2026-10-01
+- [x] Author advanced analytical SQL: Multi-table joins, subqueries, CTEs, and Window Functions ([[Lab_06_Analytical_SQL]]). ✅ 2026-10-01
+
+## 阶段 9: Enterprise Analytics & Pipeline Mastery (SQL to Excel Projects)
+- [x] **Project 01**: Northwind SQL to Excel Sales Analytics — Joins, Net Sales views, Power Query ingestion ([[12_SQL_Projects/01_Northwind_SQL_to_Excel/README]]). ✅ 2026-10-01
+- [x] **Project 02**: Pubs Publishing Sales Intelligence — Resolving Many-to-Many bridge tables and royalty weighting ([[12_SQL_Projects/02_Pubs_Publishing_Analytics/README]]). ✅ 2026-10-01
+- [x] **Project 03**: AdventureWorks Enterprise Sales Analytics — Multi-schema 3NF OLTP modeling & B2B/B2C segmentation ([[12_SQL_Projects/03_AdventureWorks_Sales_Analytics/README]]). ✅ 2026-10-01
+- [x] **Project 04**: AdventureWorksDW Dimensional Analytics — Kimball Star Schema, Fact/Dim separation, Power Pivot DAX ([[12_SQL_Projects/04_AdventureWorksDW_Dimensional_Analytics/README]]). ✅ 2026-10-01
+- [x] **Project 05**: Production SQL to Excel Analytics Pipeline — Decoupled Views, Query Folding, DAX, Modular VBA Automation ([[12_SQL_Projects/05_Production_SQL_to_Excel_Pipeline/README]]). ✅ 2026-10-01
+- [x] Defend analytical architectures in technical interviews using the comprehensive question bank ([[SQL Database Interview Questions]]). ✅ 2026-10-01
+

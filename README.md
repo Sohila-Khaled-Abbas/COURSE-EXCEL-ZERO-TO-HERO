@@ -263,12 +263,26 @@ COURSE-EXCEL-ZERO-TO-HERO/
 │       ├── AI Excel Installation Guide.md  # Office Add-ins vs COM add-ins & AppSource setup
 │       ├── AI Excel Workflow.md            # 14-step professional analytics process
 │       ├── AI Excel Prompt Library.md      # Production prompt templates (formulas, ETL, UI)
-│       ├── AI Output Verification.md       # 6-stage verification framework & checklist
 │       ├── AI Excel Security and Privacy.md# Security decision gate & PII data sanitization
 │       └── AI Tool Comparison.md           # Objective side-by-side feature comparison
+│   ├── SQL Database Sources/               # Official Microsoft SQL Server Sample References:
+│   │   ├── Microsoft SQL Server Samples.md # Official provenance & sample database governance
+│   │   ├── Northwind Documentation.md      # 13 tables, grain, extraction views & queries
+│   │   ├── pubs Documentation.md           # 11 tables, bridge tables, royalties & queries
+│   │   ├── AdventureWorks Documentation.md # 71 tables across 6 schemas, B2B vs B2C
+│   │   ├── AdventureWorksDW Documentation.md # Kimball star schema, facts vs dims, surrogate keys
+│   │   ├── SQL Server Installation References.md # Reproducible T-SQL scripts & RESTORE
+│   │   └── SQL Server Learning Environment.md # Full-stack developer environment setup
+│   └── AI for SQL Analytics/               # 5 Responsible AI Querying Guides:
+│       ├── AI-Assisted SQL Exploration.md  # 7-step human-in-the-loop querying loop
+│       ├── AI SQL Prompt Library.md        # Battle-tested schema, join & CTE prompt templates
+│       ├── AI SQL Verification.md          # 5 AI failure modes & verification checklist
+│       ├── AI-Assisted Data Modeling.md    # Dimensional star schema & DAX prompting
+│       └── AI-Assisted Query Debugging.md  # SARGability, execution plans & index tuning
 ├── 08_Revision/                            # Spaced Repetition & Interview Prep
 │   ├── Flashcards.md                       # Active-recall interactive flashcard deck
 │   ├── Interview Questions.md              # Senior Data Analyst behavioral & technical questions
+│   ├── SQL Database Interview Questions.md # Relational, ETL, DAX & project defense questions
 │   ├── Quick Review.md                     # 15-minute exam & interview cram sheet
 │   └── Common Mistakes.md                  # Top 15 Excel errors (#SPILL!, #N/A, #VALUE!) & fixes
 ├── 09_Source_Materials/                    # Preserved Original Course Files & Datasets (Local)
@@ -276,6 +290,22 @@ COURSE-EXCEL-ZERO-TO-HERO/
 │   └── ...                                 # Untouched source-of-truth materials (gitignored)
 ├── 10_Portfolio/                           # Recruiter & Client-Facing Artifacts
 │   └── Call Center Analysis Portfolio Case Study.md # Executive presentation ready for hiring managers
+├── 11_Database_Labs/                       # 8 Database Discovery & Profiling Labs:
+│   ├── Lab_01_Database_Discovery.md        # System catalogs (sys.databases, INFORMATION_SCHEMA)
+│   ├── Lab_02_Schema_Exploration.md        # Data types, nullability, precision, primary keys
+│   ├── Lab_03_Relationship_Analysis.md     # Automated FK mapping & bridge table detection
+│   ├── Lab_04_Data_Profiling.md            # Volume metrics, null ratios, boundary checks, orphan audits
+│   ├── Lab_05_SQL_Querying.md              # Multi-table joins, GROUP BY, HAVING aggregations
+│   ├── Lab_06_Analytical_SQL.md            # CTEs, CASE, Window Functions (LAG, DENSE_RANK)
+│   ├── Lab_07_SQL_to_Excel_Ingestion.md    # Ingestion architectures, Power Query M & Query Folding
+│   └── Lab_08_Model_Validation.md          # 4-tier financial reconciliation methodology
+├── 12_SQL_Projects/                        # 5 Progressive SQL Ingestion & Analytics Projects:
+│   ├── Project Roadmap.md                  # Progressive difficulty matrix & skill milestones
+│   ├── 01_Northwind_SQL_to_Excel/          # Foundation: Relational joins, Net Sales view, Excel Pivot
+│   ├── 02_Pubs_Publishing_Analytics/       # Intermediate: M:N bridge tables & royalty allocation
+│   ├── 03_AdventureWorks_Sales_Analytics/  # Advanced: 3NF OLTP (71 tables), B2B Reseller vs B2C
+│   ├── 04_AdventureWorksDW_Dimensional_Analytics/ # Advanced: Kimball Star Schema, Fact vs Dim, DAX
+│   └── 05_Production_SQL_to_Excel_Pipeline/# Expert: Views -> Query Folding -> DAX -> Modular VBA
 ├── 11_Demos_and_Workbooks/                 # Student Excel Workbooks (.xlsx) & Personal Demos
 │   ├── 01_Fundamentals/                    # Interface setup, ergonomics, navigation drills
 │   ├── 02_Data_Management/                 # Superstore formatting, custom masks, validation
@@ -428,6 +458,70 @@ pie title Booking Fulfillment vs Cancellation (36,275 Reservations)
 - 📁 **Course Student Demo Workbook**: [`11_Demos_and_Workbooks/02_Data_Management/Hotel_Reservations_Demo.xlsx`](11_Demos_and_Workbooks/02_Data_Management/Hotel_Reservations_Demo.xlsx)
 
 Full 19-column schema, cancellation driver breakdowns, validation lists, and custom formatting masks are documented in **[Hotel Reservations Dataset Documentation](07_Reference/Hotel%20Reservations%20Dataset%20Documentation.md)** and the online **[Dataset Library](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/datasets/)**.
+
+---
+
+## 🛢️ SQL Database Ingestion Project Track
+
+To bridge the gap between standalone spreadsheet files and enterprise data pipelines, this repository extends Excel analytics into **relational database engineering** using **Microsoft SQL Server**.
+
+```text
+Microsoft SQL Server Sample Database
+                ↓
+Database Schema Discovery
+                ↓
+Tables / Relationships / Keys
+                ↓
+SQL Exploration
+                ↓
+Data Profiling
+                ↓
+SQL Transformation
+                ↓
+Power Query / SQL Ingestion
+                ↓
+Data Cleaning
+                ↓
+Analytical Data Model
+                ↓
+Excel / Power Pivot
+                ↓
+KPI Layer
+                ↓
+Dashboard
+                ↓
+Automation
+                ↓
+Business Insights
+                ↓
+Portfolio Case Study
+```
+
+### Progressive Project Ladder
+
+| Project | Database | Skills & Competencies | Excel Layer | SQL Layer |
+| :--- | :--- | :--- | :--- | :--- |
+| **[Northwind Sales Analytics](12_SQL_Projects/01_Northwind_SQL_to_Excel/README.md)** | `Northwind` | Relational Joins + Power Query Ingestion | Power Query + Pivot Dashboard | Core T-SQL + Views |
+| **[Pubs Publishing Intelligence](12_SQL_Projects/02_Pubs_Publishing_Analytics/README.md)** | `pubs` | Many-to-Many Bridge Tables + Royalty Weighting | Power Query + Matrix Models | Advanced SQL + CTEs |
+| **[AdventureWorks Sales Analytics](12_SQL_Projects/03_AdventureWorks_Sales_Analytics/README.md)** | `AdventureWorks2022` | Enterprise 3NF OLTP (71 tables) + B2B vs B2C | Power Pivot Data Model | Multi-Schema Complex SQL |
+| **[AdventureWorksDW Dimensional](12_SQL_Projects/04_AdventureWorksDW_Dimensional_Analytics/README.md)** | `AdventureWorksDW2022` | Kimball Star Schema + Fact/Dim + Surrogate Keys | Power Pivot + Explicit DAX | Analytical Star Queries |
+| **[Production Analytics Pipeline](12_SQL_Projects/05_Production_SQL_to_Excel_Pipeline/README.md)** | `AdventureWorksDW2022` | End-to-End Governance + Query Folding + VBA | Semantic Model + Executive UI | Production Views + Reconciliation |
+
+### Database Discovery Labs (`11_Database_Labs/`)
+1. **[Lab 01: Database Discovery](11_Database_Labs/Lab_01_Database_Discovery.md)** — ANSI-SQL discovery via `sys.databases` and `INFORMATION_SCHEMA.TABLES`.
+2. **[Lab 02: Schema Exploration](11_Database_Labs/Lab_02_Schema_Exploration.md)** — Column definitions, precision, nullability, and primary keys.
+3. **[Lab 03: Relationship Analysis](11_Database_Labs/Lab_03_Relationship_Analysis.md)** — Automated foreign key mapping, composite keys, and bridge tables.
+4. **[Lab 04: Data Profiling](11_Database_Labs/Lab_04_Data_Profiling.md)** — Row counts, null distributions, boundary tests, and orphan audits.
+5. **[Lab 05: SQL Querying](11_Database_Labs/Lab_05_SQL_Querying.md)** — Multi-table relational joins, `GROUP BY`, and `HAVING` filters.
+6. **[Lab 06: Analytical SQL](11_Database_Labs/Lab_06_Analytical_SQL.md)** — CTEs, `CASE`, and Window Functions (`LAG`, `DENSE_RANK`).
+7. **[Lab 07: SQL to Excel Ingestion](11_Database_Labs/Lab_07_SQL_to_Excel_Ingestion.md)** — The 4 ingestion architectures, M recipes, and Query Folding.
+8. **[Lab 08: Model Validation](11_Database_Labs/Lab_08_Model_Validation.md)** — 4-tier financial reconciliation methodology.
+
+### Source Documentation & Environment Setup
+- **[Microsoft SQL Server Samples](07_Reference/SQL%20Database%20Sources/Microsoft%20SQL%20Server%20Samples.md)** — Official Microsoft provenance hierarchy and backup sources.
+- **[SQL Server Learning Environment](07_Reference/SQL%20Database%20Sources/SQL%20Server%20Learning%20Environment.md)** — Complete developer environment architecture.
+- **[SQL Server Installation References](07_Reference/SQL%20Database%20Sources/SQL%20Server%20Installation%20References.md)** — Step-by-step T-SQL setup and restore scripts.
+- **[SQL Database Interview Preparation](08_Revision/SQL%20Database%20Interview%20Questions.md)** — Comprehensive technical questions & defense guide.
 
 ---
 
