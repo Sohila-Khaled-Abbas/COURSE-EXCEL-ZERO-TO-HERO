@@ -87,26 +87,27 @@ flowchart TD
 ---
 
 ## Quick Links to Project Modules
-1. ❓ [[Business Problem]] — Stakeholder requirements for Claire & key operational questions
-2. 🗄️ [[Dataset Documentation]] — Scope, authentic Forage provenance & the 3-dataset suite
-3. 📖 [[Data Dictionary]] — Granular metadata across all 3 PwC simulation datasets
-4. 🔍 [[Data Quality Assessment]] — Grounded forensic audit of all 5,000 rows & 946 nulls
-5. 🗺️ [[Analysis Plan]] — Hypothesis testing & analytical methodology
-6. 📐 [[KPIs]] — Mathematical formulas & official PwC DAX measure library
-7. 💡 [[Findings]] — Evidence-based insights & Agent Performance Quadrant
-8. 🚀 [[Recommendations]] — Actionable staffing, process, & technology proposals for Claire
-9. 🔄 [[Project Retrospective]] — Engineering lessons & Digital Accelerator competencies
-10. 💼 [[Call Center Analysis Portfolio Case Study]] — Recruiter-ready showcase
-11. 🏗️ [[Dashboard Architecture Assessment]] — Forensic audit of workbook, 7 critical defects & target architecture
-12. 📱 [[Dashboard UX Specification]] — Product UX specs, personas, state machines & visual hierarchy
-13. 📖 [[KPI Dictionary]] — 38 explicit DAX measures across Call Center, Retention, and D&I
-14. 🎨 [[Dashboard Design System]] — Color tokens, typography, 8pt spatial grid & UI components
-15. 📐 [[Dashboard Wireframe]] — ASCII blueprints & exact grid coordinates for Portal and modules
-16. 📊 [[Dashboard Visualization Guide]] — Visual decision matrix & anti-pattern catalog
-17. 🤖 [[VBA Architecture]] — Modular production codebase (`modNavigation`, `modFilterController`, `modDataRefresh`, `modExportPDF`)
-18. ⚡ [[Excel Dashboard Performance]] — Memory benchmarks & the 7 golden performance rules
-19. ✅ [[Dashboard Testing Checklist]] — 32-point verification test suite
-20. 💼 [[Excel Dashboard Case Study]] — Master portfolio case study for recruiters
+1. 🏆 **[[Master Project Guidance Manual]]** — **Comprehensive End-to-End Master Guidance Guide (Ingestion to Publishing)**
+2. ❓ [[Business Problem]] — Stakeholder requirements for Claire & key operational questions
+3. 🗄️ [[Dataset Documentation]] — Scope, authentic Forage provenance & the 3-dataset suite
+4. 📖 [[Data Dictionary]] — Granular metadata across all 3 PwC simulation datasets
+5. 🔍 [[Data Quality Assessment]] — Grounded forensic audit of all 5,000 rows & 946 nulls
+6. 🗺️ [[Analysis Plan]] — Hypothesis testing & analytical methodology
+7. 📐 [[KPIs]] — Mathematical formulas & official PwC DAX measure library
+8. 💡 [[Findings]] — Evidence-based insights & Agent Performance Quadrant
+9. 🚀 [[Recommendations]] — Actionable staffing, process, & technology proposals for Claire
+10. 🔄 [[Project Retrospective]] — Engineering lessons & Digital Accelerator competencies
+11. 💼 [[Call Center Analysis Portfolio Case Study]] — Recruiter-ready showcase
+12. 🏗️ [[Dashboard Architecture Assessment]] — Forensic audit of workbook, 7 critical defects & target architecture
+13. 📱 [[Dashboard UX Specification]] — Product UX specs, personas, state machines & visual hierarchy
+14. 📖 [[KPI Dictionary]] — 38 explicit DAX measures across Call Center, Retention, and D&I
+15. 🎨 [[Dashboard Design System]] — Color tokens, typography, 8pt spatial grid & UI components
+16. 📐 [[Dashboard Wireframe]] — ASCII blueprints & exact grid coordinates for Portal and modules
+17. 📊 [[Dashboard Visualization Guide]] — Visual decision matrix & anti-pattern catalog
+18. 🤖 [[VBA Architecture]] — Modular production codebase (`modNavigation`, `modFilterController`, `modDataRefresh`, `modExportPDF`)
+19. ⚡ [[Excel Dashboard Performance]] — Memory benchmarks & the 7 golden performance rules
+20. ✅ [[Dashboard Testing Checklist]] — 32-point verification test suite
+21. 💼 [[Excel Dashboard Case Study]] — Master portfolio case study for recruiters
 
 ---
 
