@@ -7,7 +7,16 @@ version: 2.0
 target_platform: Microsoft Excel VBA (.xlsm)
 date: 2026-10-01
 author: Senior Excel Developer & VBA Automation Engineer
-tags: [vba-automation, macro-architecture, modnavigation, modfiltercontroller, moddatarefresh, modexportpdf, clean-code]
+tags:
+- vba-automation
+- macro-architecture
+- modnavigation
+- modfiltercontroller
+- moddatarefresh
+- modexportpdf
+- clean-code
+title: Modular VBA Automation Architecture
+description: Standard VBA modules for state control, navigation, and export
 ---
 
 # 🤖 VBA Architecture & Automation Layer

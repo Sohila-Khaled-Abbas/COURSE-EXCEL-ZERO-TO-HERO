@@ -1,8 +1,9 @@
 ---
 type: project-documentation
 project_name: PwC Call Center Performance Analysis
-section: Analysis Plan
 created: 2026-09-28
+title: Analysis Plan & Methodology
+description: Hypothesis testing and 6-phase analytical framework
 ---
 
 # 5. Analysis Plan & Methodology

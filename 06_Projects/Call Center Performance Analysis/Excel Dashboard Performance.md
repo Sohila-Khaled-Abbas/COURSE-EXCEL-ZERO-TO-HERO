@@ -7,7 +7,14 @@ version: 2.0
 target_platform: Microsoft Excel (.xlsm)
 date: 2026-10-01
 author: Senior Excel Dashboard Architect & Performance Engineer
-tags: [performance-engineering, vertipaq, dax-optimization, memory-management, calculation-tree]
+tags:
+- performance-engineering
+- vertipaq
+- dax-optimization
+- memory-management
+- calculation-tree
+title: Excel Performance & Optimization Guidelines
+description: Memory tuning, volatile formula reduction, and calculation speed
 ---
 
 # ⚡ Excel Dashboard Performance Engineering

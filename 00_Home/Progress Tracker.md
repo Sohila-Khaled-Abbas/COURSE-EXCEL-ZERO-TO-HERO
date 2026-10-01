@@ -71,10 +71,10 @@ updated: 2026-09-28
 - [x] 34. M Language Syntax & API Web Ingestion ✅ 2026-10-01
 
 ### Module 9: Data Modeling, Power Pivot & DAX
-- [ ] 35. Dimensional Modeling (Star vs Snowflake Schema)
-- [ ] 36. Fact vs Dimension Tables & 1-to-Many Relationships
-- [ ] 37. Calculated Columns vs DAX Measures
-- [ ] 38. Core DAX Functions (`CALCULATE`, `DIVIDE`, `RELATED`)
+- [x] 35. Dimensional Modeling (Star vs Snowflake Schema) ✅ 2026-10-01
+- [x] 36. Fact vs Dimension Tables & 1-to-Many Relationships ✅ 2026-10-01
+- [x] 37. Calculated Columns vs DAX Measures ✅ 2026-10-01
+- [x] 38. Core DAX Functions (`CALCULATE`, `DIVIDE`, `RELATED`) ✅ 2026-10-01
 
 ---
 

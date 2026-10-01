@@ -1,9 +1,10 @@
 ---
 type: project-documentation
 project_name: PwC Call Center Performance Analysis
-section: Findings
 created: 2026-09-28
 updated: 2026-10-01
+title: Empirical Findings & Performance Quadrants
+description: Key discoveries, arrival heatmaps, and agent performance matrix
 ---
 
 # 7. Evidence-Based Analytical Findings for Claire

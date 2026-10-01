@@ -1,8 +1,9 @@
 ---
 type: project-documentation
 project_name: PwC Call Center Performance Analysis
-section: Data Quality Assessment
 created: 2026-09-28
+title: Data Quality & Null Triage Assessment
+description: Forensic audit of 5,000 rows and explanation of 946 nulls
 ---
 
 # 4. Forensic Data Quality Assessment

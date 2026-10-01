@@ -7,7 +7,16 @@ version: 2.0
 target_platform: Microsoft Excel (.xlsm) & Power Pivot DAX
 date: 2026-10-01
 author: Senior Excel Dashboard Architect & Business Intelligence Specialist
-tags: [pwc-case-study, kpi-dictionary, dax-measures, business-metrics, call-center, customer-retention, diversity-inclusion]
+tags:
+- pwc-case-study
+- kpi-dictionary
+- dax-measures
+- business-metrics
+- call-center
+- customer-retention
+- diversity-inclusion
+title: KPI Dictionary & DAX Formulations
+description: Production DAX formulas, calculation types, and targets
 ---
 
 # 📖 Master KPI Dictionary: PwC Digital Transformation Suite

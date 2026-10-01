@@ -1,9 +1,10 @@
 ---
 type: project-documentation
 project_name: PwC Call Center Performance Analysis
-section: Business Problem
 created: 2026-09-28
 updated: 2026-10-01
+title: Business Problem & Operational Scope
+description: Operational context, client challenges, and objectives for Claire
 ---
 
 # 1. Business Context & Problem Statement

@@ -7,7 +7,14 @@ version: 2.0
 target_platform: Microsoft Excel (.xlsm)
 date: 2026-10-01
 author: Senior Excel Quality Assurance & BI Engineer
-tags: [testing-framework, qa-checklist, regression-testing, data-validation, excel-audit]
+tags:
+- testing-framework
+- qa-checklist
+- regression-testing
+- data-validation
+- excel-audit
+title: Dashboard Testing & Verification Checklist
+description: 32-point pre-flight quality and reconciliation checklist
 ---
 
 # ✅ Dashboard Testing & Quality Assurance Framework

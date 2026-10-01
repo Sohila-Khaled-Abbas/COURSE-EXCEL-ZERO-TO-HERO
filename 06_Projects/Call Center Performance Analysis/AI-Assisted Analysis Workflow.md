@@ -6,11 +6,13 @@ status: verified
 created: 2026-09-28
 updated: 2026-09-28
 tags:
-  - excel
-  - project
-  - ai-workflow
-  - call-center
-  - audit
+- excel
+- project
+- ai-workflow
+- call-center
+- audit
+title: AI-Assisted Analysis Workflow
+description: AI prompts and workflows for accelerating Excel analysis
 ---
 
 # 📞 AI-Assisted Analysis Workflow: PwC Call Center Capstone

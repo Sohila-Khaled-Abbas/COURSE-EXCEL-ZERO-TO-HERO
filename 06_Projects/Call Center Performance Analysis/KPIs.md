@@ -1,9 +1,10 @@
 ---
 type: project-documentation
 project_name: PwC Call Center Performance Analysis
-section: KPIs
 created: 2026-09-28
 updated: 2026-10-01
+title: Core KPIs & Mathematical Models
+description: Summary formulas and business rationale for core metrics
 ---
 
 # 6. Key Performance Indicators (KPIs) & Official DAX Model

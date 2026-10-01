@@ -1,9 +1,10 @@
 ---
 type: project-documentation
 project_name: PwC Call Center Performance Analysis
-section: Project Retrospective
 created: 2026-09-28
 updated: 2026-10-01
+title: Project Retrospective & Lessons Learned
+description: Engineering retrospective, technical trade-offs, and outcomes
 ---
 
 # 9. Project Retrospective & Digital Accelerator Competencies

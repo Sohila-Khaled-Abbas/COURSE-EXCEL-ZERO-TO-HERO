@@ -1,25 +1,26 @@
 ---
-title: "PwC Call Center Performance Analysis: Master Project Guidance Manual"
-date_created: "2026-10-01"
-status: "Completed"
-project_name: "PwC Call Center Performance Analysis"
-role: "Digital Accelerator & Senior Analytics Engineer"
-client: "Claire (Call Centre Operations Manager)"
+title: Master Project Guidance Manual (Step-by-Step)
+date_created: '2026-10-01'
+status: Completed
+project_name: PwC Call Center Performance Analysis
+role: Digital Accelerator & Senior Analytics Engineer
+client: Claire (Call Centre Operations Manager)
 tools:
-  - "Microsoft Excel (Power Query, Power Pivot, DAX, VBA)"
-  - "Power BI Desktop"
-  - "SQL / Relational Concepts"
+- Microsoft Excel (Power Query, Power Pivot, DAX, VBA)
+- Power BI Desktop
+- SQL / Relational Concepts
 tags:
-  - "pwc-switzerland"
-  - "forage"
-  - "call-center"
-  - "digital-accelerator"
-  - "master-guide"
-  - "end-to-end-pipeline"
-  - "power-pivot"
-  - "dax"
-  - "vba-automation"
-  - "portfolio-capstone"
+- pwc-switzerland
+- forage
+- call-center
+- digital-accelerator
+- master-guide
+- end-to-end-pipeline
+- power-pivot
+- dax
+- vba-automation
+- portfolio-capstone
+description: Comprehensive end-to-end tutorial mapped across all 10 learning modules
 ---
 
 # 🏆 PwC Call Center Performance Analysis: Master End-to-End Guidance Manual
@@ -35,19 +36,19 @@ tags:
 
 ---
 
-# Table of Contents
-1. [Executive Context & The PwC Tripartite Suite](#1-executive-context--the-pwc-tripartite-suite)
-2. [The Business Problem & Analytical Objectives](#2-the-business-problem--analytical-objectives)
-3. [Master Data Dictionary & Forensic Quality Audit](#3-master-data-dictionary--forensic-quality-audit)
-4. [Phase 1: Ingestion & ETL Pipeline (Power Query)](#4-phase-1-ingestion--etl-pipeline-power-query)
-5. [Phase 2: Semantic Data Modeling & DAX Calculation Engine](#5-phase-2-semantic-data-modeling--dax-calculation-engine)
-6. [Phase 3: Exploratory Analytics & Agent Performance Quadrant](#6-phase-3-exploratory-analytics--agent-performance-quadrant)
-7. [Phase 4: Dashboard UI/UX Architecture & Layout Engineering](#7-phase-4-dashboard-uiux-architecture--layout-engineering)
-8. [Phase 5: Visualizations & Interactive Slicers](#8-phase-5-visualizations--interactive-slicers)
-9. [Phase 6: Modular VBA Automation Layer](#9-phase-6-modular-vba-automation-layer)
-10. [Phase 7: Testing, Optimization & Reconciliation Audit](#10-phase-7-testing-optimization--reconciliation-audit)
-11. [Phase 8: Actionable Recommendations for Claire](#11-phase-8-actionable-recommendations-for-claire)
-12. [Phase 9: Recruiter Portfolio Packaging & Defense](#12-phase-9-recruiter-portfolio-packaging--defense)
+# Table of Contents (Aligned with Course Learning Modules)
+1. [Module 1 & 2: Executive Context, Data Management & Business Mandate](#1-executive-context--the-pwc-tripartite-suite)
+2. [Module 1 & 2: The Business Problem & Analytical Objectives for Claire](#2-the-business-problem--analytical-objectives)
+3. [Module 3 & 4: Master Data Dictionary & Forensic Null Quality Audit](#3-master-data-dictionary--forensic-quality-audit)
+4. [Module 7 & 8: Phase 1 — Ingestion & Power Query ETL Pipeline ('The Kitchen')](#4-phase-1-ingestion--etl-pipeline-power-query)
+5. [Module 9: Phase 2 — Semantic Star Schema Modeling & VertiPaq DAX Engine](#5-phase-2-semantic-data-modeling--dax-calculation-engine)
+6. [Module 5: Phase 3 — Multidimensional Pivot Tables & Exploratory Analytics](#6-phase-3-exploratory-analytics--agent-performance-quadrant)
+7. [Module 4 & Design: Phase 4 — Fixed-Canvas UI/UX Architecture & Layout](#7-phase-4-dashboard-uiux-architecture--layout-engineering)
+8. [Module 6: Phase 5 — Visualizations & Interactive Slicers](#8-phase-5-visualizations--interactive-slicers)
+9. [Macros & VBA: Phase 6 — Modular VBA Automation Controller Layer](#9-phase-6-modular-vba-automation-layer)
+10. [Module 10: Phase 7 — Testing, Optimization & Ground Truth Reconciliation Audit](#10-phase-7-testing-optimization--reconciliation-audit)
+11. [Module 10: Phase 8 — Actionable Recommendations for Claire](#11-phase-8-actionable-recommendations-for-claire)
+12. [Module 10: Phase 9 — Recruiter Portfolio Packaging & Technical Defense](#12-phase-9-recruiter-portfolio-packaging--defense)
 
 ---
 
@@ -164,12 +165,15 @@ flowchart LR
     T4 --> DM["Load to Power Pivot\nData Model (FactCalls)"]
 ```
 
-### 4.1 Step-by-Step Transformation Recipe
+### 4.1 Step-by-Step Transformation Recipe ('The Kitchen')
 
-1. **Connect to Source**: Open Excel $\to$ `Data` $\to$ `Get Data` $\to$ `From File` $\to$ `From Excel Workbook`. Select `01 Call-Center-Dataset.xlsx`.
-2. **Select Sheet**: Choose `Sheet1` and click **Transform Data**.
-3. **Rename Query**: Rename `Sheet1` to **`FactCalls`**.
-4. **Enforce Strong Data Types**:
+1. **Open Your Implementation Workbook**: Open `PWC_Switzerland_Virtual_Case.xlsx` in Excel.
+2. **Connect to Raw Data Source**: 
+   - Navigate to the **Data** tab $\to$ click **Get Data** $\to$ **From File** $\to$ **From Excel Workbook**.
+   - Browse to your local dataset: `11_Demos_and_Workbooks\10_Projects_and_Demos\PWC\data\01 Call-Center-Dataset.xlsx`.
+3. **Ingest Sheet1**: Select `Sheet1` and click **Transform Data** to open the Power Query Editor.
+4. **Rename Query**: In the Query Settings pane, rename `Sheet1` to **`FactCalls`**.
+5. **Enforce Strong Data Types**:
    - `Call Id`: `Text`
    - `Agent`: `Text`
    - `Date`: `Date`
@@ -177,110 +181,122 @@ flowchart LR
    - `Topic`: `Text`
    - `Answered (Y/N)`: `Text`
    - `Resolved`: `Text`
-   - `Speed of answer in seconds`: `Int64.Type`
-   - `AvgTalkDuration`: `Duration` or `Time`
-   - `Satisfaction rating`: `Int64.Type`
-5. **Add Custom Derived Columns**:
-   - **Call Hour**: `Time.Hour([Time])` (Integer 9 to 18).
-   - **Day of Week**: `Date.DayOfWeekName([Date])` (Monday, Tuesday, etc.).
-   - **Month Name**: `Date.MonthName([Date])` (January, February, March).
-   - **Duration in Seconds**: `Duration.TotalSeconds([AvgTalkDuration])` (Converts talk duration into integer seconds for mathematical modeling).
-   - **Wait Time Bucket**:
+   - `Speed of answer in seconds`: `Int64.Type` (Preserve 946 nulls!)
+   - `AvgTalkDuration`: `Time` / `Duration`
+   - `Satisfaction rating`: `Int64.Type` (Preserve 946 nulls!)
+6. **Feature Engineering (Add Derived Columns)**:
+   - **Call Hour**: `Add Column` $\to$ `Time` $\to$ `Hour` $\to$ `Hour` (`Time.Hour([Time])`).
+   - **Day Name**: `Add Column` $\to$ `Date` $\to$ `Day` $\to$ `Name of Day` (`Date.DayOfWeekName([Date])`).
+   - **Month Name**: `Add Column` $\to$ `Date` $\to$ `Month` $\to$ `Name of Month` (`Date.MonthName([Date])`).
+   - **Duration Seconds**: `Add Column` $\to$ `Custom Column` $\to$ formula:
      ```powerquery
-     if [Speed of answer in seconds] = null then "Abandoned"
-     else if [Speed of answer in seconds] <= 30 then "0-30s (Excellent)"
-     else if [Speed of answer in seconds] <= 60 then "31-60s (Standard)"
-     else if [Speed of answer in seconds] <= 90 then "61-90s (Slow)"
-     else ">90s (Critical)"
+     if [AvgTalkDuration] = null then null 
+     else Time.Hour([AvgTalkDuration]) * 3600 + Time.Minute([AvgTalkDuration]) * 60 + Time.Second([AvgTalkDuration])
      ```
-
-### 4.2 Production Power Query M Script
-
-Copy and paste this production code into Power Query's **Advanced Editor**:
-
-```powerquery
-let
-    // 1. Ingest Raw Workbook Source
-    Source = Excel.Workbook(File.Contents("D:\courses\Data Analysis 26-27\01 Call-Center-Dataset.xlsx"), null, true),
-    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
-    
-    // 2. Promote Headers & Enforce Schema Types
-    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
-    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{
-        {"Call Id", type text}, 
-        {"Agent", type text}, 
-        {"Date", type date}, 
-        {"Time", type time}, 
-        {"Topic", type text}, 
-        {"Answered (Y/N)", type text}, 
-        {"Resolved", type text}, 
-        {"Speed of answer in seconds", Int64.Type}, 
-        {"AvgTalkDuration", type time}, 
-        {"Satisfaction rating", Int64.Type}
-    }),
-
-    // 3. Add Temporal & Handle Time Features
-    #"Added Call Hour" = Table.AddColumn(#"Changed Type", "Call Hour", each Time.Hour([Time]), Int64.Type),
-    #"Added Day Name" = Table.AddColumn(#"Added Call Hour", "Day Name", each Date.DayOfWeekName([Date]), type text),
-    #"Added Month Name" = Table.AddColumn(#"Added Day Name", "Month Name", each Date.MonthName([Date]), type text),
-    #"Added Duration Seconds" = Table.AddColumn(#"Added Month Name", "Duration Seconds", each 
-        if [AvgTalkDuration] = null then null 
-        else Time.Hour([AvgTalkDuration]) * 3600 + Time.Minute([AvgTalkDuration]) * 60 + Time.Second([AvgTalkDuration]), 
-        Int64.Type
-    ),
-    #"Added Wait Bucket" = Table.AddColumn(#"Added Duration Seconds", "Wait Bucket", each 
-        if [Answered (Y/N)] = "N" then "Abandoned"
-        else if [Speed of answer in seconds] <= 30 then "0-30s (Fast)"
-        else if [Speed of answer in seconds] <= 60 then "31-60s (Target)"
-        else if [Speed of answer in seconds] <= 90 then "61-90s (Elevated)"
-        else ">90s (Severe)", 
-        type text
-    )
-in
-    #"Added Wait Bucket"
-```
-
-6. **Load Target**: In the Power Query ribbon, select **Close & Load To...** $\to$ choose **Only Create Connection** and check **Add this data to the Data Model**.
+   - **Wait Bucket**: `Add Column` $\to$ `Conditional Column`:
+     - If `Answered (Y/N) = "N"` $\to$ `"Abandoned"`
+     - Else if `Speed of answer in seconds <= 30` $\to$ `"0-30s (Fast)"`
+     - Else if `Speed of answer in seconds <= 60` $\to$ `"31-60s (Target)"`
+     - Else if `Speed of answer in seconds <= 90` $\to$ `"61-90s (Elevated)"`
+     - Else $\to$ `">90s (Severe)"`
 
 ---
 
-# 5. Phase 2: Semantic Data Modeling & DAX Calculation Engine
+### 4.2 Extracting the 3 Dimension Tables in Power Query
 
-Rather than scattering volatile Excel formulas across the workbook, our solution constructs an **In-Memory Analytical Star Schema** inside **Power Pivot**.
+To build a pure Kimball Star Schema, extract three clean dimension lookup tables from `FactCalls`:
+
+#### A. Creating `DimAgent` (8 Unique Representatives)
+1. In the Queries pane on the left, **right-click `FactCalls`** $\to$ select **Reference**.
+2. Rename this new query to **`DimAgent`**.
+3. Select the **`Agent`** column $\to$ right-click $\to$ **Remove Other Columns**.
+4. Right-click the `Agent` column header $\to$ **Remove Duplicates** (reduces to 8 rows).
+5. Add descriptive attributes:
+   - Add Custom Column `Department` = `"Customer Operations"`.
+   - Add Custom Column `Target_CSAT` = `3.50`.
+   - Add Custom Column `Target_Answer_Rate` = `0.85`.
+
+#### B. Creating `DimTopic` (5 Unique Inquiry Categories)
+1. **Right-click `FactCalls`** $\to$ select **Reference**.
+2. Rename this query to **`DimTopic`**.
+3. Select the **`Topic`** column $\to$ right-click $\to$ **Remove Other Columns**.
+4. Right-click header $\to$ **Remove Duplicates** (reduces to 5 rows).
+5. Add Custom Column `Category`:
+   ```powerquery
+   if [Topic] = "Admin Support" then "Administrative"
+   else if [Topic] = "Billing Questions" or [Topic] = "Payment related" then "Finance & Accounts"
+   else "Technical Support"
+   ```
+6. Add Custom Column `Target_SLA_Seconds` = `60`.
+
+#### C. Creating `DimDate` (90 Operational Days)
+1. **Right-click `FactCalls`** $\to$ select **Reference**.
+2. Rename this query to **`DimDate`**.
+3. Select the **`Date`** column $\to$ right-click $\to$ **Remove Other Columns**.
+4. Right-click header $\to$ **Remove Duplicates** (reduces to 90 rows).
+5. Add Calendar Features:
+   - Add Column $\to$ Date $\to$ `Year` (`Date.Year([Date])`).
+   - Add Column $\to$ Custom Column `Quarter`: `"Q" & Text.From(Date.QuarterOfYear([Date]))`.
+   - Add Column $\to$ Date $\to$ `Month` $\to$ `Month` (`Date.Month([Date])`).
+   - Add Column $\to$ Date $\to$ `Month` $\to$ `Name of Month` (`Date.MonthName([Date])`).
+   - Add Column $\to$ Date $\to$ `Day` $\to$ `Day` (`Date.Day([Date])`).
+   - Add Column $\to$ Date $\to$ `Day` $\to$ `Name of Day` (`Date.DayOfWeekName([Date])`).
+   - Add Column $\to$ Custom Column `Is_Weekend`:
+     ```powerquery
+     if Date.DayOfWeek([Date], Day.Monday) >= 5 then 1 else 0
+     ```
+
+---
+
+### 4.3 Loading Pipeline into the VertiPaq Data Model
+
+1. On the Power Query Home ribbon, click the lower half of **Close & Load** $\to$ select **Close & Load To...**.
+2. In the dialog box:
+   - Select **Only Create Connection**.
+   - ✅ **Check the box**: **Add this data to the Data Model**.
+3. Click **OK**. Power Query loads all 4 tables (`FactCalls`, `DimAgent`, `DimTopic`, `DimDate`) directly into the in-memory **VertiPaq engine**!
+
+---
+
+# 5. Phase 2: Semantic Star Schema Modeling & VertiPaq DAX Engine
+
+Now open the **Power Pivot** window: Click the **Power Pivot** tab on the Excel ribbon $\to$ click **Manage**.
+
+### 5.1 Establishing 1-to-Many Relationships in Diagram View
+1. In the Power Pivot ribbon, click **Diagram View** (Home tab $\to$ View group).
+2. Arrange the 4 tables with `FactCalls` in the center and the 3 dimensions surrounding it:
+   - `DimDate` (Top Left)
+   - `DimAgent` (Top Center)
+   - `DimTopic` (Top Right)
+3. Connect the relationships by dragging and dropping:
+   - Drag **`DimDate[Date]`** $\to$ drop onto **`FactCalls[Date]`** (`1:*`).
+   - Drag **`DimAgent[Agent]`** $\to$ drop onto **`FactCalls[Agent]`** (`1:*`).
+   - Drag **`DimTopic[Topic]`** $\to$ drop onto **`FactCalls[Topic]`** (`1:*`).
 
 ```mermaid
-erDiagram
-    DimDate ||--o{ FactCalls : "Date = Date"
-    DimAgent ||--o{ FactCalls : "Agent = Agent"
+flowchart TD
+    subgraph VertiPaq ["Power Pivot In-Memory Semantic Model (VertiPaq Engine)"]
+        direction TB
+        
+        DimDate["DimDate\n(90 Operational Days)\nPK: Date"]
+        DimAgent["DimAgent\n(8 Support Reps)\nPK: Agent"]
+        DimTopic["DimTopic\n(5 Inquiries)\nPK: Topic"]
+        FactCalls["FactCalls\n(5,000 Inbound Calls)\nFK: Date, Agent, Topic"]
 
-    FactCalls {
-        string Call_Id PK
-        string Agent FK
-        date Date FK
-        time Time
-        string Topic
-        string Answered
-        string Resolved
-        int Speed_of_answer
-        int Duration_Seconds
-        int Satisfaction_rating
-    }
+        DimDate -->|1 : *| FactCalls
+        DimAgent -->|1 : *| FactCalls
+        DimTopic -->|1 : *| FactCalls
+    end
 
-    DimDate {
-        date Date PK
-        int Year
-        int MonthNumber
-        string MonthName
-        string DayOfWeek
-        int IsWeekend
-    }
-
-    DimAgent {
-        string Agent PK
-        string Department
-        string Role
-    }
+    style VertiPaq fill:#fffbeb,stroke:#d97706,stroke-width:2px
+    style DimDate fill:#dbeafe,stroke:#1d4ed8,stroke-width:1px
+    style DimAgent fill:#dbeafe,stroke:#1d4ed8,stroke-width:1px
+    style DimTopic fill:#dbeafe,stroke:#1d4ed8,stroke-width:1px
+    style FactCalls fill:#fef3c7,stroke:#b45309,stroke-width:2px
 ```
+
+> [!tip] Verification Check
+> Verify that the line displays a `1` on the dimension side and an asterisk `*` on the `FactCalls` side. Filters flow downward from dimensions to facts!
 
 ---
 

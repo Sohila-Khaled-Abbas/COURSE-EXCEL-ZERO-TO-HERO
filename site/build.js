@@ -81,12 +81,14 @@ function parseMarkdownFile(filePath) {
     }
   }
 
-  // Derive title from H1 or filename
-  let title = data.title || data.topic || data.project_name || '';
+  // Derive title from title, H1, or filename
+  let title = data.title || data.topic || '';
   if (!title) {
     const h1Match = body.match(/^#\s+(.+)$/m);
     if (h1Match) {
-      title = h1Match[1].replace(/^[^\w\s]+/, '').trim();
+      title = h1Match[1].replace(/^[^\w\s\u0600-\u06FF]+/, '').trim();
+    } else if (data.project_name && !data.project_name.toLowerCase().includes('pwc') && !data.project_name.toLowerCase().includes('digital transformation')) {
+      title = data.project_name;
     } else {
       title = path.basename(filePath, '.md').replace(/_/g, ' ');
     }
@@ -1810,21 +1812,115 @@ function buildProjects() {
       <p class="page-subtitle">End-to-end operational intelligence analysis for a global telecom client simulation. Powered by Excel Tables, Power Pivot, and DAX Measures.</p>
     </div>
 
-    <!-- Project Tabs / Sections Grid -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 2.5rem;">
-      ${pwcFiles.map(f => `
-        <a href="#doc-${f.slug}" class="metric-card" style="text-decoration: none; padding: 1rem;">
-          <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-primary);">${f.title}</div>
-          <span style="font-size: 0.75rem; color: var(--text-muted);">Read Section ↓</span>
-        </a>
-      `).join('')}
+    <!-- Organized Project Documentation Sections -->
+    <div style="margin-bottom: 3rem;">
+      ${(() => {
+        const categories = [
+          {
+            badge: 'Master Blueprint',
+            icon: '🏆',
+            title: '1. Master Implementation Guide & Overview',
+            desc: 'Complete end-to-end execution guide mapped across the 10 course learning modules.',
+            match: ['Master Project Guidance Manual', 'Project Overview']
+          },
+          {
+            badge: 'Business & Data Governance',
+            icon: '📋',
+            title: '2. Operational Problem & Data Governance',
+            desc: 'Operational challenge for Claire, dataset provenance, forensic audit of the 946 nulls, and schema dictionary.',
+            match: ['Business Problem', 'Dataset Documentation', 'Data Quality Assessment', 'Data Dictionary', 'Analysis Plan']
+          },
+          {
+            badge: 'Analytics & KPIs',
+            icon: '📐',
+            title: '3. KPIs, Mathematical Models & Insights',
+            desc: 'DAX measure formulas, arrival heatmaps, 2D agent performance quadrant, and actionable recommendations.',
+            match: ['Core KPIs', 'KPI Dictionary', 'Empirical Findings', 'Strategic Recommendations']
+          },
+          {
+            badge: 'Executive UI/UX',
+            icon: '🎨',
+            title: '4. Executive Design System & Layout',
+            desc: 'Fixed-canvas 1080p layout, color tokens, typography scale, cell wireframes, and visual chart selection.',
+            match: ['Dashboard Design System', 'Dashboard Wireframe', 'Dashboard UX Specification', 'Dashboard Visualization Guide']
+          },
+          {
+            badge: 'Engineering & Automation',
+            icon: '⚙️',
+            title: '5. Modular Automation, QA & Technical Defense',
+            desc: 'VBA state controllers, Excel performance optimization, 32-point verification audit, and retrospective.',
+            match: ['Modular VBA', 'Excel Performance', 'Dashboard Testing', 'AI-Assisted Analysis', 'Dashboard Architecture', 'Project Retrospective']
+          }
+        ];
+
+        let renderedSlugs = new Set();
+        let html = '';
+
+        categories.forEach(cat => {
+          const matchedFiles = pwcFiles.filter(f => {
+            return cat.match.some(m => f.title.toLowerCase().includes(m.toLowerCase()) || f.baseName.toLowerCase().includes(m.toLowerCase()));
+          });
+
+          matchedFiles.forEach(f => renderedSlugs.add(f.slug));
+
+          if (matchedFiles.length > 0) {
+            html += `
+              <div style="margin-bottom: 2.25rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+                  <span style="font-size: 1.35rem;">${cat.icon}</span>
+                  <h2 style="font-size: 1.25rem; font-weight: 700; margin: 0; color: var(--text-primary);">${cat.title}</h2>
+                  <span class="meta-pill" style="font-size: 0.7rem;">${cat.badge}</span>
+                </div>
+                <p style="font-size: 0.875rem; color: var(--text-muted); margin: 0 0 1rem 0;">${cat.desc}</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+                  ${matchedFiles.map(f => `
+                    <a href="#doc-${f.slug}" class="metric-card" style="text-decoration: none; padding: 1.15rem; display: flex; flex-direction: column; justify-content: space-between; border-radius: 8px; border: 1px solid var(--border-default); background: var(--bg-card); transition: all 0.2s ease;">
+                      <div>
+                        <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-primary); margin-bottom: 0.35rem; line-height: 1.3;">${f.title}</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 0.75rem;">${f.data.description || 'Explore chapter documentation and technical specifications.'}</div>
+                      </div>
+                      <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--color-primary); font-weight: 600; padding-top: 0.5rem; border-top: 1px solid var(--border-default);">
+                        <span>Read Chapter</span>
+                        <span>↓</span>
+                      </div>
+                    </a>
+                  `).join('')}
+                </div>
+              </div>
+            `;
+          }
+        });
+
+        // Any remaining files not explicitly categorized
+        const remainingFiles = pwcFiles.filter(f => !renderedSlugs.has(f.slug));
+        if (remainingFiles.length > 0) {
+          html += `
+            <div style="margin-bottom: 2rem;">
+              <h2 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--text-primary);">📁 Additional Supporting Documents</h2>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+                ${remainingFiles.map(f => `
+                  <a href="#doc-${f.slug}" class="metric-card" style="text-decoration: none; padding: 1rem; border-radius: 8px;">
+                    <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-primary);">${f.title}</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">${f.data.description || 'Supplementary project analysis'}</div>
+                  </a>
+                `).join('')}
+              </div>
+            </div>
+          `;
+        }
+
+        return html;
+      })()}
     </div>
 
     <!-- Concatenated Project Chapters -->
     <div class="prose">
       ${pwcFiles.map(f => `
         <div id="doc-${f.slug}" style="margin-bottom: 3.5rem; padding-top: 2rem; border-top: 1px solid var(--border-default);">
-          <span class="meta-pill" style="margin-bottom: 0.75rem; display: inline-block;">Chapter: ${f.title}</span>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <span class="meta-pill" style="font-weight: 700;">Chapter: ${f.title}</span>
+            <a href="#" style="font-size: 0.75rem; text-decoration: none; color: var(--text-muted);">↑ Back to Top</a>
+          </div>
           ${transformObsidian(f.body, f)}
         </div>
       `).join('')}

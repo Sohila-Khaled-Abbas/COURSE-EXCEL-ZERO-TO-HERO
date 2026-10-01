@@ -7,7 +7,15 @@ version: 2.0
 target_platform: Microsoft Excel (.xlsm)
 date: 2026-10-01
 author: Senior Excel Dashboard Architect & Lead UI/UX Designer
-tags: [design-system, excel-ui-ux, typography, color-tokens, component-library, design-tokens]
+tags:
+- design-system
+- excel-ui-ux
+- typography
+- color-tokens
+- component-library
+- design-tokens
+title: Dashboard Design System & Design Tokens
+description: Color palette, typography scale, and 8pt spatial grid system
 ---
 
 # 🎨 Dashboard Design System: PwC Analytics Suite

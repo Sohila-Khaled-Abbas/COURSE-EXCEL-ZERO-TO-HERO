@@ -1,26 +1,27 @@
 ---
 type: project-documentation
 project_name: PwC Call Center Performance Analysis
-section: Dataset Documentation & Provenance
 source_ecosystem: PwC Switzerland Digital Transformation / Forage Virtual Case Experience
-canonical_url: "https://triwgani.github.io/pwc_digital.transformation/"
-github_mirror: "https://github.com/globalsmile/Call-Center-Analysis/blob/main/01%20Call-Center-Dataset.xlsx"
-timeframe: "January 1, 2021 – March 31, 2021 (Q1 2021, 90 operational days)"
+canonical_url: https://triwgani.github.io/pwc_digital.transformation/
+github_mirror: https://github.com/globalsmile/Call-Center-Analysis/blob/main/01%20Call-Center-Dataset.xlsx
+timeframe: January 1, 2021 – March 31, 2021 (Q1 2021, 90 operational days)
 total_records: 5000
 total_agents: 8
-answer_rate: "81.08%"
-resolution_rate: "72.92%"
+answer_rate: 81.08%
+resolution_rate: 72.92%
 created: 2026-09-28
 updated: 2026-09-30
 tags:
-  - pwc
-  - call-center
-  - forage
-  - power-bi
-  - digital-transformation
-  - dataset-documentation
-  - benchmark
-  - reference
+- pwc
+- call-center
+- forage
+- power-bi
+- digital-transformation
+- dataset-documentation
+- benchmark
+- reference
+title: Dataset Provenance & Documentation
+description: Origin, authenticity, and Forage simulation metadata
 ---
 
 # 2. Master Dataset Documentation & Authentic Provenance

@@ -7,7 +7,14 @@ version: 2.0
 target_platform: Microsoft Excel (.xlsm)
 date: 2026-10-01
 author: Senior Excel Dashboard Architect & Data Visualization Specialist
-tags: [data-visualization, visual-guide, chart-selection, visual-storytelling, excel-charts]
+tags:
+- data-visualization
+- visual-guide
+- chart-selection
+- visual-storytelling
+- excel-charts
+title: Dashboard Visualization Guide & Chart Rules
+description: Chart selection matrix and data visualization rules
 ---
 
 # 📊 Dashboard Visualization Guide: Visual Decision Framework

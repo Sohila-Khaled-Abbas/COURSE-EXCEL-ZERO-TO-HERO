@@ -5,14 +5,23 @@ status: completed
 document: Dashboard Architecture Assessment
 version: 2.0
 target_platform: Microsoft Excel (.xlsm Macro-Enabled Enterprise Application)
-target_workbook: "PwC_Digital_Transformation_Suite.xlsm"
+target_workbook: PwC_Digital_Transformation_Suite.xlsm
 source_datasets:
-  - "D:/courses/Data Analysis 26-27/01 Call-Center-Dataset.xlsx"
-  - "D:/courses/Data Analysis 26-27/02 Churn-Dataset.xlsx"
-  - "D:/courses/Data Analysis 26-27/03 Diversity-Inclusion-Dataset.xlsx"
+- D:/courses/Data Analysis 26-27/01 Call-Center-Dataset.xlsx
+- D:/courses/Data Analysis 26-27/02 Churn-Dataset.xlsx
+- D:/courses/Data Analysis 26-27/03 Diversity-Inclusion-Dataset.xlsx
 date: 2026-10-01
 author: Senior Excel Dashboard Architect & Automation Engineer
-tags: [pwc-case-study, enterprise-architecture, excel-assessment, multi-dataset, power-pivot, dax, vba-automation]
+tags:
+- pwc-case-study
+- enterprise-architecture
+- excel-assessment
+- multi-dataset
+- power-pivot
+- dax
+- vba-automation
+title: Dashboard Architecture & Design Review
+description: Evaluation of spreadsheet UI paradigms and multi-tier separation
 ---
 
 # 🏗️ Enterprise Architecture Assessment: PwC Digital Transformation Suite

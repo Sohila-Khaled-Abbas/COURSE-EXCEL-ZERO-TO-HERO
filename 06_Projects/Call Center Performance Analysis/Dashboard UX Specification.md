@@ -5,10 +5,19 @@ status: completed
 document: Dashboard UX Specification
 version: 2.0
 target_platform: Microsoft Excel (.xlsm Macro-Enabled Enterprise Application)
-target_workbook: "PwC_Digital_Transformation_Suite.xlsm"
+target_workbook: PwC_Digital_Transformation_Suite.xlsm
 date: 2026-10-01
 author: Senior Excel Dashboard Architect & Lead UI/UX Designer
-tags: [pwc-case-study, ui-ux-specification, product-design, enterprise-dashboard, multi-module, app-shell, design-system]
+tags:
+- pwc-case-study
+- ui-ux-specification
+- product-design
+- enterprise-dashboard
+- multi-module
+- app-shell
+- design-system
+title: Dashboard UX & Ergonomics Specification
+description: User personas, interaction patterns, and ergonomics
 ---
 
 # 📱 Enterprise UX Specification: PwC Digital Transformation Suite

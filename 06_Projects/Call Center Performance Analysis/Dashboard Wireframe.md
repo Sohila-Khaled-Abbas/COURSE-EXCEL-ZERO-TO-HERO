@@ -7,7 +7,14 @@ version: 2.0
 target_platform: Microsoft Excel (.xlsm)
 date: 2026-10-01
 author: Senior Excel Dashboard Architect & Lead UI/UX Designer
-tags: [wireframing, ascii-layout, information-architecture, excel-canvas, ui-grid]
+tags:
+- wireframing
+- ascii-layout
+- information-architecture
+- excel-canvas
+- ui-grid
+title: Dashboard Wireframe & Layout Coordinates
+description: Grid layout and cell-by-cell coordinate wireframes
 ---
 
 # 📐 Dashboard Wireframe & Grid Blueprints

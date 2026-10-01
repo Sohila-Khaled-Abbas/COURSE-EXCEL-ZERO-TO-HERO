@@ -1,9 +1,10 @@
 ---
 type: project-documentation
 project_name: PwC Call Center Performance Analysis
-section: Recommendations
 created: 2026-09-28
 updated: 2026-10-01
+title: Strategic Recommendations for Claire
+description: Actionable staffing, scheduling, and IVR proposals
 ---
 
 # 8. Strategic Business Recommendations for Claire

@@ -3,13 +3,29 @@ type: project-documentation
 project_name: PwC Call Center Performance Analysis
 status: completed
 domain: Customer Experience & Operations BI
-tools: [Excel Tables, Pivot Tables, Power Pivot, DAX, Slicers, VBA, Power BI]
-tags: [pwc-case-study, pwc-switzerland, forage, digital-accelerator, call-centre-trends, executive-dashboard, portfolio-capstone]
-dataset_source: "09_Source_Materials/Module 9/13/PWC Dataset.xlsx"
-canonical_reference: "https://triwgani.github.io/pwc_digital.transformation/"
-powerbi_dashboard: "https://app.powerbi.com/links/_jx5u479wZ?ctid=af2c0734-cb42-464f-b6bf-2a241b6ada56&pbi_source=linkShare"
+tools:
+- Excel Tables
+- Pivot Tables
+- Power Pivot
+- DAX
+- Slicers
+- VBA
+- Power BI
+tags:
+- pwc-case-study
+- pwc-switzerland
+- forage
+- digital-accelerator
+- call-centre-trends
+- executive-dashboard
+- portfolio-capstone
+dataset_source: 09_Source_Materials/Module 9/13/PWC Dataset.xlsx
+canonical_reference: https://triwgani.github.io/pwc_digital.transformation/
+powerbi_dashboard: https://app.powerbi.com/links/_jx5u479wZ?ctid=af2c0734-cb42-464f-b6bf-2a241b6ada56&pbi_source=linkShare
 created: 2026-09-28
 updated: 2026-10-01
+title: Project Overview & Executive Context
+description: Executive summary, client background, and deliverable suite
 ---
 
 # PwC Call Center Performance Analysis (Capstone Project)
