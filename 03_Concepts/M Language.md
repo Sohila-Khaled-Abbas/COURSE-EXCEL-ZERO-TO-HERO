@@ -132,4 +132,6 @@ M functions provide direct native connectors across enterprise storage protocols
   - [[01_Power_Query_Fundamentals_and_ETL|Lesson 8.1: Power Query Fundamentals & ETL Architecture]]
   - [[04_Introduction_to_M_Language_and_APIs|Lesson 8.4: M Language Architecture & API Ingestion]]
 - Concepts: [[Power Query]], [[ETL Process]], [[Data Cleaning]], [[Dimensional Modeling]]
-- Course Reference: [[Module 7 Dataset Documentation]]
+- Course Reference: 
+  - [[Module 7 Dataset Documentation]]
+  - [[Module 8 Dataset Documentation]]

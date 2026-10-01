@@ -14,6 +14,12 @@ Write-Host "==========================================================" -Foregro
 Write-Host " 📦 One-Click Workbook GitHub Synchronizer" -ForegroundColor Green
 Write-Host "==========================================================" -ForegroundColor Cyan
 
+# Synchronize workbook documentation
+Write-Host "🔄 Synchronizing workbook documentation..." -ForegroundColor Magenta
+if (Test-Path "$RepoRoot\scripts\sync_module_6_docs.py") { python "$RepoRoot\scripts\sync_module_6_docs.py" 2>&1 | Out-Null }
+if (Test-Path "$RepoRoot\scripts\sync_module_7_docs.py") { python "$RepoRoot\scripts\sync_module_7_docs.py" 2>&1 | Out-Null }
+if (Test-Path "$RepoRoot\scripts\sync_module_8_docs.py") { python "$RepoRoot\scripts\sync_module_8_docs.py" 2>&1 | Out-Null }
+
 # Rebuild site docs if generator exists
 if (Test-Path "$RepoRoot\site\build.js") {
     Write-Host "🔨 Rebuilding documentation site & search index..." -ForegroundColor Cyan

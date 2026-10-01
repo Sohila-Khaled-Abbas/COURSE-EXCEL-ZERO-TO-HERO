@@ -151,4 +151,8 @@ flowchart TD
   - [[04_Introduction_to_M_Language_and_APIs]]
   - [[02_Data_Cleaning_Techniques_in_Excel]]
 - Concepts: [[Power Query]], [[Data Cleaning]], [[ETL Process]], [[M Language]]
-- Workbook Laboratory: [`Module_7_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/07_Data_Cleaning/Module_7_Demo.xlsx)
+- Course Reference & Workbooks:
+  - [[Module 7 Dataset Documentation]]
+  - [[Module 8 Dataset Documentation]]
+  - Laboratory 1: [`Module_7_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/07_Data_Cleaning/Module_7_Demo.xlsx)
+  - Laboratory 2: [`Module_8_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/08_Power_Query/Module_8_Demo.xlsx)

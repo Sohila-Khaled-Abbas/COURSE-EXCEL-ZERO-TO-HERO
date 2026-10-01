@@ -369,6 +369,67 @@ in
 
 ---
 
+### Case Study 4: External Workbook Ingestion & Strict Type Contracts (`Fact_Calls`)
+From our official practice workbook ([`Module_8_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/08_Power_Query/Module_8_Demo.xlsx)), ingesting the authentic PwC Switzerland Call Center operational dataset into the **Power Pivot Data Model** (`ThisWorkbookDataModel`):
+
+```powerquery
+section Section1;
+
+shared Fact_Calls = let
+    // 1. Ingest external Excel workbook binary package
+    Source = Excel.Workbook(File.Contents("D:\courses\Data Analysis 26-27\01 Call-Center-Dataset.xlsx"), null, true),
+    
+    // 2. Navigate hierarchical package structure to target 'Sheet1' data table
+    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+    
+    // 3. Promote first row containing field names to column headers
+    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+    
+    // 4. Enforce canonical 10-column typed schema contract
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{
+        {"Call Id", type text}, 
+        {"Agent", type text}, 
+        {"Date", type date}, 
+        {"Time", type datetime}, 
+        {"Topic", type text}, 
+        {"Answered (Y/N)", type text}, 
+        {"Resolved", type text}, 
+        {"Speed of answer in seconds", Int64.Type}, 
+        {"AvgTalkDuration", type datetime}, 
+        {"Satisfaction rating", Int64.Type}
+    })
+in
+    #"Changed Type";
+```
+
+```mermaid
+flowchart TD
+    subgraph M_PIPELINE ["Fact_Calls Ingestion Pipeline Architecture"]
+        direction TB
+        S1["<b>Step 1: Excel.Workbook(File.Contents(...))</b><br/>Streams binary content of 01 Call-Center-Dataset.xlsx into an in-memory package schema."]
+        S2["<b>Step 2: Source{[Item='Sheet1',Kind='Sheet']}[Data]</b><br/>M Record Lookup navigating the workbook container to extract the raw Sheet1 cell matrix."]
+        S3["<b>Step 3: Table.PromoteHeaders(..., [PromoteAllScalars=true])</b><br/>Promotes record 1 from body data into structured column identifiers."]
+        S4["<b>Step 4: Table.TransformColumnTypes(...)</b><br/>Enforces strict typed schema: Text, Dates, Datetime durations, and 64-bit Integers."]
+        S5["<b>Destination: ThisWorkbookDataModel</b><br/>Loaded directly into the VertiPaq Data Model without populating physical worksheet grid cells."]
+        
+        S1 --> S2 --> S3 --> S4 --> S5
+    end
+
+    style M_PIPELINE fill:#fafafa,stroke:#37474f,stroke-width:2px
+    style S1 fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    style S2 fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style S3 fill:#ede7f6,stroke:#4527a0,stroke-width:2px
+    style S4 fill:#e0f2f1,stroke:#00695c,stroke-width:2px
+    style S5 fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+```
+
+#### Technical Architectural Highlights:
+1. **The Record Navigation Expression**: `Source{[Item="Sheet1",Kind="Sheet"]}[Data]` demonstrates M's powerful record-lookup bracket notation (`{[Key=Val]}[Field]`). The first bracket locates the record in `Source` where `Item="Sheet1"` and `Kind="Sheet"`, while `[Data]` dereferences the nested tabular payload.
+2. **Strict Type Casting (`Table.TransformColumnTypes`)**: By explicitly casting `Speed of answer in seconds` and `Satisfaction rating` to `Int64.Type` and `Date`/`Time` to temporal primitives, downstream DAX calculations in Power Pivot can perform mathematical aggregations without runtime parsing overhead.
+3. **Data Model Decoupling**: Loading directly to `ThisWorkbookDataModel` demonstrates why Power Query is the **"Data Kitchen" (`المطبخ بتاعنا`)**—prepping and delivering data directly to the VertiPaq engine while leaving the Excel grid clean, lightweight, and responsive.
+
+---
+
 ## 🛡️ 6. Error Handling & Defensive M Patterns
 
 In enterprise data pipelines, missing files, changed column names, or bad cell data can break automated refreshes. M provides defensive error-handling expressions:
@@ -396,5 +457,6 @@ CleanTable = Table.RemoveRowsWithErrors(Source, {"OrderID", "Amount"})
 - Concepts: [[M Language]], [[Power Query]], [[ETL Process]], [[Data Cleaning]]
 - Course Reference:
   - [[Module 7 Dataset Documentation]]
+  - [[Module 8 Dataset Documentation]]
   - Course Roadmap: [[Course Map]]
   - Interactive Web Mind Map: [Course Mind Map](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/mindmap/)

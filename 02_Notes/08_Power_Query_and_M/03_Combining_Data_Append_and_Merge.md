@@ -151,4 +151,8 @@ Transactional records frequently suffer from typos, casing variations, and minor
   - [[04_Introduction_to_M_Language_and_APIs]]
   - [[01_Dimensional_Modeling_Principles]]
 - Concepts: [[Power Query]], [[ETL Process]], [[M Language]], [[Dimensional Modeling]]
-- Workbook Laboratory: [`Module_7_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/07_Data_Cleaning/Module_7_Demo.xlsx)
+- Course Reference & Workbooks:
+  - [[Module 7 Dataset Documentation]]
+  - [[Module 8 Dataset Documentation]]
+  - Laboratory 1: [`Module_7_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/07_Data_Cleaning/Module_7_Demo.xlsx)
+  - Laboratory 2: [`Module_8_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/08_Power_Query/Module_8_Demo.xlsx)

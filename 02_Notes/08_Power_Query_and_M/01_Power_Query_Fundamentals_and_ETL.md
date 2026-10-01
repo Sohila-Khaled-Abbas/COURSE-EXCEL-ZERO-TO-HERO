@@ -82,16 +82,16 @@ flowchart LR
 
 ## ❓ 1. The 4 Essential Questions (4 Questions)
 
-Before clicking buttons inside the tool, every professional data analyst must master the four conceptual pillars that govern modern data mashup architecture:
+Before clicking buttons inside the tool, every professional data analyst must master the four conceptual pillars that govern modern data mashup architecture, as structured in our official lab workbook ([`Module_8_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/08_Power_Query/Module_8_Demo.xlsx)):
 
 ```mermaid
 flowchart TD
     subgraph FOUR_Q ["The 4 Foundational Questions of Power Query"]
         direction TB
-        Q1["<b>1. WHAT?</b><br/>An enterprise-grade, in-memory, visual ETL engine that transforms raw multi-source data into clean analytical tables."]
-        Q2["<b>2. WHY?</b><br/>Automates repetitive manual cleanup, eliminates brittle formula chains, guarantees non-destructive auditing, and bypasses 1M row limits."]
-        Q3["<b>3. WHERE?</b><br/>Lives in Excel (Data > Get Data), Power BI Desktop, and Fabric Dataflows; acts as the data-prep middleware before Power Pivot."]
-        Q4["<b>4. HOW?</b><br/>Executes declarative M code in an immutable Applied Steps dependency DAG with query folding pushdown optimization."]
+        Q1["<b>1. WHAT? (إيه هي؟)</b><br/>أداة لتنظيف البيانات وتحضيرها قبل التحليل (المطبخ بتاعنا)<br/>Visual in-memory ETL engine that transforms raw multi-source data into clean analytical models."]
+        Q2["<b>2. WHY? (ليه ظهرت؟)</b><br/>لأن LOOKUPS و PivotTables و Manual Cleaning مش scalable لما البيانات تبقى كبيرة<br/>Automates cleanup, eliminates fragile formulas, and prevents human errors."]
+        Q3["<b>3. WHERE? (فين؟)</b><br/>Excel & Power BI<br/>Universal data connectivity and transformation engine across the Microsoft Data Platform."]
+        Q4["<b>4. HOW? (إزاي نستخدمها؟)</b><br/>هو قلب الـ ETL داخل Excel<br/>Immutable Applied Steps DAG compiled in declarative M code, loading directly to Data Model."]
     end
 
     Q1 --> Q2 --> Q3 --> Q4
@@ -103,15 +103,27 @@ flowchart TD
     style Q4 fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
 ```
 
-### 1. What is Power Query? (`What?`)
+---
+
+### 1. What is Power Query? (`What?` / إيه هي؟)
+
+> [!tip] The Core Conceptual Metaphor: **"المطبخ بتاعنا" (The Data Kitchen)**
+> **«أداة لتنظيف البيانات وتحضيرها قبل التحليل (المطبخ بتاعنا)»**  
+> Think of Power Query as a high-end restaurant's **prep kitchen**. Raw ingredients (messy CSVs, SQL dumps, unformatted Excel tables, and web feeds) never go directly to the customer's dining table. In the kitchen, chefs wash vegetables, trim meats, peel potatoes, and measure ingredients. Customers in the dining room only see the finished, beautifully plated dish—represented in Excel by the **Power Pivot Data Model**, clean **PivotTables**, and interactive **Executive Dashboards**.
+
 - **Core Definition**: Power Query is Microsoft's native **visual ETL (Extract, Transform, Load)** and data connectivity technology.
 - **The Analytical Middleware**: It functions as the intermediate pipeline that sits between raw, messy enterprise data sources (CSV files, ERP dumps, databases, web pages, APIs) and downstream analytical consumers (Excel worksheets, PivotTables, and Power Pivot Data Models).
 - **Declarative Recipe Model**: When you work in Power Query, you are not editing cell contents; you are building an immutable, step-by-step transformation script written in the **M Formula Language**.
 
 ---
 
-### 2. Why Use Power Query? (`Why?`)
-Traditional spreadsheet workflows rely on manual cutting, pasting, text splitting, and thousands of `=VLOOKUP` or `=IF` formulas. Power Query fundamentally replaces this fragile paradigm:
+### 2. Why Did Power Query Emerge? (`Why?` / ليه ظهرت؟)
+
+> [!important] The Scalability Imperative
+> **«لأن الـ LOOKUPS و PivotTables و Manual Cleaning مش scalable لما البيانات تبقى كبيرة.»**  
+> **«Power Query اتعمل علشان يحل مشكلة البيانات الـ messy اللي تنظيفها يدوي بيضيع وقت وبيعمل أخطاء.»**
+
+Traditional spreadsheet workflows rely on manual cutting, pasting, text splitting, and thousands of `=VLOOKUP` or `=IF` formulas. As organizations scale into tens of thousands or millions of records, this manual approach collapses:
 
 | Operational Limitation of Standard Excel | Power Query Enterprise Solution | Business & Engineering Impact |
 | :--- | :--- | :--- |
@@ -123,7 +135,11 @@ Traditional spreadsheet workflows rely on manual cutting, pasting, text splittin
 
 ---
 
-### 3. Where is Power Query Located & Where Does It Live? (`where?`)
+### 3. Where is Power Query Located & Where Does It Live? (`where?` / فين؟)
+
+> [!note] Cross-Platform Presence
+> **«Excel & Power BI»**  
+> Power Query is not an isolated Excel plugin; it is the universal data ingestion and preparation engine underpinning the entire Microsoft Data Platform.
 
 #### A. Location Inside Microsoft Excel:
 - Located directly on the Excel Ribbon under **Data > Get & Transform Data**.
@@ -137,7 +153,7 @@ Power Query serves as Layer 1 of the canonical three-tier analytics ecosystem:
 flowchart TD
     subgraph WB ["Microsoft Modern Excel Analytics Stack"]
         direction TB
-        PQ["1. Power Query\n-->> Cleaning, Transformation & Ingestion"]
+        PQ["1. Power Query\n-->> Cleaning, Transformation & Ingestion (المطبخ بتاعنا)"]
         PP["2. Power Pivot\n-->> Data Model & Relationships (Star Schema)"]
         PT["3. Pivot Tables\n-->> Summary, Aggregations & Executive KPIs"]
         
@@ -153,9 +169,9 @@ flowchart TD
 
 ```text
 Excel Workbook
-Pivot Tables    -->> Summary
-Power Query     -->> Cleaning and transformation and modelling
-Power Pivot     -->> Data Model -- Relationships
+Pivot Tables    -->> Summary (Executive Plating)
+Power Pivot     -->> Data Model -- Relationships (Structured Pantry)
+Power Query     -->> Cleaning and transformation and modelling (المطبخ بتاعنا)
 ```
 
 #### C. Cross-Platform Ecosystem Presence:
@@ -167,7 +183,13 @@ Because Microsoft built Power Query as a standardized data connectivity engine, 
 
 ---
 
-### 4. How Does Power Query Work? (`How?`)
+### 4. How Does Power Query Work? (`How?` / إزاي نستخدمها؟)
+
+> [!abstract] Master Operational Summary (ملخص الاستخدام)
+> 1. **هو عبارة عن أداة ETL داخل Excel**: يقوم بسحب البيانات (Extract)، تنظيفها وتحويلها (Transform)، ثم تحميلها (Load) إلى الـ Data Model أو ورقة العمل.
+> 2. **كل خطوة بتعملها جواه بتتسجل تلقائيًا كـ Applied Steps وكود M تقدر تعيده على أي بيانات جديدة**: كل مرحلة يتم توثيقها كخطوة رياضية برمجية غير قابلة للتلف.
+> 3. **Power Query بيئة مستقلة عن Excel، مش فورمولا ومش Pivot—هو Tool مخصصة لتنظيف وتجهيز البيانات**: يعمل في الذاكرة الخلفية دون إثقال خلايا الإكسيل، ويغذي الـ Data Model والـ PivotTables مباشرة.
+> 4. **بتستخدمه لما يكون عندك شغل متكرر، دمج ملفات، تنظيف تقيل، أو تجهيز Data للـ dashboards والتحليل**: هو العمود الفقري لبناء خطوط أنابيب بيانات (Data Pipelines) محترفة ومستدامة.
 
 Under the hood, Power Query operates via three fundamental technical mechanisms:
 
@@ -384,7 +406,9 @@ in
 
 ## 🔬 5. Real-World Lab Implementations from Course Workbooks
 
-In our course laboratory workbook ([`Module_7_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/07_Data_Cleaning/Module_7_Demo.xlsx)), Power Query operationalizes all four ingestion paradigms side-by-side:
+### A. Laboratory 1: Multi-Channel Enterprise Ingestion ([`Module_7_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/07_Data_Cleaning/Module_7_Demo.xlsx))
+
+In our Module 7 laboratory, Power Query operationalizes all four ingestion paradigms side-by-side:
 
 ```mermaid
 flowchart TD
@@ -423,6 +447,30 @@ flowchart TD
 
 ---
 
+### B. Laboratory 2: The Data Kitchen & High-Performance Data Model Ingestion ([`Module_8_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/08_Power_Query/Module_8_Demo.xlsx))
+
+In our official Module 8 practice workbook, Power Query demonstrates the **Data Kitchen architecture** (`المطبخ بتاعنا`) by ingesting the authentic PwC Switzerland Call Center operational dataset directly into the **Power Pivot Data Model** (`ThisWorkbookDataModel`), completely bypassing physical worksheet row limits:
+
+```mermaid
+flowchart LR
+    RAW["Raw External Source\n01 Call-Center-Dataset.xlsx\n(5,000 Inbound Records)"] --> PQ_M["Power Query M Engine\n(Query: Fact_Calls)\n• Excel.Workbook(File.Contents)\n• Table.PromoteHeaders\n• Table.TransformColumnTypes"]
+    PQ_M --> MODEL["VertiPaq Data Model\n(ThisWorkbookDataModel)\n• Connection-Only Pipeline\n• 0 Worksheet Grid Lag\n• Star Schema Foundation"]
+
+    style RAW fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    style PQ_M fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style MODEL fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+```
+
+#### Workbook Structural Layout:
+- **Sheet `Intro`**: Serves as the pedagogical blueprint, anchoring the **4 Questions Framework** and documenting why manual cleaning and standard lookups fail at scale.
+- **Embedded Query `Fact_Calls`**: Pure M script that extracts `Sheet1` from `"01 Call-Center-Dataset.xlsx"`, promotes headers, and establishes a strict 10-column typed schema contract:
+  - `Call Id` (`type text`), `Agent` (`type text`), `Date` (`type date`), `Time` (`type datetime`), `Topic` (`type text`), `Answered (Y/N)` (`type text`), `Resolved` (`type text`), `Speed of answer in seconds` (`Int64.Type`), `AvgTalkDuration` (`type datetime`), and `Satisfaction rating` (`Int64.Type`).
+- **Data Model Destination (`ThisWorkbookDataModel`)**:
+  - Rather than outputting 5,000 rows into an Excel grid table, the query is configured as **Only Create Connection** + **Add this data to the Data Model**.
+  - This perfectly illustrates the lesson's core mantra: *Power Query is the kitchen that prepares clean data to feed downstream Power Pivot and PivotTables without bloating the worksheet.*
+
+---
+
 ## Related Knowledge
 - Notes:
   - [[02_Core_Data_Transformations]]
@@ -432,5 +480,6 @@ flowchart TD
 - Concepts: [[Power Query]], [[ETL Process]], [[M Language]], [[Data Cleaning]]
 - Course Datasets & References:
   - Reference: [[Module 7 Dataset Documentation]]
+  - Reference: [[Module 8 Dataset Documentation]]
   - Course Roadmap: [[Course Map]]
   - Interactive Web Mind Map: [Course Mind Map](https://sohila-khaled-abbas.github.io/COURSE-EXCEL-ZERO-TO-HERO/mindmap/)

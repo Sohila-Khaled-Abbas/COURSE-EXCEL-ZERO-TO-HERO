@@ -98,4 +98,8 @@ In enterprise operational monitoring, queries can be configured to poll live sou
   - [[03_Combining_Data_Append_and_Merge|Lesson 8.3: Combining Datasets: Append vs Merge]]
   - [[04_Introduction_to_M_Language_and_APIs|Lesson 8.4: M Language Architecture & API Ingestion]]
 - Concepts: [[ETL Process]], [[M Language]], [[Data Cleaning]], [[Dimensional Modeling]]
-- Course Labs: [`Module_7_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/07_Data_Cleaning/Module_7_Demo.xlsx)
+- Course Labs & References:
+  - Reference: [[Module 7 Dataset Documentation]]
+  - Reference: [[Module 8 Dataset Documentation]]
+  - Laboratory 1: [`Module_7_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/07_Data_Cleaning/Module_7_Demo.xlsx)
+  - Laboratory 2: [`Module_8_Demo.xlsx`](file:///d:/courses/Data%20Analysis%2026-27/7-Introducation%20to%20Data%20Fields%20(Excel)/11_Demos_and_Workbooks/08_Power_Query/Module_8_Demo.xlsx)

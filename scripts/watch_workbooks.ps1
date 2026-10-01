@@ -59,6 +59,9 @@ try {
             if (Test-Path "$RepoRoot\scripts\sync_module_7_docs.py") {
                 python "$RepoRoot\scripts\sync_module_7_docs.py" 2>&1 | Out-Null
             }
+            if (Test-Path "$RepoRoot\scripts\sync_module_8_docs.py") {
+                python "$RepoRoot\scripts\sync_module_8_docs.py" 2>&1 | Out-Null
+            }
 
             # Rebuild site docs if site generator exists
             if (Test-Path "$RepoRoot\site\build.js") {
