@@ -394,48 +394,48 @@ From our official practice workbook ([`Module_8_Demo.xlsx`](file:///d:/courses/D
 ```powerquery
 section Section1;
 
-shared Dim_Date = let
-    // 1. Reference the existing Fact_Sales query as input source
-    Source = Fact_Sales,
-
-    // 2. Isolate the date column — drop all non-date fields
-    #"Removed Other Columns" = Table.SelectColumns(Source, {"OrderDate"}),
-
-    // 3. Deduplicate to produce one row per unique calendar date
-    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns", {"OrderDate"}),
-
-    // 4. Extract Year component as integer
-    #"Inserted Year" = Table.AddColumn(#"Removed Duplicates", "Year",
-        each Date.Year([OrderDate]), Int64.Type),
-
-    // 5. Extract Month number (1–12)
-    #"Inserted Month" = Table.AddColumn(#"Inserted Year", "Month",
-        each Date.Month([OrderDate]), Int64.Type),
-
-    // 6. Extract full Month Name (e.g., "January", "February")
-    #"Inserted Month Name" = Table.AddColumn(#"Inserted Month", "Month Name",
-        each Date.MonthName([OrderDate]), type text),
-
-    // 7. Extract Day of Month (1–31)
-    #"Inserted Day" = Table.AddColumn(#"Inserted Month Name", "Day",
-        each Date.Day([OrderDate]), Int64.Type),
-
-    // 8. Extract Day Name (e.g., "Monday", "Tuesday")
-    #"Inserted Day Name" = Table.AddColumn(#"Inserted Day", "Day Name",
-        each Date.DayOfWeekName([OrderDate]), type text),
-
-    // 9. Extract Quarter of Year (1–4)
-    #"Inserted Quarter" = Table.AddColumn(#"Inserted Day Name", "Quarter",
-        each Date.QuarterOfYear([OrderDate]), Int64.Type),
-
-    // 10. Reorder columns into logical temporal hierarchy
-    #"Reordered Columns" = Table.ReorderColumns(#"Inserted Quarter",
-        {"OrderDate", "Year", "Quarter", "Month", "Month Name", "Day", "Day Name"}),
-
-    // 11. Format Quarter as "Q1", "Q2", "Q3", "Q4" for Slicer-friendly display
-    #"Added Prefix" = Table.TransformColumns(#"Reordered Columns",
-        {{"Quarter", each "Q" & Text.From(_, "en-AE"), type text}})
-in
+shared Dim_Date = let
+    // 1. Reference the existing Fact_Sales query as input source
+    Source = Fact_Sales,
+
+    // 2. Isolate the date column — drop all non-date fields
+    #"Removed Other Columns" = Table.SelectColumns(Source, {"OrderDate"}),
+
+    // 3. Deduplicate to produce one row per unique calendar date
+    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns", {"OrderDate"}),
+
+    // 4. Extract Year component as integer
+    #"Inserted Year" = Table.AddColumn(#"Removed Duplicates", "Year",
+        each Date.Year([OrderDate]), Int64.Type),
+
+    // 5. Extract Month number (1–12)
+    #"Inserted Month" = Table.AddColumn(#"Inserted Year", "Month",
+        each Date.Month([OrderDate]), Int64.Type),
+
+    // 6. Extract full Month Name (e.g., "January", "February")
+    #"Inserted Month Name" = Table.AddColumn(#"Inserted Month", "Month Name",
+        each Date.MonthName([OrderDate]), type text),
+
+    // 7. Extract Day of Month (1–31)
+    #"Inserted Day" = Table.AddColumn(#"Inserted Month Name", "Day",
+        each Date.Day([OrderDate]), Int64.Type),
+
+    // 8. Extract Day Name (e.g., "Monday", "Tuesday")
+    #"Inserted Day Name" = Table.AddColumn(#"Inserted Day", "Day Name",
+        each Date.DayOfWeekName([OrderDate]), type text),
+
+    // 9. Extract Quarter of Year (1–4)
+    #"Inserted Quarter" = Table.AddColumn(#"Inserted Day Name", "Quarter",
+        each Date.QuarterOfYear([OrderDate]), Int64.Type),
+
+    // 10. Reorder columns into logical temporal hierarchy
+    #"Reordered Columns" = Table.ReorderColumns(#"Inserted Quarter",
+        {"OrderDate", "Year", "Quarter", "Month", "Month Name", "Day", "Day Name"}),
+
+    // 11. Format Quarter as "Q1", "Q2", "Q3", "Q4" for Slicer-friendly display
+    #"Added Prefix" = Table.TransformColumns(#"Reordered Columns",
+        {{"Quarter", each "Q" & Text.From(_, "en-AE"), type text}})
+in
     #"Added Prefix";
 ```
 
@@ -478,307 +478,306 @@ From the active practice workbook ([`Module_8_Demo.xlsx`](file:///d:/courses/Dat
 ```powerquery
 section Section1;
 
-shared Fact_Sales = let
-    //==================================================
-    // 1. CONNECT TO LOCAL SQL SERVER
-    //==================================================
-    Source = Sql.Database(
-        "localhost",
-        "AdventureWorks2022"
-    ),
-
-    //==================================================
-    // 2. NAVIGATE TO SQL SERVER TABLES
-    //==================================================
-    SalesOrderDetail = Source{
-        [Schema = "Sales", Item = "SalesOrderDetail"]
-    }[Data],
-
-    SalesOrderHeader = Source{
-        [Schema = "Sales", Item = "SalesOrderHeader"]
-    }[Data],
-
-    Product = Source{
-        [Schema = "Production", Item = "Product"]
-    }[Data],
-
-    ProductSubcategory = Source{
-        [Schema = "Production", Item = "ProductSubcategory"]
-    }[Data],
-
-    ProductCategory = Source{
-        [Schema = "Production", Item = "ProductCategory"]
-    }[Data],
-
-    SalesTerritory = Source{
-        [Schema = "Sales", Item = "SalesTerritory"]
-    }[Data],
-
-    ShipMethod = Source{
-        [Schema = "Purchasing", Item = "ShipMethod"]
-    }[Data],
-
-    //==================================================
-    // 3. BASE TABLE: SALES ORDER DETAILS
-    //    GRAIN: ONE ROW PER SALES ORDER LINE
-    //==================================================
-    Detail = Table.SelectColumns(
-        SalesOrderDetail,
-        {
-            "SalesOrderID",
-            "SalesOrderDetailID",
-            "ProductID",
-            "OrderQty",
-            "UnitPrice",
-            "UnitPriceDiscount",
-            "LineTotal"
-        }
-    ),
-
-    //==================================================
-    // 4. MERGE SALES ORDER HEADER
-    //==================================================
-    MergeHeader = Table.NestedJoin(
-        Detail,
-        {"SalesOrderID"},
-        SalesOrderHeader,
-        {"SalesOrderID"},
-        "Header",
-        JoinKind.LeftOuter
-    ),
-
-    ExpandHeader = Table.ExpandTableColumn(
-        MergeHeader,
-        "Header",
-        {
-            "OrderDate",
-            "DueDate",
-            "ShipDate",
-            "Status",
-            "OnlineOrderFlag",
-            "CustomerID",
-            "SalesPersonID",
-            "TerritoryID",
-            "ShipMethodID"
-        },
-        {
-            "OrderDate",
-            "DueDate",
-            "ShipDate",
-            "StatusID",
-            "OnlineOrderFlag",
-            "CustomerID",
-            "SalesPersonID",
-            "TerritoryID",
-            "ShipMethodID"
-        }
-    ),
-
-    //==================================================
-    // 5. MERGE PRODUCT
-    //==================================================
-    MergeProduct = Table.NestedJoin(
-        ExpandHeader,
-        {"ProductID"},
-        Product,
-        {"ProductID"},
-        "ProductLookup",
-        JoinKind.LeftOuter
-    ),
-
-    ExpandProduct = Table.ExpandTableColumn(
-        MergeProduct,
-        "ProductLookup",
-        {
-            "Name",
-            "ProductSubcategoryID"
-        },
-        {
-            "Product",
-            "ProductSubcategoryID"
-        }
-    ),
-
-    //==================================================
-    // 6. MERGE PRODUCT SUBCATEGORY
-    //==================================================
-    MergeSubcategory = Table.NestedJoin(
-        ExpandProduct,
-        {"ProductSubcategoryID"},
-        ProductSubcategory,
-        {"ProductSubcategoryID"},
-        "SubcategoryLookup",
-        JoinKind.LeftOuter
-    ),
-
-    ExpandSubcategory = Table.ExpandTableColumn(
-        MergeSubcategory,
-        "SubcategoryLookup",
-        {
-            "Name",
-            "ProductCategoryID"
-        },
-        {
-            "ProductSubCategory",
-            "ProductCategoryID"
-        }
-    ),
-
-    //==================================================
-    // 7. MERGE PRODUCT CATEGORY
-    //==================================================
-    MergeCategory = Table.NestedJoin(
-        ExpandSubcategory,
-        {"ProductCategoryID"},
-        ProductCategory,
-        {"ProductCategoryID"},
-        "CategoryLookup",
-        JoinKind.LeftOuter
-    ),
-
-    ExpandCategory = Table.ExpandTableColumn(
-        MergeCategory,
-        "CategoryLookup",
-        {"Name"},
-        {"ProductCategory"}
-    ),
-
-    //==================================================
-    // 8. MERGE SALES TERRITORY
-    //==================================================
-    MergeTerritory = Table.NestedJoin(
-        ExpandCategory,
-        {"TerritoryID"},
-        SalesTerritory,
-        {"TerritoryID"},
-        "TerritoryLookup",
-        JoinKind.LeftOuter
-    ),
-
-    ExpandTerritory = Table.ExpandTableColumn(
-        MergeTerritory,
-        "TerritoryLookup",
-        {
-            "Name",
-            "Group"
-        },
-        {
-            "Territory",
-            "TerritoryGroup"
-        }
-    ),
-
-    //==================================================
-    // 9. MERGE SHIPPING METHOD
-    //==================================================
-    MergeShipMethod = Table.NestedJoin(
-        ExpandTerritory,
-        {"ShipMethodID"},
-        ShipMethod,
-        {"ShipMethodID"},
-        "ShipMethodLookup",
-        JoinKind.LeftOuter
-    ),
-
-    ExpandShipMethod = Table.ExpandTableColumn(
-        MergeShipMethod,
-        "ShipMethodLookup",
-        {"Name"},
-        {"ShipMethod"}
-    ),
-
-    //==================================================
-    // 10. ADD READABLE ORDER STATUS
-    //==================================================
-    AddStatus = Table.AddColumn(
-        ExpandShipMethod,
-        "Status",
-        each
-            if [StatusID] = 1 then "In Process"
-            else if [StatusID] = 2 then "Approved"
-            else if [StatusID] = 3 then "Backordered"
-            else if [StatusID] = 4 then "Rejected"
-            else if [StatusID] = 5 then "Shipped"
-            else if [StatusID] = 6 then "Cancelled"
-            else "Unknown",
-        type text
-    ),
-
-    //==================================================
-    // 11. SET DATA TYPES
-    //==================================================
-    SetTypes = Table.TransformColumnTypes(
-        AddStatus,
-        {
-            {"SalesOrderID", Int64.Type},
-            {"SalesOrderDetailID", type number},
-            {"ProductID", Int64.Type},
-            {"ProductSubcategoryID", Int64.Type},
-            {"ProductCategoryID", Int64.Type},
-            {"CustomerID", Int64.Type},
-            {"SalesPersonID", Int64.Type},
-            {"TerritoryID", Int64.Type},
-            {"ShipMethodID", Int64.Type},
-            {"OrderQty", Int64.Type},
-            {"UnitPrice", Currency.Type},
-            {"UnitPriceDiscount", type number},
-            {"LineTotal", Currency.Type},
-            {"OrderDate", type date},
-            {"DueDate", type date},
-            {"ShipDate", type date},
-            {"StatusID", Int64.Type},
-            {"OnlineOrderFlag", type logical}
-        }
-    ),
-
-    //==================================================
-    // 12. RENAME COLUMNS TO MATCH VISUALS
-    //==================================================
-    RenameColumns = Table.RenameColumns(
-        SetTypes,
-        {
-            {"SalesOrderDetailID", "OrderDetailID"},
-            {"SalesOrderID", "OrderID"}
-        }
-    ),
-
-    //==================================================
-    // 13. REORDER FINAL FACT SALES COLUMNS
-    //==================================================
-    Final = Table.ReorderColumns(
-        RenameColumns,
-        {
-            "OrderDetailID",
-            "OrderID",
-            "OrderDate",
-            "DueDate",
-            "ShipDate",
-            "StatusID",
-            "Status",
-            "OnlineOrderFlag",
-            "CustomerID",
-            "SalesPersonID",
-            "TerritoryID",
-            "Territory",
-            "TerritoryGroup",
-            "ShipMethodID",
-            "ShipMethod",
-            "ProductID",
-            "Product",
-            "ProductSubCategory",
-            "ProductCategory",
-            "OrderQty",
-            "UnitPrice",
-            "UnitPriceDiscount",
-            "LineTotal",
-            "ProductSubcategoryID",
-            "ProductCategoryID"
-        },
-        MissingField.Ignore
-    )
-
-in
-
+shared Fact_Sales = let
+    //==================================================
+    // 1. CONNECT TO LOCAL SQL SERVER
+    //==================================================
+    Source = Sql.Database(
+        "localhost",
+        "AdventureWorks2022"
+    ),
+
+    //==================================================
+    // 2. NAVIGATE TO SQL SERVER TABLES
+    //==================================================
+    SalesOrderDetail = Source{
+        [Schema = "Sales", Item = "SalesOrderDetail"]
+    }[Data],
+
+    SalesOrderHeader = Source{
+        [Schema = "Sales", Item = "SalesOrderHeader"]
+    }[Data],
+
+    Product = Source{
+        [Schema = "Production", Item = "Product"]
+    }[Data],
+
+    ProductSubcategory = Source{
+        [Schema = "Production", Item = "ProductSubcategory"]
+    }[Data],
+
+    ProductCategory = Source{
+        [Schema = "Production", Item = "ProductCategory"]
+    }[Data],
+
+    SalesTerritory = Source{
+        [Schema = "Sales", Item = "SalesTerritory"]
+    }[Data],
+
+    ShipMethod = Source{
+        [Schema = "Purchasing", Item = "ShipMethod"]
+    }[Data],
+
+    //==================================================
+    // 3. BASE TABLE: SALES ORDER DETAILS
+    //    GRAIN: ONE ROW PER SALES ORDER LINE
+    //==================================================
+    Detail = Table.SelectColumns(
+        SalesOrderDetail,
+        {
+            "SalesOrderID",
+            "SalesOrderDetailID",
+            "ProductID",
+            "OrderQty",
+            "UnitPrice",
+            "UnitPriceDiscount",
+            "LineTotal"
+        }
+    ),
+
+    //==================================================
+    // 4. MERGE SALES ORDER HEADER
+    //==================================================
+    MergeHeader = Table.NestedJoin(
+        Detail,
+        {"SalesOrderID"},
+        SalesOrderHeader,
+        {"SalesOrderID"},
+        "Header",
+        JoinKind.LeftOuter
+    ),
+
+    ExpandHeader = Table.ExpandTableColumn(
+        MergeHeader,
+        "Header",
+        {
+            "OrderDate",
+            "DueDate",
+            "ShipDate",
+            "Status",
+            "OnlineOrderFlag",
+            "CustomerID",
+            "SalesPersonID",
+            "TerritoryID",
+            "ShipMethodID"
+        },
+        {
+            "OrderDate",
+            "DueDate",
+            "ShipDate",
+            "StatusID",
+            "OnlineOrderFlag",
+            "CustomerID",
+            "SalesPersonID",
+            "TerritoryID",
+            "ShipMethodID"
+        }
+    ),
+
+    //==================================================
+    // 5. MERGE PRODUCT
+    //==================================================
+    MergeProduct = Table.NestedJoin(
+        ExpandHeader,
+        {"ProductID"},
+        Product,
+        {"ProductID"},
+        "ProductLookup",
+        JoinKind.LeftOuter
+    ),
+
+    ExpandProduct = Table.ExpandTableColumn(
+        MergeProduct,
+        "ProductLookup",
+        {
+            "Name",
+            "ProductSubcategoryID"
+        },
+        {
+            "Product",
+            "ProductSubcategoryID"
+        }
+    ),
+
+    //==================================================
+    // 6. MERGE PRODUCT SUBCATEGORY
+    //==================================================
+    MergeSubcategory = Table.NestedJoin(
+        ExpandProduct,
+        {"ProductSubcategoryID"},
+        ProductSubcategory,
+        {"ProductSubcategoryID"},
+        "SubcategoryLookup",
+        JoinKind.LeftOuter
+    ),
+
+    ExpandSubcategory = Table.ExpandTableColumn(
+        MergeSubcategory,
+        "SubcategoryLookup",
+        {
+            "Name",
+            "ProductCategoryID"
+        },
+        {
+            "ProductSubCategory",
+            "ProductCategoryID"
+        }
+    ),
+
+    //==================================================
+    // 7. MERGE PRODUCT CATEGORY
+    //==================================================
+    MergeCategory = Table.NestedJoin(
+        ExpandSubcategory,
+        {"ProductCategoryID"},
+        ProductCategory,
+        {"ProductCategoryID"},
+        "CategoryLookup",
+        JoinKind.LeftOuter
+    ),
+
+    ExpandCategory = Table.ExpandTableColumn(
+        MergeCategory,
+        "CategoryLookup",
+        {"Name"},
+        {"ProductCategory"}
+    ),
+
+    //==================================================
+    // 8. MERGE SALES TERRITORY
+    //==================================================
+    MergeTerritory = Table.NestedJoin(
+        ExpandCategory,
+        {"TerritoryID"},
+        SalesTerritory,
+        {"TerritoryID"},
+        "TerritoryLookup",
+        JoinKind.LeftOuter
+    ),
+
+    ExpandTerritory = Table.ExpandTableColumn(
+        MergeTerritory,
+        "TerritoryLookup",
+        {
+            "Name",
+            "Group"
+        },
+        {
+            "Territory",
+            "TerritoryGroup"
+        }
+    ),
+
+    //==================================================
+    // 9. MERGE SHIPPING METHOD
+    //==================================================
+    MergeShipMethod = Table.NestedJoin(
+        ExpandTerritory,
+        {"ShipMethodID"},
+        ShipMethod,
+        {"ShipMethodID"},
+        "ShipMethodLookup",
+        JoinKind.LeftOuter
+    ),
+
+    ExpandShipMethod = Table.ExpandTableColumn(
+        MergeShipMethod,
+        "ShipMethodLookup",
+        {"Name"},
+        {"ShipMethod"}
+    ),
+
+    //==================================================
+    // 10. ADD READABLE ORDER STATUS
+    //==================================================
+    AddStatus = Table.AddColumn(
+        ExpandShipMethod,
+        "Status",
+        each
+            if [StatusID] = 1 then "In Process"
+            else if [StatusID] = 2 then "Approved"
+            else if [StatusID] = 3 then "Backordered"
+            else if [StatusID] = 4 then "Rejected"
+            else if [StatusID] = 5 then "Shipped"
+            else if [StatusID] = 6 then "Cancelled"
+            else "Unknown",
+        type text
+    ),
+
+    //==================================================
+    // 11. SET DATA TYPES
+    //==================================================
+    SetTypes = Table.TransformColumnTypes(
+        AddStatus,
+        {
+            {"SalesOrderID", Int64.Type},
+            {"SalesOrderDetailID", type number},
+            {"ProductID", Int64.Type},
+            {"ProductSubcategoryID", Int64.Type},
+            {"ProductCategoryID", Int64.Type},
+            {"CustomerID", Int64.Type},
+            {"SalesPersonID", Int64.Type},
+            {"TerritoryID", Int64.Type},
+            {"ShipMethodID", Int64.Type},
+            {"OrderQty", Int64.Type},
+            {"UnitPrice", Currency.Type},
+            {"UnitPriceDiscount", type number},
+            {"LineTotal", Currency.Type},
+            {"OrderDate", type date},
+            {"DueDate", type date},
+            {"ShipDate", type date},
+            {"StatusID", Int64.Type},
+            {"OnlineOrderFlag", type logical}
+        }
+    ),
+
+    //==================================================
+    // 12. RENAME COLUMNS TO MATCH VISUALS
+    //==================================================
+    RenameColumns = Table.RenameColumns(
+        SetTypes,
+        {
+            {"SalesOrderDetailID", "OrderDetailID"},
+            {"SalesOrderID", "OrderID"}
+        }
+    ),
+
+    //==================================================
+    // 13. REORDER FINAL FACT SALES COLUMNS
+    //==================================================
+    Final = Table.ReorderColumns(
+        RenameColumns,
+        {
+            "OrderDetailID",
+            "OrderID",
+            "OrderDate",
+            "DueDate",
+            "ShipDate",
+            "StatusID",
+            "Status",
+            "OnlineOrderFlag",
+            "CustomerID",
+            "SalesPersonID",
+            "TerritoryID",
+            "Territory",
+            "TerritoryGroup",
+            "ShipMethodID",
+            "ShipMethod",
+            "ProductID",
+            "Product",
+            "ProductSubCategory",
+            "ProductCategory",
+            "OrderQty",
+            "UnitPrice",
+            "UnitPriceDiscount",
+            "LineTotal",
+            "ProductSubcategoryID",
+            "ProductCategoryID"
+        },
+        MissingField.Ignore
+    )
+
+in
     Final;
 ```
 

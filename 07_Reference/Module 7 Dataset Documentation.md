@@ -4,8 +4,8 @@ dataset_name: Module 7 Data Cleaning & Ingestion Laboratory
 source_type: course-workbook
 source_ecosystem: Excel Zero to Hero Curriculum
 primary_file: 11_Demos_and_Workbooks/07_Data_Cleaning/Module_7_Demo.xlsx
-total_sheets: 6
-total_records: 68759
+total_sheets: 7
+total_records: 68942
 total_columns: 37
 status: verified
 created: 2026-09-30
