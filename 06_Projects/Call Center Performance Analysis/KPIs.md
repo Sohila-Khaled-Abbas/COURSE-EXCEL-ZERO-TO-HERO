@@ -5,12 +5,12 @@ status: completed
 created: 2026-09-28
 updated: 2026-10-01
 title: Core KPIs & Tripartite Mathematical Models
-description: Mathematical formulas, Excel formulas, and official DAX measures across all 3 Galaxy domains
+description: Mathematical formulas, Excel formulas, and official DAX measures across all 3 Galaxy domains and Backing lookups
 ---
 
 # 6. Core KPIs & Tripartite Mathematical Models
 
-This document presents the complete mathematical specifications, Excel grid formulas, and official production DAX measures across all three domains of the **PwC Switzerland Digital Transformation Galaxy Schema**.
+This document presents the complete mathematical specifications, Excel grid formulas, and official production DAX measures across all three domains of the **PwC Switzerland Digital Transformation Galaxy Schema**, including metrics powered by the auxiliary Backing tables.
 
 ---
 
@@ -53,7 +53,7 @@ This document presents the complete mathematical specifications, Excel grid form
 
 ## 👥 Domain 3: Diversity, Equity & Human Capital Governance (`Fact_Employees`)
 
-### People Analytics & Parity Metrics (500 Personnel)
+### People Analytics & Parity Metrics (500 Personnel + Backing Lookups)
 
 | KPI Name | Baseline Value | Excel Formula | Production DAX Measure | Organizational Significance |
 | :--- | :---: | :--- | :--- | :--- |
@@ -66,6 +66,10 @@ This document presents the complete mathematical specifications, Excel grid form
 | **Female Promotion Rate %** | **8.78%** | `=COUNTIFS(Fact_Employees[Gender], "Female", Fact_Employees[Promotion in FY21?], "Yes") / 205` | `Female Promotion Rate = DIVIDE(CALCULATE([#Promoted Employee], Fact_Employees[Gender] = "Female"), CALCULATE([Total Employees], Fact_Employees[Gender] = "Female"), 0)` | Female career progression velocity in FY21 (18 of 205). |
 | **Male Promotion Rate %** | **11.19%** | `=COUNTIFS(Fact_Employees[Gender], "Male", Fact_Employees[Promotion in FY21?], "Yes") / 295` | `Male Promotion Rate = DIVIDE(CALCULATE([#Promoted Employee], Fact_Employees[Gender] = "Male"), CALCULATE([Total Employees], Fact_Employees[Gender] = "Male"), 0)` | Male career progression velocity in FY21 (33 of 295). |
 | **Corporate Turnover Rate %** | **9.40%** | `=COUNTIF(Fact_Employees[FY20 leaver?], "Yes") / 500` | `Turnover Rate = DIVIDE(CALCULATE(COUNT(Fact_Employees[Employee ID]), Fact_Employees[FY20 leaver?] = "Yes"), [Total Employees], 0)` | Annual corporate attrition rate (47 leavers in FY20). |
+| **Average Years in Grade (Backing 1)**| **2.62 yrs** | `=AVERAGE(Dim_EmployeeCensus[Y_GRADE])` | `Avg Years in Grade = AVERAGE(Dim_EmployeeCensus[Y_GRADE])` | Average time spent in current grade before promotion or departure. |
+| **Average Service Tenure (Backing 1)**| **4.21 yrs** | `=AVERAGE(Dim_EmployeeCensus[Y_SERVIC])` | `Avg Years of Service = AVERAGE(Dim_EmployeeCensus[Y_SERVIC])` | Cumulative organizational tenure across corporate workforce. |
+| **Swiss National Ratio (Backing 3)**| **44.80%** | `=COUNTIF(Fact_Employees[Nationality 1], "Switzerland") / 500` | `Swiss National Ratio = DIVIDE(CALCULATE(COUNT(Fact_Employees[Employee ID]), Fact_Employees[Nationality 1] = "Switzerland"), [Total Employees], 0)` | Domestic Swiss workforce concentration (224 of 500). |
+| **Uneven PRA Headcount (Backing 4)**| **37 staff** | `=COUNTIF(Dim_PRA_Equity[PRA_Status], "Uneven - Men benefit")` | `Uneven PRA Headcount = CALCULATE(COUNT(Fact_Employees[Employee ID]), Dim_PRA_Equity[PRA_Status] = "Uneven - Men benefit")` | Personnel in departmental tiers flagged for gender evaluation bias. |
 
 ---
 
@@ -116,6 +120,12 @@ DIVIDE(
     0
 )
 
+AHT := 
+CALCULATE(
+    AVERAGE(Fact_Calls[AvgTalkDuration]),
+    Fact_Calls[Answered (Y/N)] = "Y"
+)
+
 Satisfaction Score := 
 CALCULATE(
     AVERAGE(Fact_Calls[Satisfaction rating]),
@@ -148,9 +158,11 @@ CALCULATE(
     Fact_Churn[Churn] = "No"
 )
 
+Avg Tenure := AVERAGE(Fact_Churn[tenure])
+
 Avg Tech Tickets := AVERAGE(Fact_Churn[numTechTickets])
 
--- DOMAIN 3: DIVERSITY & INCLUSION
+-- DOMAIN 3: DIVERSITY & INCLUSION (WITH BACKING LOOKUPS)
 Total Employees := DISTINCTCOUNT(Fact_Employees[Employee ID])
 
 Female Employees := 
@@ -183,10 +195,44 @@ CALCULATE(
 Promotion Rate := 
 DIVIDE([#Promoted Employee], [Total Employees], 0)
 
+Female Promotion Rate := 
+DIVIDE(
+    CALCULATE([#Promoted Employee], Fact_Employees[Gender] = "Female"),
+    [Female Employees],
+    0
+)
+
+Male Promotion Rate := 
+DIVIDE(
+    CALCULATE([#Promoted Employee], Fact_Employees[Gender] = "Male"),
+    [Male Employees],
+    0
+)
+
 Turnover Rate := 
 DIVIDE(
     CALCULATE(COUNT(Fact_Employees[Employee ID]), Fact_Employees[FY20 leaver?] = "Yes"),
     [Total Employees],
     0
+)
+
+-- AUXILIARY MEASURES POWERED BY BACKING 1 TO 4
+Avg Years in Grade := 
+AVERAGE(Dim_EmployeeCensus[Y_GRADE])
+
+Avg Years of Service := 
+AVERAGE(Dim_EmployeeCensus[Y_SERVIC])
+
+Swiss National Ratio := 
+DIVIDE(
+    CALCULATE(COUNT(Fact_Employees[Employee ID]), Fact_Employees[Nationality 1] = "Switzerland"),
+    [Total Employees],
+    0
+)
+
+Uneven PRA Headcount := 
+CALCULATE(
+    COUNT(Fact_Employees[Employee ID]),
+    Dim_PRA_Equity[PRA_Status] = "Uneven - Men benefit"
 )
 ```
