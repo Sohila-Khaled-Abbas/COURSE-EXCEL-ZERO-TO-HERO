@@ -44,3 +44,6 @@ site/.astro/
 .cache/
 site/.cache/
 
+# Standalone PWC Project Git Repository
+.git_pwc_standalone/
+

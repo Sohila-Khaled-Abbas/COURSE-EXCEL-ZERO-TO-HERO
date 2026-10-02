@@ -5,6 +5,7 @@
 	logallrefupdates = true
 	symlinks = false
 	ignorecase = true
+	worktree = d:/courses/Data Analysis 26-27/7-Introducation to Data Fields (Excel)/11_Demos_and_Workbooks/10_Projects_and_Demos/PWC
 [remote "origin"]
 	url = https://github.com/Sohila-Khaled-Abbas/pwc-switzerland-virtual-case.git
 	fetch = +refs/heads/*:refs/remotes/origin/*
