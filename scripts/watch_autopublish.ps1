@@ -57,7 +57,7 @@ try {
             $global:pendingChanges = $false
 
             # If an Excel workbook was modified, auto-synchronize documentation
-            if ($global:lastModifiedFile -like "*.xlsx" -or $global:lastModifiedFile -like "*11_Demos_and_Workbooks*") {
+            if ($global:lastModifiedFile -like "*.xlsx" -or $global:lastModifiedFile -like "*.xlsm" -or $global:lastModifiedFile -like "*11_Demos_and_Workbooks*") {
                 Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [SYNC-DOCS] Synchronizing notes and dataset documentation from Excel workbook..." -ForegroundColor Magenta
                 if (Test-Path "$RepoRoot\scripts\sync_module_6_docs.py") { python "$RepoRoot\scripts\sync_module_6_docs.py" 2>&1 | Out-Null }
                 if (Test-Path "$RepoRoot\scripts\sync_module_7_docs.py") { python "$RepoRoot\scripts\sync_module_7_docs.py" 2>&1 | Out-Null }

@@ -21,7 +21,7 @@ import openpyxl
 def sync_pwc():
     repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     pwc_dir = os.path.join(repo_root, "11_Demos_and_Workbooks", "10_Projects_and_Demos", "PWC")
-    wb_path = os.path.join(pwc_dir, "PWC_Switzerland_Virtual_Case.xlsx")
+    wb_path = os.path.join(pwc_dir, "PWC_Switzerland_Virtual_Case.xlsm")
 
     if not os.path.exists(wb_path):
         print(f"[PWC-SYNC] Workbook not found: {wb_path}")
@@ -74,19 +74,25 @@ def sync_pwc():
             content = f.read()
 
         pwc_entry = (
-            "| **10: Projects & Demos** | [`PWC_Switzerland_Virtual_Case.xlsx`](10_Projects_and_Demos/PWC/PWC_Switzerland_Virtual_Case.xlsx) | "
+            "| **10: Projects & Demos** | [`PWC_Switzerland_Virtual_Case.xlsm`](10_Projects_and_Demos/PWC/PWC_Switzerland_Virtual_Case.xlsm) | "
             "Enterprise Ralph Kimball Galaxy Schema (Fact Constellation) combining Call Center (5,000 calls), Customer Churn (7,043 accounts), "
             "and Diversity & Inclusion (500 employees), VertiPaq tabular model, explicit DAX measures, VBA application suite, and "
             "3 executive dashboard specifications ([`dashboards/`](10_Projects_and_Demos/PWC/dashboards/README.md)). | 🏆 Capstone Enterprise Suite |"
         )
 
-        if "10_Projects_and_Demos/PWC/PWC_Switzerland_Virtual_Case.xlsx" not in content:
+        if "10_Projects_and_Demos/PWC/PWC_Switzerland_Virtual_Case.xlsm" not in content:
             pattern = r"(\| \*\*08: Power Query & M\*\* \|.*?\n)"
             if re.search(pattern, content):
                 content = re.sub(pattern, r"\1" + pwc_entry + "\n", content)
                 with open(demos_readme, "w", encoding="utf-8") as f:
                     f.write(content)
                 print(f"[PWC-SYNC] Added PwC Switzerland Virtual Case to 11_Demos_and_Workbooks/README.md portfolio table.")
+            elif "10_Projects_and_Demos/PWC/PWC_Switzerland_Virtual_Case.xlsx" in content:
+                content = content.replace("10_Projects_and_Demos/PWC/PWC_Switzerland_Virtual_Case.xlsx", "10_Projects_and_Demos/PWC/PWC_Switzerland_Virtual_Case.xlsm")
+                content = content.replace("`PWC_Switzerland_Virtual_Case.xlsx`", "`PWC_Switzerland_Virtual_Case.xlsm`")
+                with open(demos_readme, "w", encoding="utf-8") as f:
+                    f.write(content)
+                print(f"[PWC-SYNC] Updated PwC Switzerland Virtual Case link to .xlsm in 11_Demos_and_Workbooks/README.md.")
         else:
             pattern = r"\| \*\*10: Projects & Demos\*\* \|.*?\n"
             content = re.sub(pattern, pwc_entry + "\n", content)
@@ -102,7 +108,7 @@ def sync_pwc():
             subprocess.run(["git", f"--git-dir={standalone_git}", "add", "-A"], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             diff_res = subprocess.run(["git", f"--git-dir={standalone_git}", "diff", "--cached", "--name-only"], capture_output=True, text=True)
             if diff_res.stdout.strip():
-                commit_msg = f"feat(auto-sync): update PWC_Switzerland_Virtual_Case.xlsx [{mod_time}]"
+                commit_msg = f"feat(auto-sync): update PWC_Switzerland_Virtual_Case.xlsm [{mod_time}]"
                 subprocess.run(["git", f"--git-dir={standalone_git}", "commit", "-m", commit_msg], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                 push_res = subprocess.run(["git", f"--git-dir={standalone_git}", "push", "origin", "main"], capture_output=True, text=True)
                 if push_res.returncode == 0:
