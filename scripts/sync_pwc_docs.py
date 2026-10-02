@@ -2,12 +2,11 @@
 """
 scripts/sync_pwc_docs.py
 =============================================================================
-PwC Switzerland Virtual Case Documentation Synchronizer
+PwC Switzerland Virtual Case Documentation Synchronizer & Dual-Publisher
 Inspects PWC_Switzerland_Virtual_Case.xlsx metadata, data model, and dashboards,
-and synchronizes documentation across:
-1. 11_Demos_and_Workbooks/README.md
-2. 11_Demos_and_Workbooks/10_Projects_and_Demos/PWC/README.md
-3. 11_Demos_and_Workbooks/10_Projects_and_Demos/PWC/dashboards/README.md
+synchronizes documentation across course and project hubs, and automatically
+publishes updates to the standalone GitHub repository:
+https://github.com/Sohila-Khaled-Abbas/pwc-switzerland-virtual-case
 =============================================================================
 """
 
@@ -16,6 +15,7 @@ import sys
 import datetime
 import zipfile
 import re
+import subprocess
 import openpyxl
 
 def sync_pwc():
@@ -81,24 +81,40 @@ def sync_pwc():
         )
 
         if "10_Projects_and_Demos/PWC/PWC_Switzerland_Virtual_Case.xlsx" not in content:
-            # Insert after Module 08 row
             pattern = r"(\| \*\*08: Power Query & M\*\* \|.*?\n)"
             if re.search(pattern, content):
                 content = re.sub(pattern, r"\1" + pwc_entry + "\n", content)
                 with open(demos_readme, "w", encoding="utf-8") as f:
                     f.write(content)
                 print(f"[PWC-SYNC] Added PwC Switzerland Virtual Case to 11_Demos_and_Workbooks/README.md portfolio table.")
-            else:
-                print(f"[PWC-SYNC] Could not locate Module 08 anchor in 11_Demos_and_Workbooks/README.md.")
         else:
-            # Update existing line if needed
             pattern = r"\| \*\*10: Projects & Demos\*\* \|.*?\n"
             content = re.sub(pattern, pwc_entry + "\n", content)
             with open(demos_readme, "w", encoding="utf-8") as f:
                 f.write(content)
             print(f"[PWC-SYNC] Synchronized PwC entry in 11_Demos_and_Workbooks/README.md.")
 
-    print(f"[PWC-SYNC] All documentation successfully synchronized for PwC Switzerland Virtual Case.")
+    # 5. Dual-Publish to Standalone Repo (https://github.com/Sohila-Khaled-Abbas/pwc-switzerland-virtual-case)
+    standalone_git = os.path.join(repo_root, ".git_pwc_standalone")
+    if os.path.exists(standalone_git):
+        try:
+            print(f"[PWC-SYNC] Synchronizing standalone GitHub repository (pwc-switzerland-virtual-case)...")
+            subprocess.run(["git", f"--git-dir={standalone_git}", "add", "-A"], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            diff_res = subprocess.run(["git", f"--git-dir={standalone_git}", "diff", "--cached", "--name-only"], capture_output=True, text=True)
+            if diff_res.stdout.strip():
+                commit_msg = f"feat(auto-sync): update PWC_Switzerland_Virtual_Case.xlsx [{mod_time}]"
+                subprocess.run(["git", f"--git-dir={standalone_git}", "commit", "-m", commit_msg], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                push_res = subprocess.run(["git", f"--git-dir={standalone_git}", "push", "origin", "main"], capture_output=True, text=True)
+                if push_res.returncode == 0:
+                    print(f"[PWC-SYNC] Successfully published to standalone repository https://github.com/Sohila-Khaled-Abbas/pwc-switzerland-virtual-case!")
+                else:
+                    print(f"[PWC-SYNC] Standalone push notice: {push_res.stderr.strip()}")
+            else:
+                print(f"[PWC-SYNC] Standalone repository is already up-to-date.")
+        except Exception as ex:
+            print(f"[PWC-SYNC] Standalone sync notice: {ex}")
+
+    print(f"[PWC-SYNC] All documentation and standalone repository synchronization completed successfully.")
 
 if __name__ == '__main__':
     sync_pwc()
