@@ -27,7 +27,7 @@ $global:pendingChanges = $false
 $global:lastModifiedFile = ""
 
 # Filter regex for ignored paths/files
-$ignorePattern = '(^|[\\/])\.git([\\/]|$)|(node_modules|site[\\/](node_modules|dist|\.astro|\.cache)|dist|\.cache|\.obsidian[\\/](workspace|cache)|09_Source_Materials|assets[\\/].*\.mp4|~$|\.tmp$|\.bak$)'
+$ignorePattern = '(^|[\\/])(\.git|\.git_pwc_standalone)([\\/]|$)|(node_modules|site[\\/](node_modules|dist|\.astro|\.cache)|dist|\.cache|\.obsidian[\\/](workspace|cache)|09_Source_Materials|assets[\\/].*\.mp4|~$|\.tmp$|\.bak$)'
 
 $action = {
     param($source, $event)
